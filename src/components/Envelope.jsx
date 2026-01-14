@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Envelope.css";
-const closedImg = new URL("../assets/envelope-closed.avif", import.meta.url).href;
-const openImg = new URL("../assets/envelope-open.avif", import.meta.url).href;
+const closedImg = new URL("../../public/images/envelope-closed.avif", import.meta.url).href;
+const openImg = new URL("../../public/images/envelope-open.avif", import.meta.url).href;
 
 export default function Envelope({ onOpen }) {
   const [opened, setOpened] = useState(false);

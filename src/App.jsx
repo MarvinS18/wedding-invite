@@ -50,7 +50,7 @@ export default function App() {
           <section className="relative min-h-screen overflow-hidden bg-background">
             {/* Background immagine + video */}
             <img
-              src="/src/assets/karlandreichellebackgroundtimer.avif"
+              src="/src/../public/images/karlandreichellebackgroundtimer.avif"
               alt="Karl e Reichelle background"
               className="absolute inset-0 w-full h-full object-cover object-center z-0"
               style={{filter:'brightness(0.85)'}}
