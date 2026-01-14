@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Envelope from "./components/Envelope";
-import RSVP from "./RSVP";
+import RSVP from "./components/RSVP";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -23,7 +23,7 @@ function useCountdown(targetDate) {
 
 export default function App() {
   // Data evento
-  const target = "2026-06-20T16:30:00";
+  const target = "2026-06-05T16:30:00";
   const { days, hours, mins, secs } = useCountdown(target);
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
   // Stato per la sezione Regalos
@@ -65,9 +65,9 @@ export default function App() {
                 <div className="flex items-center justify-center gap-4 text-neutral-700 mb-2" style={{textShadow:'rgba(40,30,20,0.3) 0.2px 0.2px 0.3px'}}>
                   <span className="font-display text-sm md:text-base tracking-[0.1em]">GIUGNO</span>
                   <span className="text-neutral-400">|</span>
-                  <span className="font-display text-xl md:text-2xl">20</span>
+                  <span className="font-display text-xl md:text-2xl">5</span>
                   <span className="text-neutral-400">|</span>
-                  <span className="font-display text-sm md:text-base tracking-[0.1em]">SABATO</span>
+                  <span className="font-display text-sm md:text-base tracking-[0.1em]">VENERDì</span>
                 </div>
                 <p className="font-display text-base md:text-lg text-neutral-600 tracking-widest">2026</p>
               </div>
@@ -479,7 +479,7 @@ export default function App() {
           <p className="text-lg text-muted-foreground font-body tracking-wide mb-6">
             Gentili ospiti,<br />
             vi invitiamo a confermare la vostra presenza<br />
-            cliccando il bottone qui sotto entro il 20/09/2025.<br />
+            cliccando il bottone qui sotto entro il 30/04/2025.<br />
             Grazie di cuore!
           </p>
           <button
