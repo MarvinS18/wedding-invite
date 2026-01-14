@@ -19,12 +19,24 @@ const translations = {
       place: "Chiesa di Santa Cecilia in Trastevere",
       address: "Piazza di Santa Cecilia 22, 00153 Roma (RM), Italia",
       type: "Cerimonia religiosa (Cattolica)",
+      how: "La chiesa è nel cuore di Trastevere. Consigliamo di arrivare con mezzi pubblici o taxi; il parcheggio è limitato nelle vicinanze.",
+      howBy: {
+        car: "In auto: parcheggi limitati vicino alla piazza; consigliato lasciare l'auto in un parcheggio vicino e proseguire a piedi.",
+        bus: "In autobus: prendere le linee 8 o 23 e scendere alla fermata Trastevere; poi 5-8 minuti a piedi.",
+        train: "In treno: dalla stazione Roma Trastevere sono 10-12 minuti a piedi o 2 fermate di tram/taxi.",
+      },
     },
     reception: {
       title: "Ricevimento",
       place: "Villa dei Consoli",
       address: "Via di Pietra Porzia 38, 00044 Frascati (RM), Italia",
       note: "Ampio parcheggio disponibile; area parzialmente all'aperto.",
+      how: "La villa dispone di ampio parcheggio. È raggiungibile in auto in circa 25 minuti da Roma centro o con servizio navetta su richiesta.",
+      howBy: {
+        car: "In auto: seguire l'autostrada per Frascati, parcheggio disponibile in loco; indicazioni via Google Maps consigliate.",
+        bus: "In autobus: collegamenti locali da Roma verso Frascati, scendere alla fermata più vicina e camminare 5-10 minuti.",
+        train: "In treno: prendere la linea regionale verso Frascati e poi un breve taxi fino alla villa.",
+      },
     },
     attire: {
       title: "Dress code",
@@ -61,7 +73,7 @@ const translations = {
       coordinator: "Coordinatore matrimonio: (contatto opzionale)",
     },
     footerHashtag: "#amagiKARLstorywithREICHELLE",
-    nav: { details: "Dettagli", rsvp: "RSVP", where: "Dove" },
+    nav: { details: "Dettagli", program: "Programma", reception: "Ricevimento", gifts: "Regali", dresscode: "Dress code", rsvp: "RSVP", where: "Dove" },
     buttons: { rsvp: "Conferma presenza", details: "Dettagli evento" },
   },
   en: {
@@ -84,12 +96,24 @@ const translations = {
       place: "Chiesa di Santa Cecilia in Trastevere",
       address: "Piazza di Santa Cecilia 22, 00153 Rome (RM), Italy",
       type: "Catholic church ceremony",
+      howBy: {
+        car: "By car: parking nearby is limited; we suggest parking a short walk away and walking to the piazza.",
+        bus: "By bus: take lines 8 or 23 and get off at Trastevere stop; then a 5–8 minute walk.",
+        train: "By train: from Roma Trastevere station it's a 10–12 minute walk or a short tram/taxi ride.",
+      },
+      how: "The church is located in the heart of Trastevere. We recommend using public transport or taxis; nearby parking is limited.",
     },
     reception: {
       title: "Reception",
       place: "Villa dei Consoli",
       address: "Via di Pietra Porzia 38, 00044 Frascati (RM), Italy",
       note: "Ample parking available; venue is partly outdoors.",
+      how: "The villa has ample parking. It's about a 25-minute drive from central Rome or reachable by shuttle upon request.",
+      howBy: {
+        car: "By car: follow the road to Frascati; parking is available on-site — use Google Maps for turn-by-turn directions.",
+        bus: "By bus: regional buses run from Rome to Frascati; get off at the nearest stop and walk 5–10 minutes.",
+        train: "By train: take a regional train toward Frascati and then a short taxi ride to the villa.",
+      },
     },
     attire: {
       title: "Attire",
@@ -126,7 +150,7 @@ const translations = {
       coordinator: "Wedding coordinator: (optional contact)",
     },
     footerHashtag: "#amagiKARLstorywithREICHELLE",
-    nav: { details: "Details", rsvp: "RSVP", where: "Where" },
+    nav: { details: "Details", program: "Schedule", reception: "Reception", gifts: "Gifts", dresscode: "Attire", rsvp: "RSVP", where: "Where" },
     buttons: { rsvp: "Confirm attendance", details: "Event details" },
   },
 };

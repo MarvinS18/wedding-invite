@@ -2,9 +2,21 @@
   position:fixed;
   top:0;left:0;right:0;
   z-index:90;
+  /* Effetto fade-in globale */
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 3.5s cubic-bezier(0.22, 0.61, 0.36, 1), transform 3.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(6px);
-  padding:6px 0;
+  padding:6px 12px;
   box-shadow: 0 4px 12px rgba(10,10,10,0.06);
 }
 .navbar .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:10px}

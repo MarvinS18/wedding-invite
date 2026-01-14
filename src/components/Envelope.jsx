@@ -40,7 +40,7 @@ export default function Envelope({ onOpen }) {
         >
           <div className="flap" aria-hidden="true" />
           <div className="body">
-            <div className="letter">
+            <div className={`letter fade-in${opened ? " visible" : ""}`}>
               <div className="img-stack" aria-hidden="true">
                 <img src={closedImg} alt="Busta chiusa" className={`envelope-art closed ${opened ? "hidden" : "visible"}`} />
                 <img src={openImg} alt="Busta aperta" className={`envelope-art open ${opened ? "visible" : "hidden"}`} />

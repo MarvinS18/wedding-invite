@@ -42,9 +42,12 @@ export default function Navbar({ lang = "it", setLang = () => {} }) {
         </div>
 
         <nav className="nav-links" aria-hidden={!open}>
-          <a href="#details">{t.nav.details}</a>
-          <a href="#rsvp">{t.nav.rsvp}</a>
+          <a href="#details">{t.nav.program || t.programTitle || t.nav.details}</a>
+          <a href="#reception">{t.nav.reception || t.reception?.title}</a>
+          <a href="#gifts">{t.nav.gifts || t.gifts?.title}</a>
+          <a href="#attire">{t.nav.dresscode || t.attire?.title}</a>
           <a href="#dove">{t.nav.where}</a>
+          <a href="#rsvp">{t.nav.rsvp}</a>
         </nav>
       </div>
     </header>
