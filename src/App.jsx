@@ -214,7 +214,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16" style={{ opacity: 1, transform: 'none' }}>
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">Programma del giorno</h2>
-            <p className="text-muted-foreground font-body tracking-wide">Nuestra celebración paso a paso</p>
+            <p className="text-muted-foreground font-body tracking-wide">La nostra giornata, passo dopo passo</p>
           </div>
           <div className="relative">
             <div className="hidden md:block">
@@ -229,8 +229,8 @@ export default function App() {
                     {/* svg map-pin */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin w-5 h-5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Llegada</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Bienvenida a los invitados</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Arrivo</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Accoglienza degli invitati</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">17:00</div>
@@ -239,8 +239,8 @@ export default function App() {
                     {/* svg heart */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart w-5 h-5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Ceremonia</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Nos damos el sí</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Cerimonia</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Scambio delle promesse</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">18:00</div>
@@ -249,8 +249,8 @@ export default function App() {
                     {/* svg wine */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-wine w-5 h-5"><path d="M8 22h8"></path><path d="M7 10h10"></path><path d="M12 15v7"></path><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"></path></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Cóctel</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Brindis y aperitivos</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Aperitivo</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Brindisi e stuzzichini</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">20:00</div>
@@ -260,7 +260,7 @@ export default function App() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-utensils-crossed w-5 h-5"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"></path><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"></path><path d="m2.1 21.8 6.4-6.3"></path><path d="m19 5-7 7"></path></svg>
                   </div>
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Cena</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Banquete nupcial</p>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Cena nuziale</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">22:30</div>
@@ -269,8 +269,8 @@ export default function App() {
                     {/* svg flower2 */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-flower2 w-5 h-5"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path><circle cx="12" cy="8" r="2"></circle><path d="M12 10v12"></path><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Primer baile</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Nuestro momento</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Primo ballo</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Il nostro momento</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">23:00</div>
@@ -279,8 +279,8 @@ export default function App() {
                     {/* svg music */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-music w-5 h-5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Fiesta</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">¡A bailar!</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Festa</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Tutti a ballare!</p>
                 </div>
                 <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
                   <div className="timeline-badge mb-4">02:30</div>
@@ -289,8 +289,8 @@ export default function App() {
                     {/* svg sparkles */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles w-5 h-5"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Fin de fiesta</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Hasta pronto</p>
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Fine festa</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Arrivederci e grazie!</p>
                 </div>
               </div>
             </div>
@@ -309,9 +309,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">16:30</span>
-                      <h3 className="font-display text-lg text-foreground">Llegada</h3>
+                      <h3 className="font-display text-lg text-foreground">Arrivo</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Bienvenida a los invitados</p>
+                    <p className="text-muted-foreground font-body text-sm">Accoglienza degli invitati</p>
                   </div>
                 </div>
                   {/* Evento 2 */}
@@ -325,9 +325,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">17:00</span>
-                      <h3 className="font-display text-lg text-foreground">Ceremonia</h3>
+                      <h3 className="font-display text-lg text-foreground">Cerimonia</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Nos damos el sí</p>
+                    <p className="text-muted-foreground font-body text-sm">Scambio delle promesse</p>
                   </div>
                 </div>
                   {/* Evento 3 */}
@@ -340,9 +340,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">18:00</span>
-                      <h3 className="font-display text-lg text-foreground">Cóctel</h3>
+                      <h3 className="font-display text-lg text-foreground">Aperitivo</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Brindis y aperitivos</p>
+                    <p className="text-muted-foreground font-body text-sm">Brindisi e stuzzichini</p>
                   </div>
                 </div>
                   {/* Evento 4 */}
@@ -357,7 +357,7 @@ export default function App() {
                       <span className="timeline-badge">20:00</span>
                       <h3 className="font-display text-lg text-foreground">Cena</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Banquete nupcial</p>
+                    <p className="text-muted-foreground font-body text-sm">Cena nuziale</p>
                   </div>
                 </div>
                   {/* Evento 5 */}
@@ -370,9 +370,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">22:30</span>
-                      <h3 className="font-display text-lg text-foreground">Primer baile</h3>
+                      <h3 className="font-display text-lg text-foreground">Primo ballo</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Nuestro momento</p>
+                    <p className="text-muted-foreground font-body text-sm">Il nostro momento</p>
                   </div>
                 </div>
                   {/* Evento 6 */}
@@ -385,9 +385,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">23:00</span>
-                      <h3 className="font-display text-lg text-foreground">Fiesta</h3>
+                      <h3 className="font-display text-lg text-foreground">Festa</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">¡A bailar!</p>
+                    <p className="text-muted-foreground font-body text-sm">Tutti a ballare!</p>
                   </div>
                 </div>
                   {/* Evento 7 */}
@@ -400,9 +400,9 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">02:30</span>
-                      <h3 className="font-display text-lg text-foreground">Fin de fiesta</h3>
+                      <h3 className="font-display text-lg text-foreground">Fine festa</h3>
                     </div>
-                    <p className="text-muted-foreground font-body text-sm">Hasta pronto</p>
+                    <p className="text-muted-foreground font-body text-sm">Arrivederci e grazie!</p>
                   </div>
                 </div>
               </div>
@@ -419,7 +419,7 @@ export default function App() {
       <section className="section-padding relative">
         <div className="max-w-2xl mx-auto text-center">
           <div className="mb-12" style={{ opacity: 1, transform: 'none' }}>
-            <h2 className="font-script text-5xl md:text-6xl text-foreground mb-6">Regalos</h2>
+            <h2 className="font-script text-5xl md:text-6xl text-foreground mb-6">Regali</h2>
             <p className="text-muted-foreground font-body leading-relaxed max-w-lg mx-auto">
               La vostra presenza è il regalo più bello che possiamo ricevere.<br className="hidden md:block" />
               Se desiderate contribuire al nostro prossimo viaggio insieme, potete farlo nel modo che vi è più comodo.
