@@ -1,44 +1,404 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
-export default function RSVP() {
+export default function RsvpInline({ lang = "it", t }) {
+  // ✅ Gruppi invitati (match ESATTO)
+  const groups = useMemo(
+    () => [
+      ["Mario Rossi"],
+      ["Marvin Samiano", "Vanessa Palacio"],
+      ["Reichelle", "Karl"],
+      ["Melki", "Gizelle"],
+    ],
+    []
+  );
+
+  // ✅ Google Form config (TUO FORM)
+  const FORM_ACTION_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfWTxwfRCPVT0Av-nC_ncGCCePI7H6f63jlyflV93ubecdVBw/formResponse";
+
+  const ENTRY_NAME = "entry.700099219";       // Nome e Cognome (risposta breve)
+  const ENTRY_ATTENDING = "entry.1743725405"; // Sarai presente? (Si/No)
+  const ENTRY_FOOD = "entry.587703229";       // Allergie e intolleranze (checkbox)
+  const ENTRY_ALTRO = "entry.759350124";      // Altre allergie o restrizioni (risposta breve)
+
+  // ✅ opzioni checkbox (DEVONO combaciare con il testo nel Google Form)
+  const FOOD_OPTIONS = useMemo(
+    () => [
+      "Senza glutine / Celiaco",
+      "Vegetariano",
+      "Senza lattosio",
+      "Vegano",
+      "Allergia ai frutti secchi",
+      "Allergia ai crostacei",
+    ],
+    []
+  );
+
+  const [step, setStep] = useState("name"); // name | confirmGroup | attending | food | done
+  const [name, setName] = useState("");
+  const [group, setGroup] = useState([]);
+
+  const [attending, setAttending] = useState(""); // "Si" | "No"
+  const [food, setFood] = useState([]);          // ✅ array (checkbox)
+  const [altro, setAltro] = useState("");        // risposta breve
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
+
+  function findGroupByName(inputName) {
+    const trimmed = inputName.trim();
+    return groups.find((g) => g.includes(trimmed)) || null;
+  }
+
+  function toggleFood(option) {
+    setFood((prev) =>
+      prev.includes(option) ? prev.filter((x) => x !== option) : [...prev, option]
+    );
+  }
+
+  async function sendToGoogleForm({ nameValue, attendingValue, foodValues, altroValue }) {
+    setSending(true);
+    setError("");
+
+    try {
+      const fd = new FormData();
+
+      fd.append(ENTRY_NAME, nameValue.trim());
+      fd.append(ENTRY_ATTENDING, attendingValue);
+
+      // ✅ Checkbox: va inviato 1 valore per ogni opzione selezionata
+      (foodValues || []).forEach((opt) => {
+        fd.append(ENTRY_FOOD, opt);
+      });
+
+      fd.append(ENTRY_ALTRO, altroValue || "");
+
+      await fetch(FORM_ACTION_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: fd,
+      });
+
+      setStep("done");
+    } catch (err) {
+      console.error(err);
+      setError(lang === "it" ? "Errore durante l’invio. Riprova." : "Error while sending. Please try again.");
+    } finally {
+      setSending(false);
+    }
+  }
+
+  function checkName(e) {
+    e.preventDefault();
+    setError("");
+
+    const trimmed = name.trim();
+    if (!trimmed) {
+      setError(lang === "it" ? "Inserisci nome e cognome." : "Please enter name and surname.");
+      return;
+    }
+
+    const matchedGroup = findGroupByName(trimmed);
+    if (!matchedGroup) {
+      setError(
+        lang === "it"
+          ? "Nome non presente nella lista invitati. Controlla che sia identico all’invito."
+          : "Name not found in the guest list. Please check it matches the invitation."
+      );
+      return;
+    }
+
+    setGroup(matchedGroup);
+    setStep("confirmGroup");
+  }
+
+  function confirmGroupYes() {
+    setError("");
+    setStep("attending");
+  }
+
+  function confirmGroupNo() {
+    setError("");
+    setGroup([]);
+    setName("");
+    setAttending("");
+    setFood([]);
+    setAltro("");
+    setStep("name");
+  }
+
+  // ✅ se "No" invia subito e salta food
+  async function checkAttending(e) {
+    e.preventDefault();
+    setError("");
+
+    if (!attending) {
+      setError(lang === "it" ? "Seleziona Si o No." : "Select Yes or No.");
+      return;
+    }
+
+    if (attending === "No") {
+      await sendToGoogleForm({
+        nameValue: name,
+        attendingValue: attending,
+        foodValues: [],
+        altroValue: "",
+      });
+      return;
+    }
+
+    setStep("food");
+  }
+
+  async function submitAll(e) {
+    e.preventDefault();
+    setError("");
+
+    await sendToGoogleForm({
+      nameValue: name,
+      attendingValue: attending,
+      foodValues: food,
+      altroValue: altro,
+    });
+  }
+
+  function resetAll() {
+    setStep("name");
+    setName("");
+    setGroup([]);
+    setAttending("");
+    setFood([]);
+    setAltro("");
+    setError("");
+    setSending(false);
+  }
+
+  // ✅ stile bottoni identico a "Rispondi/Nascondi"
+  const linkBtn =
+    "text-sm text-[#7c4a1e] hover:text-[#4e2c0c] underline underline-offset-4 decoration-[#b97d6a] hover:decoration-[#7c4a1e] transition-colors font-body btn disabled:opacity-50 disabled:pointer-events-none";
+
+  const labelCls = "text-sm leading-none text-foreground font-medium";
+  const inputCls =
+    "flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary";
+  const textareaCls =
+    "flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary";
+
   return (
-    <section className="section-padding bg-ivory min-h-screen flex items-center justify-center">
-      <div className="max-w-xl w-full mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">Conferma la tua presenza</h2>
+    <div className="bg-card/90 backdrop-blur-sm border border-border rounded-sm p-8 space-y-6 shadow-soft">
+      {/* Titolo */}
+      <div className="text-center">
+        <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
+          {t?.rsvp?.title ?? "Conferma la tua presenza"}
+        </h2>
+        {t?.rsvp?.deadline && (
           <p className="text-muted-foreground font-body tracking-wide">
-            Compila il modulo per confermare la tua presenza
+            {t.rsvp.deadline}
           </p>
-        </div>
-        <form className="bg-card/90 backdrop-blur-sm border border-border rounded-sm p-8 space-y-6 shadow-soft">
-          <div>
-            <label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground font-medium" htmlFor="name">Nome e cognome *</label>
-            <input className="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary" id="name" required placeholder="Il tuo nome e cognome" defaultValue="" />
-          </div>
-          <div>
-            <label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground font-medium">Sarai presente? *</label>
-              <select
-                id="presenza-select"
-                name="presenza"
-                required
-                className="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary"
-                defaultValue=""
-              >
-                <option value="" disabled hidden>Seleziona una risposta</option>
-                <option value="si">Sì</option>
-                <option value="no">No</option>
-              </select>
-          </div>
-          <div>
-            <label className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-foreground font-medium" htmlFor="preferenze">Quali sono le tue preferenze alimentari?</label>
-            <textarea className="flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary" id="preferenze" placeholder="Scrivi qui le tue preferenze, allergie o intolleranze..." rows={3}></textarea>
-          </div>
-          <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 px-4 py-2 w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" className="mr-2 -ml-1"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>
-            Invia conferma
-          </button>
-        </form>
+        )}
       </div>
-    </section>
+
+      {/* Error */}
+      {error && (
+        <div className="rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-foreground">
+          {error}
+        </div>
+      )}
+
+      {/* STEP 1: NAME */}
+      {step === "name" && (
+        <form onSubmit={checkName} className="space-y-6" noValidate>
+          <div>
+            <label className={labelCls} htmlFor="name">
+              {lang === "it" ? "Nome e cognome *" : "Name and Surname *"}
+            </label>
+            <input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={inputCls}
+              placeholder={lang === "it" ? "Inserisci nome e cognome" : "Enter name and surname"}
+              autoComplete="name"
+              style={{ borderRadius: "14px" }}
+            />
+          </div>
+
+          <div className="flex justify-center">
+            <button className={linkBtn} type="submit" disabled={sending}>
+              {lang === "it" ? "Continua" : "Continue"}
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* STEP 2: CONFIRM GROUP */}
+      {step === "confirmGroup" && (
+        <div className="space-y-6">
+          <h3 className="text-xl text-foreground font-medium">
+            {lang === "it" ? "Ciao 👋" : "Hi 👋"}
+          </h3>
+
+          <p className="text-sm text-muted-foreground">
+            {lang === "it" ? "Sei nel gruppo" : "Are you in the group"}{" "}
+            <strong className="text-foreground">{group.join(" + ")}</strong>?
+          </p>
+
+          <div className="flex flex-col items-center gap-4 mt-9">
+            <button className={linkBtn} type="button" onClick={confirmGroupYes} disabled={sending}>
+              {lang === "it" ? "Sì" : "Yes"}
+            </button>
+            <button className={linkBtn} type="button" onClick={confirmGroupNo} disabled={sending}>
+              {lang === "it" ? "No" : "No"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3: ATTENDING */}
+      {step === "attending" && (
+        <form onSubmit={checkAttending} className="space-y-6" noValidate>
+          <div className="space-y-1">
+            <h3 className="text-xl text-foreground font-medium">
+              {lang === "it" ? `Ciao ${name.trim()} 👋` : `Hi ${name.trim()} 👋`}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {lang === "it" ? "Gruppo:" : "Group:"}{" "}
+              <strong className="text-foreground">{group.join(" + ")}</strong>
+            </p>
+          </div>
+
+          <div>
+            <p className={labelCls}>{lang === "it" ? "Sarai presente? *" : "Will you attend? *"}</p>
+
+            <div className="flex items-center gap-8 mt-3">
+              <label className="inline-flex items-center gap-2 cursor-pointer text-sm font-body text-neutral-800">
+                <input
+                  type="radio"
+                  name="attending"
+                  value="Si"
+                  checked={attending === "Si"}
+                  onChange={(e) => setAttending(e.target.value)}
+                  className="accent-[#b97d6a]"
+                />
+                <span>{lang === "it" ? "Sì" : "Yes"}</span>
+              </label>
+
+              <label className="inline-flex items-center gap-2 cursor-pointer text-sm font-body text-neutral-800">
+                <input
+                  type="radio"
+                  name="attending"
+                  value="No"
+                  checked={attending === "No"}
+                  onChange={(e) => setAttending(e.target.value)}
+                  className="accent-[#b97d6a]"
+                />
+                <span>No</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              type="button"
+              className={linkBtn}
+              disabled={sending}
+              onClick={() => {
+                setStep("confirmGroup");
+                setAttending("");
+                setError("");
+              }}
+            >
+              {lang === "it" ? "Indietro" : "Back"}
+            </button>
+
+            <button className={linkBtn} type="submit" disabled={sending}>
+              {sending
+                ? lang === "it"
+                  ? "Invio..."
+                  : "Sending..."
+                : lang === "it"
+                ? "Continua"
+                : "Continue"}
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* STEP 4: FOOD (checkbox + altro) */}
+      {step === "food" && (
+        <form onSubmit={submitAll} className="space-y-6" noValidate>
+          <div className="space-y-3">
+            <p className={labelCls}>{lang === "it" ? "Allergie e intolleranze alimentari" : "Food allergies & intolerances"}</p>
+
+            <div className="space-y-3">
+              {FOOD_OPTIONS.map((opt) => (
+                <label key={opt} className="flex items-center gap-3 cursor-pointer text-sm text-neutral-800">
+                  <input
+                    type="checkbox"
+                    checked={food.includes(opt)}
+                    onChange={() => toggleFood(opt)}
+                    className="h-4 w-4 accent-[#b97d6a]"
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className={labelCls} htmlFor="altro">
+              {lang === "it" ? "Altre allergie o restrizioni" : "Other allergies / restrictions"}
+            </label>
+            <input
+              id="altro"
+              value={altro}
+              onChange={(e) => setAltro(e.target.value)}
+              className={inputCls}
+              placeholder={lang === "it" ? "Es. allergia al pesce, ecc..." : "e.g. fish allergy, etc..."}
+              style={{ borderRadius: "14px" }}
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              type="button"
+              className={linkBtn}
+              disabled={sending}
+              onClick={() => {
+                setStep("attending");
+                setError("");
+              }}
+            >
+              {lang === "it" ? "Indietro" : "Back"}
+            </button>
+
+            <button className={linkBtn} type="submit" disabled={sending}>
+              {sending
+                ? lang === "it"
+                  ? "Invio..."
+                  : "Sending..."
+                : lang === "it"
+                ? "Invia conferma"
+                : "Send"}
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* DONE */}
+      {step === "done" && (
+        <div className="space-y-4 text-center">
+          <h3 className="text-2xl text-foreground font-medium">
+            {lang === "it" ? "Grazie! 💌" : "Thank you! 💌"}
+          </h3>
+
+          <p className="text-sm text-muted-foreground">
+            {lang === "it" ? "La tua risposta è stata registrata." : "Your response has been recorded."}
+          </p>
+
+          <button className={linkBtn} type="button" onClick={resetAll}>
+            {lang === "it" ? "Invia un’altra risposta" : "Send another response"}
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

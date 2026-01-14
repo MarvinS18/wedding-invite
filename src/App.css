@@ -1,29 +1,4 @@
-/* Bottone invia conferma RSVP */
-.invia-conferma-btn,
-form .invia-conferma-btn,
-form button[type="submit"] {
-  background: linear-gradient(90deg, #b97d6a 60%, #7c4a1e 100%) !important;
-  color: #fff;
-  border-radius: 999px;
-  font-size: 1.08em;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.85em 0;
-  border: 1.5px solid #b97d6a;
-  box-shadow: 0 4px 18px 0 rgba(185,125,106,0.13);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-.invia-conferma-btn:hover,
-form .invia-conferma-btn:hover,
-form button[type="submit"]:hover,
-.invia-conferma-btn:focus,
-form .invia-conferma-btn:focus,
-form button[type="submit"]:focus {
-  background: linear-gradient(90deg, #7c4a1e 60%, #b97d6a 100%) !important;
-  color: #fffbe9;
-  box-shadow: 0 8px 28px 0 rgba(124,74,30,0.18);
-  border-color: #7c4a1e;
-}
+
 /* Badge orario timeline carino */
 .timeline-badge {
   display: inline-block;

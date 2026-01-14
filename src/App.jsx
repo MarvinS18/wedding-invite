@@ -493,36 +493,14 @@ export default function App() {
           
           
         </div>
-        {showRSVP && (
-          <div id="rsvp-form-section" className="fade-in max-w-xl mx-auto">
-            <form className="bg-card/90 backdrop-blur-sm border border-border rounded-sm p-8 space-y-6 shadow-soft">
-              <div>
-                <label className="text-sm leading-none text-foreground font-medium" htmlFor="name">Nome e cognome *</label>
-                <input className="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary" id="name" required placeholder="Il tuo nome e cognome" defaultValue="" />
-              </div>
-              <div>
-                <label className="text-sm leading-none text-foreground font-medium">Sarai presente? *</label>
-                <div className="flex gap-6 mt-3">
-                  <div className="flex items-center space-x-2">
-                    <input type="radio" id="presente-si" name="presenza" value="si" required className="accent-primary" />
-                    <label className="text-sm font-medium leading-none cursor-pointer text-foreground flex items-center mb-0" htmlFor="presente-si">Sì</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <input type="radio" id="presente-no" name="presenza" value="no" className="accent-primary" />
-                    <label className="text-sm font-medium leading-none cursor-pointer text-foreground flex items-center mb-0" htmlFor="presente-no">No</label>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label className="text-sm leading-none text-foreground font-medium" htmlFor="preferenze">Esigenze alimentari</label>
-                <textarea className="flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary" id="preferenze" placeholder="Scrivi qui le tue preferenze, allergie o intolleranze..." rows={3}></textarea>
-              </div>
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2 w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium" type="submit">
-                Invia conferma
-              </button>
-            </form>
-          </div>
-        )}
+
+
+       {showRSVP && (
+  <div id="rsvp-form-section" className="fade-in max-w-xl mx-auto">
+    <RSVP/>
+  </div>
+)}
+
       </section>
       {/* Separatore cuore */}
       <div className="flex items-center justify-center py-6 bg-ivory" style={{opacity:1}}>
