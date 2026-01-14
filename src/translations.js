@@ -44,7 +44,7 @@ const translations = {
     },
     rsvp: {
       title: "RSVP",
-      deadline: "Si prega di confermare entro il 30 Aprile.",
+      deadline: "Vi invitiamo a confermare la vostra presenza compilando il form dedicato entro il 30/04/2026.",
       children: "I bambini sono i benvenuti.",
       contactsTitle: "Contatti RSVP",
     },

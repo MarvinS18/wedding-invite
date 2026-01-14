@@ -30,6 +30,7 @@ import "./App.css";
 import Envelope from "./components/Envelope";
 import Navbar from "./components/Navbar";
 import translations from "./translations";
+import Rsvp from "./components/RSVP/RSVP";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -53,14 +54,6 @@ export default function App() {
   const target = "2026-06-05T16:00:00";
   const { days, hours, mins, secs } = useCountdown(target);
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    attending: "",
-    guests: 0,
-    note: "",
-  });
-  const [saved, setSaved] = useState(false);
   const [showEnvelope, setShowEnvelope] = useState(true);
   const [lang, setLang] = useState(() => localStorage.getItem("lang") || "it");
 
@@ -70,31 +63,6 @@ export default function App() {
 
   const t = translations[lang] || translations.it;
 
-  useEffect(() => {
-    const s = JSON.parse(localStorage.getItem("rsvp") || "{}");
-    if (s?.name) setForm((f) => ({ ...f, ...s }));
-  }, []);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!form.name || !form.attending) {
-      alert("Compila nome e partecipazione.");
-      return;
-    }
-    localStorage.setItem("rsvp", JSON.stringify({ ...form, ts: new Date().toISOString() }));
-    setSaved(true);
-  }
-
-  function handleClear() {
-    localStorage.removeItem("rsvp");
-    setForm({ name: "", email: "", attending: "", guests: 0, note: "" });
-    setSaved(false);
-  }
 
   return (
     <>
@@ -188,41 +156,7 @@ export default function App() {
           </section>
 
           <aside id="rsvp" aria-labelledby="rsvp-title" className="fade-in-on-scroll">
-            <div className="card fade-in-on-scroll">
-            <h2 id="rsvp-title" className="section-title">{t.rsvp.title}</h2>
-            <div className="small" style={{ marginBottom: 12 }}>{t.rsvp.deadline}</div>
-              <form id="rsvpForm" onSubmit={handleSubmit} autoComplete="on" noValidate>
-                <label htmlFor="name">{lang === "it" ? "Nome e Cognome" : "Name"}</label>
-                <input id="name" name="name" className="input" value={form.name} onChange={handleChange} required />
-
-                <label htmlFor="email" style={{ marginTop: 8 }}>{lang === "it" ? "Email" : "Email"}</label>
-                <input id="email" name="email" className="input" type="email" value={form.email} onChange={handleChange} />
-
-                <label htmlFor="attending" style={{ marginTop: 8 }}>{lang === "it" ? "Partecipa?" : "Attending?"}</label>
-                <select id="attending" name="attending" className="input" value={form.attending} onChange={handleChange} required>
-                  <option value="">{lang === "it" ? "Seleziona" : "Select"}</option>
-                  <option value="yes">{lang === "it" ? "Sì, sarò presente" : "Yes, I will attend"}</option>
-                  <option value="no">{lang === "it" ? "No, non posso" : "No, I cannot"}</option>
-                </select>
-
-                <div className="form-row" style={{ marginTop: 8 }}>
-                  <div style={{ flex: 1 }}>
-                    <label htmlFor="guests">{lang === "it" ? "Numero ospiti" : "Number of guests"}</label>
-                    <input id="guests" name="guests" className="input" type="number" min="0" value={form.guests} onChange={handleChange} />
-                  </div>
-                </div>
-
-                <label htmlFor="note" style={{ marginTop: 8 }}>{lang === "it" ? "Note / Allergie" : "Notes / Allergies"}</label>
-                <textarea id="note" name="note" value={form.note} onChange={handleChange}></textarea>
-
-                <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-                  <button className="btn" type="submit">{lang === "it" ? "Invia" : "Send"}</button>
-                  <button id="clear" type="button" className="btn ghost" onClick={handleClear}>{lang === "it" ? "Cancella" : "Clear"}</button>
-                </div>
-
-                <p id="thanks" className="small" style={{ marginTop: 12, display: saved ? "block" : "none" }}>{lang === "it" ? "Grazie! Abbiamo ricevuto la tua risposta." : "Thank you! We've received your response."}</p>
-              </form>
-            </div>
+           
             <div className="card split-row fade-in-on-scroll" style={{ marginTop: 18 }}>
               <div>
                 <h3 id="dove" className="section-title">{t.ceremony.title}</h3>
@@ -291,6 +225,9 @@ export default function App() {
               <div className="small">{t.gifts.text}</div>
               <div className="small" style={{ marginTop: 8 }}>{t.gifts.beneficiary}<br />{t.gifts.iban}</div>
             </div>
+
+    <Rsvp lang={lang} t={t} />
+
             <div className="card fade-in-on-scroll">
               <h3 className="section-title" style={{ marginTop: 12 }}>{t.contacts.title}</h3>
               <div className="small">{t.contacts.karl}<br />{t.contacts.reichelle}</div>
