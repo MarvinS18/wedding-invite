@@ -16,10 +16,10 @@ export default function RsvpInline({ lang = "it", t }) {
   const FORM_ACTION_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLSfWTxwfRCPVT0Av-nC_ncGCCePI7H6f63jlyflV93ubecdVBw/formResponse";
 
-  const ENTRY_NAME = "entry.700099219";       // Nome e Cognome (risposta breve)
+  const ENTRY_NAME = "entry.700099219"; // Nome e Cognome (risposta breve)
   const ENTRY_ATTENDING = "entry.1743725405"; // Sarai presente? (Si/No)
-  const ENTRY_FOOD = "entry.587703229";       // Allergie e intolleranze (checkbox)
-  const ENTRY_ALTRO = "entry.759350124";      // Altre allergie o restrizioni (risposta breve)
+  const ENTRY_FOOD = "entry.587703229"; // Allergie e intolleranze (checkbox)
+  const ENTRY_ALTRO = "entry.759350124"; // Altre allergie o restrizioni (risposta breve)
 
   // ✅ opzioni checkbox (DEVONO combaciare con il testo nel Google Form)
   const FOOD_OPTIONS = useMemo(
@@ -39,8 +39,8 @@ export default function RsvpInline({ lang = "it", t }) {
   const [group, setGroup] = useState([]);
 
   const [attending, setAttending] = useState(""); // "Si" | "No"
-  const [food, setFood] = useState([]);          // ✅ array (checkbox)
-  const [altro, setAltro] = useState("");        // risposta breve
+  const [food, setFood] = useState([]); // ✅ array (checkbox)
+  const [altro, setAltro] = useState(""); // risposta breve
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
 
@@ -51,11 +51,18 @@ export default function RsvpInline({ lang = "it", t }) {
 
   function toggleFood(option) {
     setFood((prev) =>
-      prev.includes(option) ? prev.filter((x) => x !== option) : [...prev, option]
+      prev.includes(option)
+        ? prev.filter((x) => x !== option)
+        : [...prev, option]
     );
   }
 
-  async function sendToGoogleForm({ nameValue, attendingValue, foodValues, altroValue }) {
+  async function sendToGoogleForm({
+    nameValue,
+    attendingValue,
+    foodValues,
+    altroValue,
+  }) {
     setSending(true);
     setError("");
 
@@ -81,7 +88,11 @@ export default function RsvpInline({ lang = "it", t }) {
       setStep("done");
     } catch (err) {
       console.error(err);
-      setError(lang === "it" ? "Errore durante l’invio. Riprova." : "Error while sending. Please try again.");
+      setError(
+        lang === "it"
+          ? "Errore durante l’invio. Riprova."
+          : "Error while sending. Please try again."
+      );
     } finally {
       setSending(false);
     }
@@ -93,7 +104,11 @@ export default function RsvpInline({ lang = "it", t }) {
 
     const trimmed = name.trim();
     if (!trimmed) {
-      setError(lang === "it" ? "Inserisci nome e cognome." : "Please enter name and surname.");
+      setError(
+        lang === "it"
+          ? "Inserisci nome e cognome."
+          : "Please enter name and surname."
+      );
       return;
     }
 
@@ -215,7 +230,11 @@ export default function RsvpInline({ lang = "it", t }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className={inputCls}
-              placeholder={lang === "it" ? "Inserisci nome e cognome" : "Enter name and surname"}
+              placeholder={
+                lang === "it"
+                  ? "Inserisci nome e cognome"
+                  : "Enter name and surname"
+              }
               autoComplete="name"
               style={{ borderRadius: "14px" }}
             />
@@ -241,11 +260,21 @@ export default function RsvpInline({ lang = "it", t }) {
             <strong className="text-foreground">{group.join(" + ")}</strong>?
           </p>
 
-          <div className="flex flex-col items-center gap-4 mt-9">
-            <button className={linkBtn} type="button" onClick={confirmGroupYes} disabled={sending}>
+          <div className="flex flex-row items-center gap-4 mt-9">
+            <button
+              className={linkBtn}
+              type="button"
+              onClick={confirmGroupYes}
+              disabled={sending}
+            >
               {lang === "it" ? "Sì" : "Yes"}
             </button>
-            <button className={linkBtn} type="button" onClick={confirmGroupNo} disabled={sending}>
+            <button
+              className={linkBtn}
+              type="button"
+              onClick={confirmGroupNo}
+              disabled={sending}
+            >
               {lang === "it" ? "No" : "No"}
             </button>
           </div>
@@ -257,7 +286,9 @@ export default function RsvpInline({ lang = "it", t }) {
         <form onSubmit={checkAttending} className="space-y-6" noValidate>
           <div className="space-y-1">
             <h3 className="text-xl text-foreground font-medium">
-              {lang === "it" ? `Ciao ${name.trim()} 👋` : `Hi ${name.trim()} 👋`}
+              {lang === "it"
+                ? `Ciao ${name.trim()} 👋`
+                : `Hi ${name.trim()} 👋`}
             </h3>
             <p className="text-sm text-muted-foreground">
               {lang === "it" ? "Gruppo:" : "Group:"}{" "}
@@ -266,10 +297,12 @@ export default function RsvpInline({ lang = "it", t }) {
           </div>
 
           <div>
-            <p className={labelCls}>{lang === "it" ? "Sarai presente? *" : "Will you attend? *"}</p>
+            <p className={labelCls}>
+              {lang === "it" ? "Sarai presente? *" : "Will you attend? *"}
+            </p>
 
-            <div className="flex items-center gap-8 mt-3">
-              <label className="inline-flex items-center gap-2 cursor-pointer text-sm font-body text-neutral-800">
+            <div className="flex gap-8 mt-3">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="attending"
@@ -281,7 +314,7 @@ export default function RsvpInline({ lang = "it", t }) {
                 <span>{lang === "it" ? "Sì" : "Yes"}</span>
               </label>
 
-              <label className="inline-flex items-center gap-2 cursor-pointer text-sm font-body text-neutral-800">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="attending"
@@ -326,11 +359,18 @@ export default function RsvpInline({ lang = "it", t }) {
       {step === "food" && (
         <form onSubmit={submitAll} className="space-y-6" noValidate>
           <div className="space-y-3">
-            <p className={labelCls}>{lang === "it" ? "Allergie e intolleranze alimentari" : "Food allergies & intolerances"}</p>
+            <p className={labelCls}>
+              {lang === "it"
+                ? "Allergie e intolleranze alimentari"
+                : "Food allergies & intolerances"}
+            </p>
 
             <div className="space-y-3">
               {FOOD_OPTIONS.map((opt) => (
-                <label key={opt} className="flex items-center gap-3 cursor-pointer text-sm text-neutral-800">
+                <label
+                  key={opt}
+                  className="flex items-center gap-3 cursor-pointer text-sm text-neutral-800"
+                >
                   <input
                     type="checkbox"
                     checked={food.includes(opt)}
@@ -345,14 +385,20 @@ export default function RsvpInline({ lang = "it", t }) {
 
           <div>
             <label className={labelCls} htmlFor="altro">
-              {lang === "it" ? "Altre allergie o restrizioni" : "Other allergies / restrictions"}
+              {lang === "it"
+                ? "Altre allergie o restrizioni"
+                : "Other allergies / restrictions"}
             </label>
             <input
               id="altro"
               value={altro}
               onChange={(e) => setAltro(e.target.value)}
               className={inputCls}
-              placeholder={lang === "it" ? "Es. allergia al pesce, ecc..." : "e.g. fish allergy, etc..."}
+              placeholder={
+                lang === "it"
+                  ? "Es. allergia al pesce, ecc..."
+                  : "e.g. fish allergy, etc..."
+              }
               style={{ borderRadius: "14px" }}
             />
           </div>
@@ -391,11 +437,15 @@ export default function RsvpInline({ lang = "it", t }) {
           </h3>
 
           <p className="text-sm text-muted-foreground">
-            {lang === "it" ? "La tua risposta è stata registrata." : "Your response has been recorded."}
+            {lang === "it"
+              ? "La tua risposta è stata registrata."
+              : "Your response has been recorded."}
           </p>
 
           <button className={linkBtn} type="button" onClick={resetAll}>
-            {lang === "it" ? "Invia un’altra risposta" : "Send another response"}
+            {lang === "it"
+              ? "Invia un’altra risposta"
+              : "Send another response"}
           </button>
         </div>
       )}
