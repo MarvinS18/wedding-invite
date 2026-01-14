@@ -9,7 +9,7 @@ export default function Navbar({ lang = "it", setLang = () => {} }) {
   return (
     <header className={`navbar ${open ? "open" : ""}`} role="navigation" aria-label="Main menu">
       <div className="nav-inner container">
-        <div className="nav-brand">Karl &amp; Reichelle</div>
+        <div className="nav-brand">Maria &amp; Carlos</div>
 
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           <div className="lang-switch" aria-hidden={false}>
