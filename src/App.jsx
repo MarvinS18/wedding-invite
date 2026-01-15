@@ -34,6 +34,8 @@ export default function App() {
   // Ref per la sezione RSVP
   const rsvpSectionRef = useRef(null);
 
+  
+
   return (
     <>
       {!envelopeOpen && (
