@@ -94,40 +94,94 @@ export default function App() {
       )}
 
       {/* Countdown Section */}
-      <section id="countdown" className="section-padding bg-background">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">Conto alla rovescia</p>
-          <h2 className="font-script text-4xl md:text-5xl text-foreground mb-16">Per il grande giorno</h2>
-          <div className="grid grid-cols-4 gap-2 md:gap-8 max-w-2xl mx-auto">
-            <div className="flex flex-col items-center">
-              <div className="bg-card border border-border rounded-lg p-4 md:p-6 shadow-soft w-full">
-                <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">{String(days).padStart(2, "0")}</span>
-              </div>
-              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">Giorni</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-card border border-border rounded-lg p-4 md:p-6 shadow-soft w-full">
-                <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">{String(hours).padStart(2, "0")}</span>
-              </div>
-              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">Ore</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-card border border-border rounded-lg p-4 md:p-6 shadow-soft w-full">
-                <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">{String(mins).padStart(2, "0")}</span>
-              </div>
-              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">Minuti</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-card border border-border rounded-lg p-4 md:p-6 shadow-soft w-full">
-                <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">{String(secs).padStart(2, "0")}</span>
-              </div>
-              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">Secondi</span>
-            </div>
-          </div>
+{/* Countdown Section */}
+<section id="countdown" className="section-padding bg-background">
+  <div className="max-w-4xl mx-auto text-center px-4">
+    <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
+      Conto alla rovescia
+    </p>
+
+    <h2 className="font-script text-4xl md:text-5xl text-foreground mb-16">
+      Per il grande giorno
+    </h2>
+
+    <div className="flex flex-row justify-center gap-2 md:gap-8 max-w-2xl mx-auto">
+      {/* Giorni */}
+      <div className="flex flex-col items-center">
+        <div
+          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+          style={{
+            width: "clamp(68px, 18vw, 150px)",  // mobile -> medio -> desktop
+            aspectRatio: "1 / 1",               // sempre quadrato
+          }}
+        >
+          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+            {String(days).padStart(2, "0")}
+          </span>
         </div>
+        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+          Giorni
+        </span>
+      </div>
+
+      {/* Ore */}
+      <div className="flex flex-col items-center">
+        <div
+          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+          style={{
+            width: "clamp(68px, 18vw, 150px)",
+            aspectRatio: "1 / 1",
+          }}
+        >
+          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+            {String(hours).padStart(2, "0")}
+          </span>
+        </div>
+        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+          Ore
+        </span>
+      </div>
+
+      {/* Minuti */}
+      <div className="flex flex-col items-center">
+        <div
+          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+          style={{
+            width: "clamp(68px, 18vw, 150px)",
+            aspectRatio: "1 / 1",
+          }}
+        >
+          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+            {String(mins).padStart(2, "0")}
+          </span>
+        </div>
+        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+          Minuti
+        </span>
+      </div>
+
+      {/* Secondi */}
+      <div className="flex flex-col items-center">
+        <div
+          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+          style={{
+            width: "clamp(68px, 18vw, 150px)",
+            aspectRatio: "1 / 1",
+          }}
+        >
+          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+            {String(secs).padStart(2, "0")}
+          </span>
+        </div>
+        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+          Secondi
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
 
 
-      </section>
       {/* Separatore cuore */}
       <div className="flex items-center justify-center py-6 bg-ivory mt-8" style={{opacity:1}}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
