@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "./Envelope.css";
 
 const coverImg = "/images/envelope simple white and brown wax.avif"; // la foto iniziale
-const videoSrc = "/videos/AZvBADHd_TxML2xbvwcv3A-AZvBADHdFvvdg8Yb0sJHBQ.mp4";  // video apertura
+const videoSrc = "/videos/Timeline 3.mp4";  // video apertura
 
 export default function Envelope({ onOpen }) {
   const [playing, setPlaying] = useState(false);
