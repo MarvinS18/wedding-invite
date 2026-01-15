@@ -93,7 +93,6 @@ export default function App() {
         </>
       )}
 
-      {/* Countdown Section */}
 {/* Countdown Section */}
 <section id="countdown" className="section-padding bg-background">
   <div className="max-w-4xl mx-auto text-center px-4">
@@ -105,17 +104,23 @@ export default function App() {
       Per il grande giorno
     </h2>
 
-    <div className="flex flex-row justify-center gap-2 md:gap-8 max-w-2xl mx-auto">
+    <div
+      className="flex flex-row justify-center max-w-2xl mx-auto"
+      style={{ gap: "clamp(8px, 2.5vw, 32px)" }}
+    >
       {/* Giorni */}
       <div className="flex flex-col items-center">
         <div
           className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
           style={{
-            width: "clamp(68px, 18vw, 150px)",  // mobile -> medio -> desktop
-            aspectRatio: "1 / 1",               // sempre quadrato
+            width: "clamp(70px, 18vw, 140px)",
+            height: "clamp(70px, 14vw, 120px)",
           }}
         >
-          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+          <span
+            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+          >
             {String(days).padStart(2, "0")}
           </span>
         </div>
@@ -129,11 +134,14 @@ export default function App() {
         <div
           className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
           style={{
-            width: "clamp(68px, 18vw, 150px)",
-            aspectRatio: "1 / 1",
+            width: "clamp(70px, 18vw, 140px)",
+          height: "clamp(70px, 14vw, 120px)",
           }}
         >
-          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+          <span
+            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+          >
             {String(hours).padStart(2, "0")}
           </span>
         </div>
@@ -147,11 +155,14 @@ export default function App() {
         <div
           className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
           style={{
-            width: "clamp(68px, 18vw, 150px)",
-            aspectRatio: "1 / 1",
+            width: "clamp(70px, 18vw, 140px)",
+            height: "clamp(70px, 14vw, 120px)",
           }}
         >
-          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+          <span
+            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+          >
             {String(mins).padStart(2, "0")}
           </span>
         </div>
@@ -165,11 +176,14 @@ export default function App() {
         <div
           className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
           style={{
-            width: "clamp(68px, 18vw, 150px)",
-            aspectRatio: "1 / 1",
+            width: "clamp(70px, 18vw, 140px)",
+            height: "clamp(70px, 14vw, 120px)",
           }}
         >
-          <span className="block font-display text-3xl md:text-5xl lg:text-6xl font-normal text-foreground tracking-tight tabular-nums">
+          <span
+            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+          >
             {String(secs).padStart(2, "0")}
           </span>
         </div>
@@ -180,6 +194,9 @@ export default function App() {
     </div>
   </div>
 </section>
+
+
+
 
 
       {/* Separatore cuore */}
@@ -531,10 +548,10 @@ export default function App() {
         <div className="max-w-xl mx-auto text-center mb-8">
           <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">RSVP</h2>
           <p className="text-lg text-muted-foreground font-body tracking-wide mb-6">
-            Gentili ospiti,<br />
-            vi invitiamo a confermare la vostra presenza<br />
-            cliccando il bottone qui sotto entro il 30/04/2025.<br />
-            Grazie di cuore!
+            Per confermare la vostra presenza, inserite il vostro nome qui sotto.<br/>
+            Non vediamo l’ora di festeggiare con voi.<br/>
+            Grazie per voler condividere con noi questo giorno speciale!<br/>
+            Vi preghiamo di dare conferma entro il 30 aprile 2026
           </p>
           <button
             className="text-sm text-[#7c4a1e] hover:text-[#4e2c0c] underline underline-offset-4 decoration-[#b97d6a] hover:decoration-[#7c4a1e] transition-colors font-body btn"

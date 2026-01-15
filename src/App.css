@@ -473,4 +473,9 @@ a.inline{color:var(--accent);text-decoration:none}
   animation: content-appear 600ms ease both 220ms;
 }
 
+.countdown-number {
+  font-size: clamp(1.8rem, 5vw, 3.75rem);
+}
+
+
 /* ...existing code... */
