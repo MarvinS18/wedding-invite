@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import "./Envelope.css";
 
 const coverImg = "/images/envelope simple white and brown wax.avif";
-const videoSrc = "/videos/Timeline-4.mp4"; // meglio senza spazi
+const videoSrc = "/videos/Timeline-3.mp4"; // meglio senza spazi
 
 export default function Envelope({ onOpen }) {
   const videoRef = useRef(null);
