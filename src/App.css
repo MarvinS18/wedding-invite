@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 /* Badge orario timeline carino */
 .timeline-badge {
   display: inline-block;
@@ -337,7 +337,7 @@ body {
 .card-elegant { background: #fff; border-radius: 16px; box-shadow: 0 8px 32px rgba(185,125,106,0.12); }
 
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
 :root{
   --accent:#b97d6a;
   --muted:#666;
@@ -475,6 +475,50 @@ a.inline{color:var(--accent);text-decoration:none}
 
 .countdown-number {
   font-size: clamp(1.8rem, 5vw, 3.75rem);
+}
+.music-fab--pulse{
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%   { transform: scale(1);   box-shadow: 0 10px 25px rgba(0,0,0,0.18); }
+  50%  { transform: scale(1.06); box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+  100% { transform: scale(1);   box-shadow: 0 10px 25px rgba(0,0,0,0.18); }
+}
+
+
+.music-fab{
+  position: fixed;
+  right: calc(18px + env(safe-area-inset-right));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(165, 90, 84, 0.90);
+  color: #fff;
+
+  z-index: 2147483647; /* SUPER alto */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+
+.music-fab:hover{
+  transform: translateY(-1px);
+}
+
+.music-fab:active{
+  transform: translateY(0px);
 }
 
 

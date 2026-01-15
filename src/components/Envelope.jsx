@@ -1,21 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./Envelope.css";
 
 const coverImg = "/images/envelope simple white and brown wax.avif";
-const videoSrc = "/videos/Timeline 3.mp4";
+const videoSrc = "/videos/Timeline-4.mp4"; // meglio senza spazi
 
 export default function Envelope({ onOpen }) {
-  const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
 
+  const [requestedPlay, setRequestedPlay] = useState(false); // utente ha cliccato
+  const [coverHidden, setCoverHidden] = useState(false);     // nascondi cover SOLO quando video parte
+
   function startVideo() {
-    if (playing) return;
-    setPlaying(true);
+    if (requestedPlay) return;
+    setRequestedPlay(true);
 
     const v = videoRef.current;
     if (!v) return;
 
-    // niente setTimeout: proviamo a partire subito
     const p = v.play();
     if (p?.catch) p.catch(() => {});
   }
@@ -26,22 +27,20 @@ export default function Envelope({ onOpen }) {
 
   return (
     <div className="intro-overlay" role="dialog" aria-modal="true">
-      <div
-        className="intro-center"
-        onClick={!playing ? startVideo : undefined} // tap ovunque
-      >
-        {/* ✅ VIDEO sempre montato sotto */}
+      <div className="intro-center" onClick={startVideo}>
         <video
           ref={videoRef}
           className="intro-video"
           src={videoSrc}
           playsInline
           preload="auto"
+          poster={coverImg}                
+          onPlaying={() => setCoverHidden(true)} 
           onEnded={enterSite}
         />
 
-        {/* ✅ COVER sopra che fa fade-out */}
-        <div className={`intro-cover ${playing ? "is-hidden" : ""}`}>
+        {/* cover sopra finché il video NON è in playing */}
+        <div className={`intro-cover ${coverHidden ? "is-hidden" : ""}`}>
           <img src={coverImg} alt="Apri l'invito" />
         </div>
       </div>

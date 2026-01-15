@@ -33,11 +33,101 @@ export default function App() {
   const [showRSVP, setShowRSVP] = useState(false);
   // Ref per la sezione RSVP
   const rsvpSectionRef = useRef(null);
+  const audioRef = useRef(null);
+  const [musicMuted, setMusicMuted] = useState(false);
+const [needsGesture, setNeedsGesture] = useState(false);
 
-  
+
+
+
+  useEffect(() => {
+  const a = audioRef.current;
+  if (!a) return;
+
+  a.volume = 0.6;
+  a.loop = true;
+
+const tryPlay = () => {
+  const p = a.play();
+  if (p?.catch) {
+    p.catch(() => setNeedsGesture(true)); // ✅ autoplay bloccato su mobile
+  }
+};
+
+
+
+  // ✅ prova subito (desktop funziona)
+  tryPlay();
+
+  // ✅ fallback mobile: al primo gesto parte (tap/scroll/keypress)
+  const onFirstGesture = () => {
+    tryPlay();
+    setNeedsGesture(false);
+    window.removeEventListener("pointerdown", onFirstGesture);
+    window.removeEventListener("touchstart", onFirstGesture);
+    window.removeEventListener("keydown", onFirstGesture);
+    window.removeEventListener("scroll", onFirstGesture);
+  };
+
+  window.addEventListener("pointerdown", onFirstGesture, { passive: true });
+  window.addEventListener("touchstart", onFirstGesture, { passive: true });
+  window.addEventListener("keydown", onFirstGesture);
+  window.addEventListener("scroll", onFirstGesture, { passive: true });
+
+  return () => {
+    window.removeEventListener("pointerdown", onFirstGesture);
+    window.removeEventListener("touchstart", onFirstGesture);
+    window.removeEventListener("keydown", onFirstGesture);
+    window.removeEventListener("scroll", onFirstGesture);
+  };
+}, []);
+
+const toggleMute = () => {
+  const a = audioRef.current;
+  if (!a) return;
+
+  // se era bloccato, questo click sblocca e fa partire
+  const p = a.play();
+  if (p?.catch) p.catch(() => {});
+
+  const next = !musicMuted;
+  a.muted = next;
+  setMusicMuted(next);
+  setNeedsGesture(false);
+};
+
 
   return (
     <>
+   
+    <audio ref={audioRef} preload="auto">
+  <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
+</audio>
+
+ <button
+  type="button"
+  className={`music-fab ${needsGesture ? "music-fab--pulse" : ""}`}
+  onClick={toggleMute}
+  aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
+  title={musicMuted ? "Attiva musica" : "Silenzia musica"}
+>
+  {musicMuted ? (
+    // volume OFF
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      <path d="m23 9-6 6" />
+      <path d="m17 9 6 6" />
+    </svg>
+  ) : (
+    // volume ON
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  )}
+</button>
+
       {!envelopeOpen && (
         <>
           <div className="envelope-root-bg" />
