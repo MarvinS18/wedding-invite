@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
-import Envelope from "./components/Envelope";
-import RSVP from "./components/RSVP";
+import Envelope from "./components/Envelope/Envelope";
+import RSVP from "./components/RSVP/RSVP";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -571,7 +571,7 @@ export default function App() {
             </button>
             {showAportacion && (
               <div className="px-6 pb-6 pt-2 border-t border-border animate-fade-in text-center">
-                <p className="text-muted-foreground font-body text-sm leading-relaxed mb-6">
+              <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">
                   Se preferite, il regalo può essere in denaro contante.<br />
                   Se vi è più comodo, potete anche effettuare un bonifico:
                 </p>
@@ -609,7 +609,7 @@ export default function App() {
       <section className="section-padding bg-ivory" ref={rsvpSectionRef}>
         <div className="max-w-xl mx-auto text-center mb-8">
           <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">RSVP</h2>
-          <p className="text-lg text-muted-foreground font-body tracking-wide mb-6">
+         <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">
             Per confermare la vostra presenza, inserite il vostro nome qui sotto.<br />
             Non vediamo l’ora di festeggiare con voi.<br />
             Grazie per voler condividere con noi questo giorno speciale!<br />
@@ -647,7 +647,7 @@ export default function App() {
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-flower2 w-8 h-8 mx-auto text-primary-foreground/70"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path><circle cx="12" cy="8" r="2"></circle><path d="M12 10v12"></path><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path></svg>
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">Karl & Reichelle</p>
-          <p className="text-sm text-primary-foreground/80 font-body tracking-wide">20 giugno 2026</p>
+          <p className="text-sm text-primary-foreground/80 font-body tracking-wide">5 giugno 2026</p>
           <p className="text-xs text-primary-foreground/60 mt-8 font-body">Con tutto il nostro amore</p>
         </div>
       </footer>

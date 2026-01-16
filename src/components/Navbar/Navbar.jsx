@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import translations from "../translations";
+import translations from "../../translations";
 
 export default function Navbar({ lang = "it", setLang = () => {} }) {
   const [open, setOpen] = useState(false);
