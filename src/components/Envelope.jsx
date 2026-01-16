@@ -2,24 +2,26 @@ import React, { useRef, useState } from "react";
 import "./Envelope.css";
 
 const coverImg = "/images/envelope simple white and brown wax.avif";
-const videoSrc = "/videos/Timeline-3.mp4"; // meglio senza spazi
+const videoSrc = "/videos/Timeline-5.mp4"; 
 
-export default function Envelope({ onOpen }) {
+export default function Envelope({ onOpen, onStart }) {
   const videoRef = useRef(null);
 
-  const [requestedPlay, setRequestedPlay] = useState(false); // utente ha cliccato
-  const [coverHidden, setCoverHidden] = useState(false);     // nascondi cover SOLO quando video parte
+  const [requestedPlay, setRequestedPlay] = useState(false); 
+  const [coverHidden, setCoverHidden] = useState(false);   
 
-  function startVideo() {
-    if (requestedPlay) return;
-    setRequestedPlay(true);
+ function startVideo() {
+  if (requestedPlay) return;
+  setRequestedPlay(true);
 
-    const v = videoRef.current;
-    if (!v) return;
+  onStart?.(); // ✅ QUI parte la musica (tap = ok su mobile)
 
-    const p = v.play();
-    if (p?.catch) p.catch(() => {});
-  }
+  const v = videoRef.current;
+  if (!v) return;
+
+  const p = v.play();
+  if (p?.catch) p.catch(() => {});
+}
 
   function enterSite() {
     onOpen?.();
@@ -34,6 +36,7 @@ export default function Envelope({ onOpen }) {
           src={videoSrc}
           playsInline
           preload="auto"
+          muted
           poster={coverImg}                
           onPlaying={() => setCoverHidden(true)} 
           onEnded={enterSite}

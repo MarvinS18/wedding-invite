@@ -35,103 +35,73 @@ export default function App() {
   const rsvpSectionRef = useRef(null);
   const audioRef = useRef(null);
   const [musicMuted, setMusicMuted] = useState(false);
-const [needsGesture, setNeedsGesture] = useState(false);
 
 
+  const toggleMute = () => {
+    const a = audioRef.current;
+    if (!a) return;
 
+    const next = !musicMuted;
+    a.muted = next;
+    setMusicMuted(next);
 
-  useEffect(() => {
-  const a = audioRef.current;
-  if (!a) return;
-
-  a.volume = 0.6;
-  a.loop = true;
-
-const tryPlay = () => {
-  const p = a.play();
-  if (p?.catch) {
-    p.catch(() => setNeedsGesture(true)); // ✅ autoplay bloccato su mobile
-  }
-};
-
-
-
-  // ✅ prova subito (desktop funziona)
-  tryPlay();
-
-  // ✅ fallback mobile: al primo gesto parte (tap/scroll/keypress)
-  const onFirstGesture = () => {
-    tryPlay();
-    setNeedsGesture(false);
-    window.removeEventListener("pointerdown", onFirstGesture);
-    window.removeEventListener("touchstart", onFirstGesture);
-    window.removeEventListener("keydown", onFirstGesture);
-    window.removeEventListener("scroll", onFirstGesture);
+    // opzionale: se era in pausa, riparte (utile su mobile)
+    if (!next && a.paused) {
+      const p = a.play();
+      if (p?.catch) p.catch(() => { });
+    }
   };
 
-  window.addEventListener("pointerdown", onFirstGesture, { passive: true });
-  window.addEventListener("touchstart", onFirstGesture, { passive: true });
-  window.addEventListener("keydown", onFirstGesture);
-  window.addEventListener("scroll", onFirstGesture, { passive: true });
+  const startMusic = () => {
+    const a = audioRef.current;
+    if (!a) return;
 
-  return () => {
-    window.removeEventListener("pointerdown", onFirstGesture);
-    window.removeEventListener("touchstart", onFirstGesture);
-    window.removeEventListener("keydown", onFirstGesture);
-    window.removeEventListener("scroll", onFirstGesture);
+    a.loop = true;
+    a.volume = 0.6;
+    a.muted = musicMuted;
+
+    const p = a.play();
+    if (p?.catch) p.catch(() => { });
   };
-}, []);
 
-const toggleMute = () => {
-  const a = audioRef.current;
-  if (!a) return;
-
-  // se era bloccato, questo click sblocca e fa partire
-  const p = a.play();
-  if (p?.catch) p.catch(() => {});
-
-  const next = !musicMuted;
-  a.muted = next;
-  setMusicMuted(next);
-  setNeedsGesture(false);
-};
 
 
   return (
     <>
-   
-    <audio ref={audioRef} preload="auto">
-  <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
-</audio>
 
- <button
-  type="button"
-  className={`music-fab ${needsGesture ? "music-fab--pulse" : ""}`}
-  onClick={toggleMute}
-  aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
-  title={musicMuted ? "Attiva musica" : "Silenzia musica"}
->
-  {musicMuted ? (
-    // volume OFF
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 5 6 9H2v6h4l5 4V5z" />
-      <path d="m23 9-6 6" />
-      <path d="m17 9 6 6" />
-    </svg>
-  ) : (
-    // volume ON
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M11 5 6 9H2v6h4l5 4V5z" />
-      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-    </svg>
-  )}
-</button>
+      <audio ref={audioRef} preload="auto">
+        <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
+      </audio>
+
+      <button
+        type="button"
+        className="music-fab"
+        onClick={toggleMute}
+        aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
+        title={musicMuted ? "Attiva musica" : "Silenzia musica"}
+      >
+        {musicMuted ? (
+          // volume OFF
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 5 6 9H2v6h4l5 4V5z" />
+            <path d="m23 9-6 6" />
+            <path d="m17 9 6 6" />
+          </svg>
+        ) : (
+          // volume ON
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 5 6 9H2v6h4l5 4V5z" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+        )}
+      </button>
 
       {!envelopeOpen && (
         <>
           <div className="envelope-root-bg" />
           <Envelope
+            onStart={startMusic}
             onOpen={() => setEnvelopeOpen(true)}
           />
         </>
@@ -145,16 +115,16 @@ const toggleMute = () => {
               src="/images/karlandreichellebackgroundtimer.avif"
               alt="Karl e Reichelle background"
               className="absolute inset-0 w-full h-full object-cover object-center z-0"
-              style={{filter:'brightness(0.85)'}}
+              style={{ filter: 'brightness(0.85)' }}
             />
-            <video src="/assets/hero-video-1230-C27srnl9.mp4" className="absolute inset-0 w-full h-full object-cover z-10" autoPlay loop playsInline muted style={{objectPosition:'center center', mixBlendMode:'multiply'}}></video>
+            <video src="/assets/hero-video-1230-C27srnl9.mp4" className="absolute inset-0 w-full h-full object-cover z-10" autoPlay loop playsInline muted style={{ objectPosition: 'center center', mixBlendMode: 'multiply' }}></video>
             {/* Overlay content */}
             <div className="relative z-20 min-h-screen flex flex-col items-center justify-center">
               <div className="text-center px-8 max-w-sm mx-auto">
-                <p className="font-script text-3xl md:text-4xl text-neutral-700 mb-6" style={{textShadow:'rgba(60,40,30,0.3) 0.5px 0.5px 0px, rgba(60,40,30,0.1) -0.3px 0.3px 0px',filter:'url(#ink-texture)'}}>Salva la data</p>
-                <h1 className="font-display text-2xl md:text-3xl tracking-[0.15em] text-neutral-800 uppercase mb-6" style={{textShadow:'rgba(40,30,20,0.4) 0.3px 0.3px 0.5px'}}>Karl & Reichelle</h1>
-                <p className="font-script text-xl md:text-2xl text-neutral-600 mb-8" style={{textShadow:'rgba(60,40,30,0.25) 0.4px 0.4px 0px, rgba(60,40,30,0.1) -0.2px 0.2px 0px'}}>Ci sposiamo!</p>
-                <div className="flex items-center justify-center gap-4 text-neutral-700 mb-2" style={{textShadow:'rgba(40,30,20,0.3) 0.2px 0.2px 0.3px'}}>
+                <p className="font-script text-3xl md:text-4xl text-neutral-700 mb-6" style={{ textShadow: 'rgba(60,40,30,0.3) 0.5px 0.5px 0px, rgba(60,40,30,0.1) -0.3px 0.3px 0px', filter: 'url(#ink-texture)' }}>Salva la data</p>
+                <h1 className="font-display text-2xl md:text-3xl tracking-[0.15em] text-neutral-800 uppercase mb-6" style={{ textShadow: 'rgba(40,30,20,0.4) 0.3px 0.3px 0.5px' }}>Karl & Reichelle</h1>
+                <p className="font-script text-xl md:text-2xl text-neutral-600 mb-8" style={{ textShadow: 'rgba(60,40,30,0.25) 0.4px 0.4px 0px, rgba(60,40,30,0.1) -0.2px 0.2px 0px' }}>Ci sposiamo!</p>
+                <div className="flex items-center justify-center gap-4 text-neutral-700 mb-2" style={{ textShadow: 'rgba(40,30,20,0.3) 0.2px 0.2px 0.3px' }}>
                   <span className="font-display text-sm md:text-base tracking-[0.1em]">GIUGNO</span>
                   <span className="text-neutral-400">|</span>
                   <span className="font-display text-xl md:text-2xl">5</span>
@@ -165,7 +135,7 @@ const toggleMute = () => {
               </div>
               <button
                 className="absolute bottom-8 flex flex-col items-center gap-2 bg-transparent text-foreground/50 hover:text-primary transition-colors cursor-pointer border-none shadow-none p-0"
-                style={{background:'none', boxShadow:'none', border:'none', cursor:'pointer'}}
+                style={{ background: 'none', boxShadow: 'none', border: 'none', cursor: 'pointer' }}
                 onClick={() => {
                   setShowRSVP(true);
                   setTimeout(() => {
@@ -185,114 +155,114 @@ const toggleMute = () => {
         </>
       )}
 
-{/* Countdown Section */}
-<section id="countdown" className="section-padding bg-background">
-  <div className="max-w-4xl mx-auto text-center px-4">
-    <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
-      Conto alla rovescia
-    </p>
+      {/* Countdown Section */}
+      <section id="countdown" className="section-padding bg-background">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
+            Conto alla rovescia
+          </p>
 
-    <h2 className="font-script text-4xl md:text-5xl text-foreground mb-16">
-      Per il grande giorno
-    </h2>
+          <h2 className="font-script text-4xl md:text-5xl text-foreground mb-16">
+            Per il grande giorno
+          </h2>
 
-    <div
-      className="flex flex-row justify-center max-w-2xl mx-auto"
-      style={{ gap: "clamp(8px, 2.5vw, 32px)" }}
-    >
-      {/* Giorni */}
-      <div className="flex flex-col items-center">
-        <div
-          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-          style={{
-            width: "clamp(70px, 18vw, 140px)",
-            height: "clamp(70px, 14vw, 120px)",
-          }}
-        >
-          <span
-            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+          <div
+            className="flex flex-row justify-center max-w-2xl mx-auto"
+            style={{ gap: "clamp(8px, 2.5vw, 32px)" }}
           >
-            {String(days).padStart(2, "0")}
-          </span>
-        </div>
-        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
-          Giorni
-        </span>
-      </div>
+            {/* Giorni */}
+            <div className="flex flex-col items-center">
+              <div
+                className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                style={{
+                  width: "clamp(70px, 18vw, 140px)",
+                  height: "clamp(70px, 14vw, 120px)",
+                }}
+              >
+                <span
+                  className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                  style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                >
+                  {String(days).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                Giorni
+              </span>
+            </div>
 
-      {/* Ore */}
-      <div className="flex flex-col items-center">
-        <div
-          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-          style={{
-            width: "clamp(70px, 18vw, 140px)",
-          height: "clamp(70px, 14vw, 120px)",
-          }}
-        >
-          <span
-            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
-          >
-            {String(hours).padStart(2, "0")}
-          </span>
-        </div>
-        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
-          Ore
-        </span>
-      </div>
+            {/* Ore */}
+            <div className="flex flex-col items-center">
+              <div
+                className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                style={{
+                  width: "clamp(70px, 18vw, 140px)",
+                  height: "clamp(70px, 14vw, 120px)",
+                }}
+              >
+                <span
+                  className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                  style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                >
+                  {String(hours).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                Ore
+              </span>
+            </div>
 
-      {/* Minuti */}
-      <div className="flex flex-col items-center">
-        <div
-          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-          style={{
-            width: "clamp(70px, 18vw, 140px)",
-            height: "clamp(70px, 14vw, 120px)",
-          }}
-        >
-          <span
-            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
-          >
-            {String(mins).padStart(2, "0")}
-          </span>
-        </div>
-        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
-          Minuti
-        </span>
-      </div>
+            {/* Minuti */}
+            <div className="flex flex-col items-center">
+              <div
+                className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                style={{
+                  width: "clamp(70px, 18vw, 140px)",
+                  height: "clamp(70px, 14vw, 120px)",
+                }}
+              >
+                <span
+                  className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                  style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                >
+                  {String(mins).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                Minuti
+              </span>
+            </div>
 
-      {/* Secondi */}
-      <div className="flex flex-col items-center">
-        <div
-          className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-          style={{
-            width: "clamp(70px, 18vw, 140px)",
-            height: "clamp(70px, 14vw, 120px)",
-          }}
-        >
-          <span
-            className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-            style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
-          >
-            {String(secs).padStart(2, "0")}
-          </span>
+            {/* Secondi */}
+            <div className="flex flex-col items-center">
+              <div
+                className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                style={{
+                  width: "clamp(70px, 18vw, 140px)",
+                  height: "clamp(70px, 14vw, 120px)",
+                }}
+              >
+                <span
+                  className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                  style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                >
+                  {String(secs).padStart(2, "0")}
+                </span>
+              </div>
+              <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                Secondi
+              </span>
+            </div>
+          </div>
         </div>
-        <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
-          Secondi
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
 
 
 
 
       {/* Separatore cuore */}
-      <div className="flex items-center justify-center py-6 bg-ivory mt-8" style={{opacity:1}}>
+      <div className="flex items-center justify-center py-6 bg-ivory mt-8" style={{ opacity: 1 }}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
         <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
@@ -329,7 +299,7 @@ const toggleMute = () => {
 
       </section>
       {/* Separatore cuore */}
-      <div className="flex items-center justify-center py-6 bg-ivory" style={{opacity:1}}>
+      <div className="flex items-center justify-center py-6 bg-ivory" style={{ opacity: 1 }}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
         <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
@@ -365,7 +335,7 @@ const toggleMute = () => {
 
       </section>
       {/* Separatore cuore */}
-      <div className="flex items-center justify-center py-6 bg-ivory" style={{opacity:1}}>
+      <div className="flex items-center justify-center py-6 bg-ivory" style={{ opacity: 1 }}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
         <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
@@ -384,7 +354,7 @@ const toggleMute = () => {
               <div className="absolute top-16 left-0 right-0 h-px bg-border"></div>
               <div className="grid grid-cols-7 gap-2">
                 {/* ...7 eventi desktop, come fornito... */}
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">16:30</div>
                   {/* Linea verticale sopra (tranne il primo) */}
                   {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-4 bg-border z-0" /> */}
@@ -395,7 +365,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Arrivo</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Accoglienza degli invitati</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">17:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -405,7 +375,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Cerimonia</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Scambio delle promesse</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">18:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -415,7 +385,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Aperitivo</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Brindisi e stuzzichini</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">20:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -425,7 +395,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Cena</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Cena nuziale</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">22:30</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -435,7 +405,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Primo ballo</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Il nostro momento</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">23:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -445,7 +415,7 @@ const toggleMute = () => {
                   <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">Festa</h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">Tutti a ballare!</p>
                 </div>
-                <div className="flex flex-col items-center text-center group relative" style={{opacity: 0, transform: 'translateY(20px)'}}>
+                <div className="flex flex-col items-center text-center group relative" style={{ opacity: 0, transform: 'translateY(20px)' }}>
                   <div className="timeline-badge mb-4">02:30</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -460,10 +430,10 @@ const toggleMute = () => {
             {/* Mobile timeline fornita */}
             <div className="md:hidden relative">
               {/* Linea verticale che collega tutte le icone, più visibile */}
-              <div className="absolute left-8 top-0 bottom-0 w-4 bg-black border-2 border-white z-0" style={{borderRadius: '9999px'}}></div>
+              <div className="absolute left-8 top-0 bottom-0 w-4 bg-black border-2 border-white z-0" style={{ borderRadius: '9999px' }}></div>
               <div className="space-y-6 relative z-10">
                 {/* Evento 1 */}
-                <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
                   {/* Primo evento: nessuna linea sopra */}
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg map-pin */}
@@ -477,11 +447,11 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Accoglienza degli invitati</p>
                   </div>
                 </div>
-                  {/* Evento 2 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    {/* Linea verticale sopra l'icona */}
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 2 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  {/* Linea verticale sopra l'icona */}
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg heart */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart w-5 h-5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                   </div>
@@ -493,10 +463,10 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Scambio delle promesse</p>
                   </div>
                 </div>
-                  {/* Evento 3 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 3 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg wine */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-wine w-5 h-5"><path d="M8 22h8"></path><path d="M7 10h10"></path><path d="M12 15v7"></path><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"></path></svg>
                   </div>
@@ -508,10 +478,10 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Brindisi e stuzzichini</p>
                   </div>
                 </div>
-                  {/* Evento 4 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 4 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg utensils-crossed */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-utensils-crossed w-5 h-5"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"></path><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"></path><path d="m2.1 21.8 6.4-6.3"></path><path d="m19 5-7 7"></path></svg>
                   </div>
@@ -523,10 +493,10 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Cena nuziale</p>
                   </div>
                 </div>
-                  {/* Evento 5 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 5 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg flower2 */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-flower2 w-5 h-5"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path><circle cx="12" cy="8" r="2"></circle><path d="M12 10v12"></path><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path></svg>
                   </div>
@@ -538,10 +508,10 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Il nostro momento</p>
                   </div>
                 </div>
-                  {/* Evento 6 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 6 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg music */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-music w-5 h-5"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                   </div>
@@ -553,10 +523,10 @@ const toggleMute = () => {
                     <p className="text-muted-foreground font-body text-sm">Tutti a ballare!</p>
                   </div>
                 </div>
-                  {/* Evento 7 */}
-                  <div className="flex items-start gap-4 pl-1 relative" style={{opacity: 1, transform: 'none'}}>
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                {/* Evento 7 */}
+                <div className="flex items-start gap-4 pl-1 relative" style={{ opacity: 1, transform: 'none' }}>
+                  <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                  <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                     {/* svg sparkles */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkles w-5 h-5"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
                   </div>
@@ -628,7 +598,7 @@ const toggleMute = () => {
       </section>
 
       {/* Separatore cuore DOPO Regalos */}
-      <div className="flex items-center justify-center py-6 bg-ivory" style={{opacity:1}}>
+      <div className="flex items-center justify-center py-6 bg-ivory" style={{ opacity: 1 }}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
         <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
@@ -640,9 +610,9 @@ const toggleMute = () => {
         <div className="max-w-xl mx-auto text-center mb-8">
           <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">RSVP</h2>
           <p className="text-lg text-muted-foreground font-body tracking-wide mb-6">
-            Per confermare la vostra presenza, inserite il vostro nome qui sotto.<br/>
-            Non vediamo l’ora di festeggiare con voi.<br/>
-            Grazie per voler condividere con noi questo giorno speciale!<br/>
+            Per confermare la vostra presenza, inserite il vostro nome qui sotto.<br />
+            Non vediamo l’ora di festeggiare con voi.<br />
+            Grazie per voler condividere con noi questo giorno speciale!<br />
             Vi preghiamo di dare conferma entro il 30 aprile 2026
           </p>
           <button
@@ -653,20 +623,20 @@ const toggleMute = () => {
           >
             {showRSVP ? 'Nascondi' : 'Rispondi'}
           </button>
-          
-          
+
+
         </div>
 
 
-       {showRSVP && (
-  <div id="rsvp-form-section" className="fade-in max-w-xl mx-auto">
-    <RSVP/>
-  </div>
-)}
+        {showRSVP && (
+          <div id="rsvp-form-section" className="fade-in max-w-xl mx-auto">
+            <RSVP />
+          </div>
+        )}
 
       </section>
       {/* Separatore cuore */}
-      <div className="flex items-center justify-center py-6 bg-ivory" style={{opacity:1}}>
+      <div className="flex items-center justify-center py-6 bg-ivory" style={{ opacity: 1 }}>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
         <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
         <span className="h-px bg-primary/30 w-16 md:w-24"></span>
