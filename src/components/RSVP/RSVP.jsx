@@ -226,7 +226,7 @@ export default function RSVP({ lang = "it", t }) {
       {/* Titolo */}
       <div className="text-center">
         <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
-          {t?.rsvp?.title ?? "RSVP"}
+        Conferma la tua presenza
         </h2>
         {t?.rsvp?.deadline && (
           <p className="text-muted-foreground font-body tracking-wide">

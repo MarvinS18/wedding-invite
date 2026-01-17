@@ -241,30 +241,92 @@
   font-size: 14px;
 }
 .rsvp-btn--single {
-  min-width: 200px;
+  min-width: 100px;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 16px;
 }
 
 
 /* Mobile: select full width */
+
 @media (max-width: 520px) {
+  /* SOLO i bottoni nelle actions (Indietro / Invia / Si-No ecc) */
   .rsvp-actions {
-    flex-direction: row;          
+    flex-direction: row;
     justify-content: space-between;
     gap: 12px;
   }
 
-  .rsvp-btn {
-    width: auto;                 
-    flex: 1;                      
+  .rsvp-actions .rsvp-btn {
+    flex: 1;
     min-width: 0;
+    width: auto;
   }
 
+  /* Bottone singolo (Continua) NON deve mai flexare */
   .rsvp-btn--single {
-    min-width: 0;
-    padding: 0 18px;
-    height: 42px;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 120px;
+    height: 40px;
+    padding: 0 14px;
     font-size: 14px;
     border-radius: 14px;
   }
 }
+
+/* ✅ Mobile: sistema layout card RSVP (info + select + textarea) */
+@media (max-width: 520px) {
+  /* più respiro e niente tagli */
+  .rsvp-person__head {
+    padding: 12px 14px;
+  }
+
+  .rsvp-person__body {
+    padding: 12px 14px 14px;
+  }
+
+  /* Riga evento: da 2 colonne -> 1 colonna (stack) */
+  .rsvp-row {
+    grid-template-columns: 1fr;   /* ✅ impila */
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .rsvp-row__action {
+    justify-content: flex-start;  /* ✅ select sotto e allineata */
+  }
+
+  /* Select full width e più piccola */
+  .rsvp-select {
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  /* Titoli un filo più compatti */
+  .rsvp-row__title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .rsvp-row__meta {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  /* Label + textarea più compatti */
+  .rsvp-food__label {
+    font-size: 14px;
+  }
+
+  .rsvp-textarea {
+    border-radius: 14px;
+    padding: 10px;
+  }
+}
+
 
