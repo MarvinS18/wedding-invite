@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import "./Envelope.css";
 
-const coverImg = "/images/envelope simple white and brown wax.avif";
-const videoSrc = "/videos/Timeline-5.mp4"; 
+const coverImg = "/images/Welcome-to-our-Forever.avif";
+const videoSrc = "/videos/good-one-video.mp4"; 
 
 export default function Envelope({ onOpen, onStart }) {
   const videoRef = useRef(null);

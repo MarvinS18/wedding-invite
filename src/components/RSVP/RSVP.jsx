@@ -17,7 +17,7 @@ export default function RSVP({ lang = "it", t }) {
   );
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbyqAI608JRsSQyWrDdk0Wuq0F8ywQrCCvkRz53pwZfqL2zxr9OlBzr4_QrO0n67AA0tFQ/exec";
+    "https://script.google.com/macros/s/AKfycbzqKuqjoWX4L_w3zwXKCLqIKufzsuQ2-BW70peOvejR1KuesmXbLSc-wwD-0NlcLEiu/exec";
 
   // (Facoltativo) info evento da mostrare nelle card
   const eventInfo = useMemo(
