@@ -3,7 +3,7 @@
   inset: 0;
   width: 100vw;
   height: 100svh;
-  background: #000;
+  background: #ffffff;
   z-index: 9999;
   overflow: hidden;
 }
@@ -24,7 +24,7 @@
   display: block;
   object-fit: cover;
   object-position: center;
-  background: #000;
+  background: #ffffff;
 }
 
 /* COVER fullscreen sopra */
@@ -35,7 +35,7 @@
   height: 100%;
   opacity: 1;
   transition: opacity 200ms ease;
-  background: #000;
+  background: #ffffff;
 }
 
 .intro-cover img{

@@ -500,7 +500,7 @@ a.inline{color:var(--accent);text-decoration:none}
   justify-content: center;
 
   border: 1px solid rgba(255,255,255,0.35);
-  background: rgba(165, 90, 84, 0.90);
+   background: rgba(185, 125, 106, 0.90);
   color: #fff;
 
   z-index: 2147483647; /* SUPER alto */
@@ -519,6 +519,20 @@ a.inline{color:var(--accent);text-decoration:none}
 
 .music-fab:active{
   transform: translateY(0px);
+}
+
+.music-fab--hidden{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.music-fab--visible{
+  opacity: 0.85; /* metti 0.7 se lo vuoi più discreto */
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 

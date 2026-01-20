@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Envelope from "./components/Envelope/Envelope";
 import RSVP from "./components/RSVP/RSVP";
+import Menu from "./components/Menu/Menu";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -35,7 +36,33 @@ export default function App() {
   const rsvpSectionRef = useRef(null);
   const audioRef = useRef(null);
   const [musicMuted, setMusicMuted] = useState(false);
+  const [controlVisible, setControlVisible] = useState(false);
+  const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
+  const musicHideTimer = useRef(null);
 
+
+useEffect(() => {
+  const onScroll = () => {
+    const y = window.scrollY || 0;
+
+    if (Math.abs(y - lastScrollY.current) > 2) {
+      lastScrollY.current = y;
+
+      setControlVisible(true);
+
+      if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
+      musicHideTimer.current = setTimeout(() => {
+        setControlVisible(false);
+      }, 900);
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  return () => {
+    window.removeEventListener("scroll", onScroll);
+    if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
+  };
+}, []);
 
   const toggleMute = () => {
     const a = audioRef.current;
@@ -68,34 +95,64 @@ export default function App() {
 
   return (
     <>
-
+      <Menu controlVisible={controlVisible}/>
       <audio ref={audioRef} preload="auto">
         <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
       </audio>
 
-      <button
-        type="button"
-        className="music-fab"
-        onClick={toggleMute}
-        aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
-        title={musicMuted ? "Attiva musica" : "Silenzia musica"}
-      >
-        {musicMuted ? (
-          // volume OFF
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="m23 9-6 6" />
-            <path d="m17 9 6 6" />
-          </svg>
-        ) : (
-          // volume ON
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
-        )}
-      </button>
+  <button
+  type="button"
+  className={`music-fab ${controlVisible ? "music-fab--visible" : "music-fab--hidden"}`}
+  onClick={() => {
+    toggleMute();
+
+    // quando l'utente clicca, rendiamolo visibile un attimo
+    setControlVisible(true);
+    if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
+    musicHideTimer.current = setTimeout(() => {
+      setControlVisible(false);
+    }, 500);
+  }}
+  aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
+  title={musicMuted ? "Attiva musica" : "Silenzia musica"}
+>
+  {musicMuted ? (
+    // 🔇 volume OFF
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      <path d="m23 9-6 6" />
+      <path d="m17 9 6 6" />
+    </svg>
+  ) : (
+    // 🔊 volume ON
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M11 5 6 9H2v6h4l5 4V5z" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  )}
+</button>
+
 
       {!envelopeOpen && (
         <>
@@ -270,7 +327,7 @@ export default function App() {
 
 
       {/* Location Section */}
-      <section className="section-padding relative">
+      <section id="cerimonia" className="section-padding relative">
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">La cerimonia</h2>
@@ -306,7 +363,7 @@ export default function App() {
       </div>
 
       {/* Ricevimento Section */}
-      <section className="section-padding relative">
+      <section id="ricevimento" className="section-padding relative">
         <div className="max-w-4xl mx-auto relative z-10 px-4">
           <div className="text-center mb-16">
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">Ricevimento</h2>
@@ -343,7 +400,7 @@ export default function App() {
 
 
       {/* Programma del giorno (timeline fornita) */}
-      <section className="section-padding">
+      <section id="programma" className="section-padding">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16" style={{ opacity: 1, transform: 'none' }}>
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">Programma del giorno</h2>
@@ -549,7 +606,7 @@ export default function App() {
 
 
       {/* Sezione Regalos (versione fornita) */}
-      <section className="section-padding relative">
+      <section id="regalo" className="section-padding relative">
         <div className="max-w-2xl mx-auto text-center">
           <div className="mb-12" style={{ opacity: 1, transform: 'none' }}>
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-6">Regali</h2>
@@ -606,7 +663,7 @@ export default function App() {
 
 
       {/* Bottone RSVP e form espandibile */}
-      <section className="section-padding bg-ivory" ref={rsvpSectionRef}>
+      <section id="rsvp"className="section-padding bg-ivory" ref={rsvpSectionRef}>
         <div className="max-w-xl mx-auto text-center mb-8">
           <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">RSVP</h2>
          <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">

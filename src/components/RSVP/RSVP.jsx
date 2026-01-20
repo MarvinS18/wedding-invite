@@ -7,7 +7,7 @@ export default function RSVP({ lang = "it", t }) {
   const groups = useMemo(
     () => [
 
-      { label: "Marvin, Vanessa", members: ["Marvin Samiano", "Vanessa Palacio"] },
+      { label: "Marvin Samiano, Vanessa Joy Palacio", members: ["Marvin Samiano", "Vanessa Joy Palacio"] },
       { label: "Reichelle, Karl", members: ["Reichelle", "Karl"] },
       { label: "Melki, Gizelle", members: ["Melki", "Gizelle"] },
 
