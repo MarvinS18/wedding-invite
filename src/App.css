@@ -99,6 +99,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Prevent horizontal overflow causing right-side space */
+html, body { overflow-x: hidden; }
+
 .font-script {
   font-family: var(--font-script);
 }
@@ -417,8 +420,8 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 @media (min-width:880px){
   .timeline-desktop{display:block}
   .timeline-mobile{display:none}
-  .timeline-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;justify-content:centero;gap:clamp(6px,1.2vw,16px);scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .timeline-row > div{flex:1 1 0;min-width:clamp(110px,12vw,180px);scroll-snap-align:center}
+  .timeline-row{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:clamp(6px,0.8vw,12px)}
+  .timeline-row > div{flex:0 0 auto;min-width:clamp(100px,10vw,130px)}
 }
 
 /* Normalize headings: remove default top margin on h3 */
@@ -536,7 +539,7 @@ a.inline{color:var(--accent);text-decoration:none}
 
 .hero-video{
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100svh;          /* mobile safe */
   overflow: hidden;
   background: #fffdf9;
@@ -621,6 +624,45 @@ a.inline{color:var(--accent);text-decoration:none}
   outline-offset: 2px;
 }
 .btn-maps .lucide{width:18px;height:18px}
+
+/* Elegant Contributo button */
+.btn-contributo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position: relative;
+  height: 54px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(185,125,106,0.45);
+  background: linear-gradient(180deg,#ffffff 0%, #fffaf5 100%);
+  color: #7c4a1e;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(185,125,106,0.10);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-contributo > div{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center}
+.btn-contributo .lucide{display:block}
+.btn-contributo:hover{
+  background: #b97d6a;
+  color: #fff;
+  border-color: #b97d6a;
+  box-shadow: 0 10px 28px rgba(185,125,106,0.22);
+  transform: translateY(-1px);
+}
+.btn-contributo:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(185,125,106,0.18);
+}
+.btn-contributo:focus-visible{
+  outline: 2px solid #b97d6a;
+  outline-offset: 2px;
+}
+.btn-contributo .lucide{width:20px;height:20px}
 
 .margin-0{
   margin: 0;

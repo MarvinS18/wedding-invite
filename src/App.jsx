@@ -1084,14 +1084,14 @@ export default function App() {
             style={{ opacity: 1, transform: "none" }}
           >
             <button
-              className="w-full px-6 py-5 p-3flex items-center border border-t justify-between text-left hover:bg-secondary/30 transition-colors"
+              className="w-full px-6 py-5 p-3flex items-center border border-t justify-between text-left hover:bg-secondary/30 transition-colors btn-contributo"
               onClick={() => setShowAportacion((v) => !v)}
               aria-expanded={showAportacion}
             >
               <span className="font-display text-lg text-foreground">
                 Contributo
               </span>
-              <div style={{ transform: "none" }}>
+              <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
