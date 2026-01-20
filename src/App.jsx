@@ -36,7 +36,7 @@ export default function App() {
   const rsvpSectionRef = useRef(null);
   const audioRef = useRef(null);
   const [musicMuted, setMusicMuted] = useState(false);
-  const [controlVisible, setControlVisible] = useState(false);
+  const [musicVisible, setMusicVisible] = useState(false);
   const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
   const musicHideTimer = useRef(null);
 
@@ -48,11 +48,11 @@ useEffect(() => {
     if (Math.abs(y - lastScrollY.current) > 2) {
       lastScrollY.current = y;
 
-      setControlVisible(true);
+      setMusicVisible(true);
 
       if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
       musicHideTimer.current = setTimeout(() => {
-        setControlVisible(false);
+        setMusicVisible(false);
       }, 900);
     }
   };
@@ -95,23 +95,23 @@ useEffect(() => {
 
   return (
     <>
-      <Menu controlVisible={controlVisible}/>
+      <Menu />
       <audio ref={audioRef} preload="auto">
         <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
       </audio>
 
   <button
   type="button"
-  className={`music-fab ${controlVisible ? "music-fab--visible" : "music-fab--hidden"}`}
+  className={`music-fab ${musicVisible ? "music-fab--visible" : "music-fab--hidden"}`}
   onClick={() => {
     toggleMute();
 
     // quando l'utente clicca, rendiamolo visibile un attimo
-    setControlVisible(true);
+    setMusicVisible(true);
     if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
     musicHideTimer.current = setTimeout(() => {
-      setControlVisible(false);
-    }, 500);
+      setMusicVisible(false);
+    }, 900);
   }}
   aria-label={musicMuted ? "Attiva musica" : "Silenzia musica"}
   title={musicMuted ? "Attiva musica" : "Silenzia musica"}

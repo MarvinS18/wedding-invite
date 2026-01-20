@@ -3,11 +3,11 @@ import "./Menu.css";
 
 export default function Menu() {
   const [open, setOpen] = useState(false);
-  const [controlVisible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const lastY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
   const hideTimer = useRef(null);
- const showFab = controlVisible || open;
+
   // chiudi con ESC
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -33,7 +33,7 @@ export default function Menu() {
         hideTimer.current = setTimeout(() => {
           // se il menu è aperto, non nascondere il bottone
           setVisible(false);
-        }, 500); // 
+        }, 900); // ⬅️ dopo 0.9s che smette di scrollare sparisce
       }
     };
 
@@ -46,7 +46,8 @@ export default function Menu() {
 
   const close = () => setOpen(false);
 
-  
+  // se è aperto, deve restare visibile
+  const showFab = visible || open;
 
   return (
     <>
