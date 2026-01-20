@@ -8,7 +8,6 @@ export default function Menu() {
   const lastY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
   const hideTimer = useRef(null);
 
-  // chiudi con ESC
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === "Escape") setOpen(false);
@@ -17,23 +16,20 @@ export default function Menu() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // mostra il bottone SOLO quando l'utente scrolla (su o giù)
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
 
-      // se si è mosso davvero un pochino, consideriamo "scroll"
       if (Math.abs(y - lastY.current) > 2) {
         lastY.current = y;
 
         setVisible(true);
 
-        // reset timer di hide
         if (hideTimer.current) clearTimeout(hideTimer.current);
         hideTimer.current = setTimeout(() => {
-          // se il menu è aperto, non nascondere il bottone
+          // se è aperto, non nascondere
           setVisible(false);
-        }, 900); // ⬅️ dopo 0.9s che smette di scrollare sparisce
+        }, 900);
       }
     };
 
@@ -46,20 +42,30 @@ export default function Menu() {
 
   const close = () => setOpen(false);
 
-  // se è aperto, deve restare visibile
+  const onMenuClick = () => {
+   
+    setVisible(true);
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+
+    setOpen((v) => !v);
+    hideTimer.current = setTimeout(() => {
+  
+      setVisible(false);
+    }, 900);
+  };
+
   const showFab = visible || open;
 
   return (
     <>
-      {/* Bottone in alto a destra: visibile solo durante scroll o menu aperto */}
-       <button
+      <button
         className={`menu-fab ${showFab ? "menu-fab--visible" : ""} ${open ? "menu-fab--open" : ""}`}
-        onClick={() => setOpen(v => !v)}
+        onClick={onMenuClick}
+        aria-label="Apri menu"
       >
         ☰
       </button>
 
-      {/* Overlay + pannello */}
       {open && (
         <div className="menu-overlay" onClick={close} role="dialog" aria-modal="true">
           <div className="menu-panel" onClick={(e) => e.stopPropagation()}>
