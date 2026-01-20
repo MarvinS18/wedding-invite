@@ -575,13 +575,12 @@ export default function App() {
             </p>
           </div>
           <div className="relative">
-            <div className="hidden md:flex justify-center">
-              <div className="grid grid-cols-7 gap-2">
+            <div className="timeline-desktop relative">
+              {/* linea orizzontale dietro gli step */}
+              <div className="absolute left-0 right-0 top-14 h-px bg-border" />
+              <div className="timeline-row w-full max-w-6xl">
                 {/* ...7 eventi desktop, come fornito... */}
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">16:30</div>
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                     {/* svg map-pin */}
@@ -601,17 +600,14 @@ export default function App() {
                       <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Arrivo
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Accoglienza degli invitati
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">17:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -631,17 +627,14 @@ export default function App() {
                       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Cerimonia
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Scambio delle promesse
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">18:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -664,17 +657,14 @@ export default function App() {
                       <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"></path>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Aperitivo
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Brindisi e stuzzichini
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">20:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -697,17 +687,14 @@ export default function App() {
                       <path d="m19 5-7 7"></path>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Cena
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Cena nuziale
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">22:30</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -731,17 +718,14 @@ export default function App() {
                       <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Primo ballo
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Il nostro momento
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">23:00</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -763,17 +747,14 @@ export default function App() {
                       <circle cx="18" cy="16" r="3"></circle>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Festa
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
                     Tutti a ballare!
                   </p>
                 </div>
-                <div
-                  className="flex flex-col items-center text-center group relative"
-                  style={{ opacity: 0, transform: "translateY(20px)" }}
-                >
+                <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                   <div className="timeline-badge mb-4">02:30</div>
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                   <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -797,7 +778,7 @@ export default function App() {
                       <path d="M5 18H3"></path>
                     </svg>
                   </div>
-                  <h3 className="font-display text-base lg:text-lg text-foreground mb-1 leading-tight">
+                  <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                     Fine festa
                   </h3>
                   <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
@@ -807,7 +788,7 @@ export default function App() {
               </div>
             </div>
             {/* Mobile timeline fornita */}
-            <div className="md:hidden relative">
+            <div className="timeline-mobile relative">
               {/* Linea verticale che collega tutte le icone, più visibile */}
               <div
                 className="absolute left-8 top-0 bottom-0 w-4 bg-black border-2 border-white z-0"
@@ -841,7 +822,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">16:30</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Arrivo
                       </h3>
                     </div>
@@ -877,7 +858,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">17:00</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Cerimonia
                       </h3>
                     </div>
@@ -915,7 +896,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">18:00</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Aperitivo
                       </h3>
                     </div>
@@ -953,7 +934,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">20:00</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Cena
                       </h3>
                     </div>
@@ -992,7 +973,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">22:30</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Primo ballo
                       </h3>
                     </div>
@@ -1029,7 +1010,7 @@ export default function App() {
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
                       <span className="timeline-badge">23:00</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Festa
                       </h3>
                     </div>
@@ -1067,8 +1048,8 @@ export default function App() {
                   </div>
                   <div className="flex-1 pt-1">
                     <div className="flex items-baseline gap-3 mb-0.5">
-                      <span className="timeline-badge">02:30</span>
-                      <h3 className="font-display text-lg text-foreground">
+                      <span className="timeline-badge bg-badge-primary">02:30</span>
+                      <h3 className="font-display text-lg text-foreground margin-0">
                         Fine festa
                       </h3>
                     </div>
