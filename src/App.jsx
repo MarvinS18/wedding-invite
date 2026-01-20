@@ -179,7 +179,7 @@ export default function App() {
   {/* Mobile (verticale) */}
   <video
     className="bg-video bg-video--mobile"
-    src="/videos/save-the-date-vertical.mp4"
+    src="/videos/Save-the-date-verticale.mp4"
     autoPlay
     loop
     muted

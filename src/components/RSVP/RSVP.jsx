@@ -6,12 +6,17 @@ export default function RSVP({ lang = "it", t }) {
   // - members: nomi esatti che l’utente può inserire
   const groups = useMemo(
     () => [
-
-      { label: "Marvin Samiano, Vanessa Joy Palacio", members: ["Marvin Samiano", "Vanessa Palacio"] },
+      {
+        label: "Marvin Samiano, Vanessa Joy Palacio",
+        members: ["Marvin Samiano", "Vanessa Palacio"],
+      },
       { label: "Reichelle, Karl", members: ["Reichelle", "Karl"] },
       { label: "Melki, Gizelle", members: ["Melki", "Gizelle"] },
 
-      { label: "Palacio Family", members: ["Noa", "Eva", "Igor", "Diego", "Luna"] },
+      {
+        label: "Palacio Family",
+        members: ["Noa", "Eva", "Igor", "Diego", "Luna"],
+      },
     ],
     []
   );
@@ -29,7 +34,7 @@ export default function RSVP({ lang = "it", t }) {
       receptionPlace: "Villa dei Consoli",
       receptionTime: "18:30",
     }),
-    [lang]
+    []
   );
 
   // step: name | confirmGroup | rsvpGroup | sending | done
@@ -49,9 +54,6 @@ export default function RSVP({ lang = "it", t }) {
   const labelCls = "text-sm leading-none text-foreground font-medium";
   const inputCls =
     "flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-2 bg-background border-border text-foreground placeholder:text-muted-foreground focus:border-primary";
-
-  const selectCls =
-    "border border-border rounded-md px-2 py-1 bg-background text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   const cardCls =
     "bg-card/90 backdrop-blur-sm border border-border rounded-lg p-8 space-y-6 shadow-soft";
@@ -225,9 +227,7 @@ export default function RSVP({ lang = "it", t }) {
     <div className={`rsvp ${cardCls}`}>
       {/* Titolo */}
       <div className="text-center">
-        <h2 className="font-script rsvp-title">
-        Conferma la tua presenza
-        </h2>
+        <h2 className="font-script rsvp-title">Conferma la tua presenza</h2>
         {t?.rsvp?.deadline && (
           <p className="text-muted-foreground font-body tracking-wide">
             {t.rsvp.deadline}
@@ -235,76 +235,76 @@ export default function RSVP({ lang = "it", t }) {
         )}
       </div>
 
-    
-
       {/* STEP 1: NAME */}
-{step === "name" && (
-  <form onSubmit={checkName} className="space-y-6" noValidate>
-    <div className="flex flex-col items-center">
-      <label className={`${labelCls} text-center`} htmlFor="name">
-        {lang === "it" ? "Inserisci nome e cognome" : "Name and Surname *"}
-      </label>
+      {step === "name" && (
+        <form onSubmit={checkName} className="space-y-6" noValidate>
+          <div className="flex flex-col items-center">
+            <label className={`${labelCls} text-center`} htmlFor="name">
+              {lang === "it"
+                ? "Inserisci nome e cognome"
+                : "Name and Surname *"}
+            </label>
 
-      <input
-        id="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      className={`${inputCls} text-center`}
+            <input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`${inputCls} text-center`}
+              autoComplete="name"
+              style={{ borderRadius: "14px" }}
+            />
 
-       
-        autoComplete="name"
-        style={{ borderRadius: "14px" }}
-      />
+            {error && (
+              <p className="mt-2 text-[12px] text-[#b97d6a] text-center">
+                {error}
+              </p>
+            )}
+          </div>
 
-      {error && (
-        <p className="mt-2 text-[12px] text-[#b97d6a] text-center">
-          {error}
-        </p>
+          <div className="flex justify-center">
+            <button
+              className="rsvp-btn primary rsvp-btn--single"
+              type="submit"
+              disabled={sending}
+            >
+              {lang === "it" ? "Continua" : "Continue"}
+            </button>
+          </div>
+        </form>
       )}
-    </div>
-
-    <div className="flex justify-center">
-      <button className="rsvp-btn primary rsvp-btn--single" type="submit" disabled={sending}>
-        {lang === "it" ? "Continua" : "Continue"}
-      </button>
-    </div>
-  </form>
-)}
-
 
       {/* STEP 2: CONFIRM GROUP */}
-    {step === "confirmGroup" && matchedGroup && (
-  <div className="confirm-group">
-    <h3 className="confirm-group__title">
-      {lang === "it" ? `Ciao ${name.trim()}!` : "Hi"}
-    </h3>
+      {step === "confirmGroup" && matchedGroup && (
+        <div className="confirm-group">
+          <h3 className="confirm-group__title">
+            {lang === "it" ? `Ciao ${name.trim()}!` : "Hi"}
+          </h3>
 
-    <p className="confirm-group__text">
-      Fai parte di questo gruppo: {matchedGroup.label}
-    </p>
+          <p className="confirm-group__text">
+            Fai parte di questo gruppo: {matchedGroup.label}
+          </p>
 
-    <div className="rsvp-actions confirm right">
-      <button
-        type="button"
-        className="rsvp-btn secondary"
-        onClick={confirmGroupNo}
-        disabled={sending}
-      >
-        No
-      </button>
+          <div className="rsvp-actions confirm right">
+            <button
+              type="button"
+              className="rsvp-btn secondary"
+              onClick={confirmGroupNo}
+              disabled={sending}
+            >
+              No
+            </button>
 
-      <button
-        type="button"
-        className="rsvp-btn primary"
-        onClick={confirmGroupYes}
-        disabled={sending}
-      >
-        Sì
-      </button>
-    </div>
-  </div>
-)}
-
+            <button
+              type="button"
+              className="rsvp-btn primary"
+              onClick={confirmGroupYes}
+              disabled={sending}
+            >
+              Sì
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* STEP 3: RSVP GROUP (accordion) */}
       {step === "rsvpGroup" && matchedGroup && (
