@@ -421,7 +421,7 @@ export default function App() {
                 href="https://maps.google.com/?q=Chiesa+di+Santa+Cecilia,+Piazza+Santa+Cecilia+22,+Roma"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg"
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -527,7 +527,7 @@ export default function App() {
                 href="https://maps.google.com/?q=Villa+dei+Consoli,+Via+di+Colle+Reti+2,+Frascati"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg"
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
