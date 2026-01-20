@@ -69,9 +69,9 @@ export default function Menu() {
       {open && (
         <div className="menu-overlay" onClick={close} role="dialog" aria-modal="true">
           <div className="menu-panel" onClick={(e) => e.stopPropagation()}>
-            <div className="menu-title">Menu</div>
+            {/* <div className="menu-title">Menu</div> */}
 
-            <a className="menu-link" href="#countdown" onClick={close}>Conto alla rovescia</a>
+            <a className="menu-link" href="#countdown" onClick={close}>Countdown</a>
             <a className="menu-link" href="#cerimonia" onClick={close}>Cerimonia</a>
             <a className="menu-link" href="#ricevimento" onClick={close}>Ricevimento</a>
             <a className="menu-link" href="#programma" onClick={close}>Programma</a>

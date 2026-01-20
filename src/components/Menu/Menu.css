@@ -1,105 +1,108 @@
-.menu-fab{
-  position: fixed;
-  top: calc(18px + env(safe-area-inset-top));
-  right: calc(18px + env(safe-area-inset-right));
+.menu-fab {
+    position: fixed;
+    top: calc(18px + env(safe-area-inset-top));
+    right: calc(18px + env(safe-area-inset-right));
 
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  /* base glass trasparente */
- background: rgba(255,255,255,0.08);
+    /* base glass trasparente */
+    background: rgba(255, 255, 255, 0.08);
 
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
 
-  border: 1px solid rgba(255,255,255,0.22);
+    border: 1px solid rgba(255, 255, 255, 0.22);
 
-  /* bombatura: ombra esterna + inset che scuriscono ai bordi */
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.22),          /* shadow sotto */
-    inset 0 1px 0 rgba(255,255,255,0.22),  /* micro highlight top */
-    inset 0 -10px 18px rgba(0,0,0,0.14),   /* shading sotto */
-    inset 0 0 0 1px rgba(255,255,255,0.12);/* bordo interno */
+    /* bombatura: ombra esterna + inset che scuriscono ai bordi */
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.22),
+        /* shadow sotto */
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        /* micro highlight top */
+        inset 0 -10px 18px rgba(0, 0, 0, 0.14),
+        /* shading sotto */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+    /* bordo interno */
 
-     opacity: 0;
-  pointer-events: none;
-  transform: translateY(-6px);
-  transition: opacity 180ms ease, transform 180ms ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease;
 
-  color: rgba(185,125,106,0.9);
-  font-size: 20px;
-  line-height: 1;
+    color: rgba(185, 125, 106, 0.9);
+    font-size: 20px;
+    line-height: 1;
 
-  z-index: 2147483647;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+    z-index: 2147483647;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 
 }
-  
+
 
 
 /* anello esterno soft */
-.menu-fab::before{
-  content:"";
-  position:absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events:none;
+.menu-fab::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
 
-  /* scurisce leggermente i bordi → effetto lente/convesso */
-  background: radial-gradient(circle at 50% 35%,
-    rgba(255,255,255,0.06) 0%,
-    rgba(255,255,255,0.02) 40%,
-    rgba(0,0,0,0.14) 100%
-  );
-  opacity: 0.75;
+    /* scurisce leggermente i bordi → effetto lente/convesso */
+    background: radial-gradient(circle at 50% 35%,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.02) 40%,
+            rgba(0, 0, 0, 0.14) 100%);
+    opacity: 0.75;
 }
 
 /*  riflesso lucido superiore (la "cupola") */
-.menu-fab::after{
-  content:"";
-  position:absolute;
-  inset: 7px 9px auto 9px;   /* highlight più piccolo */
-  height: 16px;
-  border-radius: 999px;
-  pointer-events:none;
+.menu-fab::after {
+    content: "";
+    position: absolute;
+    inset: 7px 9px auto 9px;
+    /* highlight più piccolo */
+    height: 16px;
+    border-radius: 999px;
+    pointer-events: none;
 
-  /* luce morbida, niente fascia bianca */
-  background: radial-gradient(ellipse at 50% 20%,
-    rgba(255,255,255,0.55) 0%,
-    rgba(255,255,255,0.18) 45%,
-    rgba(255,255,255,0.00) 75%
-  );
+    /* luce morbida, niente fascia bianca */
+    background: radial-gradient(ellipse at 50% 20%,
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.18) 45%,
+            rgba(255, 255, 255, 0.00) 75%);
 
-  filter: blur(0.2px);
-  opacity: 0.85;
+    filter: blur(0.2px);
+    opacity: 0.85;
 }
 
 
 
-.menu-fab:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,0.14);
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.24),
-    inset 0 1px 0 rgba(255,255,255,0.24),
-    inset 0 -10px 18px rgba(0,0,0,0.14),
-    inset 0 0 0 1px rgba(255,255,255,0.14);
+.menu-fab:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 -10px 18px rgba(0, 0, 0, 0.14),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.14);
 }
 
-.menu-fab:active{
-  transform: translateY(0) scale(0.985);
+.menu-fab:active {
+    transform: translateY(0) scale(0.985);
 }
 
 
 .menu-fab--open {
-  opacity: 1;
+    opacity: 1;
 }
 
 
@@ -107,91 +110,123 @@
 
 /* Overlay */
 .menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2147483646;
-  background: rgba(0,0,0,0.15);
-  
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    background: rgba(0, 0, 0, 0.15);
+
 }
 
 /* Pannello sotto al bottone */
 .menu-panel {
-  position: fixed;
-  top: calc(72px + env(safe-area-inset-top));
-  right: calc(18px + env(safe-area-inset-right));
+    position: fixed;
+    top: calc(72px + env(safe-area-inset-top));
+    right: calc(18px + env(safe-area-inset-right));
 
-  width: 180px;
-  padding: 10px 8px;
-  border-radius: 18px;
+    width: 190px;
+    padding: 12px 10px;
+    border-radius: 26px;
 
-  /* GLASS */
-  background:transparent;
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+    /* iOS glass base */
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    /* light rim */
+    border: 1px solid rgba(177, 176, 176, 0.28);
 
-  /* bordo luminoso stile iOS */
-  border: 1px solid rgba(255, 255, 255, 0.45);
+    /* depth */
+    box-shadow:
+        0 22px 50px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -10px 18px rgba(0, 0, 0, 0.05);
 
-  /* ombra morbida “sospesa” */
-  box-shadow:
-    0 20px 45px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 
-  animation: menuIn 180ms ease both;
+
+    overflow: hidden;
+    animation: menuIn 180ms ease both;
 }
+
+.menu-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+
+    /* glow sottile lungo i bordi */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+
+    /* vignette morbida ai bordi (effetto folder iOS) */
+    background: radial-gradient(circle at 30% 20%,
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(255, 255, 255, 0.10) 38%,
+            rgba(0, 0, 0, 0.10) 100%);
+    opacity: 0.55;
+
+}
+
 
 
 @keyframes menuIn {
-  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .menu-title {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.45);
-  padding: 6px 12px 8px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+    padding: 6px 12px 8px;
 }
 
 
 .menu-link {
-  display: block;
-  text-decoration: none;
-  color: rgba(0,0,0,0.85);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  padding: 9px 12px;
-  border-radius: 12px;
+    display: block;
+    text-decoration: none;
 
-  transition: background 160ms ease, color 160ms ease;
+    font-family: var(--font-script);
+    font-size: 1.5rem;
+    line-height: 1.2;
+
+    color: rgba(0, 0, 0, 0.82);
+    padding: 12px 14px;
+    border-radius: 18px;
+
+    transition: background 160ms ease, transform 160ms ease;
 }
 
 .menu-link:hover {
-  background: rgba(255,255,255,0.35);
-  color: #7c4a1e;
+    background: rgba(255, 255, 255, 0.20);
+    color: rgba(185, 125, 106, 0.90);
 }
 
-.menu-link + .menu-link {
-  margin-top: 4px;
+.menu-link:active {
+    transform: scale(0.985);
 }
 
 
-/* di default: nascosto */
-.menu-fab {
- 
+.menu-link+.menu-link {
+    margin-top: 4px;
 }
+
 
 /* quando l'utente scrolla (o quando il menu è aperto): visibile */
 .menu-fab.menu-fab--visible {
-  opacity: 0.9;
-  pointer-events: auto;
-  transform: translateY(0);
+    opacity: 0.9;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* quando aperto: leggermente più evidente */
 .menu-fab.menu-fab--open {
-  opacity: 1;
+    opacity: 1;
 }
-
