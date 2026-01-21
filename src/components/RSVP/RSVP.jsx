@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from "react";
 import "./RSVP.css";
+import translations from "../../translations";
 
-export default function RSVP({ lang = "it", t }) {
+export default function RSVP({ lang = "it" }) {
+  const t = translations[lang];
   //  Gruppi invitati (match ESATTO)
   // - members: nomi esatti che l’utente può inserire
   const groups = useMemo(
@@ -27,10 +29,10 @@ export default function RSVP({ lang = "it", t }) {
   // (Facoltativo) info evento da mostrare nelle card
   const eventInfo = useMemo(
     () => ({
-      ceremonyTitle: "Cerimonia in Chiesa",
-      ceremonyPlace: "Chiesa di Santa Cecilia",
+      ceremonyTitle: "Ceremony in Church",
+      ceremonyPlace: "Church of Santa Cecilia",
       ceremonyTime: "16:30",
-      receptionTitle: "Ricevimento in Location",
+      receptionTitle: "Reception at Location",
       receptionPlace: "Villa dei Consoli",
       receptionTime: "18:30",
     }),
@@ -112,21 +114,13 @@ export default function RSVP({ lang = "it", t }) {
 
     const trimmed = name.trim();
     if (!trimmed) {
-      setError(
-        lang === "it"
-          ? "Inserisci nome e cognome."
-          : "Please enter name and surname."
-      );
+      setError(t.rsvpForm.errors.enterName);
       return;
     }
 
     const g = findGroupByName(trimmed);
     if (!g) {
-      setError(
-        lang === "it"
-          ? "Nome non presente nella lista invitati. Controlla che sia identico all’invito."
-          : "Name not found in the guest list. Please check it matches the invitation."
-      );
+      setError(t.rsvpForm.errors.nameNotFound);
       return;
     }
 
@@ -201,11 +195,7 @@ export default function RSVP({ lang = "it", t }) {
       setStep("done");
     } catch (err) {
       console.error(err);
-      setError(
-        lang === "it"
-          ? "Errore durante l’invio. Controlla la connessione e riprova."
-          : "Error while sending. Check your connection and try again."
-      );
+      setError(t.rsvpForm.errors.sendError);
       setStep("rsvpGroup");
     } finally {
       setSending(false);
@@ -227,12 +217,7 @@ export default function RSVP({ lang = "it", t }) {
     <div className={`rsvp ${cardCls}`}>
       {/* Titolo */}
       <div className="text-center">
-        <h2 className="font-script rsvp-title">Conferma la tua presenza</h2>
-        {t?.rsvp?.deadline && (
-          <p className="text-muted-foreground font-body tracking-wide">
-            {t.rsvp.deadline}
-          </p>
-        )}
+        <h2 className="font-script rsvp-title">{t.rsvpForm.formTitle}</h2>
       </div>
 
       {/* STEP 1: NAME */}
@@ -240,9 +225,7 @@ export default function RSVP({ lang = "it", t }) {
         <form onSubmit={checkName} className="space-y-6" noValidate>
           <div className="flex flex-col items-center">
             <label className={`${labelCls} text-center`} htmlFor="name">
-              {lang === "it"
-                ? "Inserisci nome e cognome"
-                : "Name and Surname *"}
+              {t.rsvpForm.nameLabel}
             </label>
 
             <input
@@ -267,7 +250,7 @@ export default function RSVP({ lang = "it", t }) {
               type="submit"
               disabled={sending}
             >
-              {lang === "it" ? "Continua" : "Continue"}
+              {t.rsvpForm.continue}
             </button>
           </div>
         </form>
@@ -277,11 +260,11 @@ export default function RSVP({ lang = "it", t }) {
       {step === "confirmGroup" && matchedGroup && (
         <div className="confirm-group">
           <h3 className="confirm-group__title">
-            {lang === "it" ? `Ciao ${name.trim()}!` : "Hi"}
+            {t.rsvpForm.greeting} {name.trim()}!
           </h3>
 
           <p className="confirm-group__text">
-            Fai parte di questo gruppo: {matchedGroup.label}
+            {t.rsvpForm.groupQuestion} {matchedGroup.label}
           </p>
 
           <div className="rsvp-actions confirm right">
@@ -291,7 +274,7 @@ export default function RSVP({ lang = "it", t }) {
               onClick={confirmGroupNo}
               disabled={sending}
             >
-              No
+              {t.rsvpForm.no}
             </button>
 
             <button
@@ -300,7 +283,7 @@ export default function RSVP({ lang = "it", t }) {
               onClick={confirmGroupYes}
               disabled={sending}
             >
-              Sì
+              {t.rsvpForm.yes}
             </button>
           </div>
         </div>
@@ -355,13 +338,7 @@ export default function RSVP({ lang = "it", t }) {
                           done ? "ok" : "todo"
                         }`}
                       >
-                        {done
-                          ? lang === "it"
-                            ? "✅ Completo"
-                            : "✅ Complete"
-                          : lang === "it"
-                          ? "⏳ Da completare"
-                          : "⏳ To complete"}
+                        {done ? t.rsvpForm.complete : t.rsvpForm.toComplete}
                       </div>
                     </div>
 
@@ -396,13 +373,9 @@ export default function RSVP({ lang = "it", t }) {
                             className="rsvp-select"
                             required
                           >
-                            <option value="">
-                              {lang === "it" ? "Seleziona" : "Select"}
-                            </option>
-                            <option value="Si">
-                              {lang === "it" ? "Sì" : "Yes"}
-                            </option>
-                            <option value="No">No</option>
+                            <option value="">{t.rsvpForm.select}</option>
+                            <option value="Si">{t.rsvpForm.yes}</option>
+                            <option value="No">{t.rsvpForm.no}</option>
                           </select>
                         </div>
                       </div>
@@ -430,13 +403,9 @@ export default function RSVP({ lang = "it", t }) {
                             className="rsvp-select"
                             required
                           >
-                            <option value="">
-                              {lang === "it" ? "Seleziona" : "Select"}
-                            </option>
-                            <option value="Si">
-                              {lang === "it" ? "Sì" : "Yes"}
-                            </option>
-                            <option value="No">No</option>
+                            <option value="">{t.rsvpForm.select}</option>
+                            <option value="Si">{t.rsvpForm.yes}</option>
+                            <option value="No">{t.rsvpForm.no}</option>
                           </select>
                         </div>
                       </div>
@@ -444,9 +413,7 @@ export default function RSVP({ lang = "it", t }) {
                       {/* Preferenze alimentari */}
                       <div className="rsvp-food">
                         <div className="rsvp-food__label">
-                          {lang === "it"
-                            ? "Segnalate qui eventuali esigenze alimentari:"
-                            : "Dietary requirements (allergies/intolerances):"}
+                          {t.rsvpForm.foodLabel}
                         </div>
 
                         <textarea
@@ -456,11 +423,7 @@ export default function RSVP({ lang = "it", t }) {
                           }
                           className="rsvp-textarea"
                           rows={3}
-                          placeholder={
-                            lang === "it"
-                              ? "Allergie, intolleranze o regimi alimentari specifici (es. celiachia, vegetariano, vegano...)"
-                              : "Allergies, intolerances or dietary preferences (e.g., gluten-free, vegetarian, vegan...)"
-                          }
+                          placeholder={t.rsvpForm.foodPlaceholder}
                         />
                       </div>
 
@@ -472,7 +435,7 @@ export default function RSVP({ lang = "it", t }) {
                             className="rsvp-linkbtn"
                             onClick={() => setOpenIdx(idx - 1)}
                           >
-                            {lang === "it" ? "← Precedente" : "← Prev"}
+                            {t.rsvpForm.prev}
                           </button>
                         )}
 
@@ -482,7 +445,7 @@ export default function RSVP({ lang = "it", t }) {
                             className="rsvp-linkbtn"
                             onClick={() => setOpenIdx(idx + 1)}
                           >
-                            {lang === "it" ? "Successivo →" : "Next →"}
+                            {t.rsvpForm.next}
                           </button>
                         )}
                       </div>
@@ -503,7 +466,7 @@ export default function RSVP({ lang = "it", t }) {
                 setError("");
               }}
             >
-              {lang === "it" ? "Indietro" : "Back"}
+              {t.rsvpForm.back}
             </button>
 
             <button
@@ -511,13 +474,7 @@ export default function RSVP({ lang = "it", t }) {
               type="submit"
               disabled={sending}
             >
-              {sending
-                ? lang === "it"
-                  ? "Invio..."
-                  : "Sending..."
-                : lang === "it"
-                ? "Invia RSVP"
-                : "Send RSVP"}
+              {sending ? t.rsvpForm.sending : t.rsvpForm.send}
             </button>
           </div>
         </form>
@@ -552,19 +509,15 @@ export default function RSVP({ lang = "it", t }) {
       {step === "done" && (
         <div className="space-y-4 text-center">
           <h3 className="text-2xl text-foreground font-medium">
-            {lang === "it" ? "Grazie! 💌" : "Thank you! 💌"}
+            {t.rsvpForm.thankYou}
           </h3>
 
           <p className="text-sm text-muted-foreground">
-            {lang === "it"
-              ? "La tua risposta è stata registrata."
-              : "Your response has been recorded."}
+            {t.rsvpForm.responseRecorded}
           </p>
 
           <button className={linkBtn} type="button" onClick={resetAll}>
-            {lang === "it"
-              ? "Invia un’altra risposta"
-              : "Send another response"}
+            {t.rsvpForm.sendAnother}
           </button>
         </div>
       )}
