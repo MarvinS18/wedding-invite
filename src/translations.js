@@ -144,6 +144,7 @@ const translations = {
       names: "Karl & Reichelle",
       date: "5 giugno 2026",
       message: "Con tutto il nostro amore",
+      contactLead: "Per qualsiasi informazione o necessità,\nnon esitate a contattarci",
     },
 
     // Music
@@ -296,6 +297,7 @@ const translations = {
       names: "Karl & Reichelle",
       date: "June 5, 2026",
       message: "With all our love",
+      contactLead: "For any information or needs,\nfeel free to contact us",
     },
 
     // Music

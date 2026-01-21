@@ -1242,10 +1242,9 @@ export default function App() {
         <div>
           {/* Contatti */}
           <div className="max-w-xl mx-auto mb-8 text-primary-foreground/80 font-body" style={{ lineHeight: 1.6 }}>
-            <p className="text-base mb-1">
-              Per qualsiasi informazione o necessità,
+            <p className="text-base mb-4" style={{ whiteSpace: "pre-line" }}>
+              {t.footer.contactLead}
             </p>
-            <p className="text-base mb-4">non esitate a contattarci</p>
 
             <div className="space-y-2 text-sm md:text-base">
               {/* Email */}
