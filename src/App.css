@@ -80,6 +80,7 @@
   margin-top: 0.5rem;
   margin-bottom: 1.2rem;
   transition: background 0.2s, color 0.2s;
+  cursor: pointer;
 }
 
 .card-elegant .text-center button:hover {
@@ -280,6 +281,10 @@ body {
 
 .border-border {
   border-color: #e8e6e4;
+}
+
+.border-r {
+  border-radius: 16px
 }
 
 .border-primary {
@@ -540,9 +545,9 @@ body {
   padding-bottom: 1.5rem;
 }
 
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 4em;
 }
 
 .px-3 {
@@ -1687,14 +1692,16 @@ a.inline {
   justify-content: center;
   text-align: center;
   position: relative;
-  height: 54px;
-  padding: 0 18px;
-  border-radius: 14px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 16px;
   border: 1px solid rgba(185, 125, 106, 0.45);
   background: linear-gradient(180deg, #ffffff 0%, #fffaf5 100%);
   color: #7c4a1e;
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: 15px;
+  min-width: 100px;
   letter-spacing: 0.01em;
   cursor: pointer;
   box-shadow: 0 8px 22px rgba(185, 125, 106, 0.10);
@@ -1736,6 +1743,16 @@ a.inline {
 .btn-contributo .lucide {
   width: 20px;
   height: 20px
+}
+
+@media (max-width: 520px) {
+  .btn-contributo {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    min-width: 120px;
+  }
 }
 
 .margin-0 {
@@ -1784,4 +1801,34 @@ a.inline {
 
 .scroll-reveal-left.visible {
   animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+/* Ceremony image sizing */
+.ceremony-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  .ceremony-map-img {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* Reception image sizing */
+.reception-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0;
+}
+
+@media (min-width: 640px) {
+  .reception-map-img {
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }

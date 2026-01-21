@@ -433,19 +433,19 @@ export default function App() {
                   <span className="font-body">{t.ceremony.time}</span>
                 </div>
               </div>
-              <div className="mb-6 rounded-lg overflow-hidden border border-border">
-                <iframe
-                  src="https://www.google.com/maps?q=Chiesa+di+Santa+Cecilia,+Piazza+Santa+Cecilia+22,+Roma&output=embed"
-                  width="100%"
-                  height="250"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mappa di Santa Cecilia"
-                  className="hover:opacity-90 transition-opacity duration-300"
-                  style={{ border: 0 }}
-                ></iframe>
-              </div>
+              <a
+                href="https://maps.google.com/?q=Chiesa+di+Santa+Cecilia,+Piazza+Santa+Cecilia+22,+Roma"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.reception.openInMaps}
+                className="mb-6 block rounded-lg overflow-hidden hover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src="/images/chiesa.png"
+                  alt={t.ceremony.place}
+                  className="ceremony-map-img border-r"
+                />
+              </a>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="https://maps.google.com/?q=Chiesa+di+Santa+Cecilia,+Piazza+Santa+Cecilia+22,+Roma"
@@ -539,19 +539,19 @@ export default function App() {
                   <span className="font-body">{t.reception.time}</span>
                 </div>
               </div>
-              <div className="mb-6 rounded-lg overflow-hidden border border-border">
-                <iframe
-                  src="https://www.google.com/maps?q=Villa+dei+Consoli,+Via+di+Colle+Reti+2,+Frascati&output=embed"
-                  width="100%"
-                  height="250"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mappa di Villa dei Consoli"
-                  className="hover:opacity-90 transition-opacity duration-300"
-                  style={{ border: 0 }}
-                ></iframe>
-              </div>
+              <a
+                href="https://maps.google.com/?q=Villa+dei+Consoli,+Via+di+Colle+Reti+2,+Frascati"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.reception.openInMaps}
+                className="mb-6 block rounded-lg overflow-hiddenhover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src="/images/ricevimento.png"
+                  alt={t.reception.place}
+                  className="reception-map-img border-r"
+                />
+              </a>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="https://maps.google.com/?q=Villa+dei+Consoli,+Via+di+Colle+Reti+2,+Frascati"
@@ -1220,9 +1220,8 @@ export default function App() {
         </div>
       </div>
       {/* Footer */}
-      <footer className="py-16 bg-primary text-center">
-        <div>
-          <svg
+      <footer className="py-8 bg-primary text-center">
+{/*                <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -1239,15 +1238,151 @@ export default function App() {
             <path d="M12 10v12"></path>
             <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path>
             <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path>
-          </svg>
+          </svg> */}
+        <div>
+          {/* Contatti */}
+          <div className="max-w-xl mx-auto mb-8 text-primary-foreground/80 font-body" style={{ lineHeight: 1.6 }}>
+            <p className="text-base mb-1">
+              Per qualsiasi informazione o necessità,
+            </p>
+            <p className="text-base mb-4">non esitate a contattarci</p>
+
+            <div className="space-y-2 text-sm md:text-base">
+              {/* Email */}
+              <p className="flex items-center justify-center gap-2">
+                {/* icona mail */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-mail"
+                  aria-hidden="true"
+                >
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z"></path>
+                  <path d="m22 6-10 7L2 6"></path>
+                </svg>
+                <span className="font-medium">Email:</span>
+                <a
+                  href="mailto:karlandreichelle@gmail.com"
+                  className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
+                >
+                  karlandreichelle@gmail.com
+                </a>
+              </p>
+
+              {/* Karl Anjelo Reyes */}
+              <p className="flex items-center justify-center gap-2">
+                {/* icona telefono */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-phone"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
+                </svg>
+                <span className="font-medium">Karl Anjelo Reyes:</span>
+                <a href="tel:+393342070009" className="underline underline-offset-2 hover:opacity-90 text-primary-foreground">
+                  +39 327 432 7315
+                </a>
+                <span>—</span>
+                {/* icona instagram */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-instagram"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <circle cx="18" cy="6" r="1"></circle>
+                </svg>
+                <a
+                  href="https://instagram.com/karl.anjelo_r"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
+                >
+                  @karl.anjelo_r
+                </a>
+              </p>
+
+              {/* Reichelle Mercado */}
+              <p className="flex items-center justify-center gap-2">
+                {/* icona telefono */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-phone"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
+                </svg>
+                <span className="font-medium">Reichelle Mercado:</span>
+                <a href="tel:+393285969749" className="underline underline-offset-2 hover:opacity-90 text-primary-foreground">
+                  +39 328 596 9749
+                </a>
+                <span>—</span>
+                {/* icona instagram */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-instagram"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <circle cx="18" cy="6" r="1"></circle>
+                </svg>
+                <a
+                  href="https://instagram.com/reichellem_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
+                >
+                  @reichellem_
+                </a>
+              </p>
+            </div>
+          </div>
+
+   
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">
             {t.footer.names}
-          </p>
-          <p className="text-sm text-primary-foreground/80 font-body tracking-wide">
-            {t.footer.date}
-          </p>
-          <p className="text-xs text-primary-foreground/60 mt-8 font-body">
-            {t.footer.message}
           </p>
         </div>
       </footer>
