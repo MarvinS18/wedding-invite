@@ -46,17 +46,10 @@ export default function App() {
     typeof window !== "undefined" ? window.scrollY : 0
   );
   const musicHideTimer = useRef(null);
-  // Link per mappe: per ogni sezione usa il nome del luogo
+  // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
-    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
     const encoded = encodeURIComponent(label);
-    if (/iPad|iPhone|iPod/.test(ua)) {
-      return `maps://?q=${encoded}`; // Apple Maps su iOS
-    }
-    if (/Android/.test(ua)) {
-      return `geo:0,0?q=${encoded}`; // Geo URI con query su Android
-    }
-    return `https://www.google.com/maps?q=${encoded}`; // Fallback desktop/web
+    return `https://www.google.com/maps?q=${encoded}`;
   };
 
   const mapsHrefCeremony = getMapsHref(
