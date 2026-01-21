@@ -181,7 +181,7 @@ const translations = {
     // Cerimonia
     ceremony: {
       title: "The Ceremony",
-      place: "Basilica of Santa Cecilia",
+      place: "Church of Santa Cecilia",
       address: "Piazza di Santa Cecilia, 22, 00153 Rome RM",
       time: "At 4:30 PM",
       openInMaps: "Open in Maps",

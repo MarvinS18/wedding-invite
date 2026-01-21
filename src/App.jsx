@@ -80,7 +80,7 @@ export default function App() {
     // opzionale: se era in pausa, riparte (utile su mobile)
     if (!next && a.paused) {
       const p = a.play();
-      if (p?.catch) p.catch(() => {});
+      if (p?.catch) p.catch(() => { });
     }
   };
 
@@ -93,7 +93,7 @@ export default function App() {
     a.muted = musicMuted;
 
     const p = a.play();
-    if (p?.catch) p.catch(() => {});
+    if (p?.catch) p.catch(() => { });
   };
 
   return (
@@ -105,9 +105,8 @@ export default function App() {
 
       <button
         type="button"
-        className={`music-fab ${
-          musicVisible ? "music-fab--visible" : "music-fab--hidden"
-        }`}
+        className={`music-fab ${musicVisible ? "music-fab--visible" : "music-fab--hidden"
+          }`}
         onClick={() => {
           toggleMute();
 
@@ -182,7 +181,7 @@ export default function App() {
             {/* Mobile (verticale) */}
             <video
               className="bg-video bg-video--mobile"
-              src="/videos/Save-the-date-verticale5.mp4"
+              src="/videos/Save-the-date-verticale8.mp4"
               autoPlay
               loop
               muted
@@ -246,7 +245,7 @@ export default function App() {
               {t.countdown.title}
             </p>
 
-            <h2 className="font-script text-4xl md:text-5xl text-foreground mb-16">
+            <h2 className="font-script title-script text-foreground mb-16">
               {t.countdown.subtitle}
             </h2>
 
@@ -259,13 +258,15 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 18vw, 140px)",
-                    height: "clamp(70px, 14vw, 120px)",
+                    width: "clamp(70px, 12vw, 110px)",
+                    height: "clamp(70px, 10vw, 95px)",
+
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+
                   >
                     {String(days).padStart(2, "0")}
                   </span>
@@ -280,13 +281,15 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 18vw, 140px)",
-                    height: "clamp(70px, 14vw, 120px)",
+                    width: "clamp(70px, 12vw, 110px)",
+                    height: "clamp(70px, 10vw, 95px)",
+
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+
                   >
                     {String(hours).padStart(2, "0")}
                   </span>
@@ -301,13 +304,15 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 18vw, 140px)",
-                    height: "clamp(70px, 14vw, 120px)",
+                    width: "clamp(70px, 12vw, 110px)",
+                    height: "clamp(70px, 10vw, 95px)",
+
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+
                   >
                     {String(mins).padStart(2, "0")}
                   </span>
@@ -322,13 +327,15 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 18vw, 140px)",
-                    height: "clamp(70px, 14vw, 120px)",
+                    width: "clamp(70px, 12vw, 110px)",
+                    height: "clamp(70px, 10vw, 95px)",
+
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}
+                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+
                   >
                     {String(secs).padStart(2, "0")}
                   </span>
@@ -355,12 +362,9 @@ export default function App() {
         <section id="cerimonia" className="section-padding relative">
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="text-center mb-16">
-              <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
+              <h2 className="font-script title-script text-foreground mb-16">
                 {t.ceremony.title}
               </h2>
-              <p className="text-muted-foreground font-body tracking-wide">
-                {t.ceremony.place}
-              </p>
             </div>
             <div className="bg-card/95 backdrop-blur-sm border border-border p-8 md:p-12 rounded-lg shadow-elegant text-center">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
@@ -464,9 +468,6 @@ export default function App() {
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
                 {t.reception.title}
               </h2>
-              <p className="text-muted-foreground font-body tracking-wide">
-                {t.reception.place}
-              </p>
             </div>
             <div className="bg-card/95 backdrop-blur-sm border border-border p-8 md:p-12 rounded-lg shadow-elegant text-center">
               <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
@@ -603,7 +604,7 @@ export default function App() {
                         <circle cx="12" cy="10" r="3"></circle>
                       </svg>
                     </div>
-                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
+                    <h3 className="font-display text-base text-foreground mb-0 leading-tight">
                       {t.program.events.arrival.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
@@ -630,10 +631,10 @@ export default function App() {
                         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                       </svg>
                     </div>
-                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
+                    <h3 className="font-display text-base lg:text-sm text-foreground mb-0 leading-tight">
                       {t.program.events.ceremony.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.ceremony.description}
                     </p>
                   </div>
@@ -663,7 +664,7 @@ export default function App() {
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                       {t.program.events.aperitivo.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.aperitivo.description}
                     </p>
                   </div>
@@ -693,7 +694,7 @@ export default function App() {
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                       {t.program.events.dinner.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.dinner.description}
                     </p>
                   </div>
@@ -724,7 +725,7 @@ export default function App() {
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                       {t.program.events.firstDance.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.firstDance.description}
                     </p>
                   </div>
@@ -750,10 +751,10 @@ export default function App() {
                         <circle cx="18" cy="16" r="3"></circle>
                       </svg>
                     </div>
-                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
+                    <h3 className="font-display program-3 lg:text-lg text-foreground mb-0 leading-tight">
                       {t.program.events.party.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.party.description}
                     </p>
                   </div>
@@ -784,7 +785,7 @@ export default function App() {
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
                       {t.program.events.end.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.end.description}
                     </p>
                   </div>
@@ -1076,7 +1077,7 @@ export default function App() {
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-6">
                 {t.gifts.title}
               </h2>
-              <p className="text-muted-foreground font-body leading-relaxed max-w-lg mx-auto">
+              <p className="text-base text-muted-foreground font-body leading-relaxed max-w-lg mx-auto">
                 {t.gifts.description}
               </p>
             </div>
@@ -1089,7 +1090,7 @@ export default function App() {
                 onClick={() => setShowAportacion((v) => !v)}
                 aria-expanded={showAportacion}
               >
-                <span className="font-display text-lg text-foreground">
+                <span className="font-display text-base text-foreground">
                   {t.gifts.contribution}
                 </span>
                 <div>
@@ -1103,9 +1104,8 @@ export default function App() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`lucide lucide-chevron-down w-5 h-5 text-muted-foreground transition-transform duration-200 ${
-                      showAportacion ? "rotate-180" : ""
-                    }`}
+                    className={`lucide lucide-chevron-down w-5 h-5 text-muted-foreground transition-transform duration-200 ${showAportacion ? "rotate-180" : ""
+                      }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>

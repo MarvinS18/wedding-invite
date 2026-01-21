@@ -120,14 +120,40 @@ html, body { overflow-x: hidden; }
 
 .text-3xl { font-size: 1.75rem; }
 .text-4xl { font-size: 2.25rem; }
-.text-5xl { font-size: 3rem; }
-.text-6xl { font-size: 3.75rem; }
+.text-5xl { font-size: 38px; }
 .text-xl { font-size: 1.25rem; }
 .text-2xl { font-size: 1.5rem; }
 .text-lg { font-size: 1.125rem; }
-.text-base { font-size: 1rem; }
-.text-sm { font-size: 0.875rem; }
-.text-xs { font-size: 0.75rem; }
+.text-base { font-size: 16px; }
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+
+/* Titoli principali script (RSVP, Countdown, ecc.) */
+.title-script {
+  font-size: 38px;       /* mobile */
+  line-height: 1.1;
+}
+
+@media (max-width: 520px) {
+  .title-script {
+    font-size: 30px;     /* desktop */
+  }
+
+  .text-base { font-size: 14px!important; }
+  .text-sm { font-size: 12px; }
+   .program-h3{
+    font-size: 14px; /* mobile */
+  }
+}
+
+/* forza i titoli del programma a rispettare le classi text-* */
+#programma h3{
+  font-size: inherit !important;
+}
+
+
+
+
 
 .text-neutral-700 { color: #444; }
 .text-neutral-800 { color: #222; }
@@ -486,10 +512,6 @@ a.inline{color:var(--accent);text-decoration:none}
   animation: content-appear 600ms ease both 220ms;
 }
 
-.countdown-number {
-  font-size: clamp(1.8rem, 5vw, 3.75rem);
-}
-
 
 
 .music-fab{
@@ -669,3 +691,6 @@ a.inline{color:var(--accent);text-decoration:none}
 .margin-0{
   margin: 0;
 }
+
+
+
