@@ -1793,11 +1793,14 @@ a.inline {
   height: auto;
   display: block;
   border: 0;
+  border-radius: 16px;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 @media (min-width: 640px) {
   .ceremony-map-img {
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
   }
 }
@@ -1808,11 +1811,23 @@ a.inline {
   height: auto;
   display: block;
   border: 0;
+  border-radius: 16px;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 @media (min-width: 640px) {
   .reception-map-img {
-    max-width: 80%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop: shrink images slightly and center */
+@media (min-width: 880px) {
+  .ceremony-map-img,
+  .reception-map-img {
+    max-width: 60%;
     margin: 0 auto;
   }
 }

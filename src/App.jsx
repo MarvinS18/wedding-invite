@@ -46,6 +46,25 @@ export default function App() {
     typeof window !== "undefined" ? window.scrollY : 0
   );
   const musicHideTimer = useRef(null);
+  // Link per mappe: per ogni sezione usa il nome del luogo
+  const getMapsHref = (label) => {
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const encoded = encodeURIComponent(label);
+    if (/iPad|iPhone|iPod/.test(ua)) {
+      return `maps://?q=${encoded}`; // Apple Maps su iOS
+    }
+    if (/Android/.test(ua)) {
+      return `geo:0,0?q=${encoded}`; // Geo URI con query su Android
+    }
+    return `https://www.google.com/maps?q=${encoded}`; // Fallback desktop/web
+  };
+
+  const mapsHrefCeremony = getMapsHref(
+    "Basilica di Santa Cecilia in Trastevere, Roma"
+  );
+  const mapsHrefReception = getMapsHref(
+    "Villa dei Consoli, Via di Colle Reti 2, Frascati"
+  );
 
   useEffect(() => {
     const onScroll = () => {
@@ -384,93 +403,33 @@ export default function App() {
           className="section-padding relative scroll-reveal"
         >
           <div className="max-w-4xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="font-script text-5xl text-foreground mb-16">
+            <div className="text-center mb-8">
+              <h2 className="font-script title-script text-foreground">
                 {t.ceremony.title}
               </h2>
             </div>
-            <div className="bg-card/95 backdrop-blur-sm border border-border p-8 md:p-12 rounded-lg shadow-elegant text-center">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-map-pin w-7 h-7 text-primary"
-                >
-                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <h3 className="font-display text-2xl text-foreground mb-4">
-                {t.ceremony.place}
-              </h3>
-              <div className="space-y-3 mb-6">
-                <p className="text-sm text-muted-foreground font-body">
-                  {t.ceremony.address}
-                </p>
-                <div className="flex items-center justify-center gap-2 mt-4 text-muted-foreground">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-clock w-4 h-4 text-primary"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                  <span className="font-body">{t.ceremony.time}</span>
-                </div>
-              </div>
+            <a
+              href={mapsHrefCeremony}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.reception.openInMaps}
+              className="block hover:opacity-90 transition-opacity duration-300"
+            >
+              <img
+                src="/images/chiesa.png"
+                alt={t.ceremony.place}
+                className="ceremony-map-img"
+              />
+            </a>
+            <div className="flex flex-col items-center mt-4">
               <a
-                href="geo:41.9028,12.4964"
+                href={mapsHrefCeremony}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={t.reception.openInMaps}
-                className="mb-6 block rounded-lg overflow-hidden hover:opacity-90 transition-opacity duration-300"
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
               >
-                <img
-                  src="/images/chiesa.png"
-                  alt={t.ceremony.place}
-                  className="ceremony-map-img border-r"
-                />
+                {t.reception.openInMaps}
               </a>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="geo:41.9028,12.4964"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-map-pin w-4 h-4"
-                  >
-                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  {t.reception.openInMaps}
-                </a>
-              </div>
             </div>
           </div>
         </section>
@@ -490,93 +449,33 @@ export default function App() {
           className="section-padding relative scroll-reveal"
         >
           <div className="max-w-4xl mx-auto relative z-10 px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-8">
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
                 {t.reception.title}
               </h2>
             </div>
-            <div className="bg-card/95 backdrop-blur-sm border border-border p-8 md:p-12 rounded-lg shadow-elegant text-center">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-secondary flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-map-pin w-7 h-7 text-primary"
-                >
-                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <h3 className="font-display text-2xl text-foreground mb-4">
-                {t.reception.place}
-              </h3>
-              <div className="space-y-3 mb-6">
-                <p className="text-sm text-muted-foreground font-body">
-                  {t.reception.address}
-                </p>
-                <div className="flex items-center justify-center gap-2 mt-4 text-muted-foreground">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-clock w-4 h-4 text-primary"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                  <span className="font-body">{t.reception.time}</span>
-                </div>
-              </div>
+            <a
+              href={mapsHrefReception}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.reception.openInMaps}
+              className="block hover:opacity-90 transition-opacity duration-300"
+            >
+              <img
+                src="/images/ricevimento.png"
+                alt={t.reception.place}
+                className="reception-map-img"
+              />
+            </a>
+            <div className="flex flex-col items-center mt-4">
               <a
-                href="geo:41.9028,12.4964"
+                href={mapsHrefReception}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={t.reception.openInMaps}
-                className="mb-6 block rounded-lg overflow-hiddenhover:opacity-90 transition-opacity duration-300"
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
               >
-                <img
-                  src="/images/ricevimento.png"
-                  alt={t.reception.place}
-                  className="reception-map-img border-r"
-                />
+                {t.reception.openInMaps}
               </a>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="geo:41.9028,12.4964"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background h-9 px-3 gap-2 border-primary/40 text-foreground hover:bg-primary hover:text-primary-foreground rounded-lg btn-maps"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-map-pin w-4 h-4"
-                  >
-                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  {t.reception.openInMaps}
-                </a>
-              </div>
             </div>
           </div>
         </section>
