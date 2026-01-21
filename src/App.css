@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 
@@ -26,67 +25,22 @@
   box-shadow: 0 4px 16px 0 rgba(124, 74, 30, 0.18);
 }
 
-.regalos-iban-label {
-  color: #a67c52;
-  /* oppure usa var(--primary) se definito */
-}
-
-.regalos-iban-value {
-  padding-bottom: 1rem;
-  display: inline-block;
-}
-
-/* Animazione fade-in per la sezione espansa */
-.animate-fade-in {
-  animation: fadeInRegalos 0.4s ease;
-}
-
-@keyframes fadeInRegalos {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+@media (max-width: 1024px) {
+  .timeline-badge {
+    font-size: 0.8em;
+    padding: 0.2em 0.7em;
   }
 
-  to {
-    opacity: 1;
-    transform: none;
+  /* Rimpicciolisce icone timeline mobile */
+  .timeline-mobile .w-16 {
+    width: 3rem;
+    height: 3rem;
   }
-}
 
-/* Card elegante per Regalos */
-.card-elegant {
-  background: #fff;
-  border-radius: 1.25rem;
-  box-shadow: 0 2px 16px 0 rgba(60, 40, 30, 0.07), 0 1.5px 6px 0 rgba(60, 40, 30, 0.04);
-  border: 1px solid var(--border, #e5e7eb);
-  margin-bottom: 2rem;
-}
-
-/* Bottone Aportación espanso */
-.card-elegant button[aria-expanded="true"] {
-  background: #f7f5f2;
-  color: var(--primary, #a67c52);
-}
-
-/* Bottone IBAN */
-.card-elegant .text-center button {
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  font-size: 1rem;
-  padding: 0.25rem 1.2rem;
-  border-radius: 9999px;
-  background: #f7f5f2;
-  border: 1px solid var(--border, #e5e7eb);
-  margin-top: 0.5rem;
-  margin-bottom: 1.2rem;
-  transition: background 0.2s, color 0.2s;
-  cursor: pointer;
-}
-
-.card-elegant .text-center button:hover {
-  background: var(--primary, #a67c52);
-  color: #fff;
-  border-color: var(--primary, #a67c52);
+  .timeline-mobile .lucide {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
 /* Box IBAN */
@@ -160,7 +114,7 @@ body {
 }
 
 .text-lg {
-  font-size: 1.125rem;
+  font-size: 18px;
 }
 
 .text-base {
@@ -188,6 +142,10 @@ body {
     /* desktop */
   }
 
+  .text-lg {
+    font-size: 16px !important;
+  }
+
   .text-base {
     font-size: 14px !important;
   }
@@ -204,7 +162,14 @@ body {
 
 /* forza i titoli del programma a rispettare le classi text-* */
 #programma h3 {
-  font-size: inherit !important;
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  #programma h3 {
+    font-size: 14px !important;
+  }
 }
 
 
@@ -1609,7 +1574,7 @@ a.inline {
 }
 
 /* sotto una certa width, switcha */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .bg-video--mobile {
     display: block;
   }
@@ -1801,6 +1766,25 @@ a.inline {
 
 .scroll-reveal-left.visible {
   animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+/* RSVP description responsive text */
+.rsvp-desc-mobile {
+  display: inline;
+}
+
+.rsvp-desc-desktop {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .rsvp-desc-mobile {
+    display: none;
+  }
+
+  .rsvp-desc-desktop {
+    display: inline;
+  }
 }
 
 /* Ceremony image sizing */

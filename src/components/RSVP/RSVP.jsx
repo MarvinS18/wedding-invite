@@ -1,27 +1,13 @@
 import React, { useMemo, useState } from "react";
 import "./RSVP.css";
 import translations from "../../translations";
+import { GUEST_GROUPS } from "./guestList";
 
 export default function RSVP({ lang = "it" }) {
   const t = translations[lang];
   //  Gruppi invitati (match ESATTO)
   // - members: nomi esatti che l’utente può inserire
-  const groups = useMemo(
-    () => [
-      {
-        label: "Marvin Samiano, Vanessa Joy Palacio",
-        members: ["Marvin Samiano", "Vanessa Palacio"],
-      },
-      { label: "Reichelle, Karl", members: ["Reichelle", "Karl"] },
-      { label: "Melki, Gizelle", members: ["Melki", "Gizelle"] },
-
-      {
-        label: "Palacio Family",
-        members: ["Noa", "Eva", "Igor", "Diego", "Luna"],
-      },
-    ],
-    []
-  );
+  const groups = useMemo(() => GUEST_GROUPS, []);
 
   const API_URL =
     "https://script.google.com/macros/s/AKfycbzqKuqjoWX4L_w3zwXKCLqIKufzsuQ2-BW70peOvejR1KuesmXbLSc-wwD-0NlcLEiu/exec";
@@ -66,8 +52,22 @@ export default function RSVP({ lang = "it" }) {
   }
 
   function findGroupByName(inputName) {
-    const trimmed = inputName.trim();
-    return groups.find((g) => g.members.includes(trimmed)) || null;
+    const inputLower = inputName.trim().toLowerCase();
+    const inputWords = inputLower.split(/\s+/).filter((w) => w.length > 0);
+
+    return (
+      groups.find((g) =>
+        g.members.some((member) => {
+          const memberLower = member.toLowerCase();
+          const memberWords = memberLower.split(/\s+/);
+
+          // Controlla se tutte le parole dell'input sono presenti nel nome del membro
+          return inputWords.every((inputWord) =>
+            memberWords.some((memberWord) => memberWord.includes(inputWord))
+          );
+        })
+      ) || null
+    );
   }
 
   function normalizeKey(s) {
@@ -115,6 +115,17 @@ export default function RSVP({ lang = "it" }) {
     const trimmed = name.trim();
     if (!trimmed) {
       setError(t.rsvpForm.errors.enterName);
+      return;
+    }
+
+    const inputWords = trimmed
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((w) => w.length > 0);
+
+    // Richiedi almeno 2 parole (nome + cognome o nome + secondo nome)
+    if (inputWords.length < 2) {
+      setError(t.rsvpForm.errors.nameNotFound);
       return;
     }
 
@@ -232,16 +243,12 @@ export default function RSVP({ lang = "it" }) {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`${inputCls} text-center`}
+              className={`${inputCls} text-center rsvp-input`}
               autoComplete="name"
-              style={{ borderRadius: "14px" }}
+              style={{ borderRadius: "14px", maxWidth: "420px", width: "100%" }}
             />
 
-            {error && (
-              <p className="mt-2 text-[12px] text-[#b97d6a] text-center">
-                {error}
-              </p>
-            )}
+            {error && <p className="rsvp-error">{error}</p>}
           </div>
 
           <div className="flex justify-center">
@@ -258,14 +265,23 @@ export default function RSVP({ lang = "it" }) {
 
       {/* STEP 2: CONFIRM GROUP */}
       {step === "confirmGroup" && matchedGroup && (
-        <div className="confirm-group">
+        <div
+          className="confirm-group"
+          style={{ maxWidth: "400px", margin: "0 auto" }}
+        >
           <h3 className="confirm-group__title">
             {t.rsvpForm.greeting} {name.trim()}!
           </h3>
 
-          <p className="confirm-group__text">
-            {t.rsvpForm.groupQuestion} {matchedGroup.label}
-          </p>
+          <p className="confirm-group__text">{t.rsvpForm.groupQuestion}</p>
+
+          <div className="confirm-group__box">
+            {matchedGroup.label.split(",").map((member, idx) => (
+              <div key={idx} className="confirm-group__member">
+                {member.trim()}
+              </div>
+            ))}
+          </div>
 
           <div className="rsvp-actions confirm right">
             <button
@@ -293,16 +309,6 @@ export default function RSVP({ lang = "it" }) {
       {step === "rsvpGroup" && matchedGroup && (
         <form onSubmit={submitGroup} className="space-y-6" noValidate>
           <div className="space-y-1">
-            {/* <h3 className="text-xl text-foreground font-medium">
-              {lang === "it"
-                ? `Ciao ${name.trim()} 👋`
-                : `Hi ${name.trim()} 👋`}
-            </h3> */}
-            {/* <p className="text-sm text-muted-foreground">
-              {lang === "it" ? "Gruppo:" : "Group:"}{" "}
-              <strong className="text-foreground">{matchedGroup.label}</strong>
-            </p> */}
-
             <p className="text-xs text-muted-foreground mt-2">
               {lang === "it"
                 ? `Completati: ${completedCount()}/${responses.length}`
@@ -483,7 +489,7 @@ export default function RSVP({ lang = "it" }) {
       {/* SENDING */}
       {step === "sending" && (
         <div className="space-y-4 text-center">
-          <h3 className="text-2xl text-foreground font-medium">
+          <h3 className="text-lg text-foreground font-medium">
             {lang === "it" ? "Ricevuto" : "Received"}
           </h3>
 
@@ -508,7 +514,7 @@ export default function RSVP({ lang = "it" }) {
       {/* DONE */}
       {step === "done" && (
         <div className="space-y-4 text-center">
-          <h3 className="text-2xl text-foreground font-medium">
+          <h3 className="text-lg text-foreground font-medium">
             {t.rsvpForm.thankYou}
           </h3>
 

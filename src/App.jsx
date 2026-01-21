@@ -59,7 +59,7 @@ export default function App() {
         if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
         musicHideTimer.current = setTimeout(() => {
           setMusicVisible(false);
-        }, 900);
+        }, 2000);
       }
     };
 
@@ -140,7 +140,7 @@ export default function App() {
           if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
           musicHideTimer.current = setTimeout(() => {
             setMusicVisible(false);
-          }, 900);
+          }, 2000);
         }}
         aria-label={musicMuted ? t.music.unmute : t.music.mute}
         title={musicMuted ? t.music.unmute : t.music.mute}
@@ -273,7 +273,7 @@ export default function App() {
               {t.countdown.title}
             </p>
 
-            <h2 className="font-script title-script text-foreground mb-16">
+            <h2 className="font-script text-5xl text-foreground mb-16">
               {t.countdown.subtitle}
             </h2>
 
@@ -385,7 +385,7 @@ export default function App() {
         >
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="text-center mb-16">
-              <h2 className="font-script title-script text-foreground mb-16">
+              <h2 className="font-script text-5xl text-foreground mb-16">
                 {t.ceremony.title}
               </h2>
             </div>
@@ -633,7 +633,7 @@ export default function App() {
                     <h3 className="font-display text-base text-foreground mb-0 leading-tight">
                       {t.program.events.arrival.title}
                     </h3>
-                    <p className="text-muted-foreground font-body text-xs leading-relaxed px-1">
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
                       {t.program.events.arrival.description}
                     </p>
                   </div>
@@ -853,11 +853,11 @@ export default function App() {
                       <div className="flex items-baseline gap-3 mb-0.5">
                         <span className="timeline-badge">16:30</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          Arrivo
+                          {t.program.events.arrival.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        Accoglienza degli invitati
+                        {t.program.events.arrival.description}
                       </p>
                     </div>
                   </div>
@@ -1187,9 +1187,16 @@ export default function App() {
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
               RSVP
             </h2>
-            <p className="text-base text-muted-foreground font-body leading-relaxed mb-6"
-             style={{ whiteSpace: "pre-line" }}>
-              {t.rsvp.description}
+            <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">
+              <span
+                className="rsvp-desc-desktop"
+                style={{ whiteSpace: "pre-line" }}
+              >
+                {t.rsvp.descriptionDesktop}
+              </span>
+              <span className="rsvp-desc-mobile">
+                {t.rsvp.descriptionMobile}
+              </span>
             </p>
             <button
               className={`rsvp-btn ${
@@ -1221,7 +1228,7 @@ export default function App() {
       </div>
       {/* Footer */}
       <footer className="py-8 bg-primary text-center">
-{/*                <svg
+        {/*                <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -1241,8 +1248,11 @@ export default function App() {
           </svg> */}
         <div>
           {/* Contatti */}
-          <div className="max-w-xl mx-auto mb-8 text-primary-foreground/80 font-body" style={{ lineHeight: 1.6 }}>
-            <p className="text-base mb-4" style={{ whiteSpace: "pre-line" }}>
+          <div
+            className="max-w-xl mx-auto mb-8 text-primary-foreground/80 font-body"
+            style={{ lineHeight: 1.6 }}
+          >
+            <p className="text-sm mb-4" style={{ whiteSpace: "pre-line" }}>
               {t.footer.contactLead}
             </p>
 
@@ -1294,7 +1304,10 @@ export default function App() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
                 </svg>
                 <span className="font-medium">Karl Anjelo Reyes:</span>
-                <a href="tel:+393342070009" className="underline underline-offset-2 hover:opacity-90 text-primary-foreground">
+                <a
+                  href="tel:+393342070009"
+                  className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
+                >
                   +39 327 432 7315
                 </a>
                 <span>—</span>
@@ -1345,7 +1358,10 @@ export default function App() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
                 </svg>
                 <span className="font-medium">Reichelle Mercado:</span>
-                <a href="tel:+393285969749" className="underline underline-offset-2 hover:opacity-90 text-primary-foreground">
+                <a
+                  href="tel:+393285969749"
+                  className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
+                >
                   +39 328 596 9749
                 </a>
                 <span>—</span>
@@ -1379,7 +1395,6 @@ export default function App() {
             </div>
           </div>
 
-   
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">
             {t.footer.names}
           </p>

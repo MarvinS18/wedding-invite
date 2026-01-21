@@ -4,10 +4,10 @@
 
 /* Wrapper */
 .rsvp {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  font-size: 14px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 14px;
 }
 
 /* =========================
@@ -15,72 +15,73 @@
 ========================= */
 
 .rsvp-actions {
-  display: flex;
-  justify-content: space-between; /* sinistra / destra */
-  align-items: center;
-  gap: 16px;
-  margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    /* sinistra / destra */
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
 }
 
 /* Bottoni */
 .rsvp-btn {
-  min-width: 110px;
-  height: 40px;
-  padding: 0 10px;
-  border-radius: 16px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: var(--font-body);
+    min-width: 110px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: var(--font-body);
 }
 
 /* Secondario (Indietro) */
 .rsvp-btn.secondary {
-  background: transparent;
-  border: 1px solid rgba(185, 125, 106, 0.45);
-  color: #7c4a1e;
+    background: transparent;
+    border: 1px solid rgba(185, 125, 106, 0.45);
+    color: #7c4a1e;
 }
 
 .rsvp-btn.secondary:hover {
-  background: rgba(185, 125, 106, 0.12);
+    background: rgba(185, 125, 106, 0.12);
 }
 
 /* Primario (Invia RSVP) */
 .rsvp-btn.primary {
-  background: #b97d6a;
-  border: none;
-  color: #fff;
-  box-shadow: 0 10px 22px rgba(185, 125, 106, 0.35);
+    background: #b97d6a;
+    border: none;
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(185, 125, 106, 0.35);
 }
 
 .rsvp-btn.primary:hover {
-  background: #a86b59;
-  transform: translateY(-1px);
+    background: #a86b59;
+    transform: translateY(-1px);
 }
 
 /* Disabled */
 .rsvp-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Conferma gruppo: bottoni a destra */
 .rsvp-actions.confirm.right {
-  justify-content: flex-end;
-  gap: 18px;
-  margin-top: 28px;
+    justify-content: flex-end;
+    gap: 18px;
+    margin-top: 28px;
 }
 
 /* Bottone singolo (continua, ecc.) */
 .rsvp-btn--single {
-  min-width: 100px;
-  height: 44px;
-  padding: 0 20px;
-  font-size: 15px;
-  border-radius: 16px;
+    min-width: 100px;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 15px;
+    border-radius: 16px;
 }
 
 /* =========================
@@ -88,76 +89,76 @@
 ========================= */
 
 .rsvp-acc {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .rsvp-person {
-  border: 1px solid rgba(185, 125, 106, 0.35);
-  border-radius: 18px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.55);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(185, 125, 106, 0.35);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
 }
 
 /* Header card */
 .rsvp-person__head {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.6);
-  border: none;
-  cursor: pointer;
-  text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    cursor: pointer;
+    text-align: left;
 }
 
 .rsvp-person__headLeft {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
 }
 
 .rsvp-person__name {
-  font-size: 30px;
-  line-height: 1.25;
-  padding: 2px 0;
-  color: #2b2b2b;
+    font-size: 30px;
+    line-height: 1.25;
+    padding: 2px 0;
+    color: #2b2b2b;
 
-  white-space: normal;
-  overflow: visible;
-  text-overflow: unset;
-  word-break: break-word;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
 }
 
 .rsvp-person__status {
-  margin-top: 4px;
-  font-size: 11px;
-  opacity: 0.75;
+    margin-top: 4px;
+    font-size: 11px;
+    opacity: 0.75;
 }
 
 .rsvp-person__status.ok {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 .rsvp-person__status.todo {
-  opacity: 0.65;
+    opacity: 0.65;
 }
 
 .rsvp-person__chev {
-  font-size: 14px;
-  opacity: 0.6;
+    font-size: 14px;
+    opacity: 0.6;
 }
 
 /* Body card */
 .rsvp-person__body {
-  padding: 14px 16px 16px;
-  background: rgba(255, 255, 255, 0.35);
-  border-top: 1px solid rgba(185, 125, 106, 0.25);
+    padding: 14px 16px 16px;
+    background: rgba(255, 255, 255, 0.35);
+    border-top: 1px solid rgba(185, 125, 106, 0.25);
 }
 
 /* =========================
@@ -165,62 +166,87 @@
 ========================= */
 
 .rsvp-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px;
-  padding: 12px 0;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 12px 0;
+    align-items: start;
 }
 
-.rsvp-row + .rsvp-row {
-  border-top: 1px solid rgba(185, 125, 106, 0.18);
+.rsvp-row+.rsvp-row {
+    border-top: 1px solid rgba(185, 125, 106, 0.18);
 }
 
 .rsvp-row__action {
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Minimal input style */
+.rsvp-input {
+    background: #fffaf4;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #3a2f28;
+    font-family: 'Lora', serif;
+}
+
+.rsvp-error {
+    font-size: 14px;
+    color: #c85a54;
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'Lora', serif;
+}
+
+.rsvp-input::placeholder {
+    color: rgba(58, 47, 40, 0.5);
+}
+
+.rsvp-input:focus {
+    border-color: rgba(185, 125, 106, 0.6);
+    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.18);
 }
 
 /* Select */
 .rsvp-select {
-  min-width: 160px;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(185, 125, 106, 0.45);
-  background: rgba(255, 255, 255, 0.8);
-  padding: 0 12px;
-  outline: none;
+    min-width: 160px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(185, 125, 106, 0.45);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 12px;
+    outline: none;
 }
 
 .rsvp-select:focus {
-  border-color: rgba(124, 74, 30, 0.65);
-  box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
+    border-color: rgba(124, 74, 30, 0.65);
+    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
 }
 
 /* Preferenze alimentari */
 .rsvp-food {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .rsvp-food__label {
-  font-weight: 600;
-  margin: 8px 0;
-  color: rgba(43, 43, 43, 0.85);
+    font-weight: 600;
+    margin: 8px 0;
+    color: rgba(43, 43, 43, 0.85);
 }
 
 .rsvp-textarea {
-  width: 100%;
-  border-radius: 14px;
-  border: 1px solid rgba(185, 125, 106, 0.35);
-  background: rgba(255, 255, 255, 0.7);
-  padding: 12px;
-  resize: vertical;
-  outline: none;
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid rgba(185, 125, 106, 0.35);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 12px;
+    resize: vertical;
+    outline: none;
 }
 
 .rsvp-textarea:focus {
-  border-color: rgba(124, 74, 30, 0.65);
-  box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
+    border-color: rgba(124, 74, 30, 0.65);
+    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
 }
 
 /* =========================
@@ -228,32 +254,78 @@
 ========================= */
 
 .rsvp-nav {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 10px;
 }
 
 .rsvp-linkbtn {
-  background: transparent;
-  border: none;
-  color: #7c4a1e;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
-  font-size: 11px;
+    background: transparent;
+    border: none;
+    color: #7c4a1e;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    font-size: 11px;
 }
 
- .rsvp-row__title {
+.rsvp-row__title {
     font-size: 14px;
     margin-bottom: 4px;
     font-weight: 700;
-  }
+}
 
-  /* Desktop */
+.confirm-group {
+    max-width: 400px;
+    width: min(100%, 400px);
+    margin: 0 auto;
+}
+
+.confirm-group__title {
+    margin-top: 24px;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.confirm-group__text {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* Confirm group box */
+.confirm-group__box {
+    margin: 14px auto 18px;
+    max-width: 400px;
+    width: min(100%, 400px);
+    padding: 14px 16px;
+    border: 1px solid rgba(124, 74, 30, 0.35);
+    border-radius: 12px;
+    background: rgba(255, 247, 244, 0.6);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.confirm-group .rsvp-actions.confirm.right {
+    max-width: 400px;
+    width: min(100%, 400px);
+    margin: 0 auto;
+    justify-content: flex-end;
+}
+
+.confirm-group__member {
+    font-size: 14px;
+    color: #3f332c;
+    line-height: 1.5;
+}
+
+.confirm-group__member+.confirm-group__member {
+    margin-top: 4px;
+}
+
+/* Desktop */
 .rsvp-title {
-  font-size: 38px;
-  margin-bottom: 8px;
+    font-size: 38px;
+    margin-bottom: 8px;
 }
 
 
@@ -263,110 +335,120 @@
 
 @media (max-width: 520px) {
 
-     .rsvp-title {
-    font-size: 30px;
-  }
+    .rsvp-title {
+        font-size: 30px;
+    }
+
+    .rsvp-error {
+        font-size: 12px;
+    }
+
     .confirm-group__title {
-    font-size: 14px;
-  }
+        font-size: 14px;
+    }
 
-  .confirm-group__text {
-    font-size: 13px;
-    line-height: 1.4;
-  }
-  /* conferma gruppo: centrata */
-  .rsvp-actions.confirm.right {
-    justify-content: center;
-  }
+    .confirm-group__text {
+        font-size: 13px;
+        line-height: 1.4;
+    }
 
-  /* actions: restano in riga con bottoni uguali */
-  .rsvp-actions {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 12px;
-  }
+    .confirm-group__member {
+        font-size: 12px;
+    }
 
-  .rsvp-actions .rsvp-btn {
-    flex: 1;
-    min-width: 0;
-    width: auto;
-  }
+    /* conferma gruppo: centrata */
+    .rsvp-actions.confirm.right {
+        justify-content: center;
+    }
 
-  .rsvp-btn {
-  min-width: 100px;
-  height: 40px;
-  padding: 0 10px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
+    /* actions: restano in riga con bottoni uguali */
+    .rsvp-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .rsvp-actions .rsvp-btn {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+    }
+
+    .rsvp-btn {
+        min-width: 100px;
+        height: 40px;
+        padding: 0 10px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
 
 
 
-  /* bottone singolo: non flexa */
-  .rsvp-btn--single {
-    flex: 0 0 auto;
-    width: auto;
-    min-width: 120px;
-    height: 40px;
-    padding: 0 14px;
-    font-size: 14px;
-    border-radius: 14px;
-  }
+    /* bottone singolo: non flexa */
+    .rsvp-btn--single {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 120px;
+        height: 40px;
+        padding: 0 14px;
+        font-size: 14px;
+        border-radius: 14px;
+    }
 
-  /* nome persona */
-  .rsvp-person__name {
-    font-size: 28px;
-    line-height: 1.2;
-  }
+    /* nome persona */
+    .rsvp-person__name {
+        font-size: 28px;
+        line-height: 1.2;
+    }
 
-  /* padding card */
-  .rsvp-person__head {
-    padding: 12px 14px;
-  }
+    /* padding card */
+    .rsvp-person__head {
+        padding: 12px 14px;
+    }
 
-  .rsvp-person__body {
-    padding: 12px 14px 14px;
-  }
+    .rsvp-person__body {
+        padding: 12px 14px 14px;
+    }
 
-  /* righe evento: stack */
-  .rsvp-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 10px 0;
-  }
+    /* righe evento: stack */
+    .rsvp-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 0;
+    }
 
-  .rsvp-row__action {
-    justify-content: flex-start;
-  }
+    .rsvp-row__action {
+        justify-content: flex-start;
+    }
 
-  /* select full width */
-  .rsvp-select {
-    width: 100%;
-    min-width: 0;
-    height: 38px;
-  }
+    /* select full width */
+    .rsvp-select {
+        width: 100%;
+        min-width: 0;
+        height: 38px;
+    }
 
-  /* tipografia più compatta */
-  .rsvp-row__title {
-    font-size: 12px;
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
+    /* tipografia più compatta */
+    .rsvp-row__title {
+        font-size: 12px;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
 
-  .rsvp-row__meta {
-    font-size: 12px;
-    line-height: 1.35;
-  }
+    .rsvp-row__meta {
+        font-size: 12px;
+        line-height: 1.35;
+    }
 
-  .rsvp-food__label {
-    font-size: 12px;
-  }
+    .rsvp-food__label {
+        font-size: 12px;
+    }
 
-  .rsvp-textarea {
-    font-size: 12px;
-    padding: 10px;
-  }
+    .rsvp-textarea {
+        font-size: 12px;
+        padding: 10px;
+    }
 }

@@ -101,6 +101,8 @@ const translations = {
     rsvp: {
       title: "RSVP",
       description: `Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026`,
+      descriptionMobile: `Per confermare la vostra presenza, inserite il vostro nome qui sotto. Non vediamo l'ora di festeggiare con voi. Grazie per voler condividere con noi questo giorno speciale! Vi preghiamo di dare conferma entro il 30 aprile 2026`,
+      descriptionDesktop: `Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026`,
       reply: "Rispondi",
       hide: "Nascondi",
     },
@@ -253,7 +255,8 @@ const translations = {
     // RSVP
     rsvp: {
       title: "RSVP",
-      description: `To confirm your attendance, please enter your name below.\nWe can't wait to celebrate with you.\nThank you for wanting to share this special day with us!\nPlease confirm by April 30, 2026`,
+      descriptionMobile: `To confirm your attendance, please enter your name below. We can't wait to celebrate with you. Thank you for wanting to share this special day with us! Please confirm by April 30, 2026`,
+      descriptionDesktop: `To confirm your attendance, please enter your name below.\nWe can't wait to celebrate with you.\nThank you for wanting to share this special day with us!\nPlease confirm by April 30, 2026`,
       reply: "Reply",
       hide: "Hide",
     },
