@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
+import "./components/RSVP/RSVP.css";
 import Envelope from "./components/Envelope/Envelope";
 import RSVP from "./components/RSVP/RSVP";
 import Menu from "./components/Menu/Menu";
@@ -69,6 +70,29 @@ export default function App() {
     };
   }, []);
 
+  // Scroll reveal effect
+  useEffect(() => {
+    if (!envelopeOpen) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    const sections = document.querySelectorAll(
+      ".scroll-reveal, .scroll-reveal-left"
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [envelopeOpen]);
+
   const toggleMute = () => {
     const a = audioRef.current;
     if (!a) return;
@@ -80,7 +104,7 @@ export default function App() {
     // opzionale: se era in pausa, riparte (utile su mobile)
     if (!next && a.paused) {
       const p = a.play();
-      if (p?.catch) p.catch(() => { });
+      if (p?.catch) p.catch(() => {});
     }
   };
 
@@ -93,7 +117,7 @@ export default function App() {
     a.muted = musicMuted;
 
     const p = a.play();
-    if (p?.catch) p.catch(() => { });
+    if (p?.catch) p.catch(() => {});
   };
 
   return (
@@ -105,8 +129,9 @@ export default function App() {
 
       <button
         type="button"
-        className={`music-fab ${musicVisible ? "music-fab--visible" : "music-fab--hidden"
-          }`}
+        className={`music-fab ${
+          musicVisible ? "music-fab--visible" : "music-fab--hidden"
+        }`}
         onClick={() => {
           toggleMute();
 
@@ -239,7 +264,10 @@ export default function App() {
 
       {/* Countdown Section */}
       <div className="site-content">
-        <section id="countdown" className="section-padding bg-background">
+        <section
+          id="countdown"
+          className="section-padding bg-background scroll-reveal"
+        >
           <div className="max-w-4xl mx-auto text-center px-4">
             <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
               {t.countdown.title}
@@ -260,13 +288,11 @@ export default function App() {
                   style={{
                     width: "clamp(70px, 12vw, 110px)",
                     height: "clamp(70px, 10vw, 95px)",
-
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
                     style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
-
                   >
                     {String(days).padStart(2, "0")}
                   </span>
@@ -283,13 +309,11 @@ export default function App() {
                   style={{
                     width: "clamp(70px, 12vw, 110px)",
                     height: "clamp(70px, 10vw, 95px)",
-
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
                     style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
-
                   >
                     {String(hours).padStart(2, "0")}
                   </span>
@@ -306,13 +330,11 @@ export default function App() {
                   style={{
                     width: "clamp(70px, 12vw, 110px)",
                     height: "clamp(70px, 10vw, 95px)",
-
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
                     style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
-
                   >
                     {String(mins).padStart(2, "0")}
                   </span>
@@ -329,13 +351,11 @@ export default function App() {
                   style={{
                     width: "clamp(70px, 12vw, 110px)",
                     height: "clamp(70px, 10vw, 95px)",
-
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
                     style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
-
                   >
                     {String(secs).padStart(2, "0")}
                   </span>
@@ -359,7 +379,10 @@ export default function App() {
         </div>
 
         {/* Location Section */}
-        <section id="cerimonia" className="section-padding relative">
+        <section
+          id="cerimonia"
+          className="section-padding relative scroll-reveal"
+        >
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="font-script title-script text-foreground mb-16">
@@ -462,7 +485,10 @@ export default function App() {
         </div>
 
         {/* Ricevimento Section */}
-        <section id="ricevimento" className="section-padding relative">
+        <section
+          id="ricevimento"
+          className="section-padding relative scroll-reveal"
+        >
           <div className="max-w-4xl mx-auto relative z-10 px-4">
             <div className="text-center mb-16">
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
@@ -565,7 +591,7 @@ export default function App() {
         </div>
 
         {/* Programma del giorno (timeline fornita) */}
-        <section id="programma" className="section-padding">
+        <section id="programma" className="section-padding scroll-reveal-left">
           <div className="max-w-5xl mx-auto ">
             <div
               className="text-center mb-16"
@@ -611,7 +637,7 @@ export default function App() {
                       {t.program.events.arrival.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">17:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -638,7 +664,7 @@ export default function App() {
                       {t.program.events.ceremony.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">18:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -668,7 +694,7 @@ export default function App() {
                       {t.program.events.aperitivo.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">20:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -698,7 +724,7 @@ export default function App() {
                       {t.program.events.dinner.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">22:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -729,7 +755,7 @@ export default function App() {
                       {t.program.events.firstDance.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">23:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -758,7 +784,7 @@ export default function App() {
                       {t.program.events.party.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">02:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
@@ -1071,7 +1097,7 @@ export default function App() {
         </section>
 
         {/* Sezione Regalos (versione fornita) */}
-        <section id="regalo" className="section-padding relative">
+        <section id="regalo" className="section-padding relative scroll-reveal">
           <div className="max-w-2xl mx-auto text-center">
             <div className="mb-12" style={{ opacity: 1, transform: "none" }}>
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-6">
@@ -1104,8 +1130,9 @@ export default function App() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`lucide lucide-chevron-down w-5 h-5 text-muted-foreground transition-transform duration-200 ${showAportacion ? "rotate-180" : ""
-                      }`}
+                    className={`lucide lucide-chevron-down w-5 h-5 text-muted-foreground transition-transform duration-200 ${
+                      showAportacion ? "rotate-180" : ""
+                    }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>
@@ -1153,18 +1180,21 @@ export default function App() {
         {/* Bottone RSVP e form espandibile */}
         <section
           id="rsvp"
-          className="section-padding bg-ivory"
+          className="section-padding bg-ivory scroll-reveal"
           ref={rsvpSectionRef}
         >
           <div className="max-w-xl mx-auto text-center mb-8">
             <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
               RSVP
             </h2>
-            <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">
+            <p className="text-base text-muted-foreground font-body leading-relaxed mb-6"
+             style={{ whiteSpace: "pre-line" }}>
               {t.rsvp.description}
             </p>
             <button
-              className="text-sm text-[#7c4a1e] hover:text-[#4e2c0c] underline underline-offset-4 decoration-[#b97d6a] hover:decoration-[#7c4a1e] transition-colors font-body btn"
+              className={`rsvp-btn ${
+                showRSVP ? "secondary" : "primary"
+              } rsvp-btn--single`}
               onClick={() => setShowRSVP((v) => !v)}
               aria-expanded={showRSVP}
               aria-controls="rsvp-form-section"

@@ -357,16 +357,16 @@
   }
 
   .rsvp-row__meta {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.35;
   }
 
   .rsvp-food__label {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .rsvp-textarea {
-    font-size: 11px;
+    font-size: 12px;
     padding: 10px;
   }
 }

@@ -170,7 +170,7 @@
   text-decoration: none;
 
   font-family: var(--font-script);
-  font-size: 1.5rem;
+  font-size: 25px;
   line-height: 1.2;
 
   color: rgba(0, 0, 0, 0.82);
@@ -178,6 +178,14 @@
   border-radius: 18px;
 
   transition: background 160ms ease, transform 160ms ease, color 160ms ease;
+}
+
+@media (max-width: 520px) {
+  .menu-link {
+    font-size: 22px;
+    padding: 8px 12px;
+  }
+    
 }
 
 .menu-link + .menu-link {
@@ -195,79 +203,83 @@
 
 
 /* =========================
-   Language Toggle
+   Language Toggle (smaller + minimal)
 ========================= */
 .menu-lang-toggle-wrap{
   display: flex;
   justify-content: center;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(185,125,106,0.18);
+  margin-top: 12px;                 /* meno stacco */
+  padding-top: 10px;
+  border-top: 1px solid rgba(185,125,106,0.14); /* più soft */
 }
 
 .menu-lang-toggle{
-  border: 2px solid rgba(185,125,106,0.35);
-  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(185,125,106,0.28);     /* più sottile */
+  background: rgba(255,255,255,0.06);           /* più minimal */
   border-radius: 999px;
   padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .menu-lang-toggle:hover{
-  border-color: rgba(185,125,106,0.6);
-  background: rgba(185,125,106,0.10);
+  border-color: rgba(185,125,106,0.45);
+  background: rgba(255,255,255,0.10);
 }
 
 .menu-lang-toggle:active{
-  transform: scale(0.985);
+  transform: scale(0.99);
 }
 
+/* track più piccolo */
 .toggle-track{
-  width: 100px;
-  height: 34px;
+  width: 86px;         /* ⬅️ più stretto */
+  height: 28px;        /* ⬅️ più basso */
   border-radius: 999px;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 10px;     /* meno padding */
 }
 
+/* label più piccole e più leggere */
 .toggle-label{
-  font-size: 12px;
-  letter-spacing: 0.12em;
+  font-size: 10px;      /* ⬅️ più piccolo */
+  letter-spacing: 0.10em;
   font-weight: 600;
-  color: rgba(0,0,0,0.55);
+  color: rgba(0,0,0,0.48);
   user-select: none;
 }
 
+/* knob più minimal */
 .toggle-knob{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 22px;          /* ⬅️ più piccolo */
+  height: 22px;         /* ⬅️ più piccolo */
   border-radius: 999px;
 
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.35);
-  box-shadow:
-    0 10px 22px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.26);
+  background: rgba(255,255,255,0.38);          /* più pulito */
+  border: 1px solid rgba(255,255,255,0.30);    /* meno evidente */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);      /* ombra più soft */
 
-  transition: left 220ms ease;
+  transition: left 200ms ease;
 }
 
+/* posizioni knob (coerenti con le nuove misure) */
 .menu-lang-toggle.is-en .toggle-knob{ left: 6px; }
-.menu-lang-toggle.is-it .toggle-knob{ left: calc(100% - 6px - 32px); }
+.menu-lang-toggle.is-it .toggle-knob{ left: calc(100% - 4px - 22px); }
 
-.menu-lang-toggle.is-en .toggle-label.left{ color: rgba(185,125,106,0.95); }
-.menu-lang-toggle.is-it .toggle-label.right{ color: rgba(185,125,106,0.95); }
+/* evidenzia label attiva ma più soft */
+.menu-lang-toggle.is-en .toggle-label.left{ color: rgba(185,125,106,0.90); }
+.menu-lang-toggle.is-it .toggle-label.right{ color: rgba(185,125,106,0.90); }
 
+/* focus accessibile */
 .menu-lang-toggle:focus-visible{
   outline: none;
-  box-shadow: 0 0 0 3px rgba(185,125,106,0.18);
+  box-shadow: 0 0 0 3px rgba(185,125,106,0.14);
 }
