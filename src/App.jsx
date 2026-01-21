@@ -408,19 +408,21 @@ export default function App() {
                 {t.ceremony.title}
               </h2>
             </div>
-            <a
-              href={mapsHrefCeremony}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t.reception.openInMaps}
-              className="block hover:opacity-90 transition-opacity duration-300"
-            >
-              <img
-                src="/images/chiesa.png"
-                alt={t.ceremony.place}
-                className="ceremony-map-img"
-              />
-            </a>
+            <div className="text-center">
+              <a
+                href={mapsHrefCeremony}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.reception.openInMaps}
+                className="inline-block hover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src="/images/chiesa.png"
+                  alt={t.ceremony.place}
+                  className="ceremony-map-img"
+                />
+              </a>
+            </div>
             <div className="flex flex-col items-center mt-4">
               <a
                 href={mapsHrefCeremony}
@@ -454,19 +456,21 @@ export default function App() {
                 {t.reception.title}
               </h2>
             </div>
-            <a
-              href={mapsHrefReception}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t.reception.openInMaps}
-              className="block hover:opacity-90 transition-opacity duration-300"
-            >
-              <img
-                src="/images/ricevimento.png"
-                alt={t.reception.place}
-                className="reception-map-img"
-              />
-            </a>
+            <div className="text-center">
+              <a
+                href={mapsHrefReception}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.reception.openInMaps}
+                className="inline-block hover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src="/images/ricevimento.png"
+                  alt={t.reception.place}
+                  className="reception-map-img"
+                />
+              </a>
+            </div>
             <div className="flex flex-col items-center mt-4">
               <a
                 href={mapsHrefReception}
