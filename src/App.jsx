@@ -291,20 +291,20 @@ export default function App() {
 
             <div
               className="flex flex-row justify-center max-w-2xl mx-auto"
-              style={{ gap: "clamp(8px, 2.5vw, 32px)" }}
+              style={{ gap: "clamp(10px, 3.5vw, 48px)" }}
             >
               {/* Giorni */}
               <div className="flex flex-col items-center">
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 12vw, 110px)",
-                    height: "clamp(70px, 10vw, 95px)",
+                    width: "clamp(70px, 13vw, 180px)",
+                    height: "clamp(70px, 11vw, 150px)",
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
                   >
                     {String(days).padStart(2, "0")}
                   </span>
@@ -319,13 +319,13 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 12vw, 110px)",
-                    height: "clamp(70px, 10vw, 95px)",
+                    width: "clamp(70px, 13vw, 180px)",
+                    height: "clamp(70px, 11vw, 150px)",
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
                   >
                     {String(hours).padStart(2, "0")}
                   </span>
@@ -340,13 +340,13 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 12vw, 110px)",
-                    height: "clamp(70px, 10vw, 95px)",
+                    width: "clamp(70px, 13vw, 180px)",
+                    height: "clamp(70px, 11vw, 150px)",
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
                   >
                     {String(mins).padStart(2, "0")}
                   </span>
@@ -361,13 +361,13 @@ export default function App() {
                 <div
                   className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
                   style={{
-                    width: "clamp(70px, 12vw, 110px)",
-                    height: "clamp(70px, 10vw, 95px)",
+                    width: "clamp(70px, 13vw, 180px)",
+                    height: "clamp(70px, 11vw, 150px)",
                   }}
                 >
                   <span
                     className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.9rem)" }}
+                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
                   >
                     {String(secs).padStart(2, "0")}
                   </span>
