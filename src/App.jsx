@@ -397,7 +397,7 @@ export default function App() {
         >
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="text-center mb-8">
-              <h2 className="font-script title-script text-foreground">
+              <h2 className="font-script text-5xl md:text-6xl text-foreground ">
                 {t.ceremony.title}
               </h2>
             </div>
