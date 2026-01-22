@@ -42,6 +42,7 @@ export default function App() {
   const audioRef = useRef(null);
   const [musicMuted, setMusicMuted] = useState(false);
   const [musicVisible, setMusicVisible] = useState(false);
+  const [autoPaused, setAutoPaused] = useState(false);
   const lastScrollY = useRef(
     typeof window !== "undefined" ? window.scrollY : 0
   );
@@ -131,6 +132,96 @@ export default function App() {
     const p = a.play();
     if (p?.catch) p.catch(() => {});
   };
+
+  // Mobile detection helper
+  function isMobile() {
+    try {
+      const ua = navigator?.userAgent || navigator?.vendor || "";
+      if (/android/i.test(ua)) return true;
+      if (/iPad|iPhone|iPod/.test(ua) && !(window).MSStream) return true;
+    } catch {
+      /* ignore */
+    }
+    try {
+      if (window?.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+        return true;
+      }
+      if (window?.innerWidth && window.innerWidth <= 640) return true;
+    } catch {
+      /* ignore */
+    }
+    return false;
+  }
+
+  // Auto-pause/resume music on mobile when tab/window loses focus
+  useEffect(() => {
+    if (!isMobile()) return;
+
+    const handleVisibility = () => {
+      const a = audioRef.current;
+      if (!a) return;
+      if (document.hidden) {
+        if (!a.paused) {
+          a.pause();
+          setAutoPaused(true);
+        }
+      } else {
+        if (autoPaused && !musicMuted) {
+          const p = a.play();
+          if (p?.catch) p.catch(() => {});
+          setAutoPaused(false);
+        }
+      }
+    };
+
+    const handleBlur = () => {
+      const a = audioRef.current;
+      if (!a) return;
+      if (!a.paused) {
+        a.pause();
+        setAutoPaused(true);
+      }
+    };
+
+    const handleFocus = () => {
+      const a = audioRef.current;
+      if (!a) return;
+      if (autoPaused && !musicMuted) {
+        const p = a.play();
+        if (p?.catch) p.catch(() => {});
+        setAutoPaused(false);
+      }
+    };
+
+    const handlePageHide = () => {
+      const a = audioRef.current;
+      if (a) {
+        a.pause();
+        setAutoPaused(true);
+      }
+    };
+
+    const handleBeforeUnload = () => {
+      const a = audioRef.current;
+      if (a) {
+        a.pause();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('blur', handleBlur);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('pagehide', handlePageHide);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('blur', handleBlur);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('pagehide', handlePageHide);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [musicMuted, autoPaused]);
 
   return (
     <>
