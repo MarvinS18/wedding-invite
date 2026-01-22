@@ -1001,38 +1001,18 @@ export default function App() {
                 {t.gifts.description}
               </p>
             </div>
-            <div
-              className="card-elegant overflow-hidden !p-0"
-              style={{ opacity: 1, transform: "none" }}
-            >
-              <button
-                className="w-full px-6 py-5 p-3flex items-center border border-t justify-between text-left hover:bg-secondary/30 transition-colors btn-contributo"
+               <button
+                className={`rsvp-btn rsvp-btn--single ${showAportacion ? "secondary" : "primary"}`}
                 onClick={() => setShowAportacion((v) => !v)}
                 aria-expanded={showAportacion}
               >
-                <span className="font-display text-base text-foreground">
-                  {t.gifts.contribution}
-                </span>
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={`lucide lucide-chevron-down w-5 h-5 text-muted-foreground transition-transform duration-200 ${
-                      showAportacion ? "rotate-180" : ""
-                    }`}
-                  >
-                    <path d="m6 9 6 6 6-6"></path>
-                  </svg>
-                </div>
+                {t.gifts.contribution}
               </button>
-              {showAportacion && (
+            {showAportacion && (
+              <div
+                className="card-elegant overflow-hidden p-8 border border-border"
+                style={{ opacity: 1, transform: "none", marginTop: "24px" }}
+              >
                 <div className="px-6 pb-6 pt-2 border-t border-border animate-fade-in text-center">
                   <p className="text-base text-muted-foreground font-body leading-relaxed mb-6">
                     {t.gifts.cashText}
@@ -1056,8 +1036,8 @@ export default function App() {
                     )}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
 
