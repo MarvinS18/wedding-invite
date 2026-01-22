@@ -420,7 +420,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => window.open(mapsHrefCeremony, "_blank")}
-                className="rsvp-btn primary"
+                className="rsvp-btn primary rsvp-btn--single"
               >
                 {t.reception.openInMaps}
               </button>
@@ -467,7 +467,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => window.open(mapsHrefReception, "_blank")}
-                className="rsvp-btn primary"
+                className="rsvp-btn primary rsvp-btn--single"
               >
                 {t.reception.openInMaps}
               </button>
