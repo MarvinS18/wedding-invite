@@ -54,35 +54,10 @@ export default function App() {
     return `https://www.google.com/maps?q=${encoded}`;
   };
 
-  // Rileva se siamo su un dispositivo mobile (iOS/Android)
-  const isMobileDevice = () => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-      userAgent.toLowerCase()
-    );
-  };
-
-  const openMapsApp = async (location, app) => {
+  const openMapsApp = (location, app) => {
     const encoded = encodeURIComponent(location);
     const mapsUrl = `https://www.google.com/maps?q=${encoded}`;
 
-    // Se il dispositivo è mobile E supporta Web Share API, usalo
-    if (navigator.share && isMobileDevice()) {
-      try {
-        await navigator.share({
-          title: "Directions",
-          text: `Open ${location} in your maps app`,
-          url: mapsUrl,
-        });
-        setMapsMenu(null);
-        return;
-      } catch (err) {
-        console.log("Share cancelled");
-        return;
-      }
-    }
-
-    // Fallback per desktop: apri l'app selezionata
     const urls = {
       google: mapsUrl,
       apple: `maps://maps.apple.com/?q=${encoded}`,
@@ -92,15 +67,9 @@ export default function App() {
     setMapsMenu(null);
   };
 
-  // Funzione per handle click bottone: su mobile apre share, su desktop apre dropdown
-  const handleMapsButtonClick = async (location, location_type) => {
-    if (navigator.share && isMobileDevice()) {
-      // Mobile: apri direttamente la share sheet
-      await openMapsApp(location);
-    } else {
-      // Desktop: toggle dropdown
-      setMapsMenu(mapsMenu === location_type ? null : location_type);
-    }
+  // Funzione per handle click bottone: toggle dropdown
+  const handleMapsButtonClick = (location, location_type) => {
+    setMapsMenu(mapsMenu === location_type ? null : location_type);
   };
 
   const mapsHrefCeremony = getMapsHref(
@@ -480,44 +449,43 @@ export default function App() {
               >
                 {t.reception.openInMaps}
               </button>
-              {mapsMenu === "ceremony" &&
-                !(navigator.share && isMobileDevice()) && (
-                  <div className="maps-dropdown">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Basilica di Santa Cecilia in Trastevere, Roma",
-                          "google"
-                        )
-                      }
-                    >
-                      Google Maps
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Basilica di Santa Cecilia in Trastevere, Roma",
-                          "apple"
-                        )
-                      }
-                    >
-                      Apple Maps
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Basilica di Santa Cecilia in Trastevere, Roma",
-                          "waze"
-                        )
-                      }
-                    >
-                      Waze
-                    </button>
-                  </div>
-                )}
+              {mapsMenu === "ceremony" && (
+                <div className="maps-dropdown">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Basilica di Santa Cecilia in Trastevere, Roma",
+                        "google"
+                      )
+                    }
+                  >
+                    Google Maps
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Basilica di Santa Cecilia in Trastevere, Roma",
+                        "apple"
+                      )
+                    }
+                  >
+                    Apple Maps
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Basilica di Santa Cecilia in Trastevere, Roma",
+                        "waze"
+                      )
+                    }
+                  >
+                    Waze
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -570,44 +538,43 @@ export default function App() {
               >
                 {t.reception.openInMaps}
               </button>
-              {mapsMenu === "reception" &&
-                !(navigator.share && isMobileDevice()) && (
-                  <div className="maps-dropdown">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Villa dei Consoli, Via di Colle Reti 2, Frascati",
-                          "google"
-                        )
-                      }
-                    >
-                      Google Maps
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Villa dei Consoli, Via di Colle Reti 2, Frascati",
-                          "apple"
-                        )
-                      }
-                    >
-                      Apple Maps
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openMapsApp(
-                          "Villa dei Consoli, Via di Colle Reti 2, Frascati",
-                          "waze"
-                        )
-                      }
-                    >
-                      Waze
-                    </button>
-                  </div>
-                )}
+              {mapsMenu === "reception" && (
+                <div className="maps-dropdown">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Villa dei Consoli, Via di Colle Reti 2, Frascati",
+                        "google"
+                      )
+                    }
+                  >
+                    Google Maps
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Villa dei Consoli, Via di Colle Reti 2, Frascati",
+                        "apple"
+                      )
+                    }
+                  >
+                    Apple Maps
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openMapsApp(
+                        "Villa dei Consoli, Via di Colle Reti 2, Frascati",
+                        "waze"
+                      )
+                    }
+                  >
+                    Waze
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>
