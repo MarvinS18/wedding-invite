@@ -422,7 +422,26 @@ export default function App() {
                 onClick={() => window.open(mapsHrefCeremony, "_blank")}
                 className="rsvp-btn primary rsvp-btn--single"
               >
-                {t.reception.openInMaps}
+                <span
+                  aria-hidden="true"
+                  style={{ display: "inline-flex", alignItems: "center", marginRight: "8px" }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                Piazza di Santa Cecilia, 22, 00153 Roma RM
               </button>
             </div>
           </div>
@@ -469,7 +488,26 @@ export default function App() {
                 onClick={() => window.open(mapsHrefReception, "_blank")}
                 className="rsvp-btn primary rsvp-btn--single"
               >
-                {t.reception.openInMaps}
+                <span
+                  aria-hidden="true"
+                  style={{ display: "inline-flex", alignItems: "center", marginRight: "8px" }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                Via di Pietra Porzia, 38, 00044 Frascati RM
               </button>
             </div>
           </div>
