@@ -1,157 +1,313 @@
 const translations = {
   it: {
-    namesFull: "Karl Anjelo Dimaano Reyes & Reichelle Carolaine Rodriguez Mercado",
-    namesShort: "Karl & Reichelle",
-    dateLong: "5 Giugno 2026",
-    welcome: "Siamo felici di celebrare questo giorno con voi.",
-    heroIntro: "Unitevi a noi per una serata di amore, famiglia e festa.",
-    programTitle: "Programma",
-    times: {
+    // Menu
+    menu: {
+      confirmAttendance: "Conferma presenza",
+      countdown: "Countdown",
       ceremony: "Cerimonia",
-      aperitivo: "Aperitivo",
-      dinner: "Cena",
-      cake: "Taglio torta",
-      firstDance: "Primo ballo",
-      afterparty: "After party",
+      reception: "Ricevimento",
+      program: "Programma",
+      gifts: "Regalo",
+      rsvp: "RSVP",
     },
+    
+    // Hero
+    hero: {
+      confirmAttendance: "Conferma presenza",
+    },
+
+    // Countdown
+    countdown: {
+      title: "Conto alla rovescia",
+      subtitle: "Per il grande giorno",
+      days: "Giorni",
+      hours: "Ore",
+      minutes: "Minuti",
+      seconds: "Secondi",
+    },
+
+    // Cerimonia
     ceremony: {
-      title: "Cerimonia",
-      place: "Chiesa di Santa Cecilia in Trastevere",
-      address: "Piazza di Santa Cecilia 22, 00153 Roma (RM), Italia",
-      type: "Cerimonia religiosa (Cattolica)",
-      how: "La chiesa è nel cuore di Trastevere. Consigliamo di arrivare con mezzi pubblici o taxi; il parcheggio è limitato nelle vicinanze.",
-      howBy: {
-        car: "In auto: parcheggi limitati vicino alla piazza; consigliato lasciare l'auto in un parcheggio vicino e proseguire a piedi.",
-        bus: "In autobus: prendere le linee 8 o 23 e scendere alla fermata Trastevere; poi 5-8 minuti a piedi.",
-        train: "In treno: dalla stazione Roma Trastevere sono 10-12 minuti a piedi o 2 fermate di tram/taxi.",
-      },
+      title: "La Cerimonia",
+      place: "Chiesa di Santa Cecilia",
+      address: "Piazza di Santa Cecilia, 22, 00153 Roma RM",
+      time: "Ore 16:30",
+      openInMaps: "Apri in Maps",
     },
+
+    // Ricevimento
     reception: {
-      title: "Ricevimento",
+      title: "Il Ricevimento",
       place: "Villa dei Consoli",
-      address: "Via di Pietra Porzia 38, 00044 Frascati (RM), Italia",
-      note: "Ampio parcheggio disponibile; area parzialmente all'aperto.",
-      how: "La villa dispone di ampio parcheggio. È raggiungibile in auto in circa 25 minuti da Roma centro o con servizio navetta su richiesta.",
-      howBy: {
-        car: "In auto: seguire l'autostrada per Frascati, parcheggio disponibile in loco; indicazioni via Google Maps consigliate.",
-        bus: "In autobus: collegamenti locali da Roma verso Frascati, scendere alla fermata più vicina e camminare 5-10 minuti.",
-        train: "In treno: prendere la linea regionale verso Frascati e poi un breve taxi fino alla villa.",
+      address: "Via di Colle Reti, 2, 00044 Frascati RM",
+      time: "Dalle 18:30",
+      openInMaps: "Apri in Maps",
+    },
+
+    // Programma
+    program: {
+      title: "Il Programma",
+      subtitle: "La nostra giornata, passo dopo passo",
+      events: {
+        arrival: {
+          time: "16:30",
+          title: "Arrivo",
+          description: "Accoglienza degli invitati",
+        },
+        ceremony: {
+          time: "17:00",
+          title: "Cerimonia",
+          description: "Scambio delle promesse",
+        },
+        aperitivo: {
+          time: "18:00",
+          title: "Aperitivo",
+          description: "Brindisi e stuzzichini",
+        },
+        dinner: {
+          time: "20:00",
+          title: "Cena",
+          description: "Cena nuziale",
+        },
+        firstDance: {
+          time: "22:30",
+          title: "Primo ballo",
+          description: "Il nostro momento",
+        },
+        party: {
+          time: "23:00",
+          title: "Festa",
+          description: "Tutti a ballare!",
+        },
+        end: {
+          time: "02:30",
+          title: "Fine festa",
+          description: "Arrivederci e grazie!",
+        },
       },
     },
-    attire: {
-      title: "Dress code",
-      text: "Elegante / Formale. Il bianco è riservato alla sposa.",
+
+    // Regali
+    gifts: {
+      title: "Un pensiero",
+      description: "La vostra presenza è il regalo più bello che possiamo ricevere. Se desiderate contribuire al nostro prossimo viaggio insieme, potete farlo nel modo che vi è più comodo.",
+      contribution: "Contributo",
+      cashText: "Se preferite, il regalo può essere in denaro contante. Se vi è più comodo, potete anche effettuare un bonifico:",
+      showIban: "Mostra IBAN",
+      hideIban: "Nascondi IBAN",
     },
+
+    // RSVP
     rsvp: {
       title: "RSVP",
-      deadline: "Vi invitiamo a confermare la vostra presenza compilando il form dedicato entro il 30/04/2026.",
-      children: "I bambini sono i benvenuti.",
-      contactsTitle: "Contatti RSVP",
+      description: `Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026`,
+      descriptionMobile: `Per confermare la vostra presenza, inserite il vostro nome qui sotto. Non vediamo l'ora di festeggiare con voi. Grazie per voler condividere con noi questo giorno speciale! Vi preghiamo di dare conferma entro il 30 aprile 2026`,
+      descriptionDesktop: `Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026`,
+      reply: "Rispondi",
+      hide: "Nascondi",
     },
-    gifts: {
-      title: "Regali",
-      text: "La vostra presenza è il regalo più prezioso. Chi desidera contribuire al nostro futuro, può utilizzare i dettagli bancari qui sotto.",
-      beneficiary: "Beneficiario: R. Mercado & K. Reyes",
-      iban: "IBAN: IT86U0366901600660747361804",
+
+    // RSVP Form
+    rsvpForm: {
+      formTitle: "Conferma la tua presenza",
+      nameLabel: "Inserisci nome e cognome",
+      continue: "Continua",
+      greeting: "Ciao",
+      groupQuestion: "Fai parte di questo gruppo:",
+      yes: "Sì",
+      no: "No",
+      select: "Seleziona",
+      complete: "✅ Completo",
+      toComplete: "⏳ Da completare",
+      ceremonyQuestion: "Partecipi alla cerimonia?",
+      receptionQuestion: "Partecipi al ricevimento?",
+      foodLabel: "Segnalate qui eventuali esigenze alimentari:",
+      foodPlaceholder: "Allergie, intolleranze o regimi alimentari specifici (es. celiachia, vegetariano, vegano...)",
+      prev: "← Precedente",
+      next: "Successivo →",
+      send: "Invia RSVP",
+      back: "Indietro",
+      sending: "Invio...",
+      received: "Ricevuto",
+      sendingMessage: "Stiamo inviando la tua risposta…",
+      dontClose: "Non chiudere questa pagina.",
+      thankYou: "Grazie! 💌",
+      responseRecorded: "La tua risposta è stata registrata.",
+      sendAnother: "Invia un'altra risposta",
+      errors: {
+        enterName: "Inserisci nome e cognome.",
+        nameNotFound: "Nome non presente nella lista invitati. Controlla che sia identico all'invito.",
+        sendError: "Errore durante l'invio. Controlla la connessione e riprova.",
+      },
     },
-    gallery: "Galleria",
-    faq: {
-      title: "FAQ",
-      q1: "I bambini sono benvenuti?",
-      a1: "Sì, i bambini sono benvenuti.",
-      q2: "C'è parcheggio al luogo?",
-      a2: "Sì, il ricevimento dispone di ampio parcheggio.",
-      q3: "L'evento è in parte all'aperto?",
-      a3: "Sì, parte del ricevimento si svolgerà all'aperto.",
-      q4: "Qual è il dress code?",
-      a4: "Elegante / Formale. Il bianco è riservato alla sposa.",
+
+    // Footer
+    footer: {
+      names: "Karl & Reichelle",
+      date: "5 giugno 2026",
+      message: "Con tutto il nostro amore",
+      contactLead: "Per qualsiasi informazione o necessità,\nnon esitate a contattarci",
     },
-    contacts: {
-      title: "Contatti",
-      karl: "Karl: +39 327 432 7315",
-      reichelle: "Reichelle: +39 328 596 9749",
-      coordinator: "Coordinatore matrimonio: (contatto opzionale)",
+
+    // Music
+    music: {
+      mute: "Silenzia musica",
+      unmute: "Attiva musica",
     },
-    footerHashtag: "#amagiKARLstorywithREICHELLE",
-    nav: { details: "Dettagli", program: "Programma", reception: "Ricevimento", gifts: "Regali", dresscode: "Dress code", rsvp: "RSVP", where: "Dove" },
-    buttons: { rsvp: "Conferma presenza", details: "Dettagli evento" },
   },
+
   en: {
-    namesFull: "Karl Anjelo Dimaano Reyes & Reichelle Carolaine Rodriguez Mercado",
-    namesShort: "Karl & Reichelle",
-    dateLong: "5 June 2026",
-    welcome: "We are delighted to celebrate this day with you.",
-    heroIntro: "Join us for an evening of love, family and celebration.",
-    programTitle: "Schedule",
-    times: {
+    // Menu
+    menu: {
+      confirmAttendance: "Confirm attendance",      countdown: "Countdown",
       ceremony: "Ceremony",
-      aperitivo: "Aperitif",
-      dinner: "Dinner",
-      cake: "Cake cutting",
-      firstDance: "First dance",
-      afterparty: "After party",
+      reception: "Reception",
+      program: "Program",
+      gifts: "Gifts",
+      rsvp: "RSVP",    },
+
+    // Hero
+    hero: {
+      confirmAttendance: "Confirm attendance",
     },
+
+    // Countdown
+    countdown: {
+      title: "Countdown",
+      subtitle: "For the big day",
+      days: "Days",
+      hours: "Hours",
+      minutes: "Minutes",
+      seconds: "Seconds",
+    },
+
+    // Cerimonia
     ceremony: {
-      title: "Ceremony",
-      place: "Chiesa di Santa Cecilia in Trastevere",
-      address: "Piazza di Santa Cecilia 22, 00153 Rome (RM), Italy",
-      type: "Catholic church ceremony",
-      howBy: {
-        car: "By car: parking nearby is limited; we suggest parking a short walk away and walking to the piazza.",
-        bus: "By bus: take lines 8 or 23 and get off at Trastevere stop; then a 5–8 minute walk.",
-        train: "By train: from Roma Trastevere station it's a 10–12 minute walk or a short tram/taxi ride.",
-      },
-      how: "The church is located in the heart of Trastevere. We recommend using public transport or taxis; nearby parking is limited.",
+      title: "The Ceremony",
+      place: "Church of Santa Cecilia",
+      address: "Piazza di Santa Cecilia, 22, 00153 Rome RM",
+      time: "At 4:30 PM",
+      openInMaps: "Open in Maps",
     },
+
+    // Ricevimento
     reception: {
-      title: "Reception",
+      title: "The Reception",
       place: "Villa dei Consoli",
-      address: "Via di Pietra Porzia 38, 00044 Frascati (RM), Italy",
-      note: "Ample parking available; venue is partly outdoors.",
-      how: "The villa has ample parking. It's about a 25-minute drive from central Rome or reachable by shuttle upon request.",
-      howBy: {
-        car: "By car: follow the road to Frascati; parking is available on-site — use Google Maps for turn-by-turn directions.",
-        bus: "By bus: regional buses run from Rome to Frascati; get off at the nearest stop and walk 5–10 minutes.",
-        train: "By train: take a regional train toward Frascati and then a short taxi ride to the villa.",
+      address: "Via di Colle Reti, 2, 00044 Frascati RM",
+      time: "From 6:30 PM",
+      openInMaps: "Open in Maps",
+    },
+
+    // Programma
+    program: {
+      title: "The Program",
+      subtitle: "Our day, step by step",
+      events: {
+        arrival: {
+          time: "16:30",
+          title: "Arrival",
+          description: "Welcoming guests",
+        },
+        ceremony: {
+          time: "17:00",
+          title: "Ceremony",
+          description: "Exchange of vows",
+        },
+        aperitivo: {
+          time: "18:00",
+          title: "Aperitif",
+          description: "Toasts and appetizers",
+        },
+        dinner: {
+          time: "20:00",
+          title: "Dinner",
+          description: "Wedding dinner",
+        },
+        firstDance: {
+          time: "22:30",
+          title: "First dance",
+          description: "Our moment",
+        },
+        party: {
+          time: "23:00",
+          title: "Party",
+          description: "Let's dance!",
+        },
+        end: {
+          time: "02:30",
+          title: "Party ends",
+          description: "Goodbye and thank you!",
+        },
       },
     },
-    attire: {
-      title: "Attire",
-      text: "Elegant / Formal. White is reserved for the bride.",
+
+    // Regali
+    gifts: {
+      title: "A gift",
+      description: "Your presence is the greatest gift we can receive. If you wish to contribute to our honeymoon together, you can do so in any way that suits you best.",
+      contribution: "Contribution",
+      cashText: "If you prefer, the gift can be in cash. If it is more convenient for you, you can also make a bank transfer:",
+      showIban: "Show IBAN",
+      hideIban: "Hide IBAN",
     },
+
+    // RSVP
     rsvp: {
       title: "RSVP",
-      deadline: "Please confirm by April 30th.",
-      children: "Children are welcome.",
-      contactsTitle: "RSVP contacts",
+      descriptionMobile: `To confirm your attendance, please enter your name below. We can't wait to celebrate with you. Thank you for wanting to share this special day with us! Please confirm by April 30, 2026`,
+      descriptionDesktop: `To confirm your attendance, please enter your name below.\nWe can't wait to celebrate with you.\nThank you for wanting to share this special day with us!\nPlease confirm by April 30, 2026`,
+      reply: "Reply",
+      hide: "Hide",
     },
-    gifts: {
-      title: "Gifts",
-      text: "Your presence is our greatest gift. If you wish to contribute to our journey together, bank details are below.",
-      beneficiary: "Beneficiary: R. Mercado & K. Reyes",
-      iban: "IBAN: IT86U0366901600660747361804",
+
+    // RSVP Form
+    rsvpForm: {
+      formTitle: "Confirm your attendance",
+      nameLabel: "Insert name and surname ",
+      continue: "Continue",
+      greeting: "Hi",
+      groupQuestion: "Are you part of this group:",
+      yes: "Yes",
+      no: "No",
+      select: "Select",
+      complete: "✅ Complete",
+      toComplete: "⏳ To complete",
+      ceremonyQuestion: "Will you attend the ceremony?",
+      receptionQuestion: "Will you attend the reception?",
+      foodLabel: "Dietary requirements (allergies/intolerances):",
+      foodPlaceholder: "Allergies, intolerances or dietary preferences (e.g., gluten-free, vegetarian, vegan...)",
+      prev: "← Prev",
+      next: "Next →",
+      send: "Send RSVP",
+      back: "Back",
+      sending: "Sending...",
+      received: "Received",
+      sendingMessage: "We're sending your response…",
+      dontClose: "Please don't close this page.",
+      thankYou: "Thank you! 💌",
+      responseRecorded: "Your response has been recorded.",
+      sendAnother: "Send another response",
+      errors: {
+        enterName: "Please enter name and surname.",
+        nameNotFound: "Name not found in the guest list. Please check it matches the invitation.",
+        sendError: "Error while sending. Check your connection and try again.",
+      },
     },
-    gallery: "Gallery",
-    faq: {
-      title: "FAQ",
-      q1: "Are children welcome?",
-      a1: "Yes, children are welcome.",
-      q2: "Is there parking at the venue?",
-      a2: "Yes, the reception has ample parking.",
-      q3: "Is part of the event outdoors?",
-      a3: "Yes, part of the reception is outdoors.",
-      q4: "What is the dress code?",
-      a4: "Elegant / Formal. White is reserved for the bride.",
+
+    // Footer
+    footer: {
+      names: "Karl & Reichelle",
+      date: "June 5, 2026",
+      message: "With all our love",
+      contactLead: "For any information or needs,\nfeel free to contact us",
     },
-    contacts: {
-      title: "Contacts",
-      karl: "Karl: +39 327 432 7315",
-      reichelle: "Reichelle: +39 328 596 9749",
-      coordinator: "Wedding coordinator: (optional contact)",
+
+    // Music
+    music: {
+      mute: "Mute music",
+      unmute: "Unmute music",
     },
-    footerHashtag: "#amagiKARLstorywithREICHELLE",
-    nav: { details: "Details", program: "Schedule", reception: "Reception", gifts: "Gifts", dresscode: "Attire", rsvp: "RSVP", where: "Where" },
-    buttons: { rsvp: "Confirm attendance", details: "Event details" },
   },
 };
 
