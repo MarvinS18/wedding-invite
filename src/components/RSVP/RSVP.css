@@ -39,24 +39,24 @@
 /* Secondario (Indietro) */
 .rsvp-btn.secondary {
     background: transparent;
-    border: 1px solid rgba(185, 125, 106, 0.45);
-    color: #7c4a1e;
+    border: 1px solid rgba(138, 110, 93, 0.45);
+    color: #6F5648;
 }
 
 .rsvp-btn.secondary:hover {
-    background: rgba(185, 125, 106, 0.12);
+    background: rgba(138, 110, 93, 0.12);
 }
 
 /* Primario (Invia RSVP) */
 .rsvp-btn.primary {
-    background: #b97d6a;
+    background: #8A6E5D;
     border: none;
     color: #fff;
-    box-shadow: 0 10px 22px rgba(185, 125, 106, 0.35);
+    box-shadow: 0 10px 22px rgba(138, 110, 93, 0.35);
 }
 
 .rsvp-btn.primary:hover {
-    background: #a86b59;
+    background: #7C6354;
     transform: translateY(-1px);
 }
 
@@ -103,7 +103,7 @@
 }
 
 .rsvp-person {
-    border: 1px solid rgba(185, 125, 106, 0.35);
+    border: 1px solid rgba(138, 110, 93, 0.35);
     border-radius: 18px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.55);
@@ -166,7 +166,7 @@
 .rsvp-person__body {
     padding: 14px 16px 16px;
     background: rgba(255, 255, 255, 0.35);
-    border-top: 1px solid rgba(185, 125, 106, 0.25);
+    border-top: 1px solid rgba(138, 110, 93, 0.25);
 }
 
 /* =========================
@@ -182,7 +182,7 @@
 }
 
 .rsvp-row+.rsvp-row {
-    border-top: 1px solid rgba(185, 125, 106, 0.18);
+    border-top: 1px solid rgba(138, 110, 93, 0.18);
 }
 
 .rsvp-row__action {
@@ -211,8 +211,8 @@
 }
 
 .rsvp-input:focus {
-    border-color: rgba(185, 125, 106, 0.6);
-    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.18);
+    border-color: rgba(138, 110, 93, 0.6);
+    box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.18);
 }
 
 /* Select */
@@ -220,15 +220,15 @@
     min-width: 160px;
     height: 40px;
     border-radius: 12px;
-    border: 1px solid rgba(185, 125, 106, 0.45);
+    border: 1px solid rgba(138, 110, 93, 0.45);
     background: rgba(255, 255, 255, 0.8);
     padding: 0 12px;
     outline: none;
 }
 
 .rsvp-select:focus {
-    border-color: rgba(124, 74, 30, 0.65);
-    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
+    border-color: rgba(111, 86, 72, 0.65);
+    box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.2);
 }
 
 /* Preferenze alimentari */
@@ -245,7 +245,7 @@
 .rsvp-textarea {
     width: 100%;
     border-radius: 14px;
-    border: 1px solid rgba(185, 125, 106, 0.35);
+    border: 1px solid rgba(138, 110, 93, 0.35);
     background: rgba(255, 255, 255, 0.7);
     padding: 12px;
     resize: vertical;
@@ -253,8 +253,8 @@
 }
 
 .rsvp-textarea:focus {
-    border-color: rgba(124, 74, 30, 0.65);
-    box-shadow: 0 0 0 3px rgba(185, 125, 106, 0.2);
+    border-color: rgba(111, 86, 72, 0.65);
+    box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.2);
 }
 
 /* =========================
@@ -271,7 +271,7 @@
 .rsvp-linkbtn {
     background: transparent;
     border: none;
-    color: #7c4a1e;
+    color: #6F5648;
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
@@ -307,7 +307,7 @@
     max-width: 400px;
     width: min(100%, 400px);
     padding: 14px 16px;
-    border: 1px solid rgba(124, 74, 30, 0.35);
+    border: 1px solid rgba(111, 86, 72, 0.35);
     border-radius: 12px;
     background: rgba(255, 247, 244, 0.6);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);

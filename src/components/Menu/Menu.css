@@ -30,7 +30,7 @@
   transform: translateY(-6px);
   transition: opacity 180ms ease, transform 180ms ease;
 
-  color: rgba(185, 125, 106, 0.9);
+  color: rgba(138, 110, 93, 0.9);
   font-size: 20px;
   line-height: 1;
 
@@ -194,7 +194,7 @@
 
 .menu-link:hover {
   background: rgba(255, 255, 255, 0.20);
-  color: rgba(185, 125, 106, 0.90);
+  color: rgba(138, 110, 93, 0.90);
 }
 
 .menu-link:active {
@@ -210,11 +210,11 @@
   justify-content: center;
   margin-top: 12px;                 /* meno stacco */
   padding-top: 10px;
-  border-top: 1px solid rgba(185,125,106,0.14); /* più soft */
+  border-top: 1px solid rgba(138,110,93,0.14); /* più soft */
 }
 
 .menu-lang-toggle{
-  border: 1px solid rgba(185,125,106,0.28);     /* più sottile */
+  border: 1px solid rgba(138,110,93,0.28);     /* più sottile */
   background: rgba(255,255,255,0.06);           /* più minimal */
   border-radius: 999px;
   padding: 0;
@@ -224,7 +224,7 @@
 }
 
 .menu-lang-toggle:hover{
-  border-color: rgba(185,125,106,0.45);
+  border-color: rgba(138,110,93,0.45);
   background: rgba(255,255,255,0.10);
 }
 
@@ -275,11 +275,11 @@
 .menu-lang-toggle.is-it .toggle-knob{ left: calc(100% - 4px - 22px); }
 
 /* evidenzia label attiva ma più soft */
-.menu-lang-toggle.is-en .toggle-label.left{ color: rgba(185,125,106,0.90); }
-.menu-lang-toggle.is-it .toggle-label.right{ color: rgba(185,125,106,0.90); }
+.menu-lang-toggle.is-en .toggle-label.left{ color: rgba(138,110,93,0.90); }
+.menu-lang-toggle.is-it .toggle-label.right{ color: rgba(138,110,93,0.90); }
 
 /* focus accessibile */
 .menu-lang-toggle:focus-visible{
   outline: none;
-  box-shadow: 0 0 0 3px rgba(185,125,106,0.14);
+  box-shadow: 0 0 0 3px rgba(138,110,93,0.14);
 }

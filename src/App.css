@@ -4,7 +4,7 @@
 /* Badge orario timeline carino */
 .timeline-badge {
   display: inline-block;
-  background: #b97d6a;
+  background: #8A6E5D;
   color: #fff;
   padding: 0.22em 0.85em;
   border-radius: 999px;
@@ -12,17 +12,17 @@
   font-size: 0.93em;
   font-weight: 600;
   letter-spacing: 0.08em;
-  border: 1.1px solid #b97d6a;
-  box-shadow: 0 2px 8px 0 rgba(124, 74, 30, 0.10);
+  border: 1.1px solid #8A6E5D;
+  box-shadow: 0 2px 8px 0 rgba(111, 86, 72, 0.10);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   margin-bottom: 0.2em;
 }
 
 .timeline-badge:hover,
 .timeline-badge:focus {
-  background: linear-gradient(90deg, #b97d6a 60%, #7c4a1e 100%);
+  background: linear-gradient(90deg, #8A6E5D 60%, #6F5648 100%);
   color: #fffbe9;
-  box-shadow: 0 4px 16px 0 rgba(124, 74, 30, 0.18);
+  box-shadow: 0 4px 16px 0 rgba(111, 86, 72, 0.18);
 }
 
 @media (max-width: 1024px) {
@@ -189,7 +189,7 @@ body {
 }
 
 .text-primary {
-  color: #b97d6a;
+  color: #8A6E5D;
 }
 
 .text-primary-foreground {
@@ -205,7 +205,7 @@ body {
 }
 
 .bg-primary {
-  background: #b97d6a;
+  background: #8A6E5D;
 }
 
 .bg-card {
@@ -233,11 +233,11 @@ body {
 }
 
 .shadow-soft {
-  box-shadow: 0 4px 24px rgba(185, 125, 106, 0.08);
+  box-shadow: 0 4px 24px rgba(138, 110, 93, 0.08);
 }
 
 .shadow-elegant {
-  box-shadow: 0 8px 32px rgba(185, 125, 106, 0.12);
+  box-shadow: 0 8px 32px rgba(138, 110, 93, 0.12);
 }
 
 .border {
@@ -253,7 +253,7 @@ body {
 }
 
 .border-primary {
-  border-color: #b97d6a;
+  border-color: #8A6E5D;
 }
 
 .tracking-tight {
@@ -625,15 +625,15 @@ body {
 }
 
 .focus-visible\:ring-2:focus-visible {
-  box-shadow: 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 2px #8A6E5D;
 }
 
 .focus-visible\:ring-ring:focus-visible {
-  box-shadow: 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 2px #8A6E5D;
 }
 
 .focus-visible\:ring-offset-2:focus-visible {
-  box-shadow: 0 0 0 4px #fffdf9, 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 4px #fffdf9, 0 0 0 2px #8A6E5D;
 }
 
 .disabled\:pointer-events-none:disabled {
@@ -657,11 +657,11 @@ body {
 }
 
 .bg-primary\/90 {
-  background: rgba(185, 125, 106, 0.9);
+  background: rgba(138, 110, 93, 0.9);
 }
 
 .text-primary\/50 {
-  color: rgba(185, 125, 106, 0.5);
+  color: rgba(138, 110, 93, 0.5);
 }
 
 .text-primary-foreground\/70 {
@@ -725,12 +725,12 @@ body {
 }
 
 .hover\:bg-primary:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
   color: #fff;
 }
 
 .hover\:text-primary:hover {
-  color: #b97d6a;
+  color: #8A6E5D;
 }
 
 .hover\:text-primary-foreground:hover {
@@ -746,11 +746,11 @@ body {
 }
 
 .hover\:bg-primary\/90:hover {
-  background: rgba(185, 125, 106, 0.9);
+  background: rgba(138, 110, 93, 0.9);
 }
 
 .hover\:bg-primary:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
 }
 
 .hover\:text-primary-foreground:hover {
@@ -774,17 +774,17 @@ body {
 }
 
 .shadow-soft {
-  box-shadow: 0 4px 24px rgba(185, 125, 106, 0.08);
+  box-shadow: 0 4px 24px rgba(138, 110, 93, 0.08);
 }
 
 .shadow-elegant {
-  box-shadow: 0 8px 32px rgba(185, 125, 106, 0.12);
+  box-shadow: 0 8px 32px rgba(138, 110, 93, 0.12);
 }
 
 .card-elegant {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(185, 125, 106, 0.12);
+  box-shadow: 0 8px 32px rgba(138, 110, 93, 0.12);
 }
 
 .inline-flex {
@@ -890,15 +890,15 @@ body {
 }
 
 .focus-visible\:ring-2:focus-visible {
-  box-shadow: 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 2px #8A6E5D;
 }
 
 .focus-visible\:ring-ring:focus-visible {
-  box-shadow: 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 2px #8A6E5D;
 }
 
 .focus-visible\:ring-offset-2:focus-visible {
-  box-shadow: 0 0 0 4px #fffdf9, 0 0 0 2px #b97d6a;
+  box-shadow: 0 0 0 4px #fffdf9, 0 0 0 2px #8A6E5D;
 }
 
 .ring-offset-background {
@@ -926,11 +926,11 @@ body {
 }
 
 .bg-primary\/90 {
-  background: rgba(185, 125, 106, 0.9);
+  background: rgba(138, 110, 93, 0.9);
 }
 
 .text-primary\/50 {
-  color: rgba(185, 125, 106, 0.5);
+  color: rgba(138, 110, 93, 0.5);
 }
 
 .text-primary-foreground\/70 {
@@ -994,12 +994,12 @@ body {
 }
 
 .hover\:bg-primary:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
   color: #fff;
 }
 
 .hover\:text-primary:hover {
-  color: #b97d6a;
+  color: #8A6E5D;
 }
 
 .hover\:text-primary-foreground:hover {
@@ -1015,11 +1015,11 @@ body {
 }
 
 .hover\:bg-primary\/90:hover {
-  background: rgba(185, 125, 106, 0.9);
+  background: rgba(138, 110, 93, 0.9);
 }
 
 .hover\:bg-primary:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
 }
 
 .hover\:text-primary-foreground:hover {
@@ -1043,23 +1043,23 @@ body {
 }
 
 .shadow-soft {
-  box-shadow: 0 4px 24px rgba(185, 125, 106, 0.08);
+  box-shadow: 0 4px 24px rgba(138, 110, 93, 0.08);
 }
 
 .shadow-elegant {
-  box-shadow: 0 8px 32px rgba(185, 125, 106, 0.12);
+  box-shadow: 0 8px 32px rgba(138, 110, 93, 0.12);
 }
 
 .card-elegant {
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(185, 125, 106, 0.12);
+  box-shadow: 0 8px 32px rgba(138, 110, 93, 0.12);
 }
 
 /* Import Google Fonts */
 
 :root {
-  --accent: #b97d6a;
+  --accent: #8A6E5D;
   --muted: #666;
   --bg: #fffdf9;
   --card: #fff;
@@ -1236,7 +1236,7 @@ html {
   top: 6px;
   bottom: 6px;
   width: 2px;
-  background: linear-gradient(180deg, rgba(185, 125, 106, 0.95), rgba(185, 125, 106, 0.4));
+  background: linear-gradient(180deg, rgba(138, 110, 93, 0.95), rgba(138, 110, 93, 0.4));
   border-radius: 2px
 }
 
@@ -1263,7 +1263,7 @@ html {
   height: 14px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 4px 10px rgba(185, 125, 106, 0.18)
+  box-shadow: 0 4px 10px rgba(138, 110, 93, 0.18)
 }
 
 .timeline-content {
@@ -1506,7 +1506,7 @@ a.inline {
   justify-content: center;
 
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(185, 125, 106, 0.65);
+  background: rgba(138, 110, 93, 0.65);
   color: #fff;
 
   z-index: 2147483647;
@@ -1618,30 +1618,30 @@ a.inline {
   height: 42px;
   padding: 0 16px;
   border-radius: 9999px;
-  border: 1px solid rgba(185, 125, 106, 0.45);
+  border: 1px solid rgba(138, 110, 93, 0.45);
   background: linear-gradient(180deg, #ffffff 0%, #fffaf5 100%);
-  color: #7c4a1e;
+  color: #6F5648;
   font-weight: 600;
   letter-spacing: 0.02em;
-  box-shadow: 0 6px 20px rgba(185, 125, 106, 0.08);
+  box-shadow: 0 6px 20px rgba(138, 110, 93, 0.08);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
 }
 
 .btn-maps:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
   color: #fff;
-  border-color: #b97d6a;
-  box-shadow: 0 8px 24px rgba(185, 125, 106, 0.22);
+  border-color: #8A6E5D;
+  box-shadow: 0 8px 24px rgba(138, 110, 93, 0.22);
   transform: translateY(-1px);
 }
 
 .btn-maps:active {
   transform: translateY(0);
-  box-shadow: 0 4px 14px rgba(185, 125, 106, 0.18);
+  box-shadow: 0 4px 14px rgba(138, 110, 93, 0.18);
 }
 
 .btn-maps:focus-visible {
-  outline: 2px solid #b97d6a;
+  outline: 2px solid #8A6E5D;
   outline-offset: 2px;
 }
 
@@ -1660,16 +1660,16 @@ a.inline {
   height: 44px;
   padding: 0 20px;
   border-radius: 16px;
-  border: 1px solid rgba(185, 125, 106, 0.45);
+  border: 1px solid rgba(138, 110, 93, 0.45);
   background: linear-gradient(180deg, #ffffff 0%, #fffaf5 100%);
-  color: #7c4a1e;
+  color: #6F5648;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 15px;
   min-width: 100px;
   letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(185, 125, 106, 0.10);
+  box-shadow: 0 8px 22px rgba(138, 110, 93, 0.10);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
 }
 
@@ -1688,20 +1688,20 @@ a.inline {
 }
 
 .btn-contributo:hover {
-  background: #b97d6a;
+  background: #8A6E5D;
   color: #fff;
-  border-color: #b97d6a;
-  box-shadow: 0 10px 28px rgba(185, 125, 106, 0.22);
+  border-color: #8A6E5D;
+  box-shadow: 0 10px 28px rgba(138, 110, 93, 0.22);
   transform: translateY(-1px);
 }
 
 .btn-contributo:active {
   transform: translateY(0);
-  box-shadow: 0 6px 16px rgba(185, 125, 106, 0.18);
+  box-shadow: 0 6px 16px rgba(138, 110, 93, 0.18);
 }
 
 .btn-contributo:focus-visible {
-  outline: 2px solid #b97d6a;
+  outline: 2px solid #8A6E5D;
   outline-offset: 2px;
 }
 

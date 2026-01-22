@@ -37,7 +37,7 @@ export default function RSVP({ lang = "it" }) {
 
   // --- styles ---
   const linkBtn =
-    "text-sm text-[#7c4a1e] hover:text-[#4e2c0c] underline underline-offset-4 decoration-[#b97d6a] hover:decoration-[#7c4a1e] transition-colors font-body btn disabled:opacity-50 disabled:pointer-events-none";
+    "text-sm text-[#6F5648] hover:text-[#5A473B] underline underline-offset-4 decoration-[#8A6E5D] hover:decoration-[#6F5648] transition-colors font-body btn disabled:opacity-50 disabled:pointer-events-none";
 
   const labelCls = "text-sm leading-none text-foreground font-medium";
   const inputCls =
