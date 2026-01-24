@@ -1,8 +1,10 @@
 ﻿import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import "./App.css";
 import "./components/RSVP/RSVP.css";
 import Envelope from "./components/Envelope/Envelope";
 import RSVP from "./components/RSVP/RSVP";
+import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
 import Menu from "./components/Menu/Menu";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
@@ -25,10 +27,15 @@ function useCountdown(targetDate) {
 }
 
 export default function App() {
+  const location = useLocation();
   // Data evento
   const target = "2026-06-05T16:30:00";
   const { days, hours, mins, secs } = useCountdown(target);
-  const [envelopeOpen, setEnvelopeOpen] = useState(false);
+  const [envelopeOpen, setEnvelopeOpen] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const seen = sessionStorage.getItem("envelopeSeen") === "1";
+    return seen || Boolean(location.state?.skipIntro);
+  });
   // Stato per la sezione Regalos
   const [showAportacion, setShowAportacion] = useState(false);
   const [showIban, setShowIban] = useState(false);
@@ -48,6 +55,7 @@ export default function App() {
     typeof window !== "undefined" ? window.scrollY : 0
   );
   const musicHideTimer = useRef(null);
+
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
     const encoded = encodeURIComponent(label);
@@ -83,6 +91,29 @@ export default function App() {
       if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
     };
   }, []);
+
+  const handleEnvelopeOpen = () => {
+    setEnvelopeOpen(true);
+    sessionStorage.setItem("envelopeSeen", "1");
+  };
+
+  useEffect(() => {
+    if (envelopeOpen) {
+      sessionStorage.setItem("envelopeSeen", "1");
+    }
+  }, [envelopeOpen]);
+
+  // Se arrivi con skipIntro, scorri direttamente alla sezione foto
+  useEffect(() => {
+    if (envelopeOpen && location.state?.skipIntro) {
+      const photosEl = document.getElementById("photos");
+      if (photosEl) {
+        setTimeout(() => {
+          photosEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
+    }
+  }, [envelopeOpen, location.state]);
 
   // Scroll reveal effect
   useEffect(() => {
@@ -139,12 +170,15 @@ export default function App() {
     try {
       const ua = navigator?.userAgent || navigator?.vendor || "";
       if (/android/i.test(ua)) return true;
-      if (/iPad|iPhone|iPod/.test(ua) && !(window).MSStream) return true;
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return true;
     } catch {
       /* ignore */
     }
     try {
-      if (window?.matchMedia && window.matchMedia('(pointer: coarse)').matches) {
+      if (
+        window?.matchMedia &&
+        window.matchMedia("(pointer: coarse)").matches
+      ) {
         return true;
       }
       if (window?.innerWidth && window.innerWidth <= 640) return true;
@@ -209,18 +243,18 @@ export default function App() {
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibility);
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
-    window.addEventListener('pagehide', handlePageHide);
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("blur", handleBlur);
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("pagehide", handlePageHide);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibility);
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
-      window.removeEventListener('pagehide', handlePageHide);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("pagehide", handlePageHide);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [musicMuted, autoPaused]);
 
@@ -289,7 +323,7 @@ export default function App() {
       {!envelopeOpen && (
         <>
           <div className="envelope-root-bg" />
-          <Envelope onStart={startMusic} onOpen={() => setEnvelopeOpen(true)} />
+          <Envelope onStart={startMusic} onOpen={handleEnvelopeOpen} />
         </>
       )}
       {envelopeOpen && (
@@ -516,7 +550,11 @@ export default function App() {
               >
                 <span
                   aria-hidden="true"
-                  style={{ display: "inline-flex", alignItems: "center", marginRight: "8px" }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    marginRight: "8px",
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -582,7 +620,11 @@ export default function App() {
               >
                 <span
                   aria-hidden="true"
-                  style={{ display: "inline-flex", alignItems: "center", marginRight: "8px" }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    marginRight: "8px",
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1131,13 +1173,15 @@ export default function App() {
                 {t.gifts.description}
               </p>
             </div>
-               <button
-                className={`rsvp-btn rsvp-btn--single ${showAportacion ? "secondary" : "primary"}`}
-                onClick={() => setShowAportacion((v) => !v)}
-                aria-expanded={showAportacion}
-              >
-                {t.gifts.contribution}
-              </button>
+            <button
+              className={`rsvp-btn rsvp-btn--single ${
+                showAportacion ? "secondary" : "primary"
+              }`}
+              onClick={() => setShowAportacion((v) => !v)}
+              aria-expanded={showAportacion}
+            >
+              {t.gifts.contribution}
+            </button>
             {showAportacion && (
               <div
                 className="card-elegant overflow-hidden p-8 border border-border"
@@ -1171,10 +1215,10 @@ export default function App() {
           </div>
         </section>
 
-        {/* Separatore cuore DOPO Regalos */}
+        {/* Separatore cuore DOPO Gift */}
         <div
           className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1 }}
+          style={{ opacity: 1, marginTop: "1.5rem" }}
         >
           <span className="h-px bg-primary/30 w-16 md:w-24"></span>
           <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
@@ -1220,7 +1264,21 @@ export default function App() {
             </div>
           )}
         </section>
-        {/* Separatore cuore */}
+
+        {/* Separatore cuore DOPO RSVP */}
+        <div
+          className="flex items-center justify-center py-6 bg-ivory"
+          style={{ opacity: 1 }}
+        >
+          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
+          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        </div>
+
+        {/* SEZIONE FOTO - Photo Gallery */}
+        <PhotoGallery />
+
+        {/* Separatore cuore PRIMA footer */}
         <div
           className="flex items-center justify-center py-6 bg-ivory"
           style={{ opacity: 1 }}

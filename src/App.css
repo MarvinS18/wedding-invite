@@ -1552,12 +1552,6 @@ a.inline {
   z-index: 5;
 }
 
-.site-content {
-  width: min(100% - 32px, 980px);
-  margin: 0 auto;
-}
-
-
 
 /* ...existing code... */
 
