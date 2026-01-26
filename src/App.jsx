@@ -41,8 +41,11 @@ export default function App() {
   const [showIban, setShowIban] = useState(false);
   // Stato per RSVP espandibile
   const [showRSVP, setShowRSVP] = useState(false);
-  // Stato per la lingua (default: en)
-  const [lang, setLang] = useState("en");
+  // Stato per la lingua (persistita in localStorage)
+  const [lang, setLang] = useState(() => {
+    if (typeof window === "undefined") return "en";
+    return localStorage.getItem("lang") || "en";
+  });
   // Traduzioni
   const t = translations[lang];
   // Ref per la sezione RSVP
@@ -55,6 +58,13 @@ export default function App() {
     typeof window !== "undefined" ? window.scrollY : 0
   );
   const musicHideTimer = useRef(null);
+
+  // Propaga la lingua selezionata a localStorage e agli eventuali listener
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    localStorage.setItem("lang", lang);
+    window.dispatchEvent(new Event("languageChange"));
+  }, [lang]);
 
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
@@ -1276,7 +1286,7 @@ export default function App() {
         </div>
 
         {/* SEZIONE FOTO - Photo Gallery */}
-        <PhotoGallery />
+        <PhotoGallery lang={lang} />
 
         {/* Separatore cuore PRIMA footer */}
         <div

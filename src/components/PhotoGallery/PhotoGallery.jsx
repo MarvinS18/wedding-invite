@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { storage, db } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -10,9 +10,12 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import "./PhotoGallery.css";
+import translations from "../../translations";
+import { weddingDate } from "../../eventConfig.js";
 
-export default function PhotoGallery() {
-  const [file, setFile] = useState(null);
+export default function PhotoGallery({ lang = "en" }) {
+  const t = translations[lang].photoGallery;
+  const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [uploaderName, setUploaderName] = useState("");
@@ -20,12 +23,13 @@ export default function PhotoGallery() {
   const [success, setSuccess] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [showUploadBlockedModal, setShowUploadBlockedModal] = useState(false);
 
   // Carica le foto da Firestore al montaggio
   useEffect(() => {
     const photosQuery = query(
       collection(db, "weddingPhotos"),
-      orderBy("uploadedAt", "desc")
+      orderBy("uploadedAt", "desc"),
     );
 
     const unsubscribe = onSnapshot(photosQuery, (snapshot) => {
@@ -53,26 +57,44 @@ export default function PhotoGallery() {
   }, [lightboxOpen]);
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      // Validazioni
-      if (!selectedFile.type.startsWith("image/")) {
-        setError("Per favore seleziona un file immagine");
-        return;
-      }
-      if (selectedFile.size > 10 * 1024 * 1024) {
-        setError("Il file è troppo grande (max 10 MB)");
-        return;
-      }
-      setFile(selectedFile);
-      setError("");
+    const selectedFiles = Array.from(e.target.files || []);
+
+    // Limite massimo 5 foto
+    if (selectedFiles.length > 5) {
+      setError(t.errors.maxPhotos);
+      e.target.value = "";
+      return;
     }
+
+    // Validazioni per ogni file
+    for (let file of selectedFiles) {
+      if (!file.type.startsWith("image/")) {
+        setError(t.errors.onlyImages);
+        e.target.value = "";
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        setError(t.errors.fileTooBig);
+        e.target.value = "";
+        return;
+      }
+    }
+
+    setFiles(selectedFiles);
+    setError("");
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!file || !uploaderName.trim()) {
-      setError("Inserisci il tuo nome e seleziona una foto");
+
+    // Controllo: mostra avviso prima del matrimonio
+    if (isBeforeWedding) {
+      setShowUploadBlockedModal(true);
+      return;
+    }
+
+    if (files.length === 0 || !uploaderName.trim()) {
+      setError(t.errors.nameAndPhoto);
       return;
     }
 
@@ -81,29 +103,37 @@ export default function PhotoGallery() {
     setSuccess("");
 
     try {
-      // Upload file a Firebase Storage
-      const fileName = `${Date.now()}_${file.name}`;
-      const storageRef = ref(storage, `weddingPhotos/${fileName}`);
-      await uploadBytes(storageRef, file);
+      let uploadedCount = 0;
 
-      // Ottieni URL pubblico
-      const downloadURL = await getDownloadURL(storageRef);
+      // Upload ogni file singolarmente
+      for (let file of files) {
+        const fileName = `${Date.now()}_${Math.random()}_${file.name}`;
+        const storageRef = ref(storage, `weddingPhotos/${fileName}`);
+        await uploadBytes(storageRef, file);
 
-      // Salva metadata in Firestore
-      await addDoc(collection(db, "weddingPhotos"), {
-        url: downloadURL,
-        uploaderName: uploaderName.trim(),
-        uploadedAt: new Date(),
-        fileName: file.name,
-      });
+        const downloadURL = await getDownloadURL(storageRef);
 
-      setSuccess("Foto caricata con successo! 🎉");
-      setFile(null);
-      setUploaderName("");
+        await addDoc(collection(db, "weddingPhotos"), {
+          url: downloadURL,
+          uploaderName: uploaderName.trim(),
+          uploadedAt: new Date(),
+          fileName: file.name,
+        });
+
+        uploadedCount++;
+      }
+
+      const message =
+        uploadedCount === 1
+          ? t.success.singlePhoto
+          : t.success.multiplePhotos.replace("{count}", uploadedCount);
+
+      setSuccess(message);
+      setFiles([]);
       document.getElementById("fileInput").value = "";
     } catch (err) {
       console.error("Errore upload:", err);
-      setError("Errore nel caricamento. Riprova più tardi.");
+      setError(t.errors.uploadError);
     } finally {
       setLoading(false);
     }
@@ -127,6 +157,10 @@ export default function PhotoGallery() {
   };
 
   const displayedPhotos = photos.slice(0, 9);
+  const isBeforeWeddingRef = useRef(Date.now() < weddingDate.getTime());
+  const isBeforeWedding = isBeforeWeddingRef.current;
+  const subtitle = isBeforeWedding ? t.preWeddingSubtitle : t.postWeddingSubtitle;
+  const dateLocale = lang === "it" ? "it-IT" : "en-US";
 
   return (
     <section id="photos" className="photo-gallery-section">
@@ -141,14 +175,14 @@ export default function PhotoGallery() {
         {/* Titolo */}
         <div className="text-center mb-12">
           <h2 className="font-script text-5xl md:text-6xl text-foreground mb-4">
-            Condividi i tuoi scatti
+            {t.title}
           </h2>
           <p className="text-base text-muted-foreground font-body leading-relaxed">
-            Carica le tue foto del matrimonio e crea una galleria condivisa con
-            tutti gli ospiti!
+            {subtitle}
           </p>
         </div>
 
+        {/* Compact Upload Bar - visibile solo dal matrimonio in poi */}
         {/* Compact Upload Bar */}
         <div className="compact-upload-bar">
           <div className="upload-bar-content">
@@ -157,7 +191,7 @@ export default function PhotoGallery() {
                 type="text"
                 value={uploaderName}
                 onChange={(e) => setUploaderName(e.target.value)}
-                placeholder="Il tuo nome"
+                placeholder={t.namePlaceholder}
                 className="upload-input upload-input-name"
               />
 
@@ -166,11 +200,20 @@ export default function PhotoGallery() {
                   id="fileInput"
                   type="file"
                   accept="image/*"
+                  multiple
                   onChange={handleFileChange}
+                  onClick={(e) => {
+                    if (isBeforeWedding) {
+                      e.preventDefault();
+                      setShowUploadBlockedModal(true);
+                    }
+                  }}
                   className="upload-file-input"
                 />
                 <span className="upload-file-btn">
-                  {file ? "✓ Foto" : "📷 Scegli"}
+                  {files.length > 0
+                    ? t.photosSelected.replace("{count}", files.length)
+                    : t.choosePhotos}
                 </span>
               </label>
 
@@ -179,79 +222,95 @@ export default function PhotoGallery() {
                 disabled={loading}
                 className="upload-submit-btn"
               >
-                {loading ? "..." : "Carica"}
+                {loading ? t.uploadingButton : t.uploadButton}
               </button>
             </form>
 
             <div className="upload-stats">
               <span className="upload-stats-number">{photos.length}</span>
-              <span className="upload-stats-text">foto</span>
+              <span className="upload-stats-text">{t.photosCount}</span>
             </div>
           </div>
 
           {error && <p className="upload-message upload-error">{error}</p>}
           {success && (
-            <p className="upload-message upload-success">{success}</p>
+            <p
+              className="upload-message upload-success"
+              style={{
+                background: "transparent",
+                padding: 0,
+                margin: "0.5rem 0 0 0.5rem",
+              }}
+            >
+              {success}
+            </p>
           )}
         </div>
 
-        {/* Galleria */}
-        <div className="gallery-preview mt-20">
-          <div className="text-center mb-8">
-            <h3 className="font-script text-4xl md:text-5xl text-foreground mb-2">
-              Galleria
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              I vostri momenti speciali
+        {/* Galleria - appare dal matrimonio in poi */}
+        {!isBeforeWedding && (
+          <div className="gallery-preview mt-20">
+            <div className="text-center mb-8">
+              <h3 className="font-script text-4xl md:text-5xl text-foreground mb-2">
+                {t.galleryTitle}
+              </h3>
+              {displayedPhotos.length > 0 && (
+                <p className="text-muted-foreground gallery-subtitle">
+                  {t.subtitle}
+                </p>
+              )}
+            </div>
+
+            {displayedPhotos.length > 0 ? (
+              <>
+                <div className="photo-gallery-grid photo-gallery-grid--preview">
+                  {displayedPhotos.map((photo, index) => (
+                    <button
+                      type="button"
+                      key={photo.id}
+                      className="photo-card"
+                      onClick={() => openLightbox(index)}
+                    >
+                      <img
+                        src={photo.url}
+                        alt={`Foto di ${photo.uploaderName}`}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="photo-info">
+                        <p className="font-body font-semibold">
+                          📸 {photo.uploaderName}
+                        </p>
+                        <p className="text-sm opacity-80">
+                          {photo.uploadedAt
+                            ?.toDate?.()
+                            .toLocaleDateString(dateLocale)}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                {photos.length > 8 && (
+                  <div className="text-center mt-6">
+                    <Link className="view-all-btn" to="/gallery">
+                      {t.viewAllPhotos}
+                    </Link>
+                  </div>
+                )}
+              </>
+            ) : null}
+          </div>
+        )}
+
+        {/* Messaggio "Ancora nessuna foto" solo dal matrimonio in poi */}
+        {!isBeforeWedding && displayedPhotos.length === 0 && (
+          <div className="text-center py-12 mt-20">
+            <p className="text-muted-foreground font-body empty-gallery-message">
+              {t.emptyGallery}
             </p>
           </div>
-
-          {displayedPhotos.length > 0 ? (
-            <>
-              <div className="photo-gallery-grid photo-gallery-grid--preview">
-                {displayedPhotos.map((photo, index) => (
-                  <button
-                    type="button"
-                    key={photo.id}
-                    className="photo-card"
-                    onClick={() => openLightbox(index)}
-                  >
-                    <img
-                      src={photo.url}
-                      alt={`Foto di ${photo.uploaderName}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="photo-info">
-                      <p className="font-body font-semibold">
-                        📸 {photo.uploaderName}
-                      </p>
-                      <p className="text-sm opacity-80">
-                        {photo.uploadedAt
-                          ?.toDate?.()
-                          .toLocaleDateString("it-IT")}
-                      </p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-
-              {photos.length > 8 && (
-                <div className="text-center mt-6">
-                  <Link className="view-all-btn" to="/gallery">
-                    Visualizza tutte le foto
-                  </Link>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground font-body">
-                Ancora nessuna foto. Sii il primo a condividere! 📸
-              </p>
-            </div>
-          )}
-        </div>
+        )}
       </div>
 
       {lightboxOpen && (
@@ -274,18 +333,20 @@ export default function PhotoGallery() {
                 <p className="text-xs text-muted-foreground">
                   {photos[lightboxIndex].uploadedAt
                     ?.toDate?.()
-                    .toLocaleDateString("it-IT")}
+                    .toLocaleDateString(dateLocale)}
                 </p>
               </div>
               <div className="gallery-modal__controls">
                 <span className="gallery-modal__counter">
-                  {lightboxIndex + 1} / {photos.length}
+                  {t.photoCounter
+                    .replace("{current}", lightboxIndex + 1)
+                    .replace("{total}", photos.length)}
                 </span>
                 <button
                   type="button"
                   className="gallery-close-btn"
                   onClick={closeLightbox}
-                  aria-label="Chiudi"
+                  aria-label={t.closeLabel}
                 >
                   ✕
                 </button>
@@ -297,7 +358,7 @@ export default function PhotoGallery() {
                 type="button"
                 className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
                 onClick={goToPreviousPhoto}
-                aria-label="Foto precedente"
+                aria-label={t.previousPhoto}
               >
                 ❮
               </button>
@@ -312,9 +373,82 @@ export default function PhotoGallery() {
                 type="button"
                 className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
                 onClick={goToNextPhoto}
-                aria-label="Prossima foto"
+                aria-label={t.nextPhoto}
               >
                 ❯
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Modal: Upload bloccato prima del matrimonio */}
+      {showUploadBlockedModal && (
+        <div
+          className="gallery-modal"
+          role="dialog"
+          aria-modal="true"
+          style={{ zIndex: 2147483647 }}
+        >
+          <div
+            className="gallery-modal__backdrop"
+            onClick={() => setShowUploadBlockedModal(false)}
+          ></div>
+          <div
+            className="gallery-modal__content"
+            style={{ maxWidth: "380px", padding: "2rem" }}
+          >
+            <div
+              className="gallery-modal__header"
+              style={{
+                marginBottom: "1.5rem",
+                borderBottom: "none",
+                paddingBottom: 0,
+                alignItems: "flex-start",
+                gap: "1rem",
+              }}
+            >
+              <h3
+                className="font-script text-2xl text-foreground"
+                style={{ margin: 0 }}
+              >
+                {t.uploadBlockedTitle}
+              </h3>
+              <button
+                type="button"
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  background: "transparent",
+                  border: "none",
+                  color: "#8a6e5d",
+                  fontSize: "18px",
+                  cursor: "pointer",
+                  padding: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  marginLeft: "auto",
+                  marginTop: "-4px",
+                }}
+                onClick={() => setShowUploadBlockedModal(false)}
+                aria-label={t.closeLabel}
+              >
+                ✕
+              </button>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <p className="text-sm text-muted-foreground font-body leading-relaxed">
+                {t.uploadBlockedMessage} <strong>{t.uploadBlockedDate}</strong>
+              </p>
+            </div>
+            <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+              <button
+                type="button"
+                className="rsvp-btn primary"
+                onClick={() => setShowUploadBlockedModal(false)}
+              >
+                {t.understoodButton}
               </button>
             </div>
           </div>

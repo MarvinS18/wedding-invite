@@ -3,16 +3,41 @@ import { Link } from "react-router-dom";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import "./PhotoGallery.css";
+import translations from "../../translations";
+import { weddingDate } from "../../eventConfig.js";
+
+const IS_BEFORE_WEDDING = Date.now() < weddingDate.getTime();
 
 export default function FullGallery() {
+  const [lang, setLang] = useState(() => localStorage.getItem("lang") || "en");
+  const t = translations[lang].photoGallery;
   const [photos, setPhotos] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const dateLocale = lang === "it" ? "it-IT" : "en-US";
+  const isBeforeWedding = IS_BEFORE_WEDDING;
+  const formatUploader = (name) => t.uploadedBy.replace("{name}", name);
+
+  // Rileva cambio lingua da storage/evento custom
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newLang = localStorage.getItem("lang") || "en";
+      setLang(newLang);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("languageChange", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("languageChange", handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     const photosQuery = query(
       collection(db, "weddingPhotos"),
-      orderBy("uploadedAt", "desc")
+      orderBy("uploadedAt", "desc"),
     );
     const unsubscribe = onSnapshot(photosQuery, (snapshot) => {
       const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -77,11 +102,9 @@ export default function FullGallery() {
               ←
             </Link>
             <h3 className="font-script text-4xl md:text-5xl text-foreground mb-2">
-              Tutte le foto
+              {t.allPhotosTitle}
             </h3>
-            <p className="text-sm text-muted-foreground">
-              I vostri momenti speciali
-            </p>
+            <p className="text-sm text-muted-foreground">{t.subtitle}</p>
           </div>
 
           {photos.length > 0 ? (
@@ -95,16 +118,16 @@ export default function FullGallery() {
                 >
                   <img
                     src={photo.url}
-                    alt={`Foto di ${photo.uploaderName}`}
+                    alt={formatUploader(photo.uploaderName)}
                     loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className="photo-info">
                     <p className="font-body font-semibold">
-                      📸 {photo.uploaderName}
+                      {formatUploader(photo.uploaderName)}
                     </p>
                     <p className="text-sm opacity-80">
-                      {photo.uploadedAt?.toDate?.().toLocaleDateString("it-IT")}
+                      {photo.uploadedAt?.toDate?.().toLocaleDateString(dateLocale)}
                     </p>
                   </div>
                 </button>
@@ -112,9 +135,11 @@ export default function FullGallery() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-muted-foreground font-body">
-                Ancora nessuna foto. Sii il primo a condividere! 📸
-              </p>
+              {!isBeforeWedding && (
+                <p className="text-muted-foreground font-body empty-gallery-message">
+                  {t.emptyGallery}
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -135,23 +160,25 @@ export default function FullGallery() {
             <div className="gallery-modal__header">
               <div>
                 <p className="text-sm font-body">
-                  📸 <strong>{photos[lightboxIndex].uploaderName}</strong>
+                  <strong>{formatUploader(photos[lightboxIndex].uploaderName)}</strong>
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {photos[lightboxIndex].uploadedAt
                     ?.toDate?.()
-                    .toLocaleDateString("it-IT")}
+                    .toLocaleDateString(dateLocale)}
                 </p>
               </div>
               <div className="gallery-modal__controls">
                 <span className="gallery-modal__counter">
-                  {lightboxIndex + 1} / {photos.length}
+                  {t.photoCounter
+                    .replace("{current}", lightboxIndex + 1)
+                    .replace("{total}", photos.length)}
                 </span>
                 <button
                   type="button"
                   className="gallery-close-btn"
                   onClick={closeLightbox}
-                  aria-label="Chiudi"
+                  aria-label={t.closeLabel}
                 >
                   ✕
                 </button>
@@ -163,7 +190,7 @@ export default function FullGallery() {
                 type="button"
                 className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
                 onClick={goToPreviousPhoto}
-                aria-label="Foto precedente"
+                aria-label={t.previousPhoto}
               >
                 ❮
               </button>
@@ -178,7 +205,7 @@ export default function FullGallery() {
                 type="button"
                 className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
                 onClick={goToNextPhoto}
-                aria-label="Prossima foto"
+                aria-label={t.nextPhoto}
               >
                 ❯
               </button>

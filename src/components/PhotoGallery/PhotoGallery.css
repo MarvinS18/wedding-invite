@@ -4,10 +4,11 @@
     background: var(--background);
 }
 
-/* Blur background when lightbox is open */
-body.lightbox-open {
-    filter: blur(4px);
-    transition: filter 180ms ease;
+/* Blur background when lightbox is open - handled by backdrop-filter on .gallery-modal__backdrop */
+
+/* Gallery subtitle font sizes */
+.gallery-subtitle {
+    font-size: 16px;
 }
 
 /* Compact Upload Bar */
@@ -193,6 +194,7 @@ body.lightbox-open {
     grid-auto-rows: auto;
     gap: 1rem;
     animation: fadeIn 0.3s ease-in;
+    padding: 0 8px;
 }
 
 .view-all-btn {
@@ -253,15 +255,16 @@ body.lightbox-open {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    background: #fff;
+    background: transparent;
     border: 4px solid #f5f0eb;
+    box-sizing: border-box;
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.08),
-        0 0 0 1px rgba(181, 125, 82, 0.15),
-        inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+        0 0 0 1px rgba(181, 125, 82, 0.15);
     transition: all 0.35s ease;
     cursor: pointer;
     aspect-ratio: 4 / 5;
+    padding: 0;
 }
 
 .photo-card:hover {
@@ -269,8 +272,7 @@ body.lightbox-open {
     border-color: #e8ddd0;
     box-shadow:
         0 16px 32px rgba(0, 0, 0, 0.14),
-        0 0 0 1px rgba(181, 125, 82, 0.25),
-        inset 0 0 0 2px rgba(255, 255, 255, 0.9);
+        0 0 0 1px rgba(181, 125, 82, 0.25);
 }
 
 .photo-card img {
@@ -279,7 +281,7 @@ body.lightbox-open {
     object-fit: cover;
     display: block;
     transition: transform 0.35s ease;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .photo-card:hover img {
@@ -293,13 +295,21 @@ body.lightbox-open {
     right: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
     padding: 1rem;
-    color: var(--primary-foreground);
+    color: white;
     transform: translateY(100%);
     transition: transform 0.3s ease;
+    display: none;
 }
 
-.photo-card:hover .photo-info {
-    transform: translateY(0);
+/* Mostra il .photo-info solo su desktop al hover */
+@media (min-width: 769px) {
+    .photo-info {
+        display: block;
+    }
+
+    .photo-card:hover .photo-info {
+        transform: translateY(0);
+    }
 }
 
 
@@ -460,6 +470,9 @@ body.lightbox-open {
     justify-content: center;
     z-index: 2147483646;
     animation: modalFadeIn 180ms ease both;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.28);
 }
 
 @keyframes modalFadeIn {
@@ -477,9 +490,7 @@ body.lightbox-open {
 .gallery-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: transparent;
 }
 
 .gallery-modal__content {
@@ -501,8 +512,8 @@ body.lightbox-open {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
@@ -631,5 +642,22 @@ body.lightbox-open {
     /* Reduce photo card border on mobile */
     .photo-card {
         border-width: 3px;
+    }
+
+    /* Mobile font size for empty gallery message */
+    .empty-gallery-message {
+        font-size: 14px !important;
+    }
+
+    /* Make the "Visualizza tutte le foto" button smaller on mobile */
+    .view-all-btn {
+        padding: 0.45rem 0.9rem;
+        font-size: 14px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Mobile font size for gallery subtitle */
+    .gallery-subtitle {
+        font-size: 14px;
     }
 }
