@@ -5,6 +5,7 @@ import translations from "./translations";
 
 export default function Layout() {
   const location = useLocation();
+  const [envelopeOpenedSession, setEnvelopeOpenedSession] = useState(false);
   const [lang, setLang] = useState(() => {
     if (typeof window === "undefined") return "en";
     return localStorage.getItem("lang") || "en";
@@ -26,6 +27,13 @@ export default function Layout() {
     localStorage.setItem("lang", lang);
     window.dispatchEvent(new Event("languageChange"));
   }, [lang]);
+
+  // Ricevi evento apertura busta (solo sessione corrente)
+  useEffect(() => {
+    const onEnvelopeOpen = () => setEnvelopeOpenedSession(true);
+    window.addEventListener("envelopeOpened", onEnvelopeOpen);
+    return () => window.removeEventListener("envelopeOpened", onEnvelopeOpen);
+  }, []);
 
   // Mostra/nascondi controllo musica allo scroll
   useEffect(() => {
@@ -168,20 +176,20 @@ export default function Layout() {
     };
   }, [musicMuted, autoPaused]);
 
-  // Nascondi menu e musica nella home prima dell'apertura busta
-  const showControls =
-    location.pathname === "/gallery" ||
-    sessionStorage.getItem("envelopeSeen") === "1";
+  // Menu solo dopo apertura busta nella sessione corrente (o in gallery); audio sempre visibile
+  const showMenu = location.pathname === "/gallery" || envelopeOpenedSession;
+
+  const showMusic = true;
 
   return (
     <>
-      {showControls && <Menu lang={lang} onLangChange={setLang} />}
+      {showMenu && <Menu lang={lang} onLangChange={setLang} />}
 
       <audio ref={audioRef} preload="auto">
         <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
       </audio>
 
-      {showControls && (
+      {showMusic && (
         <button
           type="button"
           className={`music-fab ${

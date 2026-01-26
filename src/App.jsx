@@ -60,6 +60,7 @@ export default function App() {
     setEnvelopeOpen(true);
     try {
       sessionStorage.setItem("envelopeSeen", "1");
+      window.dispatchEvent(new Event("envelopeOpened"));
     } catch {
       /* ignore */
     }
@@ -80,6 +81,12 @@ export default function App() {
   useEffect(() => {
     if (location.state?.skipIntro) {
       setEnvelopeOpen(true);
+      try {
+        sessionStorage.setItem("envelopeSeen", "1");
+        window.dispatchEvent(new Event("envelopeOpened"));
+      } catch {
+        /* ignore */
+      }
       const photosEl = document.getElementById("photos");
       if (photosEl) {
         setTimeout(() => {
@@ -1066,7 +1073,10 @@ export default function App() {
         <PhotoGallery lang={lang} />
       </div>
       {/* Footer */}
-      <footer className="py-8 bg-primary text-center">
+      <footer
+        className="py-8 bg-primary text-center"
+        style={{ marginTop: "4rem" }}
+      >
         {/*                <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
