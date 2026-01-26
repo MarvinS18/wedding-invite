@@ -58,6 +58,11 @@ export default function App() {
 
   const handleEnvelopeOpen = () => {
     setEnvelopeOpen(true);
+    try {
+      sessionStorage.setItem("envelopeSeen", "1");
+    } catch {
+      /* ignore */
+    }
   };
 
   const startMusic = () => {
