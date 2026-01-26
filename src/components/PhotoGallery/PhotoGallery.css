@@ -660,4 +660,10 @@
     .gallery-subtitle {
         font-size: 14px;
     }
+
+    /* Add padding to subtitle text on mobile */
+    .photo-gallery-section .text-center p {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }

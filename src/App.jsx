@@ -1,11 +1,10 @@
 ﻿import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import "./App.css";
 import "./components/RSVP/RSVP.css";
 import Envelope from "./components/Envelope/Envelope";
 import RSVP from "./components/RSVP/RSVP";
 import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
-import Menu from "./components/Menu/Menu";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
 
@@ -28,6 +27,7 @@ function useCountdown(targetDate) {
 
 export default function App() {
   const location = useLocation();
+  const { lang, audioRef } = useOutletContext();
   // Data evento
   const target = "2026-06-05T16:30:00";
   const { days, hours, mins, secs } = useCountdown(target);
@@ -41,30 +41,10 @@ export default function App() {
   const [showIban, setShowIban] = useState(false);
   // Stato per RSVP espandibile
   const [showRSVP, setShowRSVP] = useState(false);
-  // Stato per la lingua (persistita in localStorage)
-  const [lang, setLang] = useState(() => {
-    if (typeof window === "undefined") return "en";
-    return localStorage.getItem("lang") || "en";
-  });
   // Traduzioni
   const t = translations[lang];
   // Ref per la sezione RSVP
   const rsvpSectionRef = useRef(null);
-  const audioRef = useRef(null);
-  const [musicMuted, setMusicMuted] = useState(false);
-  const [musicVisible, setMusicVisible] = useState(false);
-  const [autoPaused, setAutoPaused] = useState(false);
-  const lastScrollY = useRef(
-    typeof window !== "undefined" ? window.scrollY : 0,
-  );
-  const musicHideTimer = useRef(null);
-
-  // Propaga la lingua selezionata a localStorage e agli eventuali listener
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    localStorage.setItem("lang", lang);
-    window.dispatchEvent(new Event("languageChange"));
-  }, [lang]);
 
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
@@ -79,32 +59,20 @@ export default function App() {
     "Villa dei Consoli, Via di Colle Reti 2, Frascati",
   );
 
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY || 0;
-
-      if (Math.abs(y - lastScrollY.current) > 2) {
-        lastScrollY.current = y;
-
-        setMusicVisible(true);
-
-        if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
-        musicHideTimer.current = setTimeout(() => {
-          setMusicVisible(false);
-        }, 2000);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
-    };
-  }, []);
-
   const handleEnvelopeOpen = () => {
     setEnvelopeOpen(true);
     sessionStorage.setItem("envelopeSeen", "1");
+  };
+
+  const startMusic = () => {
+    const a = audioRef.current;
+    if (!a) return;
+
+    a.loop = true;
+    a.volume = 0.6;
+
+    const p = a.play();
+    if (p?.catch) p.catch(() => {});
   };
 
   useEffect(() => {
@@ -148,188 +116,8 @@ export default function App() {
     return () => observer.disconnect();
   }, [envelopeOpen]);
 
-  const toggleMute = () => {
-    const a = audioRef.current;
-    if (!a) return;
-
-    const next = !musicMuted;
-    a.muted = next;
-    setMusicMuted(next);
-
-    // opzionale: se era in pausa, riparte (utile su mobile)
-    if (!next && a.paused) {
-      const p = a.play();
-      if (p?.catch) p.catch(() => {});
-    }
-  };
-
-  const startMusic = () => {
-    const a = audioRef.current;
-    if (!a) return;
-
-    a.loop = true;
-    a.volume = 0.6;
-    a.muted = musicMuted;
-
-    const p = a.play();
-    if (p?.catch) p.catch(() => {});
-  };
-
-  // Mobile detection helper
-  function isMobile() {
-    try {
-      const ua = navigator?.userAgent || navigator?.vendor || "";
-      if (/android/i.test(ua)) return true;
-      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return true;
-    } catch {
-      /* ignore */
-    }
-    try {
-      if (
-        window?.matchMedia &&
-        window.matchMedia("(pointer: coarse)").matches
-      ) {
-        return true;
-      }
-      if (window?.innerWidth && window.innerWidth <= 640) return true;
-    } catch {
-      /* ignore */
-    }
-    return false;
-  }
-
-  // Auto-pause/resume music on mobile when tab/window loses focus
-  useEffect(() => {
-    if (!isMobile()) return;
-
-    const handleVisibility = () => {
-      const a = audioRef.current;
-      if (!a) return;
-      if (document.hidden) {
-        if (!a.paused) {
-          a.pause();
-          setAutoPaused(true);
-        }
-      } else {
-        if (autoPaused && !musicMuted) {
-          const p = a.play();
-          if (p?.catch) p.catch(() => {});
-          setAutoPaused(false);
-        }
-      }
-    };
-
-    const handleBlur = () => {
-      const a = audioRef.current;
-      if (!a) return;
-      if (!a.paused) {
-        a.pause();
-        setAutoPaused(true);
-      }
-    };
-
-    const handleFocus = () => {
-      const a = audioRef.current;
-      if (!a) return;
-      if (autoPaused && !musicMuted) {
-        const p = a.play();
-        if (p?.catch) p.catch(() => {});
-        setAutoPaused(false);
-      }
-    };
-
-    const handlePageHide = () => {
-      const a = audioRef.current;
-      if (a) {
-        a.pause();
-        setAutoPaused(true);
-      }
-    };
-
-    const handleBeforeUnload = () => {
-      const a = audioRef.current;
-      if (a) {
-        a.pause();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-    window.addEventListener("blur", handleBlur);
-    window.addEventListener("focus", handleFocus);
-    window.addEventListener("pagehide", handlePageHide);
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-      window.removeEventListener("blur", handleBlur);
-      window.removeEventListener("focus", handleFocus);
-      window.removeEventListener("pagehide", handlePageHide);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [musicMuted, autoPaused]);
-
   return (
     <>
-      {envelopeOpen && <Menu lang={lang} onLangChange={setLang} />}
-      <audio ref={audioRef} preload="auto">
-        <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
-      </audio>
-
-      <button
-        type="button"
-        className={`music-fab ${
-          musicVisible ? "music-fab--visible" : "music-fab--hidden"
-        }`}
-        onClick={() => {
-          toggleMute();
-
-          // quando l'utente clicca, si rende visibile un attimo
-          setMusicVisible(true);
-          if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
-          musicHideTimer.current = setTimeout(() => {
-            setMusicVisible(false);
-          }, 2000);
-        }}
-        aria-label={musicMuted ? t.music.unmute : t.music.mute}
-        title={musicMuted ? t.music.unmute : t.music.mute}
-      >
-        {musicMuted ? (
-          // 🔇 volume OFF
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="m23 9-6 6" />
-            <path d="m17 9 6 6" />
-          </svg>
-        ) : (
-          // 🔊 volume ON
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
-        )}
-      </button>
-
       {!envelopeOpen && (
         <>
           <div className="envelope-root-bg" />
