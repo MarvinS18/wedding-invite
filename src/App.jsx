@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useOutletContext } from "react-router-dom";
+import { useLocation, useOutletContext, useNavigate } from "react-router-dom";
 import "./App.css";
 import "./components/RSVP/RSVP.css";
 import Envelope from "./components/Envelope/Envelope";
@@ -27,15 +27,12 @@ function useCountdown(targetDate) {
 
 export default function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { lang, audioRef } = useOutletContext();
   // Data evento
   const target = "2026-06-05T16:30:00";
   const { days, hours, mins, secs } = useCountdown(target);
-  const [envelopeOpen, setEnvelopeOpen] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const seen = sessionStorage.getItem("envelopeSeen") === "1";
-    return seen || Boolean(location.state?.skipIntro);
-  });
+  const [envelopeOpen, setEnvelopeOpen] = useState(false);
   // Stato per la sezione Regalos
   const [showAportacion, setShowAportacion] = useState(false);
   const [showIban, setShowIban] = useState(false);
@@ -61,7 +58,6 @@ export default function App() {
 
   const handleEnvelopeOpen = () => {
     setEnvelopeOpen(true);
-    sessionStorage.setItem("envelopeSeen", "1");
   };
 
   const startMusic = () => {
@@ -75,23 +71,19 @@ export default function App() {
     if (p?.catch) p.catch(() => {});
   };
 
+  // Se arrivi con skipIntro (es. bottone "indietro" della full gallery), apri e scrolla una volta, poi pulisci lo state per evitare salti al refresh
   useEffect(() => {
-    if (envelopeOpen) {
-      sessionStorage.setItem("envelopeSeen", "1");
-    }
-  }, [envelopeOpen]);
-
-  // Se arrivi con skipIntro, scorri direttamente alla sezione foto
-  useEffect(() => {
-    if (envelopeOpen && location.state?.skipIntro) {
+    if (location.state?.skipIntro) {
+      setEnvelopeOpen(true);
       const photosEl = document.getElementById("photos");
       if (photosEl) {
         setTimeout(() => {
           photosEl.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 50);
       }
+      navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [envelopeOpen, location.state]);
+  }, [location, navigate, setEnvelopeOpen]);
 
   // Scroll reveal effect
   useEffect(() => {
@@ -305,13 +297,10 @@ export default function App() {
         </section>
 
         {/* Separatore cuore */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory mt-8"
-          style={{ opacity: 1 }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
         </div>
 
         {/* Location Section */}
@@ -375,13 +364,10 @@ export default function App() {
           </div>
         </section>
         {/* Separatore cuore */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1 }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
         </div>
 
         {/* Ricevimento Section */}
@@ -445,13 +431,10 @@ export default function App() {
           </div>
         </section>
         {/* Separatore cuore */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1 }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
         </div>
 
         {/* Programma del giorno (timeline fornita) */}
@@ -960,6 +943,13 @@ export default function App() {
           </div>
         </section>
 
+        {/* Separatore cuore */}
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
+        </div>
+
         {/* Sezione Regalos (versione fornita) */}
         <section id="regalo" className="section-padding relative scroll-reveal">
           <div className="max-w-2xl mx-auto text-center">
@@ -1014,19 +1004,16 @@ export default function App() {
         </section>
 
         {/* Separatore cuore DOPO Gift */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1, marginTop: "1.5rem" }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
         </div>
 
         {/* Bottone RSVP e form espandibile */}
         <section
           id="rsvp"
-          className="section-padding bg-ivory scroll-reveal"
+          className="section-padding scroll-reveal"
           ref={rsvpSectionRef}
         >
           <div className="max-w-xl mx-auto text-center mb-8">
@@ -1064,27 +1051,14 @@ export default function App() {
         </section>
 
         {/* Separatore cuore DOPO RSVP */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1 }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
         </div>
 
         {/* SEZIONE FOTO - Photo Gallery */}
         <PhotoGallery lang={lang} />
-
-        {/* Separatore cuore PRIMA footer */}
-        <div
-          className="flex items-center justify-center py-6 bg-ivory"
-          style={{ opacity: 1 }}
-        >
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-          <span className="mx-4 text-primary/50 text-lg font-script">♥</span>
-          <span className="h-px bg-primary/30 w-16 md:w-24"></span>
-        </div>
       </div>
       {/* Footer */}
       <footer className="py-8 bg-primary text-center">
