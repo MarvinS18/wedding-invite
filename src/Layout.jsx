@@ -16,7 +16,7 @@ export default function Layout() {
   const [musicVisible, setMusicVisible] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const lastScrollY = useRef(
-    typeof window !== "undefined" ? window.scrollY : 0
+    typeof window !== "undefined" ? window.scrollY : 0,
   );
   const musicHideTimer = useRef(null);
 
@@ -169,12 +169,14 @@ export default function Layout() {
   }, [musicMuted, autoPaused]);
 
   // Nascondi menu e musica nella home prima dell'apertura busta
-  const showControls = location.pathname === "/gallery" || sessionStorage.getItem("envelopeSeen") === "1";
+  const showControls =
+    location.pathname === "/gallery" ||
+    sessionStorage.getItem("envelopeSeen") === "1";
 
   return (
     <>
       {showControls && <Menu lang={lang} onLangChange={setLang} />}
-      
+
       <audio ref={audioRef} preload="auto">
         <source src="/music/Olivia-song.mp3" type="audio/mpeg" />
       </audio>
