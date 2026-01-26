@@ -165,7 +165,7 @@ export default function PhotoGallery({ lang = "en" }) {
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
 
   return (
-    <section id="photos" className="photo-gallery-section">
+    <section id="photos" className="photo-gallery-section scroll-reveal">
       <div
         className="max-w-7xl mx-auto px-4"
         style={{

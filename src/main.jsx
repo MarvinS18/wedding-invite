@@ -8,7 +8,9 @@ import FullGallery from "./components/PhotoGallery/FullGallery.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />
