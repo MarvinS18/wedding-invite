@@ -159,7 +159,9 @@ export default function PhotoGallery({ lang = "en" }) {
   const displayedPhotos = photos.slice(0, 9);
   const isBeforeWeddingRef = useRef(Date.now() < weddingDate.getTime());
   const isBeforeWedding = isBeforeWeddingRef.current;
-  const subtitle = isBeforeWedding ? t.preWeddingSubtitle : t.postWeddingSubtitle;
+  const subtitle = isBeforeWedding
+    ? t.preWeddingSubtitle
+    : t.postWeddingSubtitle;
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
 
   return (

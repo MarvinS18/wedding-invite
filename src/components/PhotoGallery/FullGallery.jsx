@@ -127,7 +127,9 @@ export default function FullGallery() {
                       {formatUploader(photo.uploaderName)}
                     </p>
                     <p className="text-sm opacity-80">
-                      {photo.uploadedAt?.toDate?.().toLocaleDateString(dateLocale)}
+                      {photo.uploadedAt
+                        ?.toDate?.()
+                        .toLocaleDateString(dateLocale)}
                     </p>
                   </div>
                 </button>
@@ -160,7 +162,9 @@ export default function FullGallery() {
             <div className="gallery-modal__header">
               <div>
                 <p className="text-sm font-body">
-                  <strong>{formatUploader(photos[lightboxIndex].uploaderName)}</strong>
+                  <strong>
+                    {formatUploader(photos[lightboxIndex].uploaderName)}
+                  </strong>
                 </p>
                 <p className="text-xs text-muted-foreground">
                   {photos[lightboxIndex].uploadedAt

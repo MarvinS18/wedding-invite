@@ -55,7 +55,7 @@ export default function App() {
   const [musicVisible, setMusicVisible] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const lastScrollY = useRef(
-    typeof window !== "undefined" ? window.scrollY : 0
+    typeof window !== "undefined" ? window.scrollY : 0,
   );
   const musicHideTimer = useRef(null);
 
@@ -73,10 +73,10 @@ export default function App() {
   };
 
   const mapsHrefCeremony = getMapsHref(
-    "Basilica di Santa Cecilia in Trastevere, Roma"
+    "Basilica di Santa Cecilia in Trastevere, Roma",
   );
   const mapsHrefReception = getMapsHref(
-    "Villa dei Consoli, Via di Colle Reti 2, Frascati"
+    "Villa dei Consoli, Via di Colle Reti 2, Frascati",
   );
 
   useEffect(() => {
@@ -137,11 +137,11 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
 
     const sections = document.querySelectorAll(
-      ".scroll-reveal, .scroll-reveal-left"
+      ".scroll-reveal, .scroll-reveal-left",
     );
     sections.forEach((section) => observer.observe(section));
 
