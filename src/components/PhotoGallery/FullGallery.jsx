@@ -48,6 +48,7 @@ export default function FullGallery() {
 
   useEffect(() => {
     sessionStorage.setItem("envelopeSeen", "1");
+    sessionStorage.setItem("returnToSection", "galleria");
   }, []);
 
   useEffect(() => {
@@ -83,7 +84,7 @@ export default function FullGallery() {
           <div className="text-center mb-8" style={{ position: "relative" }}>
             <Link
               to="/"
-              state={{ skipIntro: true }}
+              state={{ skipIntro: true, targetSection: "galleria" }}
               className="view-all-btn"
               style={{
                 position: "absolute",

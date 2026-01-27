@@ -196,6 +196,7 @@
     border: 1px solid rgba(0, 0, 0, 0.12);
     color: #3a2f28;
     font-family: 'Lora', serif;
+    font-size: 14px;
 }
 
 .rsvp-error {
@@ -345,6 +346,10 @@
 
     .rsvp-title {
         font-size: 30px;
+    }
+
+    .rsvp-input {
+        font-size: 11px;
     }
 
     .rsvp-error {

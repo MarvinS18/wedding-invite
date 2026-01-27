@@ -15,14 +15,16 @@ export default function RSVP({ lang = "it" }) {
   // (Facoltativo) info evento da mostrare nelle card
   const eventInfo = useMemo(
     () => ({
-      ceremonyTitle: "Ceremony in Church",
-      ceremonyPlace: "Church of Santa Cecilia",
+      ceremonyTitle:
+        lang === "it" ? "Cerimonia in Chiesa" : "Ceremony in Church",
+      ceremonyPlace:
+        lang === "it" ? "Chiesa di Santa Cecilia" : "Church of Santa Cecilia",
       ceremonyTime: "16:30",
-      receptionTitle: "Reception at Location",
-      receptionPlace: "Villa dei Consoli",
+      receptionTitle: lang === "it" ? "Ricevimento" : "Reception at Location",
+      receptionPlace: lang === "it" ? "Villa dei Consoli" : "Villa dei Consoli",
       receptionTime: "18:30",
     }),
-    []
+    [lang],
   );
 
   // step: name | confirmGroup | rsvpGroup | sending | done
@@ -63,9 +65,9 @@ export default function RSVP({ lang = "it" }) {
 
           // Controlla se tutte le parole dell'input sono presenti nel nome del membro
           return inputWords.every((inputWord) =>
-            memberWords.some((memberWord) => memberWord.includes(inputWord))
+            memberWords.some((memberWord) => memberWord.includes(inputWord)),
           );
-        })
+        }),
       ) || null
     );
   }
@@ -87,7 +89,7 @@ export default function RSVP({ lang = "it" }) {
 
   function updateResponse(idx, field, value) {
     setResponses((prev) =>
-      prev.map((r, i) => (i === idx ? { ...r, [field]: value } : r))
+      prev.map((r, i) => (i === idx ? { ...r, [field]: value } : r)),
     );
   }
 
@@ -95,7 +97,7 @@ export default function RSVP({ lang = "it" }) {
     return responses.every(
       (r) =>
         (r.ceremony === "Si" || r.ceremony === "No") &&
-        (r.reception === "Si" || r.reception === "No")
+        (r.reception === "Si" || r.reception === "No"),
     );
   }
 
@@ -103,7 +105,7 @@ export default function RSVP({ lang = "it" }) {
     return responses.filter(
       (r) =>
         (r.ceremony === "Si" || r.ceremony === "No") &&
-        (r.reception === "Si" || r.reception === "No")
+        (r.reception === "Si" || r.reception === "No"),
     ).length;
   }
 
@@ -166,7 +168,7 @@ export default function RSVP({ lang = "it" }) {
       setError(
         lang === "it"
           ? "Compila Cerimonia e Ricevimento per tutti i membri del gruppo."
-          : "Please complete Ceremony and Reception for everyone in the group."
+          : "Please complete Ceremony and Reception for everyone in the group.",
       );
       return;
     }

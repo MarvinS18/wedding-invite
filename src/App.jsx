@@ -49,6 +49,18 @@ export default function App() {
     return `https://www.google.com/maps?q=${encoded}`;
   };
 
+  // Disabilita il ripristino automatico della posizione scroll del browser
+  useEffect(() => {
+    try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   const mapsHrefCeremony = getMapsHref(
     "Basilica di Santa Cecilia in Trastevere, Roma",
   );
@@ -87,15 +99,31 @@ export default function App() {
       } catch {
         /* ignore */
       }
-      const photosEl = document.getElementById("photos");
-      if (photosEl) {
+      const targetId = location.state?.targetSection || "galleria";
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
         setTimeout(() => {
-          photosEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 50);
       }
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location, navigate, setEnvelopeOpen]);
+
+  // Se torni da /gallery con il tasto indietro, usa il flag di sessione per scrollare alla galleria
+  useEffect(() => {
+    if (!envelopeOpen) return;
+    const targetId = sessionStorage.getItem("returnToSection");
+    if (!targetId) return;
+
+    const el = document.getElementById(targetId);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+    sessionStorage.removeItem("returnToSection");
+  }, [envelopeOpen]);
 
   // Scroll reveal effect
   useEffect(() => {
@@ -962,7 +990,7 @@ export default function App() {
           <span className="section-separator__line"></span>
         </div>
 
-        {/* Sezione Regalos (versione fornita) */}
+        {/* Sezione Regalo */}
         <section id="regalo" className="section-padding relative scroll-reveal">
           <div className="max-w-2xl mx-auto text-center">
             <div className="mb-12" style={{ opacity: 1, transform: "none" }}>

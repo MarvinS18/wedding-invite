@@ -1763,7 +1763,6 @@ a.inline {
 
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
 }
 
 .scroll-reveal.visible {
@@ -1785,7 +1784,6 @@ a.inline {
 
 .scroll-reveal-left {
   opacity: 0;
-  transform: translateX(-50px);
 }
 
 .scroll-reveal-left.visible {

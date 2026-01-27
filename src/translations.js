@@ -9,6 +9,7 @@
       program: "Programma",
       gifts: "Regalo",
       rsvp: "RSVP",
+      gallery: "Galleria foto",
     },
 
     // Hero
@@ -141,6 +142,7 @@
       uploadButton: "Carica",
       uploadingButton: "...",
       photosCount: "foto",
+      uploadLimitNote: "Puoi selezionare massimo 5 foto alla volta",
       viewAllPhotos: "Visualizza tutte le foto",
       emptyGallery: "Ancora nessuna foto. Sii il primo a condividere! ",
       uploadedBy: "📷 {name}",
@@ -176,6 +178,7 @@
       program: "Program",
       gifts: "Gifts",
       rsvp: "RSVP",
+      gallery: "Photo gallery",
     },
 
     // Hero
@@ -307,6 +310,7 @@
       uploadButton: "Upload",
       uploadingButton: "...",
       photosCount: "photos",
+      uploadLimitNote: "You can select up to 5 photos per upload",
       viewAllPhotos: "View all photos",
       emptyGallery: "No photos yet. Be the first to share! ",
       uploadedBy: "📷 {name}",

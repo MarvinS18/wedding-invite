@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { storage, db } from "../../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -165,7 +166,7 @@ export default function PhotoGallery({ lang = "en" }) {
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
 
   return (
-    <section id="photos" className="photo-gallery-section scroll-reveal">
+    <section id="galleria" className="photo-gallery-section scroll-reveal">
       <div
         className="max-w-7xl mx-auto px-4"
         style={{
@@ -315,147 +316,129 @@ export default function PhotoGallery({ lang = "en" }) {
         )}
       </div>
 
-      {lightboxOpen && (
-        <div
-          className="gallery-modal"
-          role="dialog"
-          aria-modal="true"
-          style={{ zIndex: 2147483647 }}
-        >
+      {lightboxOpen &&
+        ReactDOM.createPortal(
           <div
-            className="gallery-modal__backdrop"
-            onClick={closeLightbox}
-          ></div>
-          <div className="gallery-modal__content">
-            <div className="gallery-modal__header">
-              <div>
-                <p className="text-sm font-body">
-                  📸 <strong>{photos[lightboxIndex].uploaderName}</strong>
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {photos[lightboxIndex].uploadedAt
-                    ?.toDate?.()
-                    .toLocaleDateString(dateLocale)}
-                </p>
+            className="gallery-modal"
+            role="dialog"
+            aria-modal="true"
+            style={{ zIndex: 2147483647 }}
+          >
+            <div
+              className="gallery-modal__backdrop"
+              onClick={closeLightbox}
+            ></div>
+            <div className="gallery-modal__content">
+              <div className="gallery-modal__header">
+                <div>
+                  <p className="text-sm font-body">
+                    📸 <strong>{photos[lightboxIndex].uploaderName}</strong>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {photos[lightboxIndex].uploadedAt
+                      ?.toDate?.()
+                      .toLocaleDateString(dateLocale)}
+                  </p>
+                </div>
+                <div className="gallery-modal__controls">
+                  <span className="gallery-modal__counter">
+                    {t.photoCounter
+                      .replace("{current}", lightboxIndex + 1)
+                      .replace("{total}", photos.length)}
+                  </span>
+                  <button
+                    type="button"
+                    className="gallery-close-btn"
+                    onClick={closeLightbox}
+                    aria-label={t.closeLabel}
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
-              <div className="gallery-modal__controls">
-                <span className="gallery-modal__counter">
-                  {t.photoCounter
-                    .replace("{current}", lightboxIndex + 1)
-                    .replace("{total}", photos.length)}
-                </span>
+
+              <div className="gallery-modal__image-container">
                 <button
                   type="button"
-                  className="gallery-close-btn"
-                  onClick={closeLightbox}
-                  aria-label={t.closeLabel}
+                  className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
+                  onClick={goToPreviousPhoto}
+                  aria-label={t.previousPhoto}
                 >
-                  ✕
+                  ❮
+                </button>
+
+                <img
+                  src={photos[lightboxIndex].url}
+                  alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
+                  className="gallery-modal__image"
+                />
+
+                <button
+                  type="button"
+                  className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
+                  onClick={goToNextPhoto}
+                  aria-label={t.nextPhoto}
+                >
+                  ❯
                 </button>
               </div>
             </div>
-
-            <div className="gallery-modal__image-container">
-              <button
-                type="button"
-                className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
-                onClick={goToPreviousPhoto}
-                aria-label={t.previousPhoto}
-              >
-                ❮
-              </button>
-
-              <img
-                src={photos[lightboxIndex].url}
-                alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
-                className="gallery-modal__image"
-              />
-
-              <button
-                type="button"
-                className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
-                onClick={goToNextPhoto}
-                aria-label={t.nextPhoto}
-              >
-                ❯
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
       {/* Modal: Upload bloccato prima del matrimonio */}
-      {showUploadBlockedModal && (
-        <div
-          className="gallery-modal"
-          role="dialog"
-          aria-modal="true"
-          style={{ zIndex: 2147483647 }}
-        >
+      {showUploadBlockedModal &&
+        ReactDOM.createPortal(
           <div
-            className="gallery-modal__backdrop"
-            onClick={() => setShowUploadBlockedModal(false)}
-          ></div>
-          <div
-            className="gallery-modal__content"
-            style={{ maxWidth: "380px", padding: "2rem" }}
+            className="gallery-modal"
+            role="dialog"
+            aria-modal="true"
+            style={{ zIndex: 2147483647 }}
           >
             <div
-              className="gallery-modal__header"
-              style={{
-                marginBottom: "1.5rem",
-                borderBottom: "none",
-                paddingBottom: 0,
-                alignItems: "flex-start",
-                gap: "1rem",
-              }}
+              className="gallery-modal__backdrop"
+              onClick={() => setShowUploadBlockedModal(false)}
+            ></div>
+            <div
+              className="gallery-modal__content"
+              style={{ maxWidth: "380px", padding: "2rem" }}
             >
-              <h3
-                className="font-script text-2xl text-foreground"
-                style={{ margin: 0 }}
-              >
-                {t.uploadBlockedTitle}
-              </h3>
-              <button
-                type="button"
+              <div
+                className="gallery-modal__header"
                 style={{
-                  width: "28px",
-                  height: "28px",
-                  background: "transparent",
-                  border: "none",
-                  color: "#8a6e5d",
-                  fontSize: "18px",
-                  cursor: "pointer",
-                  padding: 0,
-                  display: "flex",
+                  marginBottom: "1.5rem",
+                  borderBottom: "none",
+                  paddingBottom: 0,
                   alignItems: "center",
                   justifyContent: "center",
-                  flexShrink: 0,
-                  marginLeft: "auto",
-                  marginTop: "-4px",
                 }}
-                onClick={() => setShowUploadBlockedModal(false)}
-                aria-label={t.closeLabel}
               >
-                ✕
-              </button>
+                <h3
+                  className="font-script text-2xl text-foreground"
+                  style={{ margin: 0 }}
+                >
+                  {t.uploadBlockedTitle}
+                </h3>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <p className="text-sm text-muted-foreground font-body leading-relaxed">
+                  {t.uploadBlockedMessage}{" "}
+                  <strong>{t.uploadBlockedDate}</strong>
+                </p>
+              </div>
+              <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+                <button
+                  type="button"
+                  className="rsvp-btn primary"
+                  onClick={() => setShowUploadBlockedModal(false)}
+                >
+                  {t.understoodButton}
+                </button>
+              </div>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <p className="text-sm text-muted-foreground font-body leading-relaxed">
-                {t.uploadBlockedMessage} <strong>{t.uploadBlockedDate}</strong>
-              </p>
-            </div>
-            <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-              <button
-                type="button"
-                className="rsvp-btn primary"
-                onClick={() => setShowUploadBlockedModal(false)}
-              >
-                {t.understoodButton}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body,
+        )}
     </section>
   );
 }

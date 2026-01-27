@@ -168,6 +168,7 @@
     border-radius: 4px;
 }
 
+
 .upload-error {
     color: #dc2626;
     background: transparent;
@@ -470,9 +471,8 @@
     justify-content: center;
     z-index: 2147483646;
     animation: modalFadeIn 180ms ease both;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    background: rgba(0, 0, 0, 0.28);
+    /* No dimmed backdrop to avoid dark striping */
+    background: transparent;
 }
 
 @keyframes modalFadeIn {

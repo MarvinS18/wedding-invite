@@ -96,6 +96,9 @@ export default function Menu({ lang = "en", onLangChange }) {
             <a className="menu-link" href="#rsvp" onClick={close}>
               {t.menu.rsvp}
             </a>
+            <a className="menu-link" href="#galleria" onClick={close}>
+              {t.menu.gallery}
+            </a>
             {/* Language switcher */}
             <div className="menu-lang-toggle-wrap">
               <button
