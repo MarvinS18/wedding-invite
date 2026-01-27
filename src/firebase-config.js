@@ -16,6 +16,6 @@ const firebaseConfig = {
 // Inizializza Firebase
 const app = initializeApp(firebaseConfig);
 
-// Esporta Storage e Firestore
-export const storage = getStorage(app);
+// Esporta Storage (usando bucket EU) e Firestore
+export const storage = getStorage(app, 'wedding-invite-1d5ed');
 export const db = getFirestore(app);
