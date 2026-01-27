@@ -193,7 +193,20 @@ export default function PhotoGallery({ lang = "en" }) {
               <input
                 type="text"
                 value={uploaderName}
-                onChange={(e) => setUploaderName(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Consenti solo lettere e spazi
+                  if (/^[a-zA-Z\s]*$/.test(value)) {
+                    // Capitalizza la prima lettera
+                    const capitalized = value
+                      .split(" ")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
+                      )
+                      .join(" ");
+                    setUploaderName(capitalized);
+                  }
+                }}
                 placeholder={t.namePlaceholder}
                 className="upload-input upload-input-name"
               />

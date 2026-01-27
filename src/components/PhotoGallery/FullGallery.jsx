@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "../../firebase-config";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
+import { db, storage } from "../../firebase-config";
 import "./PhotoGallery.css";
 import translations from "../../translations";
 import { weddingDate } from "../../eventConfig.js";
@@ -14,6 +23,14 @@ export default function FullGallery() {
   const [photos, setPhotos] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [verifiedName, setVerifiedName] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteSuccess, setDeleteSuccess] = useState("");
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [photoToDelete, setPhotoToDelete] = useState(null);
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
   const isBeforeWedding = IS_BEFORE_WEDDING;
   const formatUploader = (name) => t.uploadedBy.replace("{name}", name);
@@ -77,6 +94,77 @@ export default function FullGallery() {
     setLightboxIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
   };
 
+  const handleDeleteModeClick = () => {
+    setShowDeleteModal(true);
+    setNameInput("");
+    setDeleteError("");
+  };
+
+  const handleVerifyName = () => {
+    const trimmed = nameInput.trim();
+    if (!trimmed) {
+      setDeleteError(lang === "it" ? "Inserisci un nome" : "Enter a name");
+      return;
+    }
+
+    const hasPhotos = photos.some((p) => p.uploaderName?.trim() === trimmed);
+
+    if (!hasPhotos) {
+      setDeleteError(t.noPhotosToDelete);
+      return;
+    }
+
+    setVerifiedName(trimmed);
+    setDeleteMode(true);
+    setShowDeleteModal(false);
+    setDeleteError("");
+  };
+
+  const handleExitDeleteMode = () => {
+    setDeleteMode(false);
+    setVerifiedName("");
+  };
+
+  const handleDeletePhoto = (photo) => {
+    setPhotoToDelete(photo);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!photoToDelete) return;
+
+    try {
+      // Delete from Firestore
+      await deleteDoc(doc(db, "weddingPhotos", photoToDelete.id));
+
+      // Delete from Storage
+      if (photoToDelete.fileName) {
+        const storageRef = ref(
+          storage,
+          `weddingPhotos/${photoToDelete.fileName}`,
+        );
+        await deleteObject(storageRef).catch(() => {
+          // File might not exist, ignore
+        });
+      }
+
+      setDeleteSuccess(t.photoDeleted);
+      setTimeout(() => setDeleteSuccess(""), 3000);
+      setShowDeleteConfirm(false);
+      setPhotoToDelete(null);
+    } catch (err) {
+      console.error("Delete error:", err);
+      setDeleteError(t.deleteError);
+      setTimeout(() => setDeleteError(""), 3000);
+      setShowDeleteConfirm(false);
+      setPhotoToDelete(null);
+    }
+  };
+
+  const userPhotos = deleteMode
+    ? photos.filter((p) => p.uploaderName?.trim() === verifiedName.trim())
+    : [];
+
   return (
     <section id="photos" className="photo-gallery-section">
       <div className="max-w-7xl mx-auto px-4">
@@ -102,38 +190,176 @@ export default function FullGallery() {
             >
               ←
             </Link>
-            <h3 className="font-script text-4xl md:text-5xl text-foreground mb-2">
-              {t.allPhotosTitle}
+
+            {!deleteMode && (
+              <button
+                type="button"
+                onClick={handleDeleteModeClick}
+                className="view-all-btn"
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  fontSize: "0.85rem",
+                  width: "40px",
+                  height: "40px",
+                  padding: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                aria-label={t.deleteButton}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                </svg>
+              </button>
+            )}
+
+            {deleteMode && (
+              <button
+                type="button"
+                onClick={handleExitDeleteMode}
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  fontSize: "0.8rem",
+                  width: "auto",
+                  height: "36px",
+                  padding: "0 0.85rem",
+                  background: "#8A6E5D",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "999px",
+                  cursor: "pointer",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 500,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 2px 8px rgba(138, 110, 93, 0.2)",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform =
+                    "translateY(-50%) translateY(-1px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 12px rgba(138, 110, 93, 0.3)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "translateY(-50%)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 8px rgba(138, 110, 93, 0.2)";
+                }}
+              >
+                {t.deleteModeExit}
+              </button>
+            )}
+
+            <h3 className="font-script text-5xl md:text-5xl text-foreground mb-2">
+              {deleteMode ? t.deleteButton : t.allPhotosTitle}
             </h3>
-            <p className="text-sm text-muted-foreground">{t.subtitle}</p>
+            <p className="text-sm text-muted-foreground">
+              {deleteMode
+                ? `${userPhotos.length} ${lang === "it" ? "foto" : "photos"}`
+                : t.subtitle}
+            </p>
+
+            {deleteSuccess && (
+              <p
+                style={{
+                  color: "#16a34a",
+                  fontSize: "12px",
+                  marginTop: "0.5rem",
+                }}
+              >
+                {deleteSuccess}
+              </p>
+            )}
+            {deleteError && !showDeleteModal && (
+              <p
+                style={{
+                  color: "#dc2626",
+                  fontSize: "0.875rem",
+                  marginTop: "0.5rem",
+                }}
+              >
+                {deleteError}
+              </p>
+            )}
           </div>
 
-          {photos.length > 0 ? (
+          {(deleteMode ? userPhotos : photos).length > 0 ? (
             <div className="photo-gallery-grid">
-              {photos.map((photo, index) => (
-                <button
-                  type="button"
-                  key={photo.id}
-                  className="photo-card"
-                  onClick={() => openLightbox(index)}
-                >
-                  <img
-                    src={photo.url}
-                    alt={formatUploader(photo.uploaderName)}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="photo-info">
-                    <p className="font-body font-semibold">
-                      {formatUploader(photo.uploaderName)}
-                    </p>
-                    <p className="text-sm opacity-80">
-                      {photo.uploadedAt
-                        ?.toDate?.()
-                        .toLocaleDateString(dateLocale)}
-                    </p>
-                  </div>
-                </button>
+              {(deleteMode ? userPhotos : photos).map((photo, index) => (
+                <div key={photo.id} style={{ position: "relative" }}>
+                  <button
+                    type="button"
+                    className="photo-card"
+                    onClick={() => !deleteMode && openLightbox(index)}
+                    style={{ cursor: deleteMode ? "default" : "pointer" }}
+                  >
+                    <img
+                      src={photo.url}
+                      alt={formatUploader(photo.uploaderName)}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="photo-info">
+                      <p className="font-body font-semibold">
+                        {formatUploader(photo.uploaderName)}
+                      </p>
+                      <p className="text-sm opacity-80">
+                        {photo.uploadedAt
+                          ?.toDate?.()
+                          .toLocaleDateString(dateLocale)}
+                      </p>
+                    </div>
+                  </button>
+
+                  {deleteMode && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeletePhoto(photo)}
+                      style={{
+                        position: "absolute",
+                        top: "-8px",
+                        right: "-5px",
+                        width: "26px",
+                        height: "26px",
+                        borderRadius: "50%",
+                        background: "#8A6E5D",
+                        color: "white",
+                        border: "none",
+                        cursor: "pointer",
+                        fontSize: "0.85rem",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: "0 2px 8px rgba(138, 110, 93, 0.2)",
+                        zIndex: 10,
+                      }}
+                      aria-label={t.deleteButton}
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
               ))}
             </div>
           ) : (
@@ -218,6 +444,161 @@ export default function FullGallery() {
           </div>
         </div>
       )}
+
+      {showDeleteConfirm &&
+        ReactDOM.createPortal(
+          <div
+            className="gallery-modal"
+            role="dialog"
+            aria-modal="true"
+            style={{ zIndex: 2147483647 }}
+          >
+            <div
+              className="gallery-modal__backdrop"
+              onClick={() => setShowDeleteConfirm(false)}
+            ></div>
+            <div
+              className="gallery-modal__content"
+              style={{ maxWidth: "380px", padding: "2rem" }}
+            >
+              <div
+                className="gallery-modal__header"
+                style={{
+                  marginBottom: "1.5rem",
+                  borderBottom: "none",
+                  paddingBottom: 0,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <h3
+                  className="font-script text-2xl text-foreground"
+                  style={{ margin: 0 }}
+                >
+                  {t.deletePhotoConfirm}
+                </h3>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  justifyContent: "center",
+                  marginTop: "1.5rem",
+                }}
+              >
+                <button
+                  type="button"
+                  className="rsvp-btn secondary"
+                  onClick={() => setShowDeleteConfirm(false)}
+                >
+                  {t.deletePhotoNo}
+                </button>
+                <button
+                  type="button"
+                  className="rsvp-btn primary"
+                  onClick={confirmDelete}
+                >
+                  {t.deletePhotoYes}
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
+
+      {showDeleteModal &&
+        ReactDOM.createPortal(
+          <div
+            className="gallery-modal"
+            role="dialog"
+            aria-modal="true"
+            style={{ zIndex: 2147483647 }}
+          >
+            <div
+              className="gallery-modal__backdrop"
+              onClick={() => setShowDeleteModal(false)}
+            ></div>
+            <div
+              className="gallery-modal__content"
+              style={{ maxWidth: "420px", padding: "2rem" }}
+            >
+              <div
+                className="gallery-modal__header"
+                style={{
+                  marginBottom: "1.5rem",
+                  borderBottom: "none",
+                  paddingBottom: 0,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <h3
+                  className="font-script text-2xl text-foreground"
+                  style={{ margin: 0 }}
+                >
+                  {t.deleteModalTitle}
+                </h3>
+              </div>
+              <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+                <p className="text-sm text-muted-foreground font-body leading-relaxed mb-4">
+                  {t.deleteModalPrompt}
+                </p>
+                <input
+                  type="text"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  placeholder={lang === "it" ? "Il tuo nome" : "Your name"}
+                  className="rsvp-input"
+                  style={{
+                    width: "100%",
+                    maxWidth: "100%",
+                    textAlign: "center",
+                    borderRadius: "14px",
+                    height: "38px",
+                    fontSize: "15px",
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleVerifyName();
+                  }}
+                />
+                {deleteError && (
+                  <p
+                    style={{
+                      color: "#dc2626",
+                      fontSize: "0.875rem",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    {deleteError}
+                  </p>
+                )}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  justifyContent: "center",
+                }}
+              >
+                <button
+                  type="button"
+                  className="rsvp-btn secondary"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  {t.deleteModalCancel}
+                </button>
+                <button
+                  type="button"
+                  className="rsvp-btn primary"
+                  onClick={handleVerifyName}
+                >
+                  {t.deleteModalConfirm}
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 }

@@ -110,7 +110,7 @@ body {
 }
 
 .text-2xl {
-  font-size: 1.5rem;
+  font-size: 30px;
 }
 
 .text-lg {
@@ -157,6 +157,9 @@ body {
   .program-h3 {
     font-size: 14px;
     /* mobile */
+  }
+  .text-2xl {
+    font-size: 28px;
   }
 }
 
