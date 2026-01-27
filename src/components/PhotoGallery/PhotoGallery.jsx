@@ -26,6 +26,14 @@ export default function PhotoGallery({ lang = "en" }) {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showUploadBlockedModal, setShowUploadBlockedModal] = useState(false);
 
+  // Nascondi il messaggio di successo dopo 3 secondi
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
   // Carica le foto da Firestore al montaggio
   useEffect(() => {
     const photosQuery = query(
@@ -130,6 +138,7 @@ export default function PhotoGallery({ lang = "en" }) {
           : t.success.multiplePhotos.replace("{count}", uploadedCount);
 
       setSuccess(message);
+      setUploaderName("");
       setFiles([]);
       document.getElementById("fileInput").value = "";
     } catch (err) {
@@ -163,7 +172,12 @@ export default function PhotoGallery({ lang = "en" }) {
   const subtitle = isBeforeWedding
     ? t.preWeddingSubtitle
     : t.postWeddingSubtitle;
-  const dateLocale = lang === "it" ? "it-IT" : "en-US";
+  // Forza sempre il formato dd/mm/yyyy
+  const dateFormatOptions = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
 
   return (
     <section id="galleria" className="photo-gallery-section scroll-reveal">
@@ -298,9 +312,19 @@ export default function PhotoGallery({ lang = "en" }) {
                           📸 {photo.uploaderName}
                         </p>
                         <p className="text-sm opacity-80">
-                          {photo.uploadedAt
-                            ?.toDate?.()
-                            .toLocaleDateString(dateLocale)}
+                          {(() => {
+                            const d = photo.uploadedAt?.toDate?.();
+                            if (!d) return "";
+                            const date = d.toLocaleDateString(
+                              "it-IT",
+                              dateFormatOptions,
+                            );
+                            const time = d.toLocaleTimeString("it-IT", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            });
+                            return `${date} ${time}`;
+                          })()}
                         </p>
                       </div>
                     </button>
@@ -348,9 +372,19 @@ export default function PhotoGallery({ lang = "en" }) {
                     📸 <strong>{photos[lightboxIndex].uploaderName}</strong>
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {photos[lightboxIndex].uploadedAt
-                      ?.toDate?.()
-                      .toLocaleDateString(dateLocale)}
+                    {(() => {
+                      const d = photos[lightboxIndex].uploadedAt?.toDate?.();
+                      if (!d) return "";
+                      const date = d.toLocaleDateString(
+                        "it-IT",
+                        dateFormatOptions,
+                      );
+                      const time = d.toLocaleTimeString("it-IT", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      });
+                      return `${date} ${time}`;
+                    })()}
                   </p>
                 </div>
                 <div className="gallery-modal__controls">

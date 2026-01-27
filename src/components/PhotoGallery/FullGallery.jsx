@@ -18,6 +18,11 @@ import { weddingDate } from "../../eventConfig.js";
 const IS_BEFORE_WEDDING = Date.now() < weddingDate.getTime();
 
 export default function FullGallery() {
+  // Aggiungi classe al body per nascondere il menu nella full gallery
+  useEffect(() => {
+    document.body.classList.add("full-gallery-page");
+    return () => document.body.classList.remove("full-gallery-page");
+  }, []);
   const [lang, setLang] = useState(() => localStorage.getItem("lang") || "en");
   const t = translations[lang].photoGallery;
   const [photos, setPhotos] = useState([]);
@@ -32,6 +37,12 @@ export default function FullGallery() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
+  // Forza sempre il formato dd/mm/yyyy
+  const dateFormatOptions = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
   const isBeforeWedding = IS_BEFORE_WEDDING;
   const formatUploader = (name) => t.uploadedBy.replace("{name}", name);
 
@@ -325,9 +336,19 @@ export default function FullGallery() {
                         {formatUploader(photo.uploaderName)}
                       </p>
                       <p className="text-sm opacity-80">
-                        {photo.uploadedAt
-                          ?.toDate?.()
-                          .toLocaleDateString(dateLocale)}
+                        {(() => {
+                          const d = photo.uploadedAt?.toDate?.();
+                          if (!d) return "";
+                          const date = d.toLocaleDateString(
+                            "it-IT",
+                            dateFormatOptions,
+                          );
+                          const time = d.toLocaleTimeString("it-IT", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          });
+                          return `${date} ${time}`;
+                        })()}
                       </p>
                     </div>
                   </button>
@@ -394,9 +415,19 @@ export default function FullGallery() {
                   </strong>
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {photos[lightboxIndex].uploadedAt
-                    ?.toDate?.()
-                    .toLocaleDateString(dateLocale)}
+                  {(() => {
+                    const d = photos[lightboxIndex].uploadedAt?.toDate?.();
+                    if (!d) return "";
+                    const date = d.toLocaleDateString(
+                      "it-IT",
+                      dateFormatOptions,
+                    );
+                    const time = d.toLocaleTimeString("it-IT", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    });
+                    return `${date} ${time}`;
+                  })()}
                 </p>
               </div>
               <div className="gallery-modal__controls">

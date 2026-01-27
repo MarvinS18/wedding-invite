@@ -1,3 +1,8 @@
+/* Nascondi il menu-fab solo nella pagina full gallery */
+body.full-gallery-page .menu-fab {
+  display: none !important;
+}
+
 /* =========================
    Floating menu button (FAB)
 ========================= */
@@ -48,12 +53,10 @@
   border-radius: inherit;
   pointer-events: none;
 
-  background: radial-gradient(
-    circle at 50% 35%,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 40%,
-    rgba(0, 0, 0, 0.14) 100%
-  );
+  background: radial-gradient(circle at 50% 35%,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 40%,
+      rgba(0, 0, 0, 0.14) 100%);
   opacity: 0.75;
 }
 
@@ -66,12 +69,10 @@
   border-radius: 999px;
   pointer-events: none;
 
-  background: radial-gradient(
-    ellipse at 50% 20%,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.18) 45%,
-    rgba(255, 255, 255, 0.00) 75%
-  );
+  background: radial-gradient(ellipse at 50% 20%,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.18) 45%,
+      rgba(255, 255, 255, 0.00) 75%);
 
   filter: blur(0.2px);
   opacity: 0.85;
@@ -147,18 +148,23 @@
   pointer-events: none;
 
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.10) 38%,
-    rgba(0, 0, 0, 0.10) 100%
-  );
+  background: radial-gradient(circle at 30% 20%,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.10) 38%,
+      rgba(0, 0, 0, 0.10) 100%);
   opacity: 0.55;
 }
 
 @keyframes menuIn {
-  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 
@@ -185,10 +191,10 @@
     font-size: 22px;
     padding: 8px 12px;
   }
-    
+
 }
 
-.menu-link + .menu-link {
+.menu-link+.menu-link {
   margin-top: 4px;
 }
 
@@ -205,17 +211,21 @@
 /* =========================
    Language Toggle (smaller + minimal)
 ========================= */
-.menu-lang-toggle-wrap{
+.menu-lang-toggle-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 12px;                 /* meno stacco */
+  margin-top: 12px;
+  /* meno stacco */
   padding-top: 10px;
-  border-top: 1px solid rgba(138,110,93,0.14); /* più soft */
+  border-top: 1px solid rgba(138, 110, 93, 0.14);
+  /* più soft */
 }
 
-.menu-lang-toggle{
-  border: 1px solid rgba(138,110,93,0.28);     /* più sottile */
-  background: rgba(255,255,255,0.06);           /* più minimal */
+.menu-lang-toggle {
+  border: 1px solid rgba(138, 110, 93, 0.28);
+  /* più sottile */
+  background: rgba(255, 255, 255, 0.06);
+  /* più minimal */
   border-radius: 999px;
   padding: 0;
   cursor: pointer;
@@ -223,63 +233,82 @@
   transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-.menu-lang-toggle:hover{
-  border-color: rgba(138,110,93,0.45);
-  background: rgba(255,255,255,0.10);
+.menu-lang-toggle:hover {
+  border-color: rgba(138, 110, 93, 0.45);
+  background: rgba(255, 255, 255, 0.10);
 }
 
-.menu-lang-toggle:active{
+.menu-lang-toggle:active {
   transform: scale(0.99);
 }
 
 /* track più piccolo */
-.toggle-track{
-  width: 86px;         /* ⬅️ più stretto */
-  height: 28px;        /* ⬅️ più basso */
+.toggle-track {
+  width: 86px;
+  /* ⬅️ più stretto */
+  height: 28px;
+  /* ⬅️ più basso */
   border-radius: 999px;
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;     /* meno padding */
+  padding: 0 10px;
+  /* meno padding */
 }
 
 /* label più piccole e più leggere */
-.toggle-label{
-  font-size: 10px;      /* ⬅️ più piccolo */
+.toggle-label {
+  font-size: 10px;
+  /* ⬅️ più piccolo */
   letter-spacing: 0.10em;
   font-weight: 600;
-  color: rgba(0,0,0,0.48);
+  color: rgba(0, 0, 0, 0.48);
   user-select: none;
 }
 
 /* knob più minimal */
-.toggle-knob{
+.toggle-knob {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 22px;          /* ⬅️ più piccolo */
-  height: 22px;         /* ⬅️ più piccolo */
+  width: 22px;
+  /* ⬅️ più piccolo */
+  height: 22px;
+  /* ⬅️ più piccolo */
   border-radius: 999px;
 
-  background: rgba(255,255,255,0.38);          /* più pulito */
-  border: 1px solid rgba(255,255,255,0.30);    /* meno evidente */
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);      /* ombra più soft */
+  background: rgba(255, 255, 255, 0.38);
+  /* più pulito */
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  /* meno evidente */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  /* ombra più soft */
 
   transition: left 200ms ease;
 }
 
 /* posizioni knob (coerenti con le nuove misure) */
-.menu-lang-toggle.is-en .toggle-knob{ left: 6px; }
-.menu-lang-toggle.is-it .toggle-knob{ left: calc(100% - 4px - 22px); }
+.menu-lang-toggle.is-en .toggle-knob {
+  left: 6px;
+}
+
+.menu-lang-toggle.is-it .toggle-knob {
+  left: calc(100% - 4px - 22px);
+}
 
 /* evidenzia label attiva ma più soft */
-.menu-lang-toggle.is-en .toggle-label.left{ color: rgba(138,110,93,0.90); }
-.menu-lang-toggle.is-it .toggle-label.right{ color: rgba(138,110,93,0.90); }
+.menu-lang-toggle.is-en .toggle-label.left {
+  color: rgba(138, 110, 93, 0.90);
+}
+
+.menu-lang-toggle.is-it .toggle-label.right {
+  color: rgba(138, 110, 93, 0.90);
+}
 
 /* focus accessibile */
-.menu-lang-toggle:focus-visible{
+.menu-lang-toggle:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(138,110,93,0.14);
+  box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.14);
 }

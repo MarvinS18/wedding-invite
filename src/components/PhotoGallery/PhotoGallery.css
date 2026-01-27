@@ -1,3 +1,21 @@
+@media (min-width: 601px) {
+    .gallery-close-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+    .rsvp-input::placeholder {
+        font-size: 12px !important;
+    }
+
+    .rsvp-input {
+        font-size: 12px !important;
+    }
+}
+
 /* Photo Gallery Section */
 .photo-gallery-section {
     padding: 3rem 0 4rem;
@@ -471,8 +489,9 @@
     justify-content: center;
     z-index: 2147483646;
     animation: modalFadeIn 180ms ease both;
-    /* No dimmed backdrop to avoid dark striping */
-    background: transparent;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.28);
 }
 
 @keyframes modalFadeIn {
@@ -490,7 +509,7 @@
 .gallery-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: transparent;
+    background: transparent
 }
 
 .gallery-modal__content {
