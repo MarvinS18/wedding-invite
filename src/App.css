@@ -110,7 +110,7 @@ body {
 }
 
 .text-2xl {
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .text-lg {
@@ -159,7 +159,7 @@ body {
     /* mobile */
   }
   .text-2xl {
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
