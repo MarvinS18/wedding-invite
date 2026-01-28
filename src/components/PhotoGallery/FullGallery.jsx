@@ -35,17 +35,17 @@ export default function FullGallery() {
   const [deleteError, setDeleteError] = useState("");
   const [deleteSuccess, setDeleteSuccess] = useState("");
   const [showToaster, setShowToaster] = useState(false);
-    // Mostra toaster per eliminazione con successo
-    useEffect(() => {
-      if (deleteSuccess) {
-        setShowToaster(true);
-        const timer = setTimeout(() => {
-          setShowToaster(false);
-          setDeleteSuccess("");
-        }, 2200);
-        return () => clearTimeout(timer);
-      }
-    }, [deleteSuccess]);
+  // Mostra toaster per eliminazione con successo
+  useEffect(() => {
+    if (deleteSuccess) {
+      setShowToaster(true);
+      const timer = setTimeout(() => {
+        setShowToaster(false);
+        setDeleteSuccess("");
+      }, 2200);
+      return () => clearTimeout(timer);
+    }
+  }, [deleteSuccess]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
@@ -305,9 +305,7 @@ export default function FullGallery() {
 
             {/* Success Toaster */}
             {showToaster && (
-              <div className="toaster-success">
-                {deleteSuccess}
-              </div>
+              <div className="toaster-success">{deleteSuccess}</div>
             )}
             {deleteError && !showDeleteModal && (
               <p
