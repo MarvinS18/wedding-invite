@@ -37,18 +37,17 @@ export default function FullGallery() {
   const [showToaster, setShowToaster] = useState(false);
   // Mostra toaster per eliminazione con successo
   useEffect(() => {
-    if (deleteSuccess) {
-      setShowToaster(true);
+    if (showToaster) {
       const timer = setTimeout(() => {
         setShowToaster(false);
         setDeleteSuccess("");
       }, 2200);
       return () => clearTimeout(timer);
     }
-  }, [deleteSuccess]);
+  }, [showToaster]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
-  const dateLocale = lang === "it" ? "it-IT" : "en-US";
+  // rimosso dateLocale inutilizzato
   // Forza sempre il formato dd/mm/yyyy
   const dateFormatOptions = {
     day: "2-digit",
@@ -172,6 +171,7 @@ export default function FullGallery() {
       }
 
       setDeleteSuccess(t.photoDeleted);
+      setShowToaster(true);
       setTimeout(() => setDeleteSuccess(""), 3000);
       setShowDeleteConfirm(false);
       setPhotoToDelete(null);
