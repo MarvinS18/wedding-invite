@@ -1,3 +1,38 @@
+/* Toaster Success: solo per eliminazione */
+.toaster-success {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    background: var(--primary, #8A6E5D);
+    color: var(--primary-foreground, #fff);
+    padding: 0.48rem 1.2rem;
+    border-radius: 24px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    box-shadow: 0 2px 8px rgba(138, 110, 93, 0.13);
+    z-index: 9999;
+    opacity: 0.97;
+    animation: toaster-in 0.3s cubic-bezier(.4,1.3,.6,1) both;
+    min-width: 0;
+    min-height: 0;
+    max-width: 90vw;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
+@media (max-width: 600px) {
+    .toaster-success {
+        font-size: 12px;
+        border-radius: 18px;
+        padding: 0.38rem 0.9rem;
+    }
+}
+
+@keyframes toaster-in {
+    0% { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.95); }
+    100% { opacity: 0.97; transform: translateX(-50%) translateY(0) scale(1); }
+}
 @media (min-width: 601px) {
     .gallery-close-btn {
         width: 52px;
@@ -238,6 +273,17 @@
     box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
 }
+
+.wiggle {
+  animation: ios-wiggle 0.15s ease-in-out infinite alternate;
+  transform-origin: 50% 60%;
+}
+
+@keyframes ios-wiggle {
+  0%   { transform: rotate(-1deg); }
+  100% { transform: rotate(1deg); }
+}
+
 
 @keyframes fadeIn {
     from {

@@ -34,6 +34,18 @@ export default function FullGallery() {
   const [nameInput, setNameInput] = useState("");
   const [deleteError, setDeleteError] = useState("");
   const [deleteSuccess, setDeleteSuccess] = useState("");
+  const [showToaster, setShowToaster] = useState(false);
+    // Mostra toaster per eliminazione con successo
+    useEffect(() => {
+      if (deleteSuccess) {
+        setShowToaster(true);
+        const timer = setTimeout(() => {
+          setShowToaster(false);
+          setDeleteSuccess("");
+        }, 2200);
+        return () => clearTimeout(timer);
+      }
+    }, [deleteSuccess]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
   const dateLocale = lang === "it" ? "it-IT" : "en-US";
@@ -291,16 +303,11 @@ export default function FullGallery() {
                 : t.subtitle}
             </p>
 
-            {deleteSuccess && (
-              <p
-                style={{
-                  color: "#16a34a",
-                  fontSize: "12px",
-                  marginTop: "0.5rem",
-                }}
-              >
+            {/* Success Toaster */}
+            {showToaster && (
+              <div className="toaster-success">
                 {deleteSuccess}
-              </p>
+              </div>
             )}
             {deleteError && !showDeleteModal && (
               <p
@@ -321,7 +328,7 @@ export default function FullGallery() {
                 <div key={photo.id} style={{ position: "relative" }}>
                   <button
                     type="button"
-                    className="photo-card"
+                    className={`photo-card${deleteMode ? " wiggle" : ""}`}
                     onClick={() => !deleteMode && openLightbox(index)}
                     style={{ cursor: deleteMode ? "default" : "pointer" }}
                   >
@@ -385,10 +392,16 @@ export default function FullGallery() {
             </div>
           ) : (
             <div className="text-center py-12">
-              {!isBeforeWedding && (
+              {deleteMode ? (
                 <p className="text-muted-foreground font-body empty-gallery-message">
-                  {t.emptyGallery}
+                  No photos
                 </p>
+              ) : (
+                !isBeforeWedding && (
+                  <p className="text-muted-foreground font-body empty-gallery-message">
+                    {t.emptyGallery}
+                  </p>
+                )
               )}
             </div>
           )}

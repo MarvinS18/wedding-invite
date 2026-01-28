@@ -29,7 +29,7 @@ export default function PhotoGallery({ lang = "en" }) {
   // Nascondi il messaggio di successo dopo 3 secondi
   useEffect(() => {
     if (success) {
-      const timer = setTimeout(() => setSuccess(""), 3000);
+      const timer = setTimeout(() => setSuccess("");, 3000);
       return () => clearTimeout(timer);
     }
   }, [success]);
@@ -126,7 +126,7 @@ export default function PhotoGallery({ lang = "en" }) {
           url: downloadURL,
           uploaderName: uploaderName.trim(),
           uploadedAt: new Date(),
-          fileName: file.name,
+          fileName,
         });
 
         uploadedCount++;
