@@ -351,7 +351,28 @@ export default function RSVP({ lang = "it" }) {
                     </div>
 
                     <div className="rsvp-person__chev" aria-hidden="true">
-                      {isOpen ? "▲" : "▼"}
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{
+                          transition: 'transform 0.2s',
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          display: 'block',
+                          margin: '0 auto',
+                        }}
+                      >
+                        <polyline
+                          points="6 9 12 15 18 9"
+                          stroke="#444"
+                          strokeWidth="2.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      </svg>
                     </div>
                   </button>
 
