@@ -22,17 +22,21 @@ export default function PhotoGallery({ lang = "en" }) {
   const [uploaderName, setUploaderName] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showUploadToaster, setShowUploadToaster] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showUploadBlockedModal, setShowUploadBlockedModal] = useState(false);
 
-  // Nascondi il messaggio di successo dopo 3 secondi
+  // Mostra toaster per upload con successo
   useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => setSuccess(""), 3000);
+    if (showUploadToaster) {
+      const timer = setTimeout(() => {
+        setShowUploadToaster(false);
+        setSuccess("");
+      }, 2200);
       return () => clearTimeout(timer);
     }
-  }, [success]);
+  }, [showUploadToaster]);
 
   // Carica le foto da Firestore al montaggio
   useEffect(() => {
@@ -138,6 +142,7 @@ export default function PhotoGallery({ lang = "en" }) {
           : t.success.multiplePhotos.replace("{count}", uploadedCount);
 
       setSuccess(message);
+      setShowUploadToaster(true);
       setUploaderName("");
       setFiles([]);
       document.getElementById("fileInput").value = "";
@@ -181,6 +186,13 @@ export default function PhotoGallery({ lang = "en" }) {
 
   return (
     <section id="galleria" className="photo-gallery-section scroll-reveal">
+      {/* Success Toaster - fixed in alto al centro */}
+      {showUploadToaster &&
+        ReactDOM.createPortal(
+          <div className="toaster-success">{success}</div>,
+          document.body,
+        )}
+
       <div
         className="max-w-7xl mx-auto px-4"
         style={{
@@ -263,18 +275,7 @@ export default function PhotoGallery({ lang = "en" }) {
           </div>
 
           {error && <p className="upload-message upload-error">{error}</p>}
-          {success && (
-            <p
-              className="upload-message upload-success"
-              style={{
-                background: "transparent",
-                padding: 0,
-                margin: "0.5rem 0 0 0.5rem",
-              }}
-            >
-              {success}
-            </p>
-          )}
+          {/* Success Toaster spostato in alto, qui non serve più */}
         </div>
 
         {/* Galleria - appare dal matrimonio in poi */}
