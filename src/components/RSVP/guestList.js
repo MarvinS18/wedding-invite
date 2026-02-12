@@ -63,7 +63,7 @@ export const GUEST_GROUPS = [
     members: ["Susan Reyes", "Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel", "Angelito Reyes"],
   },
   { label: "Samantha Munoz, Paul Avinguetero", members: ["Samantha Munoz", "Paul Avinguetero"] },
-  { label: "Francesca Conidi, Fidanzato", members: ["Francesca Conidi", "Fidanzato"] },
+  { label: "Francesca Conidi, Rian Hossain", members: ["Francesca Conidi", "Rian Hossain"] },
   {
     label: "Maramot Family",
     members: ["Totie Maramot", "Chona Maramot", "Jerome Maramot"],
