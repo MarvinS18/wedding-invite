@@ -229,7 +229,7 @@
 
     // Programma
     program: {
-      title: "The Program",
+      title: "The Timeline of Our Big Day",
       subtitle: "Our day, step by step",
       events: {
         arrival: { time: "16:30", title: "Arrival", description: "Welcoming guests" },
@@ -245,7 +245,7 @@
     // Regali
     gifts: {
       title: "A gift",
-      description: "Your presence is the greatest gift we can receive. If you wish to contribute to our honeymoon together, you can do so in any way that suits you best.",
+      description: "Your presence is all we ask for. Should you wish to contribute to our first journey as a married couple, we would be truly grateful.",
       contribution: "Contribution",
       cashText: "If you prefer, the gift can be in cash. If it is more convenient for you, you can also make a bank transfer:",
       showIban: "Show IBAN",
@@ -255,8 +255,8 @@
     // RSVP
     rsvp: {
       title: "RSVP",
-      descriptionMobile: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you. Thank you for wanting to share this special day with us! Please confirm by April 30, 2026",
-      descriptionDesktop: "To confirm your attendance, please enter your name below.\nWe can't wait to celebrate with you.\nThank you for wanting to share this special day with us!\nPlease confirm by April 30, 2026",
+      descriptionMobile: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! Please RSVP by April 30, 2026.",
+      descriptionDesktop: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! Please RSVP by April 30, 2026.",
       reply: "Reply",
       hide: "Hide",
     },
@@ -300,7 +300,7 @@
       names: "Karl & Reichelle",
       date: "June 5, 2026",
       message: "With all our love",
-      contactLead: "For any information or needs,\nfeel free to contact us",
+      contactLead: "For any further information, please feel free to reach out",
     },
 
     // Music
