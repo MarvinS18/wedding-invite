@@ -56,6 +56,20 @@ export default function PhotoGallery({ lang = "en" }) {
     return () => unsubscribe();
   }, []);
 
+  const videoRef = useRef(null);
+
+  // Autoplay video quando si apre il lightbox
+  useEffect(() => {
+    if (lightboxOpen && photos[lightboxIndex]?.type === "video" && videoRef.current) {
+      // Autoplay del video quando si apre il lightbox
+      setTimeout(() => {
+        videoRef.current?.play().catch(() => {
+          // Fallback se autoplay è bloccato dal browser
+        });
+      }, 100);
+    }
+  }, [lightboxOpen, lightboxIndex, photos]);
+
   useEffect(() => {
     const overlayActive = lightboxOpen;
     if (overlayActive) {
@@ -496,8 +510,10 @@ export default function PhotoGallery({ lang = "en" }) {
 
                 {photos[lightboxIndex].type === "video" ? (
                   <video
+                    ref={videoRef}
                     src={photos[lightboxIndex].url}
                     controls
+                    autoPlay
                     className="gallery-modal__image"
                     style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
                   />

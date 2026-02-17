@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import {
@@ -47,6 +47,7 @@ export default function FullGallery() {
   }, [showToaster]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
+  const videoRef = useRef(null);
   // rimosso dateLocale inutilizzato
   // Forza sempre il formato dd/mm/yyyy
   const dateFormatOptions = {
@@ -89,6 +90,17 @@ export default function FullGallery() {
     sessionStorage.setItem("envelopeSeen", "1");
     sessionStorage.setItem("returnToSection", "galleria");
   }, []);
+
+  // Autoplay video quando si apre il lightbox
+  useEffect(() => {
+    if (lightboxOpen && photos[lightboxIndex]?.type === "video" && videoRef.current) {
+      setTimeout(() => {
+        videoRef.current?.play().catch(() => {
+          // Fallback se autoplay è bloccato dal browser
+        });
+      }, 100);
+    }
+  }, [lightboxOpen, lightboxIndex, photos]);
 
   useEffect(() => {
     if (lightboxOpen) {
@@ -518,8 +530,10 @@ export default function FullGallery() {
 
               {photos[lightboxIndex].type === "video" ? (
                 <video
+                  ref={videoRef}
                   src={photos[lightboxIndex].url}
                   controls
+                  autoPlay
                   className="gallery-modal__image"
                   style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
                 />
