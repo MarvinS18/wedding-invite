@@ -7,6 +7,7 @@ import RSVP from "./components/RSVP/RSVP";
 import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
+import OurStoryCarousel from "./components/OurStoryCarousel/OurStoryCarousel";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -205,7 +206,7 @@ export default function App() {
                 aria-expanded={showRSVP}
                 aria-controls="rsvp-form-section"
               >
-                <span className="text-[10px] tracking-[0.3em] uppercase font-body font-light">
+                <span className="text-[10px] tracking-[0.3em] max-w-2xl uppercase font-body font-light">
                   {t.hero.confirmAttendance}
                 </span>
                 <div>
@@ -485,7 +486,18 @@ export default function App() {
               style={{ opacity: 1, transform: "none" }}
             >
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
-                {t.program.title}
+                {lang === "en" ? (
+                  <>
+                    <span className="program-title-desktop">
+                      {t.program.titleDesktop}
+                    </span>
+                    <span className="program-title-mobile">
+                      {t.program.titleMobile}
+                    </span>
+                  </>
+                ) : (
+                  t.program.title
+                )}
               </h2>
               <p className="text-muted-foreground font-body tracking-wide">
                 {t.program.subtitle}
@@ -498,7 +510,7 @@ export default function App() {
                 <div className="timeline-row w-full max-w-6xl">
                   {/* ...7 eventi desktop, come fornito... */}
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
-                    <div className="timeline-badge mb-4">16:30</div>
+                    <div className="timeline-badge mb-4">16:00</div>
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg map-pin */}
                       <svg
@@ -518,14 +530,14 @@ export default function App() {
                       </svg>
                     </div>
                     <h3 className="font-display text-base text-foreground mb-0 leading-tight">
-                      {t.program.events.arrival.title}
+                      {t.program.events.ceremony.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.arrival.description}
+                      {t.program.events.ceremony.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">17:00</div>
+                    <div className="timeline-badge mb-4">18:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg heart */}
@@ -545,14 +557,14 @@ export default function App() {
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-sm text-foreground mb-0 leading-tight">
-                      {t.program.events.ceremony.title}
+                      {t.program.events.aperitivo.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.ceremony.description}
+                      {t.program.events.aperitivo.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">18:00</div>
+                    <div className="timeline-badge mb-4">20:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg wine */}
@@ -575,14 +587,14 @@ export default function App() {
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
-                      {t.program.events.aperitivo.title}
+                      {t.program.events.dinner.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.aperitivo.description}
+                      {t.program.events.dinner.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">20:00</div>
+                    <div className="timeline-badge mb-4">22:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg utensils-crossed */}
@@ -605,10 +617,10 @@ export default function App() {
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
-                      {t.program.events.dinner.title}
+                      {t.program.events.cakeCutting.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.dinner.description}
+                      {t.program.events.cakeCutting.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
@@ -671,37 +683,7 @@ export default function App() {
                       {t.program.events.party.description}
                     </p>
                   </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">02:30</div>
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg sparkles */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-sparkles w-5 h-5"
-                      >
-                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
-                        <path d="M20 3v4"></path>
-                        <path d="M22 5h-4"></path>
-                        <path d="M4 17v2"></path>
-                        <path d="M5 18H3"></path>
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
-                      {t.program.events.end.title}
-                    </h3>
-                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.end.description}
-                    </p>
-                  </div>
+                  
                 </div>
               </div>
               {/* Mobile timeline fornita */}
@@ -738,13 +720,13 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">16:30</span>
+                        <span className="timeline-badge">16:00</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.arrival.title}
+                          {t.program.events.ceremony.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.arrival.description}
+                        {t.program.events.ceremony.description}
                       </p>
                     </div>
                   </div>
@@ -774,13 +756,13 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">17:00</span>
+                        <span className="timeline-badge">18:30</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.ceremony.title}
+                          {t.program.events.aperitivo.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.ceremony.description}
+                        {t.program.events.aperitivo.description}
                       </p>
                     </div>
                   </div>
@@ -812,13 +794,13 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">18:00</span>
+                        <span className="timeline-badge">20:30</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.aperitivo.title}
+                          {t.program.events.dinner.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.aperitivo.description}
+                        {t.program.events.dinner.description}
                       </p>
                     </div>
                   </div>
@@ -850,13 +832,13 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">20:00</span>
+                        <span className="timeline-badge">22:00</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.dinner.title}
+                          {t.program.events.firstDance.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.dinner.description}
+                        {t.program.events.firstDance.description}
                       </p>
                     </div>
                   </div>
@@ -891,11 +873,11 @@ export default function App() {
                       <div className="flex items-baseline gap-3 mb-0.5">
                         <span className="timeline-badge">22:30</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.firstDance.title}
+                          {t.program.events.cakeCutting.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.firstDance.description}
+                        {t.program.events.cakeCutting.description}
                       </p>
                     </div>
                   </div>
@@ -936,47 +918,7 @@ export default function App() {
                       </p>
                     </div>
                   </div>
-                  {/* Evento 7 */}
-                  <div
-                    className="flex items-start gap-4 pl-1 relative"
-                    style={{ opacity: 1, transform: "none" }}
-                  >
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg sparkles */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-sparkles w-5 h-5"
-                      >
-                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
-                        <path d="M20 3v4"></path>
-                        <path d="M22 5h-4"></path>
-                        <path d="M4 17v2"></path>
-                        <path d="M5 18H3"></path>
-                      </svg>
-                    </div>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge bg-badge-primary">
-                          02:30
-                        </span>
-                        <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.end.title}
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.end.description}
-                      </p>
-                    </div>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -984,6 +926,29 @@ export default function App() {
         </section>
 
         {/* Separatore cuore */}
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
+        </div>
+
+        {/* Our Story Section */}
+        <section id="our-story" className="section-padding scroll-reveal">
+          <div className="max-w-3xl mx-auto text-center px-4">
+            <h2 className="font-script text-5xl md:text-6xl text-foreground mb-4">
+              {t.ourStory.title}
+            </h2>
+            <p
+              className="text-base text-muted-foreground font-body leading-relaxed"
+              style={{ whiteSpace: "pre-line" }}
+            >
+              {t.ourStory.text}
+            </p>
+            <OurStoryCarousel />
+          </div>
+        </section>
+
+        {/* Separatore cuore DOPO Our Story */}
         <div className="section-separator" style={{ opacity: 1 }}>
           <span className="section-separator__line"></span>
           <span className="section-separator__heart">♥</span>
