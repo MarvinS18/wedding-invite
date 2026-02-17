@@ -7,6 +7,7 @@ import RSVP from "./components/RSVP/RSVP";
 import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
+import OurStoryCarousel from "./components/OurStoryCarousel/OurStoryCarousel";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -485,7 +486,18 @@ export default function App() {
               style={{ opacity: 1, transform: "none" }}
             >
               <h2 className="font-script text-5xl md:text-6xl text-foreground mb-2">
-                {t.program.title}
+                {lang === "en" ? (
+                  <>
+                    <span className="program-title-desktop">
+                      {t.program.titleDesktop}
+                    </span>
+                    <span className="program-title-mobile">
+                      {t.program.titleMobile}
+                    </span>
+                  </>
+                ) : (
+                  t.program.title
+                )}
               </h2>
               <p className="text-muted-foreground font-body tracking-wide">
                 {t.program.subtitle}
@@ -914,6 +926,29 @@ export default function App() {
         </section>
 
         {/* Separatore cuore */}
+        <div className="section-separator" style={{ opacity: 1 }}>
+          <span className="section-separator__line"></span>
+          <span className="section-separator__heart">♥</span>
+          <span className="section-separator__line"></span>
+        </div>
+
+        {/* Our Story Section */}
+        <section id="our-story" className="section-padding scroll-reveal">
+          <div className="max-w-3xl mx-auto text-center px-4">
+            <h2 className="font-script text-5xl md:text-6xl text-foreground mb-4">
+              {t.ourStory.title}
+            </h2>
+            <p
+              className="text-base text-muted-foreground font-body leading-relaxed"
+              style={{ whiteSpace: "pre-line" }}
+            >
+              {t.ourStory.text}
+            </p>
+            <OurStoryCarousel />
+          </div>
+        </section>
+
+        {/* Separatore cuore DOPO Our Story */}
         <div className="section-separator" style={{ opacity: 1 }}>
           <span className="section-separator__line"></span>
           <span className="section-separator__heart">♥</span>

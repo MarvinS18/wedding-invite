@@ -1,0 +1,12 @@
+.ourstory-carousel{position:relative;max-width:900px;margin:24px auto 0;border-radius:12px;overflow:hidden;background:var(--background);box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.carousel-track{display:flex;transition:transform .5s ease}
+.carousel-slide{min-width:100%}
+.carousel-image{display:block;width:100%;height: clamp(200px, 40vw, 480px);object-fit:cover}
+.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.7);color:var(--foreground);border:1px solid var(--border);border-radius:9999px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.carousel-arrow:hover{background:rgba(255,255,255,.9)}
+.carousel-arrow.left{left:12px}
+.carousel-arrow.right{right:12px}
+.carousel-dots{display:flex;gap:8px;justify-content:center;align-items:center;padding:12px}
+.dot{width:10px;height:10px;border-radius:50%;border:1px solid var(--border);background:var(--muted);opacity:.6;cursor:pointer}
+.dot.active{background:var(--primary);opacity:1}
+@media (max-width:640px){.carousel-arrow{width:34px;height:34px}.carousel-image{height: clamp(180px, 55vw, 360px)} }

@@ -1126,6 +1126,22 @@ html {
   margin: 1.5rem 0;
   background: transparent;
 }
+.program-title-desktop {
+  display: none;
+  white-space: nowrap;
+}
+.program-title-mobile {
+  display: block;
+  white-space: pre-line;
+}
+@media (min-width: 768px) {
+  .program-title-desktop {
+    display: inline;
+  }
+  .program-title-mobile {
+    display: none;
+  }
+}
 
 .section-separator__line {
   display: inline-block;

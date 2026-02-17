@@ -59,6 +59,13 @@
       },
     },
 
+    // Our Story
+    ourStory: {
+      title: "Our Story",
+      text:
+        "Quasi sette anni fa, se qualcuno ci avesse detto che un incontro inaspettato ci avrebbe portato fin qui, probabilmente non ci avremmo creduto. A quanto pare, le cose migliori della vita sono proprio quelle che non vedi arrivare.\nCi siamo trovati senza cercarci e, da allora, non abbiamo mai smesso di sceglierci.\nSiamo arrivati a questo nuovo capitolo, pronti per il nostro grande giorno e per scambiarci finalmente il nostro 'SÌ'.",
+    },
+
     // Regali
     gifts: {
       title: "Un pensiero",
@@ -229,6 +236,8 @@
     // Programma
     program: {
       title: "The Timeline of Our Big Day",
+      titleDesktop: "The Timeline of Our\u00A0Big\u00A0Day",
+      titleMobile: "The Timeline of \nOur Big Day",
       subtitle: "Our day, step by step",
       events: {
         ceremony: { time: "16:00", title: "Ceremony", description: "Exchange of vows" },
@@ -238,6 +247,13 @@
         cakeCutting: { time: "22:30", title: "Cake cutting", description: "Cake cutting" },
         party: { time: "23:00", title: "Party", description: "Let's dance!" },
       },
+    },
+
+    // Our Story
+    ourStory: {
+      title: "Our Story",
+      text:
+        "Almost seven years ago, if someone had told us that an unexpected encounter would lead us here, we probably wouldn't have believed them. \nAs it turns out, the best things in life are the ones you never see coming.\nWe met without looking, and we haven't stopped choosing each other since.\nWe’ve arrived at this new chapter, ready for our big day and to finally say 'I DO'.",
     },
 
     // Regali
