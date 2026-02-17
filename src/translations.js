@@ -47,23 +47,22 @@
 
     // Programma
     program: {
-      title: "Il Programma",
+      title: "Il Programma del nostro grande giorno",
       subtitle: "La nostra giornata, passo dopo passo",
       events: {
-        arrival: { time: "16:30", title: "Arrivo", description: "Accoglienza degli invitati" },
-        ceremony: { time: "17:00", title: "Cerimonia", description: "Scambio delle promesse" },
-        aperitivo: { time: "18:00", title: "Aperitivo", description: "Brindisi e stuzzichini" },
-        dinner: { time: "20:00", title: "Cena", description: "Cena nuziale" },
-        firstDance: { time: "22:30", title: "Primo ballo", description: "Il nostro momento" },
-        party: { time: "23:00", title: "Festa", description: "Tutti a ballare!" },
-        end: { time: "02:30", title: "Fine festa", description: "Arrivederci e grazie!" },
+        ceremony: { time: "16:00", title: "Cerimonia", description: "Scambio delle promesse" },
+        aperitivo: { time: "18:30", title: "Aperitivo", description: "Brindisi e stuzzichini" },
+        dinner: { time: "20:30", title: "Cena", description: "Cena nuziale" },
+        firstDance: { time: "22:00", title: "Primo ballo", description: "Il nostro momento" },
+        cakeCutting: { time: "22:30", title: "Taglio torta", description: "Il taglio della torta" },
+        party: { time: "23:00", title: "Party", description: "Tutti a ballare!" },
       },
     },
 
     // Regali
     gifts: {
       title: "Un pensiero",
-      description: "La vostra presenza è il regalo più bello che possiamo ricevere. Se desiderate contribuire al nostro prossimo viaggio insieme, potete farlo nel modo che vi è più comodo.",
+      description: "Il regalo più bello sarà avervi con noi. Se voleste dedicarci un pensiero per l'inizio della nostra vita insieme da marito e moglie, ve ne saremo davvero grati.",
       contribution: "Contributo",
       cashText: "Se preferite, il regalo può essere in denaro contante. Se vi è più comodo, potete anche effettuare un bonifico:",
       showIban: "Mostra IBAN",
@@ -73,9 +72,9 @@
     // RSVP
     rsvp: {
       title: "RSVP",
-      description: "Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026",
-      descriptionMobile: "Per confermare la vostra presenza, inserite il vostro nome qui sotto. Non vediamo l'ora di festeggiare con voi. Grazie per voler condividere con noi questo giorno speciale! Vi preghiamo di dare conferma entro il 30 aprile 2026",
-      descriptionDesktop: "Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l'ora di festeggiare con voi.\nGrazie per voler condividere con noi questo giorno speciale!\nVi preghiamo di dare conferma entro il 30 aprile 2026",
+      description: "Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l’ora di festeggiare con voi e siamo profondamente grati di avervi al nostro fianco!\nVi preghiamo di confermare entro il 30 aprile 2026.",
+      descriptionMobile: "Per confermare la vostra presenza, inserite il vostro nome qui sotto. Non vediamo l’ora di festeggiare con voi e siamo profondamente grati di avervi al nostro fianco! Vi preghiamo di confermare entro il 30 aprile 2026.",
+      descriptionDesktop: "Per confermare la vostra presenza, inserite il vostro nome qui sotto.\nNon vediamo l’ora di festeggiare con voi e siamo profondamente grati di avervi al nostro fianco!\nVi preghiamo di confermare entro il 30 aprile 2026.",
       reply: "Rispondi",
       hide: "Nascondi",
     },
@@ -119,7 +118,7 @@
       names: "Karl & Reichelle",
       date: "5 giugno 2026",
       message: "Con tutto il nostro amore",
-      contactLead: "Per qualsiasi informazione o necessità,\nnon esitate a contattarci",
+      contactLead: "Per ulteriori informazioni, non esitate a contattarci",
     },
 
     // Music
@@ -232,13 +231,12 @@
       title: "The Timeline of Our Big Day",
       subtitle: "Our day, step by step",
       events: {
-        arrival: { time: "16:30", title: "Arrival", description: "Welcoming guests" },
-        ceremony: { time: "17:00", title: "Ceremony", description: "Exchange of vows" },
-        aperitivo: { time: "18:00", title: "Aperitif", description: "Toasts and appetizers" },
-        dinner: { time: "20:00", title: "Dinner", description: "Wedding dinner" },
-        firstDance: { time: "22:30", title: "First dance", description: "Our moment" },
+        ceremony: { time: "16:00", title: "Ceremony", description: "Exchange of vows" },
+        aperitivo: { time: "18:30", title: "Aperitif", description: "Toasts and appetizers" },
+        dinner: { time: "20:30", title: "Dinner", description: "Wedding dinner" },
+        firstDance: { time: "22:00", title: "First dance", description: "Our moment" },
+        cakeCutting: { time: "22:30", title: "Cake cutting", description: "Cake cutting" },
         party: { time: "23:00", title: "Party", description: "Let's dance!" },
-        end: { time: "02:30", title: "Party ends", description: "Goodbye and thank you!" },
       },
     },
 
@@ -255,8 +253,8 @@
     // RSVP
     rsvp: {
       title: "RSVP",
-      descriptionMobile: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! Please RSVP by April 30, 2026.",
-      descriptionDesktop: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! Please RSVP by April 30, 2026.",
+      descriptionMobile: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! \nPlease RSVP by April 30, 2026.",
+      descriptionDesktop: "To confirm your attendance, please enter your name below. We can't wait to celebrate with you and are so grateful to have you by our sides! \nPlease RSVP by April 30, 2026.",
       reply: "Reply",
       hide: "Hide",
     },
