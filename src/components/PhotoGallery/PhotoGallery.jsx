@@ -383,7 +383,7 @@ export default function PhotoGallery({ lang = "en" }) {
                       {photo.type === "video" ? (
                         <>
                           <video
-                            src={photo.url}
+                            src={`${photo.url}#t=0.1`}
                             className="w-full h-full object-cover"
                             preload="metadata"
                           />
