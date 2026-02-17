@@ -765,3 +765,34 @@ gallery-close-btn:hover {
         right: -2.2rem;
     }
 }
+
+/* Play icon responsive */
+.play-icon-wrapper {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.play-icon {
+    font-size: 1.25rem;
+    color: #333;
+    margin-left: 3px;
+}
+
+@media (min-width: 768px) {
+    .play-icon-wrapper {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .play-icon {
+        font-size: 2rem;
+        margin-left: 3px;
+    }
+}

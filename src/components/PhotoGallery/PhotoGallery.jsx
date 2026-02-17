@@ -69,10 +69,10 @@ export default function PhotoGallery({ lang = "en" }) {
     };
   }, [lightboxOpen]);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFiles = Array.from(e.target.files || []);
 
-    // Limite massimo 5 foto
+    // Limite massimo 5 file (foto + video)
     if (selectedFiles.length > 5) {
       setError(t.errors.maxPhotos);
       e.target.value = "";
@@ -81,20 +81,64 @@ export default function PhotoGallery({ lang = "en" }) {
 
     // Validazioni per ogni file
     for (let file of selectedFiles) {
-      if (!file.type.startsWith("image/")) {
+      const isImage = file.type.startsWith("image/");
+      const isVideo = file.type === "video/mp4";
+
+      // Controlla che sia immagine o video
+      if (!isImage && !isVideo) {
         setError(t.errors.onlyImages);
         e.target.value = "";
         return;
       }
-      if (file.size > 10 * 1024 * 1024) {
+
+      // Controlla dimensioni
+      const maxSize = isImage ? 10 * 1024 * 1024 : 50 * 1024 * 1024; // 10MB foto, 50MB video
+      if (file.size > maxSize) {
         setError(t.errors.fileTooBig);
         e.target.value = "";
         return;
+      }
+
+      // Controlla durata del video (max 5 minuti = 300 secondi)
+      if (isVideo) {
+        try {
+          const duration = await getVideoDuration(file);
+          if (duration > 300) {
+            setError(t.errors.videoTooLong);
+            e.target.value = "";
+            return;
+          }
+        } catch (err) {
+          console.error("Errore nel controllare la durata del video:", err);
+          setError(t.errors.uploadError);
+          e.target.value = "";
+          return;
+        }
       }
     }
 
     setFiles(selectedFiles);
     setError("");
+  };
+
+  // Helper per ottenere la durata di un video
+  const getVideoDuration = (file) => {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const video = document.createElement("video");
+      
+      video.onloadedmetadata = () => {
+        URL.revokeObjectURL(url);
+        resolve(video.duration);
+      };
+      
+      video.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("Impossibile leggere il video"));
+      };
+      
+      video.src = url;
+    });
   };
 
   const handleUpload = async (e) => {
@@ -117,6 +161,8 @@ export default function PhotoGallery({ lang = "en" }) {
 
     try {
       let uploadedCount = 0;
+      let photoCount = 0;
+      let videoCount = 0;
 
       // Upload ogni file singolarmente
       for (let file of files) {
@@ -126,20 +172,38 @@ export default function PhotoGallery({ lang = "en" }) {
 
         const downloadURL = await getDownloadURL(storageRef);
 
+        const fileType = file.type.startsWith("image/") ? "image" : "video";
+
+        if (fileType === "image") {
+          photoCount++;
+        } else {
+          videoCount++;
+        }
+
         await addDoc(collection(db, "weddingPhotos"), {
           url: downloadURL,
           uploaderName: uploaderName.trim(),
           uploadedAt: new Date(),
           fileName,
+          type: fileType,
         });
 
         uploadedCount++;
       }
 
-      const message =
-        uploadedCount === 1
-          ? t.success.singlePhoto
-          : t.success.multiplePhotos.replace("{count}", uploadedCount);
+      // Determina il messaggio di successo in base ai tipi di file caricati
+      let message;
+      if (uploadedCount === 1) {
+        message = photoCount === 1 ? t.success.singlePhoto : t.success.singleVideo;
+      } else if (photoCount > 0 && videoCount > 0) {
+        message = t.success.multipleFiles
+          .replace("{photoCount}", photoCount)
+          .replace("{videoCount}", videoCount);
+      } else if (photoCount > 0) {
+        message = t.success.multiplePhotos.replace("{count}", photoCount);
+      } else {
+        message = t.success.multipleVideos.replace("{count}", videoCount);
+      }
 
       setSuccess(message);
       setShowUploadToaster(true);
@@ -241,7 +305,7 @@ export default function PhotoGallery({ lang = "en" }) {
                 <input
                   id="fileInput"
                   type="file"
-                  accept="image/*"
+                  accept="image/*,video/mp4"
                   multiple
                   onChange={handleFileChange}
                   onClick={(e) => {
@@ -302,15 +366,30 @@ export default function PhotoGallery({ lang = "en" }) {
                       className="photo-card"
                       onClick={() => openLightbox(index)}
                     >
-                      <img
-                        src={photo.url}
-                        alt={`Foto di ${photo.uploaderName}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                      />
+                      {photo.type === "video" ? (
+                        <>
+                          <video
+                            src={photo.url}
+                            className="w-full h-full object-cover"
+                            preload="metadata"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <div className="play-icon-wrapper">
+                              <span className="play-icon">▶</span>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <img
+                          src={photo.url}
+                          alt={`Foto di ${photo.uploaderName}`}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                        />
+                      )}
                       <div className="photo-info">
                         <p className="font-body font-semibold">
-                          📸 {photo.uploaderName}
+                          {photo.type === "video" ? "🎥" : "📸"} {photo.uploaderName}
                         </p>
                         <p className="text-sm opacity-80">
                           {(() => {
@@ -332,7 +411,7 @@ export default function PhotoGallery({ lang = "en" }) {
                   ))}
                 </div>
 
-                {photos.length > 8 && (
+                {photos.length > 0 && (
                   <div className="text-center mt-6">
                     <Link className="view-all-btn" to="/gallery">
                       {t.viewAllPhotos}
@@ -370,7 +449,7 @@ export default function PhotoGallery({ lang = "en" }) {
               <div className="gallery-modal__header">
                 <div>
                   <p className="text-sm font-body">
-                    📸 <strong>{photos[lightboxIndex].uploaderName}</strong>
+                    {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>{photos[lightboxIndex].uploaderName}</strong>
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {(() => {
@@ -415,11 +494,20 @@ export default function PhotoGallery({ lang = "en" }) {
                   ❮
                 </button>
 
-                <img
-                  src={photos[lightboxIndex].url}
-                  alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
-                  className="gallery-modal__image"
-                />
+                {photos[lightboxIndex].type === "video" ? (
+                  <video
+                    src={photos[lightboxIndex].url}
+                    controls
+                    className="gallery-modal__image"
+                    style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                  />
+                ) : (
+                  <img
+                    src={photos[lightboxIndex].url}
+                    alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
+                    className="gallery-modal__image"
+                  />
+                )}
 
                 <button
                   type="button"

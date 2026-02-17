@@ -19,6 +19,7 @@ export default function Layout() {
   const lastScrollY = useRef(
     typeof window !== "undefined" ? window.scrollY : 0,
   );
+  const lastMouseMove = useRef(0);
   const musicHideTimer = useRef(null);
 
   // Propaga la lingua selezionata a localStorage e agli eventuali listener
@@ -35,26 +36,41 @@ export default function Layout() {
     return () => window.removeEventListener("envelopeOpened", onEnvelopeOpen);
   }, []);
 
-  // Mostra/nascondi controllo musica allo scroll
+  // Mostra/nascondi controllo musica allo scroll e movimento del mouse
   useEffect(() => {
+    const showMusicControl = () => {
+      setMusicVisible(true);
+
+      if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
+      musicHideTimer.current = setTimeout(() => {
+        setMusicVisible(false);
+      }, 2000);
+    };
+
     const onScroll = () => {
       const y = window.scrollY || 0;
 
       if (Math.abs(y - lastScrollY.current) > 2) {
         lastScrollY.current = y;
+        showMusicControl();
+      }
+    };
 
-        setMusicVisible(true);
-
-        if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
-        musicHideTimer.current = setTimeout(() => {
-          setMusicVisible(false);
-        }, 2000);
+    const onMouseMove = () => {
+      const now = Date.now();
+      // Throttle: mostra solo ogni 200ms
+      if (now - lastMouseMove.current > 200) {
+        lastMouseMove.current = now;
+        showMusicControl();
       }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
       if (musicHideTimer.current) clearTimeout(musicHideTimer.current);
     };
   }, []);

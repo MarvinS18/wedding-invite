@@ -165,7 +165,7 @@ export default function App() {
 
             <video
               className="bg-video bg-video--desktop"
-              src="/videos/Save-the-date.mp4"
+              src="/videos/Save-the-date-orizzontale.mp4"
               autoPlay
               loop
               muted
@@ -1032,7 +1032,7 @@ export default function App() {
               >
                 {t.rsvp.descriptionDesktop}
               </span>
-              <span className="rsvp-desc-mobile">
+              <span className="rsvp-desc-mobile" style={{ whiteSpace: "pre-line" }}>
                 {t.rsvp.descriptionMobile}
               </span>
             </p>

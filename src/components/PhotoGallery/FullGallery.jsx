@@ -170,7 +170,8 @@ export default function FullGallery() {
         });
       }
 
-      setDeleteSuccess(t.photoDeleted);
+      const successMessage = photoToDelete.type === "video" ? t.videoDeleted : t.photoDeleted;
+      setDeleteSuccess(successMessage);
       setShowToaster(true);
       setTimeout(() => setDeleteSuccess(""), 3000);
       setShowDeleteConfirm(false);
@@ -187,6 +188,29 @@ export default function FullGallery() {
   const userPhotos = deleteMode
     ? photos.filter((p) => p.uploaderName?.trim() === verifiedName.trim())
     : [];
+
+  // Conta foto e video separatamente
+  const photosToCount = deleteMode ? userPhotos : photos;
+  const photoCount = photosToCount.filter(p => p.type !== "video").length;
+  const videoCount = photosToCount.filter(p => p.type === "video").length;
+  
+  const getFileCountText = () => {
+    const parts = [];
+    
+    if (photoCount > 0) {
+      if (lang === "it") {
+        parts.push(`${photoCount} ${photoCount === 1 ? "foto" : "foto"}`);
+      } else {
+        parts.push(`${photoCount} ${photoCount === 1 ? "photo" : "photos"}`);
+      }
+    }
+    
+    if (videoCount > 0) {
+      parts.push(`${videoCount} video`);
+    }
+    
+    return parts.length > 0 ? parts.join(", ") : (lang === "it" ? "Nessun file" : "No files");
+  };
 
   return (
     <section id="photos" className="photo-gallery-section">
@@ -297,11 +321,20 @@ export default function FullGallery() {
             <h3 className="font-script text-5xl md:text-5xl text-foreground mb-2">
               {deleteMode ? t.deleteButton : t.allPhotosTitle}
             </h3>
-            <p className="text-sm text-muted-foreground">
-              {deleteMode
-                ? `${userPhotos.length} ${lang === "it" ? "foto" : "photos"}`
-                : t.subtitle}
-            </p>
+            {!deleteMode ? (
+              <>
+                <p className="text-base text-muted-foreground" style={{ marginBottom: '0' }}>
+                  {t.subtitle}
+                </p>
+                <p className="text-sm text-muted-foreground opacity-75" style={{ margin: '0' }}>
+                  {getFileCountText()}
+                </p>
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                {getFileCountText()}
+              </p>
+            )}
 
             {/* Success Toaster */}
             {showToaster && (
@@ -330,15 +363,30 @@ export default function FullGallery() {
                     onClick={() => !deleteMode && openLightbox(index)}
                     style={{ cursor: deleteMode ? "default" : "pointer" }}
                   >
-                    <img
-                      src={photo.url}
-                      alt={formatUploader(photo.uploaderName)}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
+                    {photo.type === "video" ? (
+                      <>
+                        <video
+                          src={photo.url}
+                          className="w-full h-full object-cover"
+                          preload="metadata"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                          <div className="play-icon-wrapper">
+                            <span className="play-icon">▶</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <img
+                        src={photo.url}
+                        alt={formatUploader(photo.uploaderName)}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                     <div className="photo-info">
                       <p className="font-body font-semibold">
-                        {formatUploader(photo.uploaderName)}
+                        {photo.type === "video" ? "🎥" : "📸"} {photo.uploaderName}
                       </p>
                       <p className="text-sm opacity-80">
                         {(() => {
@@ -421,8 +469,8 @@ export default function FullGallery() {
             <div className="gallery-modal__header">
               <div>
                 <p className="text-sm font-body">
-                  <strong>
-                    {formatUploader(photos[lightboxIndex].uploaderName)}
+                  {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>
+                    {photos[lightboxIndex].uploaderName}
                   </strong>
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -468,11 +516,20 @@ export default function FullGallery() {
                 ❮
               </button>
 
-              <img
-                src={photos[lightboxIndex].url}
-                alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
-                className="gallery-modal__image"
-              />
+              {photos[lightboxIndex].type === "video" ? (
+                <video
+                  src={photos[lightboxIndex].url}
+                  controls
+                  className="gallery-modal__image"
+                  style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                />
+              ) : (
+                <img
+                  src={photos[lightboxIndex].url}
+                  alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
+                  className="gallery-modal__image"
+                />
+              )}
 
               <button
                 type="button"
