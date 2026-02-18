@@ -33,7 +33,21 @@ export default function App() {
   // Data evento
   const target = "2026-06-05T16:30:00";
   const { days, hours, mins, secs } = useCountdown(target);
-  const [envelopeOpen, setEnvelopeOpen] = useState(false);
+  
+  // Inizializza envelopeOpen basandoti su skipIntro o sessionStorage
+  const [envelopeOpen, setEnvelopeOpen] = useState(() => {
+    if (location.state?.skipIntro) {
+      try {
+        sessionStorage.setItem("envelopeSeen", "1");
+        window.dispatchEvent(new Event("envelopeOpened"));
+      } catch {
+        /* ignore */
+      }
+      return true;
+    }
+    return false;
+  });
+  
   // Stato per la sezione Regalos
   const [showAportacion, setShowAportacion] = useState(false);
   const [showIban, setShowIban] = useState(false);
@@ -90,16 +104,9 @@ export default function App() {
     if (p?.catch) p.catch(() => {});
   };
 
-  // Se arrivi con skipIntro (es. bottone "indietro" della full gallery), apri e scrolla una volta, poi pulisci lo state per evitare salti al refresh
+  // Se arrivi con skipIntro (es. bottone "indietro" della full gallery), scrolla alla sezione target
   useEffect(() => {
-    if (location.state?.skipIntro) {
-      setEnvelopeOpen(true);
-      try {
-        sessionStorage.setItem("envelopeSeen", "1");
-        window.dispatchEvent(new Event("envelopeOpened"));
-      } catch {
-        /* ignore */
-      }
+    if (location.state?.skipIntro && envelopeOpen) {
       const targetId = location.state?.targetSection || "galleria";
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
@@ -109,7 +116,7 @@ export default function App() {
       }
       navigate(location.pathname, { replace: true, state: {} });
     }
-  }, [location, navigate, setEnvelopeOpen]);
+  }, [location, navigate, envelopeOpen]);
 
   // Se torni da /gallery con il tasto indietro, usa il flag di sessione per scrollare alla galleria
   useEffect(() => {

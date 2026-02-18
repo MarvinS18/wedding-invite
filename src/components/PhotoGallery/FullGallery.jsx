@@ -48,6 +48,8 @@ export default function FullGallery() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
   const videoRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   // rimosso dateLocale inutilizzato
   // Forza sempre il formato dd/mm/yyyy
   const dateFormatOptions = {
@@ -126,6 +128,60 @@ export default function FullGallery() {
 
   const goToNextPhoto = () => {
     setLightboxIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
+  };
+
+  // Gestione swipe touch
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      goToNextPhoto();
+    }
+    if (isRightSwipe) {
+      goToPreviousPhoto();
+    }
+    
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  // Gestione mouse drag per desktop
+  const handleMouseDown = (e) => {
+    setTouchStart(e.clientX);
+  };
+
+  const handleMouseMove = (e) => {
+    if (touchStart) {
+      setTouchEnd(e.clientX);
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      goToNextPhoto();
+    }
+    if (isRightSwipe) {
+      goToPreviousPhoto();
+    }
+    
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   const handleDeleteModeClick = () => {
@@ -479,46 +535,26 @@ export default function FullGallery() {
           ></div>
           <div className="gallery-modal__content">
             <div className="gallery-modal__header">
-              <div>
-                <p className="text-sm font-body">
-                  {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>
-                    {photos[lightboxIndex].uploaderName}
-                  </strong>
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {(() => {
-                    const d = photos[lightboxIndex].uploadedAt?.toDate?.();
-                    if (!d) return "";
-                    const date = d.toLocaleDateString(
-                      "it-IT",
-                      dateFormatOptions,
-                    );
-                    const time = d.toLocaleTimeString("it-IT", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    });
-                    return `${date} ${time}`;
-                  })()}
-                </p>
-              </div>
-              <div className="gallery-modal__controls">
-                <span className="gallery-modal__counter">
-                  {t.photoCounter
-                    .replace("{current}", lightboxIndex + 1)
-                    .replace("{total}", photos.length)}
-                </span>
-                <button
-                  type="button"
-                  className="gallery-close-btn"
-                  onClick={closeLightbox}
-                  aria-label={t.closeLabel}
-                >
-                  ✕
-                </button>
-              </div>
+              <button
+                type="button"
+                className="gallery-close-btn"
+                onClick={closeLightbox}
+                aria-label={t.closeLabel}
+              >
+                ✕
+              </button>
             </div>
 
-            <div className="gallery-modal__image-container">
+            <div 
+              className="gallery-modal__image-container"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              style={{ cursor: 'grab', userSelect: 'none' }}
+            >
               <button
                 type="button"
                 className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
@@ -528,31 +564,54 @@ export default function FullGallery() {
                 ❮
               </button>
 
-              {photos[lightboxIndex].type === "video" ? (
-                <video
-                  ref={videoRef}
-                  src={photos[lightboxIndex].url}
-                  controls
-                  autoPlay
-                  className="gallery-modal__image"
-                  style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
-                />
-              ) : (
-                <img
-                  src={photos[lightboxIndex].url}
-                  alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
-                  className="gallery-modal__image"
-                />
-              )}
+              <div className="gallery-modal__image-wrapper">
+                <span className="gallery-modal__counter">
+                  {t.photoCounter
+                    .replace("{current}", lightboxIndex + 1)
+                    .replace("{total}", photos.length)}
+                </span>
+                {photos[lightboxIndex].type === "video" ? (
+                  <video
+                    ref={videoRef}
+                    src={photos[lightboxIndex].url}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="gallery-modal__image"
+                    style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                  />
+                ) : (
+                  <img
+                    src={photos[lightboxIndex].url}
+                    alt={`Foto di ${photos[lightboxIndex].uploaderName}`}
+                    className="gallery-modal__image"
+                    draggable="false"
+                  />
+                )}
+              </div>
+            </div>
 
-              <button
-                type="button"
-                className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
-                onClick={goToNextPhoto}
-                aria-label={t.nextPhoto}
-              >
-                ❯
-              </button>
+            <div className="gallery-modal__footer">
+              <p className="text-sm font-body">
+                {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>
+                  {photos[lightboxIndex].uploaderName}
+                </strong>
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {(() => {
+                  const d = photos[lightboxIndex].uploadedAt?.toDate?.();
+                  if (!d) return "";
+                  const date = d.toLocaleDateString(
+                    "it-IT",
+                    dateFormatOptions,
+                  );
+                  const time = d.toLocaleTimeString("it-IT", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
+                  return `${date} ${time}`;
+                })()}
+              </p>
             </div>
           </div>
         </div>
