@@ -1247,6 +1247,7 @@ export default function App() {
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">
             {t.footer.names}
           </p>
+    
         </div>
       </footer>
     </>

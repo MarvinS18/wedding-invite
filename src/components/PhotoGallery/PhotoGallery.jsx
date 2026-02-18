@@ -59,6 +59,8 @@ export default function PhotoGallery({ lang = "en" }) {
   }, []);
 
   const videoRef = useRef(null);
+  const [showVideoControls, setShowVideoControls] = useState(false);
+  const videoControlsTimeoutRef = useRef(null);
 
   // Autoplay video quando si apre il lightbox
   useEffect(() => {
@@ -555,16 +557,16 @@ export default function PhotoGallery({ lang = "en" }) {
                 onMouseUp={handleMouseUp}
                 style={{ cursor: 'grab', userSelect: 'none' }}
               >
-                <button
-                  type="button"
-                  className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
-                  onClick={goToPreviousPhoto}
-                  aria-label={t.previousPhoto}
-                >
-                  ❮
-                </button>
-
                 <div className="gallery-modal__image-wrapper">
+                  <button
+                    type="button"
+                    className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
+                    onClick={goToPreviousPhoto}
+                    aria-label={t.previousPhoto}
+                  >
+                    ❮
+                  </button>
+
                   <span className="gallery-modal__counter">
                     {t.photoCounter
                       .replace("{current}", lightboxIndex + 1)
@@ -574,11 +576,39 @@ export default function PhotoGallery({ lang = "en" }) {
                     <video
                       ref={videoRef}
                       src={photos[lightboxIndex].url}
-                      controls
+                      controls={showVideoControls}
                       autoPlay
                       playsInline
                       className="gallery-modal__image"
                       style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                      onPlay={() => {
+                        setShowVideoControls(true);
+                        if (videoControlsTimeoutRef.current) {
+                          clearTimeout(videoControlsTimeoutRef.current);
+                        }
+                        videoControlsTimeoutRef.current = setTimeout(() => {
+                          setShowVideoControls(false);
+                        }, 2000);
+                      }}
+                      onMouseMove={() => {
+                        setShowVideoControls(true);
+                        if (videoControlsTimeoutRef.current) {
+                          clearTimeout(videoControlsTimeoutRef.current);
+                        }
+                        videoControlsTimeoutRef.current = setTimeout(() => {
+                          setShowVideoControls(false);
+                        }, 2000);
+                      }}
+                      onTouchMove={() => {
+                        setShowVideoControls(true);
+                        if (videoControlsTimeoutRef.current) {
+                          clearTimeout(videoControlsTimeoutRef.current);
+                        }
+                        videoControlsTimeoutRef.current = setTimeout(() => {
+                          setShowVideoControls(false);
+                        }, 2000);
+                      }}
+                      onPause={() => setShowVideoControls(true)}
                     />
                   ) : (
                     <img
@@ -588,16 +618,16 @@ export default function PhotoGallery({ lang = "en" }) {
                       draggable="false"
                     />
                   )}
-                </div>
 
-                <button
-                  type="button"
-                  className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
-                  onClick={goToNextPhoto}
-                  aria-label={t.nextPhoto}
-                >
-                  ❯
-                </button>
+                  <button
+                    type="button"
+                    className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
+                    onClick={goToNextPhoto}
+                    aria-label={t.nextPhoto}
+                  >
+                    ❯
+                  </button>
+                </div>
               </div>
 
               <div className="gallery-modal__footer">

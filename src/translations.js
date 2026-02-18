@@ -138,7 +138,7 @@
     photoGallery: {
       title: "Condividi i tuoi scatti",
       preWeddingSubtitle: "Al giorno del matrimonio, condividi gli scatti migliori con tutti gli ospiti",
-      postWeddingSubtitle: "Carica le tue foto del matrimonio e crea una galleria condivisa con tutti gli ospiti!",
+      postWeddingSubtitle: "Carica i tuoi scatti del matrimonio e crea una galleria condivisa con tutti gli ospiti!",
       galleryTitle: "Galleria",
       allPhotosTitle: "Tutti gli scatti",
       subtitle: "I vostri momenti speciali",
@@ -243,7 +243,7 @@
     program: {
       title: "The Timeline of Our Big Day",
       titleDesktop: "The Timeline of Our\u00A0Big\u00A0Day",
-      titleMobile: "The Timeline of \nOur Big Day",
+      titleMobile: "The Timeline\nof Our Big Day",
       subtitle: "Our day, step by step",
       events: {
         ceremony: { time: "16:00", title: "Ceremony", description: "Exchange of vows" },

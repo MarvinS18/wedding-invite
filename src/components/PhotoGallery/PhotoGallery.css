@@ -71,6 +71,13 @@
     }
 }
 
+@media (min-width: 601px) {
+    .delete-modal-content {
+        width: 400px !important;
+        max-width: 520px !important;
+    }
+}
+
 /* Photo Gallery Section */
 .photo-gallery-section {
     padding: 3rem 0 4rem;
@@ -879,4 +886,32 @@ gallery-close-btn:hover {
 .gallery-modal__footer p {
     margin: 0.1rem 0;
     line-height: 1.3;
+}
+
+.delete-error-message {
+    font-size: 12px;
+}
+
+.delete-modal-input {
+    background: #fffaf4 !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #3a2f28 !important;
+}
+
+.rsvp-input.delete-modal-input:focus {
+    border-color: rgba(138, 110, 93, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.18) !important;
+    outline: none !important;
+}
+
+.delete-modal-input:focus {
+    border-color: rgba(138, 110, 93, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(138, 110, 93, 0.18) !important;
+    outline: none !important;
+}
+
+@media (min-width: 768px) {
+    .delete-error-message {
+        font-size: 14px;
+    }
 }

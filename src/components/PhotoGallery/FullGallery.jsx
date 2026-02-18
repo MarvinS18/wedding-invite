@@ -47,7 +47,9 @@ export default function FullGallery() {
   }, [showToaster]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [photoToDelete, setPhotoToDelete] = useState(null);
+  const [showVideoControls, setShowVideoControls] = useState(false);
   const videoRef = useRef(null);
+  const videoControlsTimeoutRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   // rimosso dateLocale inutilizzato
@@ -134,6 +136,37 @@ export default function FullGallery() {
       document.documentElement.style.scrollBehavior = lockedBehavior;
     };
   }, [lightboxOpen]);
+
+  useEffect(() => {
+    if (!showDeleteModal) return;
+
+    const scrollY = window.scrollY;
+    const scrollBehavior = document.documentElement.style.scrollBehavior;
+    document.body.dataset.deleteModalScrollLockBehavior = scrollBehavior || "";
+    document.body.dataset.deleteModalScrollLockY = String(scrollY);
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      const lockedY = parseInt(document.body.dataset.deleteModalScrollLockY || "0", 10);
+      const lockedBehavior = document.body.dataset.deleteModalScrollLockBehavior || "";
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.dataset.deleteModalScrollLockY = "";
+      document.body.dataset.deleteModalScrollLockBehavior = "";
+      if (!Number.isNaN(lockedY)) {
+        window.scrollTo(0, lockedY);
+      }
+      document.documentElement.style.scrollBehavior = lockedBehavior;
+    };
+  }, [showDeleteModal]);
 
   const openLightbox = (index) => {
     setLightboxIndex(index);
@@ -575,16 +608,16 @@ export default function FullGallery() {
               onMouseUp={handleMouseUp}
               style={{ cursor: 'grab', userSelect: 'none' }}
             >
-              <button
-                type="button"
-                className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
-                onClick={goToPreviousPhoto}
-                aria-label={t.previousPhoto}
-              >
-                ❮
-              </button>
-
               <div className="gallery-modal__image-wrapper">
+                <button
+                  type="button"
+                  className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
+                  onClick={goToPreviousPhoto}
+                  aria-label={t.previousPhoto}
+                >
+                  ❮
+                </button>
+
                 <span className="gallery-modal__counter">
                   {t.photoCounter
                     .replace("{current}", lightboxIndex + 1)
@@ -594,11 +627,39 @@ export default function FullGallery() {
                   <video
                     ref={videoRef}
                     src={photos[lightboxIndex].url}
-                    controls
+                    controls={showVideoControls}
                     autoPlay
                     playsInline
                     className="gallery-modal__image"
                     style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                    onPlay={() => {
+                      setShowVideoControls(true);
+                      if (videoControlsTimeoutRef.current) {
+                        clearTimeout(videoControlsTimeoutRef.current);
+                      }
+                      videoControlsTimeoutRef.current = setTimeout(() => {
+                        setShowVideoControls(false);
+                      }, 2000);
+                    }}
+                    onMouseMove={() => {
+                      setShowVideoControls(true);
+                      if (videoControlsTimeoutRef.current) {
+                        clearTimeout(videoControlsTimeoutRef.current);
+                      }
+                      videoControlsTimeoutRef.current = setTimeout(() => {
+                        setShowVideoControls(false);
+                      }, 2000);
+                    }}
+                    onTouchMove={() => {
+                      setShowVideoControls(true);
+                      if (videoControlsTimeoutRef.current) {
+                        clearTimeout(videoControlsTimeoutRef.current);
+                      }
+                      videoControlsTimeoutRef.current = setTimeout(() => {
+                        setShowVideoControls(false);
+                      }, 2000);
+                    }}
+                    onPause={() => setShowVideoControls(true)}
                   />
                 ) : (
                   <img
@@ -608,16 +669,16 @@ export default function FullGallery() {
                     draggable="false"
                   />
                 )}
-              </div>
 
-              <button
-                type="button"
-                className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
-                onClick={goToNextPhoto}
-                aria-label={t.nextPhoto}
-              >
-                ❯
-              </button>
+                <button
+                  type="button"
+                  className="gallery-modal__nav-btn gallery-modal__nav-btn--next"
+                  onClick={goToNextPhoto}
+                  aria-label={t.nextPhoto}
+                >
+                  ❯
+                </button>
+              </div>
             </div>
 
             <div className="gallery-modal__footer">
@@ -717,11 +778,14 @@ export default function FullGallery() {
           >
             <div
               className="gallery-modal__backdrop"
-              onClick={() => setShowDeleteModal(false)}
+              onClick={() => {
+                setShowDeleteModal(false);
+                setDeleteError("");
+              }}
             ></div>
             <div
-              className="gallery-modal__content"
-              style={{ maxWidth: "420px", padding: "2rem" }}
+              className="gallery-modal__content delete-modal-content"
+              style={{ padding: "2rem" }}
             >
               <div
                 className="gallery-modal__header"
@@ -749,14 +813,17 @@ export default function FullGallery() {
                   value={nameInput}
                   onChange={(e) => setNameInput(e.target.value)}
                   placeholder={lang === "it" ? "Il tuo nome" : "Your name"}
-                  className="rsvp-input"
+                  className="rsvp-input delete-modal-input"
                   style={{
                     width: "100%",
                     maxWidth: "100%",
                     textAlign: "center",
                     borderRadius: "14px",
                     height: "38px",
-                    fontSize: "15px",
+                    fontSize: "16px",
+                    background: "#fffaf4",
+                    border: "1px solid rgba(0, 0, 0, 0.12)",
+                    color: "#3a2f28",
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") handleVerifyName();
@@ -764,9 +831,9 @@ export default function FullGallery() {
                 />
                 {deleteError && (
                   <p
+                    className="delete-error-message"
                     style={{
                       color: "#dc2626",
-                      fontSize: "0.875rem",
                       marginTop: "0.5rem",
                     }}
                   >
@@ -784,7 +851,10 @@ export default function FullGallery() {
                 <button
                   type="button"
                   className="rsvp-btn secondary"
-                  onClick={() => setShowDeleteModal(false)}
+                  onClick={() => {
+                    setShowDeleteModal(false);
+                    setDeleteError("");
+                  }}
                 >
                   {t.deleteModalCancel}
                 </button>
