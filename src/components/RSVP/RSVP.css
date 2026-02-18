@@ -150,7 +150,9 @@
 }
 
 .rsvp-person__status.ok {
-    opacity: 0.9;
+    opacity: 1;
+    color: #8A6E5D;
+    font-weight: 500;
 }
 
 .rsvp-person__status.todo {
@@ -226,6 +228,7 @@
     background: rgba(255, 255, 255, 0.8);
     padding: 0 12px;
     outline: none;
+    font-size: 14px;
 }
 
 .rsvp-select:focus {
@@ -355,7 +358,7 @@
 
     .rsvp-select,
     .rsvp-textarea {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .rsvp-error {
@@ -425,7 +428,8 @@
 
     /* padding card */
     .rsvp-person__head {
-        padding: 12px 14px;
+        padding: 12px 10px;
+        gap: 8px;
     }
 
     .rsvp-person__body {

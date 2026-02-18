@@ -31,7 +31,7 @@
     // Cerimonia
     ceremony: {
       title: "La Cerimonia",
-      place: "Chiesa di Santa Cecilia",
+      place: "Basilica di Santa Cecilia",
       address: "Piazza di Santa Cecilia, 22, 00153 Roma RM",
       time: "Ore 16:30",
       openInMaps: "Apri in Maps",
@@ -118,6 +118,7 @@
         enterName: "Inserisci nome e cognome.",
         nameNotFound: "Nome non presente nella lista invitati. Controlla che sia identico all'invito.",
         sendError: "Errore durante l'invio. Controlla la connessione e riprova.",
+        incompleteForm: "Compila la form prima di inviare.",
       },
     },
 
@@ -226,7 +227,7 @@
     // Cerimonia
     ceremony: {
       title: "The Ceremony",
-      place: "Church of Santa Cecilia",
+      place: "Basilica of Santa Cecilia",
       address: "Piazza di Santa Cecilia, 22, 00153 Rome RM",
       time: "At 4:30 PM",
       openInMaps: "Open in Maps",
@@ -314,6 +315,7 @@
         enterName: "Please enter name and surname.",
         nameNotFound: "Name not found in the guest list. Please check it matches the invitation.",
         sendError: "Error while sending. Check your connection and try again.",
+        incompleteForm: "Please complete the form before submitting.",
       },
     },
 

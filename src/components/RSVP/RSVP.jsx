@@ -10,7 +10,7 @@ export default function RSVP({ lang = "it" }) {
   const groups = useMemo(() => GUEST_GROUPS, []);
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbzqKuqjoWX4L_w3zwXKCLqIKufzsuQ2-BW70peOvejR1KuesmXbLSc-wwD-0NlcLEiu/exec";
+    "https://script.google.com/macros/s/AKfycbyb7-dm7n3oSB_PqTisVMLTvBooQstHqqHinaFoDZbeo_9-5NyVFKnja4OMsRd9PuNS/exec";
 
   // (Facoltativo) info evento da mostrare nelle card
   const eventInfo = useMemo(
@@ -18,8 +18,8 @@ export default function RSVP({ lang = "it" }) {
       ceremonyTitle:
         lang === "it" ? "Cerimonia in Chiesa" : "Ceremony in Church",
       ceremonyPlace:
-        lang === "it" ? "Chiesa di Santa Cecilia" : "Church of Santa Cecilia",
-      ceremonyTime: "16:30",
+        lang === "it" ? "Basilica di Santa Cecilia" : "Basilica of Santa Cecilia",
+      ceremonyTime: "16:00",
       receptionTitle: lang === "it" ? "Ricevimento" : "Reception at Location",
       receptionPlace: lang === "it" ? "Villa dei Consoli" : "Villa dei Consoli",
       receptionTime: "18:30",
@@ -165,11 +165,8 @@ export default function RSVP({ lang = "it" }) {
     setError("");
 
     if (!isCompleteAll()) {
-      setError(
-        lang === "it"
-          ? "Compila Cerimonia e Ricevimento per tutti i membri del gruppo."
-          : "Please complete Ceremony and Reception for everyone in the group.",
-      );
+      setError(t.rsvpForm.errors.incompleteForm);
+      setTimeout(() => setError(""), 4000);
       return;
     }
 
@@ -484,6 +481,8 @@ export default function RSVP({ lang = "it" }) {
               );
             })}
           </div>
+
+          {error && <p className="rsvp-error">{error}</p>}
 
           <div className="rsvp-actions">
             <button
