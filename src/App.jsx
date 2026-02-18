@@ -57,6 +57,7 @@ export default function App() {
   const t = translations[lang];
   // Ref per la sezione RSVP
   const rsvpSectionRef = useRef(null);
+  const resumeMusicOnInteractionRef = useRef(false);
 
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
@@ -99,9 +100,27 @@ export default function App() {
 
     a.loop = true;
     a.volume = 0.6;
+    if (a.load) a.load();
 
     const p = a.play();
-    if (p?.catch) p.catch(() => {});
+    if (p?.catch) {
+      p.catch(() => {
+        if (resumeMusicOnInteractionRef.current) return;
+        resumeMusicOnInteractionRef.current = true;
+
+        const resume = () => {
+          resumeMusicOnInteractionRef.current = false;
+          const p2 = a.play();
+          if (p2?.catch) p2.catch(() => {});
+        };
+
+        document.addEventListener("touchstart", resume, {
+          once: true,
+          passive: true,
+        });
+        document.addEventListener("click", resume, { once: true });
+      });
+    }
   };
 
   // Se arrivi con skipIntro (es. bottone "indietro" della full gallery), scrolla alla sezione target
