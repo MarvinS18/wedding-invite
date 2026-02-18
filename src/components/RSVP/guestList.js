@@ -20,12 +20,8 @@ export const GUEST_GROUPS = [
     members: ["Ochie Mercado", "Larry Boco", "Deither Boco", "Vera Joy Pablo", "Dale Boco", "Caterina Delios"],
   },
   {
-    label: "Jay Mercado",
-    members: ["Jay Mercado"],
-  },
-  {
-    label: "Analyn Uri",
-    members: ["Analyn Uri"],
+    label: "Jay Mercado, Analyn Uri",
+    members: ["Jay Mercado", "Analyn Uri"],
   },
   {
     label: "Uri Camiso Family",
@@ -52,8 +48,8 @@ export const GUEST_GROUPS = [
     members: ["Franz Gabrielle Macario", "Lawrence Castelo", "Zendaya Castelo"],
   },
   {
-    label: "Martina Iori",
-    members: ["Martina Iori"],
+    label: "Martina Iori, Francesco De Santis",
+    members: ["Martina Iori", "Francesco De Santis"],
   },
   {
     label: "Louis Perolina, Margareth Maccaferri",
@@ -85,7 +81,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Capoano Family",
-    members: ["Marco Capoano", "Maria Capoano", "Rocco Capoano", "Rocco Capoano", "Oscar Capoano", "Roxanne Capoano", "Elvis Capoano"],
+    members: ["Marco Capoano", "Maria Capoano", "Rocco Capoano", "Oscar Capoano", "Roxanne Capoano", "Elvis Capoano"],
   },
   {
     label: "Kathleen Galut Lirio, John Christoper Duhina",
@@ -132,10 +128,6 @@ export const GUEST_GROUPS = [
     members: ["Mariel Gaddi"],
   },
   {
-    label: "Francesco De Santis",
-    members: ["Francesco De Santis"],
-  },
-  {
     label: "Reyes-De Villa Family",
     members: ["Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel"],
   },
@@ -168,8 +160,8 @@ export const GUEST_GROUPS = [
     members: ["Dominika Pilus"],
   },
   {
-    label: "Tita May Oloraza, Flavio",
-    members: ["Tita May Oloraza", "Flavio"],
+    label: "Tita May Oloraza, Flavio Talone",
+    members: ["Tita May Oloraza", "Flavio Talone"],
   },
   {
     label: "Samantha Munoz, Paul Avinguetero",
@@ -181,7 +173,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Casapao Family",
-    members: ["Maricel Casapao", "Ragie Casapao"],
+    members: ["Maricel Casapao", "Ragie Casapao", "Khloe Casapao"],
   },
   {
     label: "Rachel Patrocinio, Jerome Maramot",
