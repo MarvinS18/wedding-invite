@@ -37,11 +37,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Axalan Family",
-    members: ["Hazelle Klein Axalan", "John Pierre Aracano", "Alma Calangi Axalan", "Edwin Axalan"],
-  },
-  {
-    label: "Axalan Family",
-    members: ["Hazelle Klein Axalan", "John Pierre Aracano", "Alma Calangi Axalan", "Edwin Axalan", "Kyle Axalan"],
+    members: ["Hazelle Klein Axalan", "John Pierre Arcano", "Alma Calangi Axalan", "Edwin Axalan", "Kyle Axalan"],
   },
   {
     label: "Gizelle Catigbac, Jhon Pier Melchor",
