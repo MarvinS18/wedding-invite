@@ -20,16 +20,16 @@ export const GUEST_GROUPS = [
     members: ["Ochie Mercado", "Larry Boco", "Deither Boco", "Vera Joy Pablo", "Dale Boco", "Caterina Delios"],
   },
   {
-    label: "Jay Mercado, Analyn Uri",
-    members: ["Jay Mercado", "Analyn Uri"],
+    label: "Rizaldy Jay Mercado",
+    members: ["Rizaldy Jay Mercado"],
   },
   {
     label: "Uri Camiso Family",
-    members: ["Izle Uri", "Clairus J Camiso", "Callien Camiso"],
+    members: ["Fheliza Uri", "Clairus J Camiso", "Callie Camiso"],
   },
   {
     label: "Desingco Family",
-    members: ["Jasmine Mercado", "Bernard Desingco", "Rafael B Desingco", "Gabbie Desingco"],
+    members: ["Jasmine Mercado", "Bernard Desingco", "Rafaelle Bernard Desingco", "Gabriella Jasmine Desingco"],
   },
   {
     label: "Axalan Family",
@@ -41,7 +41,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Uri Sandoval Family",
-    members: ["Cloie Uri", "Mac Sandoval", "Joshua Uri Sandoval"],
+    members: ["Ma Cleotilda Uri", "Marc Raven Sandoval", "Joshua Uri Sandoval"],
   },
   {
     label: "Macario-Castelo Family",
@@ -61,7 +61,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Mistica Family",
-    members: ["Keith Mistica", "Mike Mistica", "Wayne Mistica"],
+    members: ["Keith Mistica", "Mike Mistica", "Wayne Carter Mistica"],
   },
   {
     label: "Felizardo Family",
@@ -84,8 +84,8 @@ export const GUEST_GROUPS = [
     members: ["Marco Capoano", "Maria Capoano", "Rocco Capoano", "Oscar Capoano", "Roxanne Capoano", "Elvis Capoano"],
   },
   {
-    label: "Kathleen Galut Lirio, John Christoper Duhina",
-    members: ["Kathleen Galut Lirio", "John Christoper Duhina"],
+    label: "Kathleen Galut Lirio, John Christopher Duhina",
+    members: ["Kathleen Galut Lirio", "John Christopher Duhina"],
   },
   {
     label: "Lesley Duhina",
@@ -145,7 +145,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Calangi Family",
-    members: ["Ariel Calangi", "Remy Calangi"],
+    members: ["Ariel Calangi", "Remy Calangi", "Christian Calangi"],
   },
   {
     label: "Valeria Bocchino, Enzo Conte",
@@ -183,5 +183,4 @@ export const GUEST_GROUPS = [
     label: "Daryl Renz Lirio, Giulia Padan",
     members: ["Daryl Renz Lirio", "Giulia Padan"],
   },
-
 ]
