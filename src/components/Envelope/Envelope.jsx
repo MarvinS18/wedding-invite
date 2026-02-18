@@ -10,18 +10,19 @@ export default function Envelope({ onOpen, onStart }) {
   const [requestedPlay, setRequestedPlay] = useState(false); 
   const [coverHidden, setCoverHidden] = useState(false);   
 
- function startVideo() {
-  if (requestedPlay) return;
-  setRequestedPlay(true);
+  function startVideo() {
+    if (requestedPlay) return;
+    setRequestedPlay(true);
 
-  onStart?.(); // ✅ QUI parte la musica (tap = ok su mobile)
+    onStart?.(); // ✅ QUI parte la musica (tap = ok su mobile)
 
-  const v = videoRef.current;
-  if (!v) return;
+    const v = videoRef.current;
+    if (!v) return;
 
-  const p = v.play();
-  if (p?.catch) p.catch(() => {});
-}
+    v.load();
+    const p = v.play();
+    if (p?.catch) p.catch(() => {});
+  }
 
   function enterSite() {
     onOpen?.();
@@ -29,13 +30,17 @@ export default function Envelope({ onOpen, onStart }) {
 
   return (
     <div className="intro-overlay" role="dialog" aria-modal="true">
-      <div className="intro-center" onClick={startVideo}>
+      <div
+        className="intro-center"
+        onTouchStart={startVideo}
+        onClick={startVideo}
+      >
         <video
           ref={videoRef}
           className="intro-video"
           src={videoSrc}
           playsInline
-          preload="auto"
+          preload="none"
           muted
           poster={coverImg}                
           onPlaying={() => setCoverHidden(true)} 
