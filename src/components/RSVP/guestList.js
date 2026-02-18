@@ -4,27 +4,48 @@ export const GUEST_GROUPS = [
     label: "Marvin Samiano, Vanessa Palacio",
     members: ["Marvin Samiano", "Vanessa Palacio"],
   },
-  { label: "Reichelle Mercado, Karl Anjelo Dimaano Reyes", members: ["Reichelle Carolaine Rodriguez Mercado", "Karl Anjelo Dimaano Reyes"] },
-  { label: "Jhon Pier Melchor, Gizelle Catigbac", members: ["Jhon Pier Melchor", "Gizelle Catigbac"] },
+  { label: "Reichelle Mercado, Karl Anjelo Dimaano Reyes", 
+    members: ["Reichelle Carolaine Rodriguez Mercado", "Karl Anjelo Dimaano Reyes"] 
+  },
+  {
+    label: "Jan Armond Reyes, Leonisa Dimaano",
+    members: ["an Armond Reyes", "Leonisa Dimaano"],
+  },
   {
     label: "Mercado Family",
-    members: ["Ysabelle Mercado", "Wilma Rodriguez", "Rolando Mercado", "Jay Mercado"],
+    members: ["Ysabelle Mercado", "Wilma Rodriguez", "Rolando Mercado"],
   },
   {
     label: "Mercado-Boco Family",
     members: ["Ochie Mercado", "Larry Boco", "Deither Boco", "Vera Joy Pablo", "Dale Boco", "Caterina Delios"],
   },
   {
+    label: "Jay Mercado",
+    members: ["Jay Mercado"],
+  },
+  {
+    label: "Analyn Uri",
+    members: ["Analyn Uri"],
+  },
+  {
     label: "Uri Camiso Family",
-    members: ["Izle Uri", "Clairus J Camiso", "Callie Camiso"],
+    members: ["Izle Uri", "Clairus J Camiso", "Callien Camiso"],
   },
   {
     label: "Desingco Family",
-    members: ["Bernard Desingco", "Rafael B Desingco", "Gabbie Desingco", "Jasmine Mercado"],
+    members: ["Jasmine Mercado", "Bernard Desingco", "Rafael B Desingco", "Gabbie Desingco"],
   },
   {
     label: "Axalan Family",
-    members: ["Hazelle Klein Axalan", "John Pierre Arcano", "Alma Calangi Axalan", "Edwin Axalan", "Kyle Axalan"],
+    members: ["Hazelle Klein Axalan", "John Pierre Aracano", "Alma Calangi Axalan", "Edwin Axalan"],
+  },
+  {
+    label: "Axalan Family",
+    members: ["Hazelle Klein Axalan", "John Pierre Aracano", "Alma Calangi Axalan", "Edwin Axalan", "Kyle Axalan"],
+  },
+  {
+    label: "Gizelle Catigbac, Jhon Pier Melchor",
+    members: ["Gizelle Catigbac", "Jhon Pier Melchor"],
   },
   {
     label: "Uri Sandoval Family",
@@ -35,8 +56,16 @@ export const GUEST_GROUPS = [
     members: ["Franz Gabrielle Macario", "Lawrence Castelo", "Zendaya Castelo"],
   },
   {
+    label: "Martina Iori",
+    members: ["Martina Iori"],
+  },
+  {
+    label: "Louis Perolina, Margareth Maccaferri",
+    members: ["Louis Perolina", "Margareth Maccaferri"],
+  },
+  {
     label: "Go Family",
-    members: ["Katrina Sicat Go", "Mark Go", "Lucas Go", "Luna Go"],
+    members: ["Katrina Sicat Go", "Mark Go", "Lucas Go", "Luna Go", ],
   },
   {
     label: "Mistica Family",
@@ -47,60 +76,124 @@ export const GUEST_GROUPS = [
     members: ["Celine Mistica", "Killian Felizardo", "Elaine Felizardo", "Kassandra Felizardo", "Matias Felizardo"],
   },
   {
+    label: "Cristian Aguila",
+    members: ["Cristian Aguila"],
+  },
+  {
     label: "Frago Family",
     members: ["Rolly Frago", "Ana Frago", "Gioia Frago"],
   },
   {
-    label: "Grita Family",
+    label: "Grita",
     members: ["Lucilla Grita", "Boyet Grita"],
   },
   {
     label: "Capoano Family",
-    members: ["Marco Capoano", "Maria Capoano", "Rocco Capoano", "Oscar Capoano", "Roxanne Capoano", "Elvis Capoano"],
+    members: ["Marco Capoano", "Maria Capoano", "Rocco Capoano", "Rocco Capoano", "Oscar Capoano", "Roxanne Capoano", "Elvis Capoano"],
+  },
+  {
+    label: "Kathleen Galut Lirio, John Christoper Duhina",
+    members: ["Kathleen Galut Lirio", "John Christoper Duhina"],
+  },
+  {
+    label: "Lesley Duhina",
+    members: ["Lesley Duhina"],
+  },
+  {
+    label: "Jordan Galura, Sara Dottore",
+    members: ["Jordan Galura", "Sara Dottore"],
+  },
+  {
+    label: "Ralph Glenn Olinares, Cyril Ramos",
+    members: ["Ralph Glenn Olinares", "Cyril Ramos"],
+  },
+  {
+    label: "Ivan Mhar Tizon, Francesca Rose Ubaldo",
+    members: ["Ivan Mhar Tizon", "Francesca Rose Ubaldo"],
+  },
+  {
+    label: "Marvin Cabugawan",
+    members: ["Marvin Cabugawan"],
+  },
+  {
+    label: "Pierre Simangan, Melissa Goot",
+    members: ["Pierre Simangan", "Melissa Goot"],
+  },
+  {
+    label: "Joan Mendoza, Hendrix Perez",
+    members: ["Joan Mendoza", "Hendrix Perez"],
+  },
+  {
+    label: "Aira Briones, Allan Manarin",
+    members: ["Aira Briones", "Allan Manarin"],
+  },
+  {
+    label: "Kristal Salonga, Daniele De Los Santos",
+    members: ["Kristal Salonga", "Daniele De Los Santos"],
+  },
+  {
+    label: "Mariel Gaddi",
+    members: ["Mariel Gaddi"],
+  },
+  {
+    label: "Francesco De Santis",
+    members: ["Francesco De Santis"],
   },
   {
     label: "Reyes-De Villa Family",
-    members: ["Susan Reyes", "Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel", "Angelito Reyes"],
+    members: ["Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel"],
   },
-  { label: "Samantha Munoz, Paul Avinguetero", members: ["Samantha Munoz", "Paul Avinguetero"] },
-  { label: "Francesca Conidi, Rian Hossain", members: ["Francesca Conidi", "Rian Hossain"] },
+  {
+    label: "Angelito Reyes",
+    members: ["Angelito Reyes"],
+  },
+  {
+    label: "Chelsea Catigbac",
+    members: ["Chelsea Catigbac"],
+  },
   {
     label: "Maramot Family",
-    members: ["Totie Maramot", "Chona Maramot", "Jerome Maramot"],
+    members: ["Totie Maramot", "Chona Maramot"],
   },
   {
     label: "Calangi Family",
     members: ["Ariel Calangi", "Remy Calangi"],
   },
   {
+    label: "Valeria Bocchino, Enzo Conte",
+    members: ["Valeria Bocchino", "Enzo Conte"],
+  },
+  {
+    label: "Chiara De Simone",
+    members: ["Chiara De Simone"],
+  },
+  {
+    label: "Dominika Pilus",
+    members: ["Dominika Pilus"],
+  },
+  {
+    label: "Tita May Oloraza, Flavio",
+    members: ["Tita May Oloraza", "Flavio"],
+  },
+  {
+    label: "Samantha Munoz, Paul Avinguetero",
+    members: ["Samantha Munoz", "Paul Avinguetero"],
+  },
+  {
+    label: "Francesca Conidi, Rian Hossain",
+    members: ["Francesca Conidi", "Rian Hossain"],
+  },
+  {
     label: "Casapao Family",
     members: ["Maricel Casapao", "Ragie Casapao"],
   },
-  { label: "Cristian Aguila", members: ["Cristian Aguila"] },
-  { label: "Louis Perolina", members: ["Louis Perolina"] },
-  { label: "Margareth Maccaferri", members: ["Margareth Maccaferri"] },
-  { label: "Jordan Galura", members: ["Jordan Galura"] },
-  { label: "Ralph Glenn Olinares", members: ["Ralph Glenn Olinares"] },
-  { label: "Cyril Ramos", members: ["Cyril Ramos"] },
-  { label: "Ivan Mhar Tizon", members: ["Ivan Mhar Tizon"] },
-  { label: "Francesca Rose Ubaldo", members: ["Francesca Rose Ubaldo"] },
-  { label: "Pierre Simangan", members: ["Pierre Simangan"] },
-  { label: "Melissa Goot", members: ["Melissa Goot"] },
-  { label: "Joan Mendoza", members: ["Joan Mendoza"] },
-  { label: "Hendrix Perez", members: ["Hendrix Perez"] },
-  { label: "Aira Briones", members: ["Aira Briones"] },
-  { label: "Allan Manarin", members: ["Allan Manarin"] },
-  { label: "Kristal Salonga", members: ["Kristal Salonga"] },
-  { label: "Daniele De los Santos", members: ["Daniele De los Santos"] },
-  { label: "Mariel Gaddi", members: ["Mariel Gaddi"] },
-  { label: "Sara Dottore", members: ["Sara Dottore"] },
-  { label: "Francesco De Santis", members: ["Francesco De Santis"] },
-  { label: "Valeria Bocchino, Enzo Conte", members: ["Valeria Bocchino", "Enzo Conte"] },
-  { label: "Chiara De Simone, Dominika Pilus", members: ["Chiara De Simone", "Dominika Pilus"] },
-  { label: "Tita May Oloraza", members: ["Tita May Oloraza"] },
-  { label: "Flavio", members: ["Flavio"] },
-  { label: "Chelsea Catigbac", members: ["Chelsea Catigbac"] },
-  { label: "Kathleen Galut Lirio, John Christopher Duhina, Lesley Duhina", members: ["Kathleen Galut Lirio", "John Christopher Duhina", "Lesley Duhina"] },
-  { label: "Giulia Padan", members: ["Giulia Padan"] },
-  { label: "Daryl Renz Lirio", members: ["Daryl Renz Lirio"] },
-];
+  {
+    label: "Rachel Patrocinio, Jerome Maramot",
+    members: ["Rachel Patrocinio", "Jerome Maramot"],
+  },
+  {
+    label: "Daryl Renz Lirio, Giulia Padan",
+    members: ["Daryl Renz Lirio", "Giulia Padan"],
+  },
+
+]
