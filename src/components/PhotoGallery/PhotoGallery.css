@@ -52,11 +52,15 @@
 
 @media (max-width: 600px) {
     .rsvp-input::placeholder {
-        font-size: 12px !important;
+        font-size: 16px !important;
     }
 
     .rsvp-input {
-        font-size: 12px !important;
+        font-size: 16px !important;
+    }
+
+    .upload-input {
+        font-size: 16px;
     }
 
     .gallery-modal__footer {

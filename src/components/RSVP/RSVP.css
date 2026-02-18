@@ -350,7 +350,12 @@
     }
 
     .rsvp-input {
-        font-size: 11px;
+        font-size: 16px;
+    }
+
+    .rsvp-select,
+    .rsvp-textarea {
+        font-size: 16px;
     }
 
     .rsvp-error {
