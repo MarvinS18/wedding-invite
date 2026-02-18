@@ -129,7 +129,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Reyes-De Villa Family",
-    members: ["Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel"],
+    members: ["Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel", "Susan Reyes"],
   },
   {
     label: "Angelito Reyes",
