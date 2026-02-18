@@ -1155,6 +1155,9 @@ html {
   color: rgba(138, 110, 93, 0.5);
   font-family: var(--font-script);
   font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
