@@ -149,6 +149,7 @@
     opacity: 0.75;
     color: inherit;
     -webkit-text-fill-color: currentcolor;
+    font-family: var(--font-body);
 }
 
 .rsvp-person__status.ok {

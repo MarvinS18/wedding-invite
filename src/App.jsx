@@ -248,7 +248,7 @@ export default function App() {
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="currentColor"
+                    stroke="rgba(0, 0, 0, 0.5)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -543,7 +543,7 @@ export default function App() {
                   t.program.title
                 )}
               </h2>
-              <p className="text-muted-foreground font-body tracking-wide">
+              <p className="program-subtitle text-muted-foreground font-body tracking-wide">
                 {t.program.subtitle}
               </p>
             </div>

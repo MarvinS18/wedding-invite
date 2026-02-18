@@ -203,6 +203,16 @@ body {
   color: #bdbdbd;
 }
 
+.program-subtitle {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .program-subtitle {
+    font-size: 16px;
+  }
+}
+
 .bg-background {
   background: #fffdf9;
 }
