@@ -9,7 +9,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Jan Armond Reyes, Leonisa Dimaano",
-    members: ["an Armond Reyes", "Leonisa Dimaano"],
+    members: ["Jan Armond Reyes", "Leonisa Dimaano"],
   },
   {
     label: "Mercado Family",
