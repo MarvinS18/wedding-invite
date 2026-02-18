@@ -551,6 +551,7 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     background: rgba(0, 0, 0, 0.28);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @keyframes modalFadeIn {
@@ -575,14 +576,20 @@
     position: relative;
     width: auto;
     max-width: 95vw;
-    max-height: 90vh;
+    max-height: calc(100vh - 24px);
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 22px;
-    padding: 0.5rem 1rem 1rem;
+    padding: 0.5rem 1rem calc(1rem + env(safe-area-inset-bottom));
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
     overflow: hidden;
     z-index: 1;
+}
+
+@supports (height: 100dvh) {
+    .gallery-modal__content {
+        max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    }
 }
 
 .gallery-modal__header {
