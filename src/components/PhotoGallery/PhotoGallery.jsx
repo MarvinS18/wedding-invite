@@ -73,15 +73,33 @@ export default function PhotoGallery({ lang = "en" }) {
   }, [lightboxOpen, lightboxIndex, photos]);
 
   useEffect(() => {
-    const overlayActive = lightboxOpen;
-    if (overlayActive) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!lightboxOpen) return;
+
+    const scrollY = window.scrollY;
+    const scrollBehavior = document.documentElement.style.scrollBehavior;
+    document.body.dataset.scrollLockBehavior = scrollBehavior || "";
+    document.body.dataset.scrollLockY = String(scrollY);
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     return () => {
+      const lockedY = parseInt(document.body.dataset.scrollLockY || "0", 10);
+      const lockedBehavior = document.body.dataset.scrollLockBehavior || "";
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.dataset.scrollLockY = "";
+      document.body.dataset.scrollLockBehavior = "";
+      if (!Number.isNaN(lockedY)) {
+        window.scrollTo(0, lockedY);
+      }
+      document.documentElement.style.scrollBehavior = lockedBehavior;
     };
   }, [lightboxOpen]);
 

@@ -412,6 +412,7 @@
     justify-content: center;
     min-height: 400px;
     padding: 0 1rem;
+    isolation: isolate;
 }
 
 .gallery-modal__image-wrapper {
@@ -772,7 +773,7 @@ gallery-close-btn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 20;
     border-radius: 50%;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
