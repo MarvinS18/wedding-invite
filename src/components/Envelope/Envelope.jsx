@@ -40,7 +40,7 @@ export default function Envelope({ onOpen, onStart }) {
           className="intro-video"
           src={videoSrc}
           playsInline
-          preload="none"
+          preload="auto"
           muted
           poster={coverImg}                
           onPlaying={() => setCoverHidden(true)} 
