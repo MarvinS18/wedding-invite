@@ -270,7 +270,7 @@ export default function App() {
           className="section-padding bg-background scroll-reveal"
         >
           <div className="max-w-4xl mx-auto text-center px-4">
-            <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
+            <p className="countdown-title text-primary font-body tracking-[0.4em] uppercase mb-4">
               {t.countdown.title}
             </p>
 
@@ -298,7 +298,7 @@ export default function App() {
                     {String(days).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.days}
                 </span>
               </div>
@@ -319,7 +319,7 @@ export default function App() {
                     {String(hours).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.hours}
                 </span>
               </div>
@@ -340,7 +340,7 @@ export default function App() {
                     {String(mins).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.minutes}
                 </span>
               </div>
@@ -361,7 +361,7 @@ export default function App() {
                     {String(secs).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.seconds}
                 </span>
               </div>

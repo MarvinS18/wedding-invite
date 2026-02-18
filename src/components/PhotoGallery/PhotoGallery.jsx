@@ -503,7 +503,7 @@ export default function PhotoGallery({ lang = "en" }) {
 
                 {photos.length > 0 && (
                   <div className="text-center mt-6">
-                    <Link className="view-all-btn" to="/gallery">
+                    <Link className="rsvp-btn primary rsvp-btn--single" to="/gallery">
                       {t.viewAllPhotos}
                     </Link>
                   </div>

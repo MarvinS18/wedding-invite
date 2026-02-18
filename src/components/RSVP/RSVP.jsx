@@ -275,11 +275,27 @@ export default function RSVP({ lang = "it" }) {
           <p className="confirm-group__text">{t.rsvpForm.groupQuestion}</p>
 
           <div className="confirm-group__box">
-            {matchedGroup.label.split(",").map((member, idx) => (
-              <div key={idx} className="confirm-group__member">
-                {member.trim()}
-              </div>
-            ))}
+            {matchedGroup.members.length > 2 ? (
+              <>
+                <div
+                  className="confirm-group__member"
+                  style={{ fontWeight: "600", color: "#2B2B2B" }}
+                >
+                  {matchedGroup.label}
+                </div>
+                {matchedGroup.members.map((member, idx) => (
+                  <div key={idx} className="confirm-group__member">
+                    • {member}
+                  </div>
+                ))}
+              </>
+            ) : (
+              matchedGroup.label.split(",").map((member, idx) => (
+                <div key={idx} className="confirm-group__member">
+                  {member.trim()}
+                </div>
+              ))
+            )}
           </div>
 
           <div className="rsvp-actions confirm right">

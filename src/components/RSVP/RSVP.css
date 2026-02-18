@@ -34,6 +34,10 @@
     cursor: pointer;
     transition: all 0.25s ease;
     font-family: var(--font-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 /* Secondario (Indietro) */
@@ -355,7 +359,7 @@
 @media (max-width: 520px) {
 
     .rsvp-title {
-        font-size: 30px;
+        font-size: 28px;
     }
 
     .rsvp-input {
@@ -403,14 +407,15 @@
     }
 
     .rsvp-btn {
-        min-width: 100px;
-        height: 40px;
-        padding: 0 10px;
-        border-radius: 16px;
+        min-width: 96px;
+        height: 36px;
+        padding: 0 12px;
+        border-radius: 14px;
         font-size: 12px;
         font-weight: 500;
         cursor: pointer;
         transition: all 0.25s ease;
+        letter-spacing: 0.02em;
     }
 
 
@@ -419,11 +424,11 @@
     .rsvp-btn--single {
         flex: 0 0 auto;
         width: auto;
-        min-width: 130px;
-        height: 40px;
-        padding: 0 12px;
-        font-size: 14px;
-        border-radius: 13px;
+        min-width: 120px;
+        height: 36px;
+        padding: 0 14px;
+        font-size: 12px;
+        border-radius: 14px;
     }
 
     /* nome persona */
