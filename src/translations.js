@@ -7,6 +7,7 @@
       ceremony: "Cerimonia",
       reception: "Ricevimento",
       program: "Programma",
+      ourStory: "La nostra storia",
       gifts: "Regalo",
       rsvp: "RSVP",
       gallery: "Galleria foto",
@@ -61,7 +62,7 @@
 
     // Our Story
     ourStory: {
-      title: "Our Story",
+      title: "La nostra storia",
       text:
         "Quasi sette anni fa, se qualcuno ci avesse detto che un incontro inaspettato ci avrebbe portato fin qui, probabilmente non ci avremmo creduto. A quanto pare, le cose migliori della vita sono proprio quelle che non vedi arrivare.\nCi siamo trovati senza cercarci e, da allora, non abbiamo mai smesso di sceglierci.\nSiamo arrivati a questo nuovo capitolo, pronti per il nostro grande giorno e per scambiarci finalmente il nostro 'SÌ'.",
     },
@@ -201,6 +202,7 @@
       ceremony: "Ceremony",
       reception: "Reception",
       program: "Program",
+      ourStory: "Our Story",
       gifts: "Gifts",
       rsvp: "RSVP",
       gallery: "Photo gallery",
