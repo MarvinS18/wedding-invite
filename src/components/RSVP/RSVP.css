@@ -147,16 +147,21 @@
     margin-top: 4px;
     font-size: 11px;
     opacity: 0.75;
+    color: inherit;
+    -webkit-text-fill-color: currentcolor;
 }
 
 .rsvp-person__status.ok {
     opacity: 1;
     color: #8A6E5D;
     font-weight: 500;
+    -webkit-text-fill-color: #8A6E5D;
 }
 
 .rsvp-person__status.todo {
     opacity: 0.65;
+    color: #222;
+    -webkit-text-fill-color: #222;
 }
 
 .rsvp-person__chev {
@@ -451,7 +456,9 @@
     .rsvp-select {
         width: 100%;
         min-width: 0;
-        height: 38px;
+        height: 32px;
+        padding-right: 32px;
+        font-size: 12px;
     }
 
     /* tipografia più compatta */
