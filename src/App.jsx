@@ -8,7 +8,7 @@ import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
 import OurStoryCarousel from "./components/OurStoryCarousel/OurStoryCarousel";
-import dresscodecolors from "./assets/dresscodecolors.jpeg";
+import dresscodecolorsnobg from "./assets/dresscodecolorsnobg.png";
 
 function useCountdown(targetDate) {
   const [t, setT] = useState(getDiff(targetDate));
@@ -1085,7 +1085,7 @@ export default function App() {
               {t.attire.note}
             </p>
             <img
-              src={dresscodecolors}
+              src={dresscodecolorsnobg}
               alt="Dress code colors"
               className="mx-auto mt-6"
               style={{ width: "220px", maxWidth: "100%" }}

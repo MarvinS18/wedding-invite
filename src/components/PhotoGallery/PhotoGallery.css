@@ -767,6 +767,11 @@ gallery-close-btn:hover {
         text-align: left !important;
         margin-left: 0.75rem;
     }
+
+    .photo-gallery-title {
+        font-size: 22px;
+        line-height: 1.1;
+    }
 }
 
 /* Navigation buttons - subtle Instagram style */

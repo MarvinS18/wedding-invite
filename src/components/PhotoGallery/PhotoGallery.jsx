@@ -357,7 +357,10 @@ export default function PhotoGallery({ lang = "en" }) {
       >
         {/* Titolo */}
         <div className="text-center mb-12">
-          <h2 className="font-script text-5xl md:text-6xl text-foreground mb-4">
+          <h2
+            className="font-script text-5xl md:text-6xl text-foreground mb-4 photo-gallery-title"
+            style={{ marginLeft: "auto", marginRight: "auto" }}
+          >
             {t.title}
           </h2>
           <p className="text-base text-muted-foreground font-body leading-relaxed">
