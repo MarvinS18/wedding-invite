@@ -233,7 +233,13 @@ export default function App() {
                 aria-expanded={showRSVP}
                 aria-controls="rsvp-form-section"
               >
-                <span className="text-[10px] tracking-[0.3em] max-w-2xl uppercase font-body font-light">
+                <span 
+                  className="text-[10px] tracking-[0.3em] max-w-2xl uppercase font-body font-light"
+                  style={{
+                    WebkitTextFillColor: "currentcolor",
+                    color: "rgba(0, 0, 0, 0.5)"
+                  }}
+                >
                   {t.hero.confirmAttendance}
                 </span>
                 <div>
@@ -243,7 +249,7 @@ export default function App() {
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="currentColor"
+                    stroke="rgba(0, 0, 0, 0.5)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -265,7 +271,7 @@ export default function App() {
           className="section-padding bg-background scroll-reveal"
         >
           <div className="max-w-4xl mx-auto text-center px-4">
-            <p className="text-primary text-[10px] font-body tracking-[0.4em] uppercase mb-4">
+            <p className="countdown-title text-primary font-body tracking-[0.4em] uppercase mb-4">
               {t.countdown.title}
             </p>
 
@@ -293,7 +299,7 @@ export default function App() {
                     {String(days).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.days}
                 </span>
               </div>
@@ -314,7 +320,7 @@ export default function App() {
                     {String(hours).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.hours}
                 </span>
               </div>
@@ -335,7 +341,7 @@ export default function App() {
                     {String(mins).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.minutes}
                 </span>
               </div>
@@ -356,7 +362,7 @@ export default function App() {
                     {String(secs).padStart(2, "0")}
                   </span>
                 </div>
-                <span className="block mt-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-body">
+                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
                   {t.countdown.seconds}
                 </span>
               </div>
@@ -538,7 +544,7 @@ export default function App() {
                   t.program.title
                 )}
               </h2>
-              <p className="text-muted-foreground font-body tracking-wide">
+              <p className="program-subtitle text-muted-foreground font-body tracking-wide">
                 {t.program.subtitle}
               </p>
             </div>

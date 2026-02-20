@@ -118,7 +118,7 @@ export default function PhotoGallery({ lang = "en" }) {
     // Validazioni per ogni file
     for (let file of selectedFiles) {
       const isImage = file.type.startsWith("image/");
-      const isVideo = file.type === "video/mp4";
+      const isVideo = file.type.startsWith("video/");
 
       // Controlla che sia immagine o video
       if (!isImage && !isVideo) {
@@ -395,7 +395,7 @@ export default function PhotoGallery({ lang = "en" }) {
                 <input
                   id="fileInput"
                   type="file"
-                  accept="image/*,video/mp4"
+                  accept="image/*,video/*"
                   multiple
                   onChange={handleFileChange}
                   onClick={(e) => {
@@ -503,7 +503,7 @@ export default function PhotoGallery({ lang = "en" }) {
 
                 {photos.length > 0 && (
                   <div className="text-center mt-6">
-                    <Link className="view-all-btn" to="/gallery">
+                    <Link className="rsvp-btn primary rsvp-btn--single" to="/gallery">
                       {t.viewAllPhotos}
                     </Link>
                   </div>
