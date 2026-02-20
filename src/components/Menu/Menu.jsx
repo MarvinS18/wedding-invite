@@ -96,6 +96,9 @@ export default function Menu({ lang = "en", onLangChange }) {
             <a className="menu-link" href="#regalo" onClick={close}>
               {t.menu.gifts}
             </a>
+            <a className="menu-link" href="#attire" onClick={close}>
+              {t.menu.attire}
+            </a>
             <a className="menu-link" href="#rsvp" onClick={close}>
               {t.menu.rsvp}
             </a>

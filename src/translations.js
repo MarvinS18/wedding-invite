@@ -9,6 +9,7 @@
       program: "Programma",
       ourStory: "La nostra storia",
       gifts: "Regalo",
+      attire: "Dress code",
       rsvp: "RSVP",
       gallery: "Galleria foto",
     },
@@ -77,6 +78,13 @@
       hideIban: "Nascondi IBAN",
     },
 
+    // Dress Code / Attire
+    attire: {
+      title: "Dress Code",
+      subtitle: "È richiesto un abbigliamento elegante.",
+      note: "Il bianco è riservato alla sposa e il blu scuro è riservato allo sposo.",
+    },
+
     // RSVP
     rsvp: {
       title: "RSVP",
@@ -138,9 +146,9 @@
 
     // Photo Gallery
     photoGallery: {
-      title: "Condividi i tuoi scatti",
-      preWeddingSubtitle: "Al giorno del matrimonio, condividi gli scatti migliori con tutti gli ospiti",
-      postWeddingSubtitle: "Carica i tuoi scatti del matrimonio e crea una galleria condivisa con tutti gli ospiti!",
+      title: "#amagiKARLstorywithREICHELLE",
+      preWeddingSubtitle: "Il giorno del matrimonio, aiutate a rendere eterno ogni istante: condividete qui i momenti più speciali.",
+      postWeddingSubtitle: "I vostri ricordi, la nostra gioia: caricate qui gli scatti più belli.",
       galleryTitle: "Galleria",
       allPhotosTitle: "Tutti gli scatti",
       subtitle: "I vostri momenti speciali",
@@ -205,8 +213,16 @@
       program: "Program",
       ourStory: "Our Story",
       gifts: "Gifts",
+      attire: "Attire",
       rsvp: "RSVP",
       gallery: "Photo gallery",
+    },
+   
+    // Attire
+    attire: {
+      title: "Attire",
+      subtitle: "Elegant attire requested.",
+      note: "With white reserved for the bride and dark blue reserved for the groom.",
     },
 
     // Hero
@@ -335,9 +351,9 @@
 
     // Photo Gallery
     photoGallery: {
-      title: "Share your captures",
-      preWeddingSubtitle: "On the wedding day, share your best shots with all the guests",
-      postWeddingSubtitle: "Upload your shots and create a shared gallery with all the guests!",
+      title: "#amagiKARLstorywithREICHELLE",
+      preWeddingSubtitle: "On our wedding day, help us make every moment eternal: share the most special highlights.",
+      postWeddingSubtitle: "Through your lens: we’d love to see the day through your eyes.",
       galleryTitle: "Gallery",
       allPhotosTitle: "All captures",
       subtitle: "Your special moments",
