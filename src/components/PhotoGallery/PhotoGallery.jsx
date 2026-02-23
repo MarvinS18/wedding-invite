@@ -474,19 +474,6 @@ export default function PhotoGallery({ lang = "en" }) {
               >
                 {loading ? t.uploadingButton : t.uploadButton}
               </button>
-
-              {/* Progress Bar */}
-              {loading && (
-                <div className="upload-progress-container">
-                  <div className="upload-progress-bar">
-                    <div
-                      className="upload-progress-fill"
-                      style={{ width: `${uploadProgress}%` }}
-                    ></div>
-                  </div>
-                  <span className="upload-progress-text">{uploadProgress}%</span>
-                </div>
-              )}
             </form>
 
             <div className="upload-stats">
@@ -495,8 +482,16 @@ export default function PhotoGallery({ lang = "en" }) {
             </div>
           </div>
 
-          {error && <p className="upload-message upload-error">{error}</p>}
-          {/* Success Toaster spostato in alto, qui non serve più */}
+          {/* Progress Bar - Always rendered OUTSIDE form */}
+          <div className={`upload-progress-container ${!loading ? 'invisible' : ''}`}>
+            <div className="upload-progress-bar">
+              <div
+                className="upload-progress-fill"
+                style={{ width: `${uploadProgress}%` }}
+              ></div>
+            </div>
+            <span className="upload-progress-text">{uploadProgress}%</span>
+          </div>
         </div>
 
         {/* Galleria - appare dal matrimonio in poi */}
