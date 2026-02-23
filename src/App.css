@@ -1920,3 +1920,31 @@ a.inline {
 }
 
 @media (max-width: 1024px) {}
+
+/* Our Story Video - Responsive */
+.ourstory-video {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  margin: 12px auto 0;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #000;
+}
+
+@media (max-width: 768px) {
+  .ourstory-video {
+    max-width: 80%;
+    border-radius: 8px;
+    margin: 10px auto 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .ourstory-video {
+    max-width: 85%;
+    border-radius: 8px;
+    margin: 10px auto 0;
+  }
+}

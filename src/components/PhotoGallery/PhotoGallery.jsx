@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { storage, db } from "../../firebase-config";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
   collection,
   addDoc,
@@ -18,6 +18,7 @@ export default function PhotoGallery({ lang = "en" }) {
   const t = translations[lang].photoGallery;
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [photos, setPhotos] = useState([]);
   const [uploaderName, setUploaderName] = useState("");
   const [error, setError] = useState("");
@@ -128,18 +129,18 @@ export default function PhotoGallery({ lang = "en" }) {
       }
 
       // Controlla dimensioni
-      const maxSize = isImage ? 10 * 1024 * 1024 : 50 * 1024 * 1024; // 10MB foto, 50MB video
+      const maxSize = isImage ? 10 * 1024 * 1024 : 100 * 1024 * 1024; // 10MB foto, 100MB video
       if (file.size > maxSize) {
         setError(t.errors.fileTooBig);
         e.target.value = "";
         return;
       }
 
-      // Controlla durata del video (max 5 minuti = 300 secondi)
+      // Controlla durata del video (max 15 secondi)
       if (isVideo) {
         try {
           const duration = await getVideoDuration(file);
-          if (duration > 300) {
+          if (duration > 15) {
             setError(t.errors.videoTooLong);
             e.target.value = "";
             return;
@@ -194,37 +195,64 @@ export default function PhotoGallery({ lang = "en" }) {
     setLoading(true);
     setError("");
     setSuccess("");
+    setUploadProgress(0);
 
     try {
       let uploadedCount = 0;
       let photoCount = 0;
       let videoCount = 0;
+      const totalFiles = files.length;
 
       // Upload ogni file singolarmente
-      for (let file of files) {
+      for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+        const file = files[fileIndex];
         const fileName = `${Date.now()}_${Math.random()}_${file.name}`;
         const storageRef = ref(storage, `weddingPhotos/${fileName}`);
-        await uploadBytes(storageRef, file);
 
-        const downloadURL = await getDownloadURL(storageRef);
+        // Usa uploadBytesResumable per tracciare il progresso
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-        const fileType = file.type.startsWith("image/") ? "image" : "video";
+        // Promessa che si risolve quando l'upload è completato
+        await new Promise((resolve, reject) => {
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              // Traccia il progresso
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              // Calcola il progresso globale considerando tutti i file
+              const globalProgress = Math.round(
+                (fileIndex * 100 + progress) / totalFiles
+              );
+              setUploadProgress(globalProgress);
+            },
+            (error) => {
+              console.error("Errore durante l'upload:", error);
+              reject(error);
+            },
+            async () => {
+              // Upload completato
+              const downloadURL = await getDownloadURL(storageRef);
+              const fileType = file.type.startsWith("image/") ? "image" : "video";
 
-        if (fileType === "image") {
-          photoCount++;
-        } else {
-          videoCount++;
-        }
+              if (fileType === "image") {
+                photoCount++;
+              } else {
+                videoCount++;
+              }
 
-        await addDoc(collection(db, "weddingPhotos"), {
-          url: downloadURL,
-          uploaderName: uploaderName.trim(),
-          uploadedAt: new Date(),
-          fileName,
-          type: fileType,
+              await addDoc(collection(db, "weddingPhotos"), {
+                url: downloadURL,
+                uploaderName: uploaderName.trim(),
+                uploadedAt: new Date(),
+                fileName,
+                type: fileType,
+              });
+
+              uploadedCount++;
+              resolve();
+            }
+          );
         });
-
-        uploadedCount++;
       }
 
       // Determina il messaggio di successo in base ai tipi di file caricati
@@ -246,6 +274,7 @@ export default function PhotoGallery({ lang = "en" }) {
       setUploaderName("");
       setFiles([]);
       document.getElementById("fileInput").value = "";
+      setUploadProgress(0);
     } catch (err) {
       console.error("Errore upload:", err);
       setError(t.errors.uploadError);
@@ -358,7 +387,7 @@ export default function PhotoGallery({ lang = "en" }) {
         {/* Titolo */}
         <div className="text-center mb-12">
           <h2
-            className="font-script text-5xl md:text-6xl text-foreground mb-4 photo-gallery-title"
+            className="text-5xl md:text-6xl text-foreground mb-4 gallery-title-custom"
             style={{ marginLeft: "auto", marginRight: "auto" }}
           >
             {t.title}
@@ -367,6 +396,24 @@ export default function PhotoGallery({ lang = "en" }) {
             {subtitle}
           </p>
         </div>
+
+        {/* Upload Guidelines */}
+        {!isBeforeWedding && (
+          <div className="upload-guidelines-section">
+            <div className="upload-guidelines-box">
+              <div className="guidelines-header">{t.uploadGuidelines || "Puoi caricare fino a:"}</div>
+              <div className="guidelines-content">
+                <div className="guideline-item-compact">
+                  <span className="guideline-value">5</span> <span className="guideline-label">{t.guidelineFiles}</span>
+                </div>
+                <div className="guidelines-divider"></div>
+                <div className="guideline-item-compact">
+                  <span className="guideline-value">15 sec</span> <span className="guideline-label">{t.guidelineDuration}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Compact Upload Bar - visibile solo dal matrimonio in poi */}
         {/* Compact Upload Bar */}
@@ -406,7 +453,11 @@ export default function PhotoGallery({ lang = "en" }) {
                       e.preventDefault();
                       setShowUploadBlockedModal(true);
                     }
+                    if (loading) {
+                      e.preventDefault();
+                    }
                   }}
+                  disabled={loading}
                   className="upload-file-input"
                 />
                 <span className="upload-file-btn">
@@ -423,6 +474,19 @@ export default function PhotoGallery({ lang = "en" }) {
               >
                 {loading ? t.uploadingButton : t.uploadButton}
               </button>
+
+              {/* Progress Bar */}
+              {loading && (
+                <div className="upload-progress-container">
+                  <div className="upload-progress-bar">
+                    <div
+                      className="upload-progress-fill"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
+                  <span className="upload-progress-text">{uploadProgress}%</span>
+                </div>
+              )}
             </form>
 
             <div className="upload-stats">

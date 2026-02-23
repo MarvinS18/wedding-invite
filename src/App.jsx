@@ -7,7 +7,6 @@ import RSVP from "./components/RSVP/RSVP";
 import PhotoGallery from "./components/PhotoGallery/PhotoGallery";
 import translations from "./translations";
 import Rsvp from "./components/RSVP/RSVP";
-import OurStoryCarousel from "./components/OurStoryCarousel/OurStoryCarousel";
 import dresscodecolorsnobg from "./assets/dresscodecolorsnobg.png";
 
 function useCountdown(targetDate) {
@@ -993,7 +992,15 @@ export default function App() {
             >
               {t.ourStory.text}
             </p>
-            <OurStoryCarousel />
+                <video
+              className="ourstory-video"
+              src="/videos/ourstory.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            
           </div>
         </section>
 
