@@ -146,13 +146,6 @@
     color: rgba(0, 0, 0, 0.45);
 }
 
-@media (max-width: 768px) {
-    .upload-input,
-    .upload-input::placeholder {
-        font-size: 16px;
-    }
-}
-
 .upload-input-name {
     flex: 1;
     min-width: 120px;
