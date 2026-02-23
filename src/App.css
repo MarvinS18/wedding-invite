@@ -179,6 +179,13 @@ body {
   .countdown-label {
     font-size: 14px !important;
   }
+
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px;
+  }
 }
 
 /* forza i titoli del programma a rispettare le classi text-* */
