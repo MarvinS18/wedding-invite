@@ -1924,6 +1924,10 @@ a.inline {
     max-width: 60%;
     margin: 0 auto;
   }
+
+  .ourstory-video {
+    max-width: 60%;
+  }
 }
 
 @media (max-width: 1024px) {}
@@ -1932,7 +1936,7 @@ a.inline {
 .ourstory-video {
   display: block;
   width: 100%;
-  max-width: 340px;
+  max-width: 30%;
   height: auto;
   margin: 12px auto 0;
   border-radius: 12px;
@@ -1942,15 +1946,6 @@ a.inline {
 
 @media (max-width: 768px) {
   .ourstory-video {
-    max-width: 80%;
-    border-radius: 8px;
-    margin: 10px auto 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .ourstory-video {
-    max-width: 85%;
     border-radius: 8px;
     margin: 10px auto 0;
   }
