@@ -29,7 +29,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Desingco Family",
-    members: ["Jasmine Mercado", "Bernard Desingco", "Rafaelle Bernard Desingco", "Gabriella Jasmine Desingco"],
+    members: ["Jasmin Mercado", "Bernard Desingco", "Rafaelle Bernard Desingco", "Gabriella Jasmine Desingco"],
   },
   {
     label: "Axalan Family",
@@ -61,11 +61,11 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Mistica Family",
-    members: ["Keith Mistica", "Mike Mistica", "Wayne Carter Mistica"],
+    members: ["Keith Mistica", "Mike Mistica", "Wayne Carter Mistica", "Celine Mistica"],
   },
   {
     label: "Felizardo Family",
-    members: ["Celine Mistica", "Killian Felizardo", "Elaine Felizardo", "Kassandra Felizardo", "Matias Felizardo"],
+    members: ["Killian Felizardo", "Elaine Felizardo", "Kassandra Felizardo", "Matias Felizardo"],
   },
   {
     label: "Cristian Aguila",
@@ -116,8 +116,8 @@ export const GUEST_GROUPS = [
     members: ["Joan Mendoza", "Hendrix Perez"],
   },
   {
-    label: "Aira Briones, Allan Manarin",
-    members: ["Aira Briones", "Allan Manarin"],
+    label: "Aira Briones, Allan Manarin, Ethan Jared Briones Manarin",
+    members: ["Aira Briones", "Allan Manarin", "Ethan Jared Briones Manarin"],
   },
   {
     label: "Kristal Salonga, Daniele De Los Santos",
@@ -129,7 +129,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Reyes-De Villa Family",
-    members: ["Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel", "Susan Reyes"],
+    members: ["Susan Reyes", "Jose Jr De Villa", "Eloisa De Villa", "Luke Hovious", "Hanna De Villa", "Craig Falconer", "Erika De Villa", "Noel"],
   },
   {
     label: "Angelito Reyes",
@@ -180,7 +180,7 @@ export const GUEST_GROUPS = [
     members: ["Rachel Patrocinio", "Jerome Maramot"],
   },
   {
-    label: "Daryl Renz Lirio, Giulia Padan",
-    members: ["Daryl Renz Lirio", "Giulia Padan"],
+    label: "Daryl Renz Lirio, Giulietta Padan",
+    members: ["Daryl Renz Lirio", "Giulietta Padan"],
   },
 ]
