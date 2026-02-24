@@ -276,7 +276,7 @@
         aperitivo: { time: "18:30", title: "Aperitif", description: "Toasts and appetizers" },
         dinner: { time: "20:30", title: "Dinner", description: "Wedding dinner" },
         firstDance: { time: "22:00", title: "First dance", description: "Our moment" },
-        cakeCutting: { time: "22:30", title: "Cake cutting", description: "Cake cutting" },
+        cakeCutting: { time: "22:30", title: "Cake cutting", description: "Sweet Tradition" },
         party: { time: "23:00", title: "Party", description: "Let's dance!" },
       },
     },
