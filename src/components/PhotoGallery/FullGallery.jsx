@@ -460,9 +460,11 @@ export default function FullGallery() {
                 </p>
               </>
             ) : (
-              <p className="text-sm text-muted-foreground">
-                {getFileCountText()}
-              </p>
+              (photoCount > 0 || videoCount > 0) && (
+                <p className="text-sm text-muted-foreground">
+                  {getFileCountText()}
+                </p>
+              )
             )}
 
             {/* Success Toaster */}
@@ -568,8 +570,8 @@ export default function FullGallery() {
           ) : (
             <div className="text-center py-12">
               {deleteMode ? (
-                <p className="text-muted-foreground font-body empty-gallery-message">
-                  No photos
+                <p className="text-muted-foreground font-body empty-gallery-message" style={{ fontSize: "1.5rem" }}>
+                  {lang === "it" ? "Nessun file" : "No files"}
                 </p>
               ) : (
                 !isBeforeWedding && (
@@ -786,7 +788,7 @@ export default function FullGallery() {
                   className="font-script text-2xl text-foreground"
                   style={{ margin: 0 }}
                 >
-                  {t.deletePhotoConfirm}
+                  {photoToDelete?.type === "video" ? t.deleteVideoConfirm : t.deletePhotoConfirm}
                 </h3>
               </div>
               <div
