@@ -107,33 +107,35 @@ export default function Menu({ lang = "en", onLangChange }) {
           <div className="menu-panel" onClick={(e) => e.stopPropagation()}>
             {/* <div className="menu-title">Menu</div> */}
 
-            <a className="menu-link" href="#countdown" onClick={close}>
-              {t.menu.countdown}
-            </a>
-            <a className="menu-link" href="#cerimonia" onClick={close}>
-              {t.menu.ceremony}
-            </a>
-            <a className="menu-link" href="#ricevimento" onClick={close}>
-              {t.menu.reception}
-            </a>
-            <a className="menu-link" href="#programma" onClick={close}>
-              {t.menu.program}
-            </a>
-            <a className="menu-link" href="#our-story" onClick={close}>
-              {t.menu.ourStory}
-            </a>
-            <a className="menu-link" href="#regalo" onClick={close}>
-              {t.menu.gifts}
-            </a>
-            <a className="menu-link" href="#attire" onClick={close}>
-              {t.menu.attire}
-            </a>
-            <a className="menu-link" href="#rsvp" onClick={close}>
-              {t.menu.rsvp}
-            </a>
-            <a className="menu-link" href="#galleria" onClick={close}>
-              {t.menu.gallery}
-            </a>
+            <div className="menu-links">
+              <a className="menu-link" href="#countdown" onClick={close}>
+                {t.menu.countdown}
+              </a>
+              <a className="menu-link" href="#cerimonia" onClick={close}>
+                {t.menu.ceremony}
+              </a>
+              <a className="menu-link" href="#ricevimento" onClick={close}>
+                {t.menu.reception}
+              </a>
+              <a className="menu-link" href="#programma" onClick={close}>
+                {t.menu.program}
+              </a>
+              <a className="menu-link" href="#our-story" onClick={close}>
+                {t.menu.ourStory}
+              </a>
+              <a className="menu-link" href="#regalo" onClick={close}>
+                {t.menu.gifts}
+              </a>
+              <a className="menu-link" href="#attire" onClick={close}>
+                {t.menu.attire}
+              </a>
+              <a className="menu-link" href="#rsvp" onClick={close}>
+                {t.menu.rsvp}
+              </a>
+              <a className="menu-link" href="#galleria" onClick={close}>
+                {t.menu.gallery}
+              </a>
+            </div>
             {/* Language switcher */}
             <div className="menu-lang-toggle-wrap">
               <button
