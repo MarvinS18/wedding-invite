@@ -178,7 +178,7 @@ body.full-gallery-page .menu-fab {
   text-decoration: none;
 
   font-family: var(--font-script);
-  font-size: 28px;
+  font-size: 32px;
   line-height: 1.2;
 
   color: rgba(0, 0, 0, 0.82);
@@ -423,7 +423,7 @@ body.full-gallery-page .menu-fab {
 
 @media (max-width: 400px) {
   .menu-panel {
-    padding: 1.5rem 0.75rem;
+    font-size: 24px;
   }
 
   .menu-link {
