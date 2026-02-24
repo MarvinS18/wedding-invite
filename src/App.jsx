@@ -994,7 +994,7 @@ export default function App() {
             </p>
                 <video
               className="ourstory-video"
-              src="/videos/ourstory.mp4"
+              src="/videos/ourlovestory.mp4"
               autoPlay
               loop
               muted
