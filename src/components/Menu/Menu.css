@@ -339,7 +339,9 @@ body.full-gallery-page .menu-fab {
     height: 100vh;
     max-width: 100vw;
     border-radius: 0;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     
     display: flex;
     flex-direction: column;
@@ -372,18 +374,22 @@ body.full-gallery-page .menu-fab {
   }
 
   .menu-link {
-    font-size: 1.75rem;
-    padding: 0.65rem 1.5rem;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
     text-align: center;
     width: 100%;
-    max-width: 350px;
+    max-width: 90vw;
     display: flex;
     align-items: center;
     justify-content: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
   }
 
   .menu-link + .menu-link {
-    margin-top: 0.25rem;
+    margin-top: 0.15rem;
   }
 
   .menu-lang-toggle-wrap {
@@ -410,13 +416,13 @@ body.full-gallery-page .menu-fab {
 
 @media (max-width: 400px) {
   .menu-panel {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.75rem;
   }
 
   .menu-link {
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    max-width: 280px;
+    font-size: 1.35rem;
+    padding: 0.45rem 0.85rem;
+    max-width: 95vw;
   }
 
   .menu-lang-toggle-wrap {
@@ -425,8 +431,55 @@ body.full-gallery-page .menu-fab {
 }
 
 @media (max-width: 350px) {
+  .menu-panel {
+    padding: 1.25rem 0.5rem;
+  }
+
   .menu-link {
-    font-size: 1.35rem;
-    padding: 0.45rem 0.85rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.75rem;
+    max-width: 95vw;
+  }
+
+  .menu-lang-toggle-wrap {
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .menu-link {
+    font-size: 1.1rem;
+    padding: 0.35rem 0.65rem;
+  }
+}
+
+/* Schermi bassi in altezza */
+@media (max-height: 700px) and (max-width: 768px) {
+  .menu-panel {
+    padding: 1rem 0.75rem;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+
+  .menu-link {
+    font-size: 1.3rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  .menu-link + .menu-link {
+    margin-top: 0.1rem;
+  }
+
+  .menu-lang-toggle-wrap {
+    position: relative;
+    bottom: auto;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-height: 600px) and (max-width: 768px) {
+  .menu-link {
+    font-size: 1.15rem;
+    padding: 0.3rem 0.75rem;
   }
 }
