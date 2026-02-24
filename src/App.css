@@ -1697,6 +1697,16 @@ a.inline {
   z-index: 5;
 }
 
+.hero-confirm-text {
+  font-size: 14px;
+}
+
+@media (min-width: 769px) {
+  .hero-confirm-text {
+    font-size: 16px;
+  }
+}
+
 
 /* ...existing code... */
 

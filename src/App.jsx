@@ -233,7 +233,7 @@ export default function App() {
                 aria-controls="rsvp-form-section"
               >
                 <span 
-                  className="text-[10px] tracking-[0.3em] max-w-2xl uppercase font-body font-light"
+                  className="hero-confirm-text tracking-[0.3em] max-w-2xl uppercase font-body font-light"
                   style={{
                     WebkitTextFillColor: "currentcolor",
                     color: "rgba(0, 0, 0, 0.5)"
