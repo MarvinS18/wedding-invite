@@ -195,7 +195,7 @@
       errors: {
         maxPhotos: "Puoi selezionare massimo 5 foto/video alla volta",
         onlyImages: "Per favore seleziona solo file immagine o video",
-        fileTooBig: "Uno o più file sono troppo grandi (foto max 10 MB, video max 200 MB)",
+        fileTooBig: "Uno o più file sono troppo grandi (foto max 15 MB, video max 200 MB)",
         videoTooLong: "Il video è troppo lungo (indicativamente 1 minuto)",
         videoFormatNotSupported: "Formato video non supportato (solo MP4)",
         nameAndPhoto: "Inserisci il tuo nome e seleziona almeno una foto o video",
@@ -408,7 +408,7 @@
       errors: {
         maxPhotos: "You can select a maximum of 5 photos/videos at a time",
         onlyImages: "Please select only image or video files",
-        fileTooBig: "One or more files are too large (photos max 10 MB, videos max 200 MB)",
+        fileTooBig: "One or more files are too large (photos max 15 MB, videos max 200 MB)",
         videoTooLong: "The video is too long (approximately 1 minute)",
         videoFormatNotSupported: "Video format not supported (MP4 only)",
         nameAndPhoto: "Enter your name and select at least one photo or video",
