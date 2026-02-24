@@ -708,26 +708,51 @@ export default function FullGallery() {
             </div>
 
             <div className="gallery-modal__footer">
-              <p className="text-sm font-body">
-                {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>
-                  {photos[lightboxIndex].uploaderName}
-                </strong>
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {(() => {
-                  const d = photos[lightboxIndex].uploadedAt?.toDate?.();
-                  if (!d) return "";
-                  const date = d.toLocaleDateString(
-                    "it-IT",
-                    dateFormatOptions,
-                  );
-                  const time = d.toLocaleTimeString("it-IT", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  });
-                  return `${date} ${time}`;
-                })()}
-              </p>
+              <div className="gallery-modal__footer-left">
+                <p className="text-sm font-body">
+                  {photos[lightboxIndex].type === "video" ? "🎥" : "📸"} <strong>
+                    {photos[lightboxIndex].uploaderName}
+                  </strong>
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {(() => {
+                    const d = photos[lightboxIndex].uploadedAt?.toDate?.();
+                    if (!d) return "";
+                    const date = d.toLocaleDateString(
+                      "it-IT",
+                      dateFormatOptions,
+                    );
+                    const time = d.toLocaleTimeString("it-IT", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    });
+                    return `${date} ${time}`;
+                  })()}
+                </p>
+              </div>
+              {photos[lightboxIndex].type === "video" && (
+                <div className="gallery-download-wrap">
+                  <a
+                    className="gallery-download-link"
+                    href={photos[lightboxIndex].url}
+                    download
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="gallery-download-icon" aria-hidden="true">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24"
+                        viewBox="0 -960 960 960"
+                        width="24"
+                        fill="currentColor"
+                      >
+                        <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

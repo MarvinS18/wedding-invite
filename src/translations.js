@@ -184,6 +184,7 @@
       videoDeleted: "Video eliminato con successo",
       deleteError: "Errore nell'eliminazione. Riprova.",
       noPhotosToDelete: "Non hai foto da eliminare",
+      downloadVideo: "Scarica video",
       uploadGuidelines: "Puoi caricare fino a:",
       guidelineFiles: "file per volta",
       guidelinePhotos: "per foto",
@@ -399,6 +400,7 @@
       videoDeleted: "Video deleted successfully",
       deleteError: "Error deleting. Please try again.",
       noPhotosToDelete: "You have no photos to delete",
+      downloadVideo: "Download video",
       errors: {
         maxPhotos: "You can select a maximum of 5 photos/videos at a time",
         onlyImages: "Please select only image or video files",
