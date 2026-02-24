@@ -217,8 +217,13 @@ export default function PhotoGallery({ lang = "en" }) {
         const fileName = `${Date.now()}_${Math.random()}_${file.name}`;
         const storageRef = ref(storage, `weddingPhotos/${fileName}`);
 
+        const metadata = {
+          contentType: file.type,
+          contentDisposition: `attachment; filename="${file.name}"`,
+        };
+
         // Usa uploadBytesResumable per tracciare il progresso
-        const uploadTask = uploadBytesResumable(storageRef, file);
+        const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
         // Promessa che si risolve quando l'upload è completato
         await new Promise((resolve, reject) => {
