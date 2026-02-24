@@ -41,7 +41,7 @@ export default function Layout() {
         album: "",
         artwork: [
           {
-            src: "/favicon.ico.png",
+            src: "/favicon.ico.png?v=2026-02-24",
             sizes: "512x512",
             type: "image/png",
           },
