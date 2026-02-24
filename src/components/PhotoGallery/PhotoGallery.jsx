@@ -24,6 +24,7 @@ export default function PhotoGallery({ lang = "en" }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showUploadToaster, setShowUploadToaster] = useState(false);
+  const [showErrorToaster, setShowErrorToaster] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showUploadBlockedModal, setShowUploadBlockedModal] = useState(false);
@@ -40,6 +41,18 @@ export default function PhotoGallery({ lang = "en" }) {
       return () => clearTimeout(timer);
     }
   }, [showUploadToaster]);
+
+  // Mostra toaster per errori
+  useEffect(() => {
+    if (error) {
+      setShowErrorToaster(true);
+      const timer = setTimeout(() => {
+        setShowErrorToaster(false);
+        setError("");
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   // Carica le foto da Firestore al montaggio
   useEffect(() => {
@@ -137,28 +150,11 @@ export default function PhotoGallery({ lang = "en" }) {
       }
 
       // Controlla dimensioni
-      const maxSize = isImage ? 10 * 1024 * 1024 : 800 * 1024 * 1024; // 10MB foto, 800MB video
+      const maxSize = isImage ? 10 * 1024 * 1024 : 200 * 1024 * 1024; // 10MB foto, 200MB video
       if (file.size > maxSize) {
         setError(t.errors.fileTooBig);
         e.target.value = "";
         return;
-      }
-
-      // Controlla durata del video (max 60 secondi)
-      if (isVideo) {
-        try {
-          const duration = await getVideoDuration(file);
-          if (duration > 60) {
-            setError(t.errors.videoTooLong);
-            e.target.value = "";
-            return;
-          }
-        } catch (err) {
-          console.error("Errore nel controllare la durata del video:", err);
-          setError(t.errors.uploadError);
-          e.target.value = "";
-          return;
-        }
       }
     }
 
@@ -505,6 +501,13 @@ export default function PhotoGallery({ lang = "en" }) {
             </div>
             <span className="upload-progress-text">{uploadProgress}%</span>
           </div>
+
+          {/* Error Message */}
+          {showErrorToaster && error && (
+            <div className="upload-error-container">
+              <p className="upload-error-message">{error}</p>
+            </div>
+          )}
         </div>
 
         {/* Galleria - appare dal matrimonio in poi */}

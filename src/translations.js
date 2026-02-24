@@ -56,7 +56,7 @@
         aperitivo: { time: "18:30", title: "Aperitivo", description: "Brindisi e stuzzichini" },
         dinner: { time: "20:30", title: "Cena", description: "Cena nuziale" },
         firstDance: { time: "22:00", title: "Primo ballo", description: "Il nostro momento" },
-        cakeCutting: { time: "22:30", title: "Taglio torta", description: "Il taglio della torta" },
+        cakeCutting: { time: "22:30", title: "Taglio torta", description: "Un momento di dolcezza" },
         party: { time: "23:00", title: "Party", description: "Tutti a ballare!" },
       },
     },
@@ -65,7 +65,7 @@
     ourStory: {
       title: "La nostra storia",
       text:
-        "Quasi sette anni fa, se qualcuno ci avesse detto che un incontro inaspettato ci avrebbe portato fin qui, probabilmente non ci avremmo creduto. \nA quanto pare, le cose migliori della vita sono proprio quelle che non vedi arrivare.\nCi siamo trovati senza cercarci e, da allora, non abbiamo mai smesso di sceglierci.\nSiamo arrivati a questo nuovo capitolo, pronti per il nostro grande giorno e per scambiarci finalmente il nostro 'SÌ'.",
+        "Quasi sette anni fa, se qualcuno ci avesse detto che un incontro inaspettato ci avrebbe portato fin qui,\nprobabilmente non ci avremmo creduto. \nA quanto pare, le cose migliori della vita sono proprio quelle che non vedi arrivare.\nCi siamo trovati senza cercarci e, da allora, non abbiamo mai smesso di sceglierci.\nSiamo arrivati a questo nuovo capitolo, pronti per il nostro grande giorno e per scambiarci finalmente il nostro 'SÌ'.",
     },
 
     // Regali
@@ -76,6 +76,7 @@
       cashText: "Se preferite, il regalo può essere in denaro contante. Se vi è più comodo, potete anche effettuare un bonifico:",
       showIban: "Mostra IBAN",
       hideIban: "Nascondi IBAN",
+      beneficiary: "Beneficiario",
     },
 
     // Dress Code / Attire
@@ -189,13 +190,13 @@
       uploadGuidelines: "Puoi caricare fino a:",
       guidelineFiles: "file per volta",
       guidelinePhotos: "per foto",
-      guidelineVideos: "per video",
-      guidelineDuration: "durata video",
+      guidelineVideos: "per video (max 200 MB)",
+      guidelineDuration: "video",
       errors: {
         maxPhotos: "Puoi selezionare massimo 5 foto/video alla volta",
         onlyImages: "Per favore seleziona solo file immagine o video",
-        fileTooBig: "Uno o più file sono troppo grandi (foto max 10 MB, video max 800 MB)",
-        videoTooLong: "Il video è troppo lungo (massimo 1 minuto)",
+        fileTooBig: "Uno o più file sono troppo grandi (foto max 10 MB, video max 200 MB)",
+        videoTooLong: "Il video è troppo lungo (indicativamente 1 minuto)",
         videoFormatNotSupported: "Formato video non supportato (solo MP4)",
         nameAndPhoto: "Inserisci il tuo nome e seleziona almeno una foto o video",
         uploadError: "Errore nel caricamento. Riprova più tardi.",
@@ -276,7 +277,7 @@
         aperitivo: { time: "18:30", title: "Aperitif", description: "Toasts and appetizers" },
         dinner: { time: "20:30", title: "Dinner", description: "Wedding dinner" },
         firstDance: { time: "22:00", title: "First dance", description: "Our moment" },
-        cakeCutting: { time: "22:30", title: "Cake cutting", description: "Sweet Tradition" },
+        cakeCutting: { time: "22:30", title: "Cake cutting", description: "A moment of sweetness" },
         party: { time: "23:00", title: "Party", description: "Let's dance!" },
       },
     },
@@ -285,7 +286,7 @@
     ourStory: {
       title: "Our Story",
       text:
-        "Almost seven years ago, if someone had told us that an unexpected encounter would lead us here, we probably wouldn't have believed them. \nAs it turns out, the best things in life are the ones you never see coming.\nWe met without looking, and we haven't stopped choosing each other since.\nWe’ve arrived at this new chapter, ready for our big day and to finally say 'I DO'.",
+        "Almost seven years ago, if someone had told us that an unexpected encounter would lead us here,\nwe probably wouldn't have believed them. \nAs it turns out, the best things in life are the ones you never see coming.\nWe met without looking, and we haven't stopped choosing each other since.\nWe’ve arrived at this new chapter, ready for our big day and to finally say 'I DO'.",
     },
 
     // Regali
@@ -296,6 +297,7 @@
       cashText: "If you prefer, the gift can be in cash. If it is more convenient for you, you can also make a bank transfer:",
       showIban: "Show IBAN",
       hideIban: "Hide IBAN",
+      beneficiary: "Beneficiary",
     },
 
     // RSVP
@@ -374,8 +376,8 @@
       uploadGuidelines: "You can upload up to:",
       guidelineFiles: "files at a time",
       guidelinePhotos: "per photo",
-      guidelineVideos: "per video",
-      guidelineDuration: "video duration",
+      guidelineVideos: "per video (max 200 MB)",
+      guidelineDuration: "video",
       viewAllPhotos: "View full gallery",
       emptyGallery: "No files yet. Be the first to share! ",
       uploadedBy: "{name}",
@@ -406,8 +408,8 @@
       errors: {
         maxPhotos: "You can select a maximum of 5 photos/videos at a time",
         onlyImages: "Please select only image or video files",
-        fileTooBig: "One or more files are too large (photos max 10 MB, videos max 800 MB)",
-        videoTooLong: "The video is too long (maximum 1 minute)",
+        fileTooBig: "One or more files are too large (photos max 10 MB, videos max 200 MB)",
+        videoTooLong: "The video is too long (approximately 1 minute)",
         videoFormatNotSupported: "Video format not supported (MP4 only)",
         nameAndPhoto: "Enter your name and select at least one photo or video",
         uploadError: "Upload error. Please try again later.",

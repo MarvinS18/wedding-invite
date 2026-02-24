@@ -1053,11 +1053,18 @@ export default function App() {
                     </button>
                     {showIban && (
                       <div className="mt-4">
+                          <div className="text-xs font-body regalos-iban-label mb-1 tracking-widest uppercase">
+                          {t.gifts.beneficiary}
+                        </div>
+                         <div className="font-mono text-base text-foreground select-all regalos-iban-value">
+                         R Mercado & K Reyes
+                        </div>
+                        <br></br>
                         <div className="text-xs font-body regalos-iban-label mb-1 tracking-widest uppercase">
                           IBAN
                         </div>
                         <div className="font-mono text-base text-foreground select-all regalos-iban-value">
-                          IT60X0542811101000000123456
+                          IT86 U036 6901 6006 6074 7361 804
                         </div>
                       </div>
                     )}
