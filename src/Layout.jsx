@@ -29,6 +29,29 @@ export default function Layout() {
     window.dispatchEvent(new Event("languageChange"));
   }, [lang]);
 
+  // Set media session metadata (lock screen artwork)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("mediaSession" in navigator)) return;
+
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: "Karl & Reichelle",
+        artist: "Wedding",
+        album: "",
+        artwork: [
+          {
+            src: "/favicon.ico.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      });
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   // Ricevi evento apertura busta (solo sessione corrente)
   useEffect(() => {
     const onEnvelopeOpen = () => setEnvelopeOpenedSession(true);

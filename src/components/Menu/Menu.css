@@ -310,7 +310,7 @@ body.full-gallery-page .menu-fab {
 /* =========================
    Mobile Full Screen Menu
 ========================= */
-@media (max-width: 768px) {
+@media (min-width: 0px) {
   .menu-overlay {
     background: rgba(0, 0, 0, 0.06);
   }
