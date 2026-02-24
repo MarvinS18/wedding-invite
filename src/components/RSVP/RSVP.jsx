@@ -10,7 +10,7 @@ export default function RSVP({ lang = "it" }) {
   const groups = useMemo(() => GUEST_GROUPS, []);
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbzJ_OpVvJgdG9Cc4qD1CdDLhCBOgOet3lnqe1izR1OiLm-5LIaPpQ7dfphAhZycTAtZ/exec";
+    "https://script.google.com/macros/s/AKfycbwMSyqnz99Ya18KvY1IVmAGJDWElVD9GkyxAjPqSHs58PeYCFnKw34Wab1iPhny1CXi/exec";
 
   // (Facoltativo) info evento da mostrare nelle card
   const eventInfo = useMemo(
