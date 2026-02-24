@@ -368,7 +368,7 @@ export default function PhotoGallery({ lang = "en" }) {
   };
 
   return (
-    <section id="galleria" className="photo-gallery-section scroll-reveal">
+    <section id="galleria" className={`photo-gallery-section scroll-reveal ${isBeforeWedding ? 'before-wedding' : ''}`}>
       {/* Success Toaster - fixed in alto al centro */}
       {showUploadToaster &&
         ReactDOM.createPortal(

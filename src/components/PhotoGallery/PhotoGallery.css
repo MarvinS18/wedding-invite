@@ -88,6 +88,10 @@
     background: var(--background);
 }
 
+.photo-gallery-section.before-wedding {
+    padding: 2rem 0 1rem;
+}
+
 /* Blur background when lightbox is open - handled by backdrop-filter on .gallery-modal__backdrop */
 
 /* Gallery subtitle font sizes */
