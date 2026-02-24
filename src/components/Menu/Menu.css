@@ -359,7 +359,7 @@ body.full-gallery-page .menu-fab {
     width: 100%;
     justify-content: center;
     margin-top: auto;
-    margin-bottom: calc(16px + env(safe-area-inset-bottom));
+    margin-bottom: env(safe-area-inset-bottom);
   }
 
   .menu-lang-toggle {
@@ -367,15 +367,6 @@ body.full-gallery-page .menu-fab {
     display: block;
   }
 
-  .menu-lang-toggle-wrap {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .menu-lang-toggle {
-    margin: 0 auto;
-    display: block;
-  }
 
   .menu-panel::before {
     content: "";
