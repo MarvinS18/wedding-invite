@@ -3,7 +3,7 @@
     // Menu
     menu: {
       confirmAttendance: "Conferma presenza",
-      countdown: "Countdown",
+      countdown: "Conto alla rovescia",
       ceremony: "Cerimonia",
       reception: "Ricevimento",
       program: "Programma",
@@ -11,7 +11,7 @@
       gifts: "Regalo",
       attire: "Dress code",
       rsvp: "RSVP",
-      gallery: "Galleria foto",
+      gallery: "Galleria",
     },
 
     // Hero
@@ -160,7 +160,7 @@
       photosCount: "file",
       uploadLimitNote: "Puoi caricare massimo 5 file alla volta",
       viewAllPhotos: "Visualizza galleria completa",
-      emptyGallery: "Ancora nessuna foto. Sii il primo a condividere! ",
+      emptyGallery: "Ancora nessun file. Sii il primo a condividere! ",
       uploadedBy: "{name}",
       closeLabel: "Chiudi",
       previousPhoto: "Foto precedente",
@@ -192,8 +192,8 @@
       errors: {
         maxPhotos: "Puoi selezionare massimo 5 foto/video alla volta",
         onlyImages: "Per favore seleziona solo file immagine o video",
-        fileTooBig: "Uno o più file sono troppo grandi (foto max 10 MB, video max 100 MB)",
-        videoTooLong: "Il video è troppo lungo (massimo 15 secondi)",
+        fileTooBig: "Uno o più file sono troppo grandi (foto max 10 MB, video max 800 MB)",
+        videoTooLong: "Il video è troppo lungo (massimo 1 minuto)",
         videoFormatNotSupported: "Formato video non supportato (solo MP4)",
         nameAndPhoto: "Inserisci il tuo nome e seleziona almeno una foto o video",
         uploadError: "Errore nel caricamento. Riprova più tardi.",
@@ -217,10 +217,10 @@
       reception: "Reception",
       program: "Program",
       ourStory: "Our Story",
-      gifts: "Gifts",
+      gifts: "Gift",
       attire: "Attire",
       rsvp: "RSVP",
-      gallery: "Photo gallery",
+      gallery: "Gallery",
     },
    
     // Attire
@@ -375,7 +375,7 @@
       guidelineVideos: "per video",
       guidelineDuration: "video duration",
       viewAllPhotos: "View full gallery",
-      emptyGallery: "No photos yet. Be the first to share! ",
+      emptyGallery: "No files yet. Be the first to share! ",
       uploadedBy: "{name}",
       closeLabel: "Close",
       previousPhoto: "Previous photo",
@@ -402,8 +402,8 @@
       errors: {
         maxPhotos: "You can select a maximum of 5 photos/videos at a time",
         onlyImages: "Please select only image or video files",
-        fileTooBig: "One or more files are too large (photos max 10 MB, videos max 100 MB)",
-        videoTooLong: "The video is too long (maximum 15 seconds)",
+        fileTooBig: "One or more files are too large (photos max 10 MB, videos max 800 MB)",
+        videoTooLong: "The video is too long (maximum 1 minute)",
         videoFormatNotSupported: "Video format not supported (MP4 only)",
         nameAndPhoto: "Enter your name and select at least one photo or video",
         uploadError: "Upload error. Please try again later.",

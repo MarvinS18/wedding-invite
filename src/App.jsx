@@ -130,7 +130,7 @@ export default function App() {
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
         setTimeout(() => {
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          targetEl.scrollIntoView({ behavior: "instant", block: "start" });
         }, 50);
       }
       navigate(location.pathname, { replace: true, state: {} });
@@ -146,7 +146,7 @@ export default function App() {
     const el = document.getElementById(targetId);
     if (el) {
       setTimeout(() => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.scrollIntoView({ behavior: "instant", block: "start" });
       }, 50);
     }
     sessionStorage.removeItem("returnToSection");

@@ -50,6 +50,7 @@ export default function FullGallery() {
   const [showVideoControls, setShowVideoControls] = useState(false);
   const videoRef = useRef(null);
   const videoControlsTimeoutRef = useRef(null);
+  const [isVerticalVideo, setIsVerticalVideo] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   // rimosso dateLocale inutilizzato
@@ -103,6 +104,13 @@ export default function FullGallery() {
           // Fallback se autoplay è bloccato dal browser
         });
       }, 100);
+    }
+  }, [lightboxOpen, lightboxIndex, photos]);
+
+  useEffect(() => {
+    const current = photos[lightboxIndex];
+    if (!lightboxOpen || !current || current.type !== "video") {
+      setIsVerticalVideo(false);
     }
   }, [lightboxOpen, lightboxIndex, photos]);
 
@@ -608,7 +616,17 @@ export default function FullGallery() {
               onMouseUp={handleMouseUp}
               style={{ cursor: 'grab', userSelect: 'none' }}
             >
-              <div className="gallery-modal__image-wrapper">
+              <div
+                className={`gallery-modal__image-wrapper${
+                  photos[lightboxIndex]?.type === "video"
+                    ? " gallery-modal__image-wrapper--video"
+                    : ""
+                }${
+                  photos[lightboxIndex]?.type === "video" && !isVerticalVideo
+                    ? " gallery-modal__image-wrapper--free"
+                    : ""
+                }`}
+              >
                 <button
                   type="button"
                   className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
@@ -630,8 +648,16 @@ export default function FullGallery() {
                     controls={showVideoControls}
                     autoPlay
                     playsInline
-                    className="gallery-modal__image"
-                    style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                    controlsList=""
+                    className={`gallery-modal__image${
+                      isVerticalVideo
+                        ? " gallery-modal__image--cover"
+                        : " gallery-modal__image--free"
+                    } gallery-modal__image--video`}
+                    onLoadedMetadata={(e) => {
+                      const { videoWidth, videoHeight } = e.currentTarget;
+                      setIsVerticalVideo(videoHeight > videoWidth);
+                    }}
                     onPlay={() => {
                       setShowVideoControls(true);
                       if (videoControlsTimeoutRef.current) {

@@ -62,6 +62,7 @@ export default function PhotoGallery({ lang = "en" }) {
   const videoRef = useRef(null);
   const [showVideoControls, setShowVideoControls] = useState(false);
   const videoControlsTimeoutRef = useRef(null);
+  const [isVerticalVideo, setIsVerticalVideo] = useState(false);
 
   // Autoplay video quando si apre il lightbox
   useEffect(() => {
@@ -72,6 +73,13 @@ export default function PhotoGallery({ lang = "en" }) {
           // Fallback se autoplay è bloccato dal browser
         });
       }, 100);
+    }
+  }, [lightboxOpen, lightboxIndex, photos]);
+
+  useEffect(() => {
+    const current = photos[lightboxIndex];
+    if (!lightboxOpen || !current || current.type !== "video") {
+      setIsVerticalVideo(false);
     }
   }, [lightboxOpen, lightboxIndex, photos]);
 
@@ -129,18 +137,18 @@ export default function PhotoGallery({ lang = "en" }) {
       }
 
       // Controlla dimensioni
-      const maxSize = isImage ? 10 * 1024 * 1024 : 100 * 1024 * 1024; // 10MB foto, 100MB video
+      const maxSize = isImage ? 10 * 1024 * 1024 : 800 * 1024 * 1024; // 10MB foto, 800MB video
       if (file.size > maxSize) {
         setError(t.errors.fileTooBig);
         e.target.value = "";
         return;
       }
 
-      // Controlla durata del video (max 15 secondi)
+      // Controlla durata del video (max 60 secondi)
       if (isVideo) {
         try {
           const duration = await getVideoDuration(file);
-          if (duration > 15) {
+          if (duration > 60) {
             setError(t.errors.videoTooLong);
             e.target.value = "";
             return;
@@ -408,7 +416,7 @@ export default function PhotoGallery({ lang = "en" }) {
                 </div>
                 <div className="guidelines-divider"></div>
                 <div className="guideline-item-compact">
-                  <span className="guideline-value">15 sec</span> <span className="guideline-label">{t.guidelineDuration}</span>
+                  <span className="guideline-value">1 min</span> <span className="guideline-label">{t.guidelineDuration}</span>
                 </div>
               </div>
             </div>
@@ -619,7 +627,17 @@ export default function PhotoGallery({ lang = "en" }) {
                 onMouseUp={handleMouseUp}
                 style={{ cursor: 'grab', userSelect: 'none' }}
               >
-                <div className="gallery-modal__image-wrapper">
+                <div
+                  className={`gallery-modal__image-wrapper${
+                    photos[lightboxIndex]?.type === "video"
+                      ? " gallery-modal__image-wrapper--video"
+                      : ""
+                  }${
+                    photos[lightboxIndex]?.type === "video" && !isVerticalVideo
+                      ? " gallery-modal__image-wrapper--free"
+                      : ""
+                  }`}
+                >
                   <button
                     type="button"
                     className="gallery-modal__nav-btn gallery-modal__nav-btn--prev"
@@ -641,8 +659,16 @@ export default function PhotoGallery({ lang = "en" }) {
                       controls={showVideoControls}
                       autoPlay
                       playsInline
-                      className="gallery-modal__image"
-                      style={{ width: "100%", height: "auto", maxHeight: "70vh" }}
+                      controlsList=""
+                      className={`gallery-modal__image${
+                        isVerticalVideo
+                          ? " gallery-modal__image--cover"
+                          : " gallery-modal__image--free"
+                      } gallery-modal__image--video`}
+                      onLoadedMetadata={(e) => {
+                        const { videoWidth, videoHeight } = e.currentTarget;
+                        setIsVerticalVideo(videoHeight > videoWidth);
+                      }}
                       onPlay={() => {
                         setShowVideoControls(true);
                         if (videoControlsTimeoutRef.current) {

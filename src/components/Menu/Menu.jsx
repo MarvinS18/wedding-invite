@@ -9,6 +9,7 @@ export default function Menu({ lang = "en", onLangChange }) {
 
   const lastY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
   const hideTimer = useRef(null);
+  const scrollPosition = useRef(0);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -17,6 +18,34 @@ export default function Menu({ lang = "en", onLangChange }) {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      scrollPosition.current = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollPosition.current}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+    } else {
+      // Ripristina gli stili
+      const currentScrollPos = scrollPosition.current;
+      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('top');
+      document.body.style.removeProperty('width');
+      document.body.style.removeProperty('overflow');
+      // Ripristina lo scroll istantaneamente senza animazione
+      window.scrollTo({
+        top: currentScrollPos,
+        behavior: 'instant'
+      });
+    }
+    return () => {
+      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('top');
+      document.body.style.removeProperty('width');
+      document.body.style.removeProperty('overflow');
+    };
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -65,7 +94,7 @@ export default function Menu({ lang = "en", onLangChange }) {
         onClick={onMenuClick}
         aria-label="Apri menu"
       >
-        ☰
+        {open ? "✕" : "☰"}
       </button>
 
       {open && (
