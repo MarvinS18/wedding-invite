@@ -349,6 +349,16 @@ body.full-gallery-page .menu-fab {
       inset 0 -10px 18px rgba(0, 0, 0, 0.05);
   }
 
+  .menu-lang-toggle-wrap {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .menu-lang-toggle {
+    margin: 0 auto;
+    display: block;
+  }
+
   .menu-panel::before {
     content: "";
     position: absolute;
