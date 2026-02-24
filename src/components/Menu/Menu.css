@@ -359,7 +359,7 @@ body.full-gallery-page .menu-fab {
     width: 100%;
     justify-content: center;
     margin-top: auto;
-    margin-bottom: env(safe-area-inset-bottom);
+    margin-bottom: calc(env(safe-area-inset-bottom) + 2rem);
   }
 
   .menu-lang-toggle {
