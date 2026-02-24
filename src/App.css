@@ -1946,6 +1946,7 @@ a.inline {
 
 @media (max-width: 768px) {
   .ourstory-video {
+    max-width: 90%;
     border-radius: 8px;
     margin: 10px auto 0;
   }
