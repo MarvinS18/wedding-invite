@@ -33,7 +33,7 @@ body.full-gallery-page .menu-fab {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
-  transition: opacity 180ms ease, transform 180ms ease, rotate 200ms ease;
+  transition: opacity 180ms ease, transform 180ms ease;
 
   color: rgba(138, 110, 93, 0.9);
   font-size: 20px;
@@ -101,7 +101,7 @@ body.full-gallery-page .menu-fab {
 
 .menu-fab.menu-fab--open {
   opacity: 1;
-  rotate: 90deg;
+  rotate: 0deg;
 }
 
 
