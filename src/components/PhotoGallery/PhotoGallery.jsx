@@ -750,8 +750,6 @@ export default function PhotoGallery({ lang = "en" }) {
                       className="gallery-download-link"
                       href={photos[lightboxIndex].url}
                       download
-                      target="_blank"
-                      rel="noreferrer"
                     >
                       <span className="gallery-download-icon" aria-hidden="true">
                         <svg
