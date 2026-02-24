@@ -150,9 +150,11 @@ export default function PhotoGallery({ lang = "en" }) {
       }
 
       // Controlla dimensioni
-      const maxSize = isImage ? 10 * 1024 * 1024 : 200 * 1024 * 1024; // 10MB foto, 200MB video
+      const maxSize = isImage ? 15 * 1024 * 1024 : 200 * 1024 * 1024; // 15MB foto, 200MB video
       if (file.size > maxSize) {
-        setError(t.errors.fileTooBig);
+        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
+        const maxSizeMB = isImage ? "15" : "200";
+        setError(`${t.errors.fileTooBig} (${fileSizeMB} MB > ${maxSizeMB} MB)`);
         e.target.value = "";
         return;
       }
