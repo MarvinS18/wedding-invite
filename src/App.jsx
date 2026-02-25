@@ -608,7 +608,7 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-rings w-7 h-7"
+                        className="lucide lucide-rings w-8 h-8"
                       >
                         <circle cx="9" cy="14" r="4"></circle>
                         <circle cx="15" cy="14" r="4"></circle>
@@ -798,7 +798,7 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-rings w-7 h-7"
+                        className="lucide lucide-rings w-8 h-8"
                       >
                         <circle cx="9" cy="14" r="4"></circle>
                         <circle cx="15" cy="14" r="4"></circle>
