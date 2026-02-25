@@ -505,10 +505,10 @@ export default function App() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-church w-8 h-8"
+                        className="lucide lucide-church w-7 h-7"
                       >
                         <path d="M12 3v4"></path>
                         <path d="M10.5 5h3"></path>
@@ -538,7 +538,7 @@ export default function App() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         className="lucide lucide-wine w-5 h-5"
@@ -702,7 +702,7 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-church w-8 h-8"
+                        className="lucide lucide-church w-7 h-7"
                       >
                         <path d="M12 3v4"></path>
                         <path d="M10.5 5h3"></path>
@@ -1486,7 +1486,7 @@ export default function App() {
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">
             {t.footer.names}
           </p>
-          <p className="text-xs text-primary-foreground/70 font-body tracking-wide">
+          <p className="text-xs text-primary-foreground/70 font-body tracking-wide mt-6">
             {t.footer.credits}
           </p>
     
