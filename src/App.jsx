@@ -97,7 +97,7 @@ export default function App() {
     }
   }, []);
 
-  // QR code: auto-open and jump to gallery
+  // QR code: go directly to PhotoGallery page
   useEffect(() => {
     if (qrHandledRef.current) return;
 
@@ -106,17 +106,8 @@ export default function App() {
 
     qrHandledRef.current = true;
 
-    if (!envelopeOpen) {
-      handleEnvelopeOpen();
-    }
-
-    setTimeout(() => {
-      const targetEl = document.getElementById("galleria");
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 150);
-  }, [location.search, envelopeOpen]);
+    navigate("/gallery?source=qrcode", { replace: true });
+  }, [location.search, navigate]);
 
   const mapsHrefCeremony = getMapsHref(
     "Basilica di Santa Cecilia in Trastevere, Roma",

@@ -403,13 +403,11 @@ body.full-gallery-page .menu-fab {
   }
 
   .menu-lang-toggle-wrap {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 0;
+    margin-top: 1rem;
+    margin-bottom: calc(env(safe-area-inset-bottom) + 2rem);
     padding-top: 0;
     border-top: none;
+    transform: none;
   }
 
   @keyframes menuIn {
@@ -481,7 +479,7 @@ body.full-gallery-page .menu-fab {
 }
 
 /* Schermi bassi in altezza */
-@media (max-height: 700px) and (max-width: 768px) {
+@media (max-height: 700px) {
   .menu-panel {
     padding: 1rem 0.75rem;
     justify-content: flex-start;
@@ -489,24 +487,34 @@ body.full-gallery-page .menu-fab {
   }
 
   .menu-link {
-    font-size: 1.3rem;
-    padding: 0.4rem 1.2rem;
+    font-size: 1.35rem;
+    padding: 0.38rem 1.1rem;
+    line-height: 1.2;
   }
 
   .menu-link + .menu-link {
-    margin-top: 0.1rem;
+    margin-top: 0.08rem;
   }
 
   .menu-lang-toggle-wrap {
     position: relative;
     bottom: auto;
-    margin-top: 1rem;
+    margin-top: 0.6rem;
   }
 }
 
-@media (max-height: 600px) and (max-width: 768px) {
+@media (max-height: 600px) {
   .menu-link {
-    font-size: 1.15rem;
-    padding: 0.3rem 1rem;
+    font-size: 1.2rem;
+    padding: 0.32rem 1rem;
+    line-height: 1.14;
+  }
+
+  .menu-link + .menu-link {
+    margin-top: 0.06rem;
+  }
+
+  .menu-lang-toggle-wrap {
+    margin-top: 0.45rem;
   }
 }
