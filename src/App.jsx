@@ -686,7 +686,7 @@ export default function App() {
                     <div className="timeline-badge mb-4">22:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg cake-slice with cherry */}
+                      {/* svg cake */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -697,14 +697,13 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-cake-slice w-5 h-5"
+                        className="lucide lucide-cake w-5 h-5"
                       >
-                        <path d="M2 20h20"></path>
-                        <path d="M2 20L12 4l10 16H2Z"></path>
-                        <circle cx="12" cy="6" r="1.6"></circle>
-                        <path d="M12 4.4V5.6"></path>
-                        <path d="M10 12l2 3"></path>
-                        <path d="M8 16l2 3"></path>
+                        <path d="M20 21H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2Z"></path>
+                        <path d="M3 14V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7"></path>
+                        <path d="M7 5V3"></path>
+                        <path d="M12 5V2"></path>
+                        <path d="M17 5V3"></path>
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
@@ -937,7 +936,7 @@ export default function App() {
                   >
                     <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg cake-slice with cherry */}
+                      {/* svg cake */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -948,14 +947,13 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-cake-slice w-5 h-5"
+                        className="lucide lucide-cake w-5 h-5"
                       >
-                        <path d="M2 20h20"></path>
-                        <path d="M2 20L12 4l10 16H2Z"></path>
-                        <circle cx="12" cy="6" r="1.6"></circle>
-                        <path d="M12 4.4V5.6"></path>
-                        <path d="M10 12l2 3"></path>
-                        <path d="M8 16l2 3"></path>
+                        <path d="M20 21H4a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2Z"></path>
+                        <path d="M3 14V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7"></path>
+                        <path d="M7 5V3"></path>
+                        <path d="M12 5V2"></path>
+                        <path d="M17 5V3"></path>
                       </svg>
                     </div>
                     <div className="flex-1 pt-1">
