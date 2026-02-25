@@ -597,7 +597,7 @@ export default function App() {
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                     <div className="timeline-badge mb-4">16:00</div>
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg rings (one with diamond) */}
+                      {/* svg interlaced rings + diamond */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -612,7 +612,7 @@ export default function App() {
                       >
                         <circle cx="9" cy="14" r="4"></circle>
                         <circle cx="15" cy="14" r="4"></circle>
-                        <path d="M15 6l1.6 2-1.6 2-1.6-2 1.6-2Z"></path>
+                        <path d="M13.5 6l1.7 2.2-1.7 2.2-1.7-2.2L13.5 6Z"></path>
                       </svg>
                     </div>
                     <h3 className="font-display text-base text-foreground mb-0 leading-tight">
@@ -787,7 +787,7 @@ export default function App() {
                   >
                     {/* Primo evento: nessuna linea sopra */}
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg rings (one with diamond) */}
+                      {/* svg interlaced rings + diamond */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -802,7 +802,7 @@ export default function App() {
                       >
                         <circle cx="9" cy="14" r="4"></circle>
                         <circle cx="15" cy="14" r="4"></circle>
-                        <path d="M15 6l1.6 2-1.6 2-1.6-2 1.6-2Z"></path>
+                        <path d="M13.5 6l1.7 2.2-1.7 2.2-1.7-2.2L13.5 6Z"></path>
                       </svg>
                     </div>
                     <div className="flex-1 pt-1">
