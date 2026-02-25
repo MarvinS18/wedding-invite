@@ -51,6 +51,7 @@ export default function App() {
   // Stato per la sezione Regalos
   const [showAportacion, setShowAportacion] = useState(false);
   const [showIban, setShowIban] = useState(false);
+  const [copiedItem, setCopiedItem] = useState(null); // 'beneficiary' o 'iban'
   // Stato per RSVP espandibile
   const [showRSVP, setShowRSVP] = useState(false);
   // Traduzioni
@@ -59,6 +60,24 @@ export default function App() {
   const rsvpSectionRef = useRef(null);
   const resumeMusicOnInteractionRef = useRef(false);
   const qrHandledRef = useRef(false);
+
+  // Funzione per copiare negli appunti
+  const copyToClipboard = (text, itemId) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedItem(itemId);
+      setTimeout(() => setCopiedItem(null), 2000);
+    }).catch(() => {
+      // Fallback per browser che non supportano l'API clipboard
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopiedItem(itemId);
+      setTimeout(() => setCopiedItem(null), 2000);
+    });
+  };
 
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
@@ -1074,19 +1093,105 @@ export default function App() {
                       {showIban ? t.gifts.hideIban : t.gifts.showIban}
                     </button>
                     {showIban && (
-                      <div className="mt-4">
-                          <div className="text-xs font-body regalos-iban-label mb-1 tracking-widest uppercase">
-                          {t.gifts.beneficiary}
+                      <div className="mt-4 space-y-3">
+                        {/* Beneficiario */}
+                        <div>
+                          <label className="text-xs font-body mb-1.5 tracking-widest uppercase block text-muted-foreground">
+                            {t.gifts.beneficiary}
+                          </label>
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="font-mono text-base text-foreground whitespace-nowrap overflow-auto flex-1">
+                              R Mercado & K Reyes
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => copyToClipboard("R Mercado & K Reyes", "beneficiary")}
+                              className="copy-btn"
+                              aria-label="Copia beneficiario"
+                              title="Copia"
+                            >
+                              {copiedItem === "beneficiary" ? (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              ) : (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                              )}
+                            </button>
+                          </div>
                         </div>
-                         <div className="font-mono text-base text-foreground select-all regalos-iban-value">
-                         R Mercado & K Reyes
-                        </div>
-                        <br></br>
-                        <div className="text-xs font-body regalos-iban-label mb-1 tracking-widest uppercase">
-                          IBAN
-                        </div>
-                        <div className="font-mono text-base text-foreground select-all regalos-iban-value">
-                          IT86 U036 6901 6006 6074 7361 804
+
+                        {/* IBAN */}
+                        <div>
+                          <label className="text-xs font-body mb-1.5 tracking-widest uppercase block text-muted-foreground">
+                            IBAN
+                          </label>
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="font-mono text-base text-foreground whitespace-nowrap overflow-auto flex-1">
+                              IT86U0366901600660747361804
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => copyToClipboard("IT86U0366901600660747361804", "iban")}
+                              className="copy-btn"
+                              aria-label="Copia IBAN"
+                              title="Copia"
+                            >
+                              {copiedItem === "iban" ? (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              ) : (
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                              )}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}
