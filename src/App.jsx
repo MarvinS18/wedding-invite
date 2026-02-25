@@ -597,7 +597,7 @@ export default function App() {
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative">
                     <div className="timeline-badge mb-4">16:00</div>
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg map-pin */}
+                      {/* svg rings (one with diamond) */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -608,10 +608,11 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-map-pin w-5 h-5"
+                        className="lucide lucide-rings w-7 h-7"
                       >
-                        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
+                        <circle cx="9" cy="14" r="4"></circle>
+                        <circle cx="15" cy="14" r="4"></circle>
+                        <path d="M15 6l1.6 2-1.6 2-1.6-2 1.6-2Z"></path>
                       </svg>
                     </div>
                     <h3 className="font-display text-base text-foreground mb-0 leading-tight">
@@ -623,33 +624,6 @@ export default function App() {
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
                     <div className="timeline-badge mb-4">18:30</div>
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg heart */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-heart w-5 h-5"
-                      >
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-base lg:text-sm text-foreground mb-0 leading-tight">
-                      {t.program.events.aperitivo.title}
-                    </h3>
-                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.aperitivo.description}
-                    </p>
-                  </div>
-                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">20:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg wine */}
@@ -671,15 +645,15 @@ export default function App() {
                         <path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z"></path>
                       </svg>
                     </div>
-                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
-                      {t.program.events.dinner.title}
+                    <h3 className="font-display text-base lg:text-sm text-foreground mb-0 leading-tight">
+                      {t.program.events.aperitivo.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.dinner.description}
+                      {t.program.events.aperitivo.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">22:00</div>
+                    <div className="timeline-badge mb-4">20:30</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
                       {/* svg utensils-crossed */}
@@ -702,17 +676,17 @@ export default function App() {
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
-                      {t.program.events.cakeCutting.title}
+                      {t.program.events.dinner.title}
                     </h3>
                     <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
-                      {t.program.events.cakeCutting.description}
+                      {t.program.events.dinner.description}
                     </p>
                   </div>
                   <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
-                    <div className="timeline-badge mb-4">22:30</div>
+                    <div className="timeline-badge mb-4">22:00</div>
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
-                      {/* svg flower2 */}
+                      {/* svg cake-slice with cherry */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -723,13 +697,41 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-flower2 w-5 h-5"
+                        className="lucide lucide-cake-slice w-5 h-5"
                       >
-                        <path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path>
-                        <circle cx="12" cy="8" r="2"></circle>
-                        <path d="M12 10v12"></path>
-                        <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path>
-                        <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path>
+                        <path d="M2 20h20"></path>
+                        <path d="M2 20L12 4l10 16H2Z"></path>
+                        <circle cx="12" cy="6" r="1.6"></circle>
+                        <path d="M12 4.4V5.6"></path>
+                        <path d="M10 12l2 3"></path>
+                        <path d="M8 16l2 3"></path>
+                      </svg>
+                    </div>
+                    <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
+                      {t.program.events.cakeCutting.title}
+                    </h3>
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed px-1">
+                      {t.program.events.cakeCutting.description}
+                    </p>
+                  </div>
+                  <div className="flex-1 min-w-[120px] flex flex-col items-center text-center group relative scroll-reveal-left">
+                    <div className="timeline-badge mb-4">22:30</div>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-border z-0" />
+                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary mb-4 shadow-soft group-hover:border-primary group-hover:scale-110 transition-all duration-300 z-10">
+                      {/* svg heart */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-heart w-5 h-5"
+                      >
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                       </svg>
                     </div>
                     <h3 className="font-display text-base lg:text-lg text-foreground mb-0 leading-tight">
@@ -786,7 +788,7 @@ export default function App() {
                   >
                     {/* Primo evento: nessuna linea sopra */}
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg map-pin */}
+                      {/* svg rings (one with diamond) */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -797,10 +799,11 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-map-pin w-5 h-5"
+                        className="lucide lucide-rings w-7 h-7"
                       >
-                        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
+                        <circle cx="9" cy="14" r="4"></circle>
+                        <circle cx="15" cy="14" r="4"></circle>
+                        <path d="M15 6l1.6 2-1.6 2-1.6-2 1.6-2Z"></path>
                       </svg>
                     </div>
                     <div className="flex-1 pt-1">
@@ -821,41 +824,6 @@ export default function App() {
                     style={{ opacity: 1, transform: "none" }}
                   >
                     {/* Linea verticale sopra l'icona */}
-                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
-                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg heart */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-heart w-5 h-5"
-                      >
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                      </svg>
-                    </div>
-                    <div className="flex-1 pt-1">
-                      <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">18:30</span>
-                        <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.aperitivo.title}
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.aperitivo.description}
-                      </p>
-                    </div>
-                  </div>
-                  {/* Evento 3 */}
-                  <div
-                    className="flex items-start gap-4 pl-1 relative"
-                    style={{ opacity: 1, transform: "none" }}
-                  >
                     <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
                       {/* svg wine */}
@@ -879,17 +847,17 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
-                        <span className="timeline-badge">20:30</span>
+                        <span className="timeline-badge">18:30</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
-                          {t.program.events.dinner.title}
+                          {t.program.events.aperitivo.title}
                         </h3>
                       </div>
                       <p className="text-muted-foreground font-body text-sm">
-                        {t.program.events.dinner.description}
+                        {t.program.events.aperitivo.description}
                       </p>
                     </div>
                   </div>
-                  {/* Evento 4 */}
+                  {/* Evento 3 */}
                   <div
                     className="flex items-start gap-4 pl-1 relative"
                     style={{ opacity: 1, transform: "none" }}
@@ -917,6 +885,41 @@ export default function App() {
                     </div>
                     <div className="flex-1 pt-1">
                       <div className="flex items-baseline gap-3 mb-0.5">
+                        <span className="timeline-badge">20:30</span>
+                        <h3 className="font-display text-lg text-foreground margin-0">
+                          {t.program.events.dinner.title}
+                        </h3>
+                      </div>
+                      <p className="text-muted-foreground font-body text-sm">
+                        {t.program.events.dinner.description}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Evento 4 */}
+                  <div
+                    className="flex items-start gap-4 pl-1 relative"
+                    style={{ opacity: 1, transform: "none" }}
+                  >
+                    <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
+                    <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
+                      {/* svg heart */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-heart w-5 h-5"
+                      >
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                      </svg>
+                    </div>
+                    <div className="flex-1 pt-1">
+                      <div className="flex items-baseline gap-3 mb-0.5">
                         <span className="timeline-badge">22:00</span>
                         <h3 className="font-display text-lg text-foreground margin-0">
                           {t.program.events.firstDance.title}
@@ -934,7 +937,7 @@ export default function App() {
                   >
                     <div className="absolute top-0 left-[34px] w-px h-8 bg-border z-0" />
                     <div className="w-16 h-16 rounded-full bg-background border-2 border-border flex items-center justify-center text-primary flex-shrink-0 shadow-soft z-10">
-                      {/* svg flower2 */}
+                      {/* svg cake-slice with cherry */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -945,13 +948,14 @@ export default function App() {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="lucide lucide-flower2 w-5 h-5"
+                        className="lucide lucide-cake-slice w-5 h-5"
                       >
-                        <path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path>
-                        <circle cx="12" cy="8" r="2"></circle>
-                        <path d="M12 10v12"></path>
-                        <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path>
-                        <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path>
+                        <path d="M2 20h20"></path>
+                        <path d="M2 20L12 4l10 16H2Z"></path>
+                        <circle cx="12" cy="6" r="1.6"></circle>
+                        <path d="M12 4.4V5.6"></path>
+                        <path d="M10 12l2 3"></path>
+                        <path d="M8 16l2 3"></path>
                       </svg>
                     </div>
                     <div className="flex-1 pt-1">
