@@ -58,6 +58,7 @@ export default function App() {
   // Ref per la sezione RSVP
   const rsvpSectionRef = useRef(null);
   const resumeMusicOnInteractionRef = useRef(false);
+  const qrHandledRef = useRef(false);
 
   // Link Google Maps: usa sempre l'URL web di Google Maps
   const getMapsHref = (label) => {
@@ -76,6 +77,27 @@ export default function App() {
       /* ignore */
     }
   }, []);
+
+  // QR code: auto-open and jump to gallery
+  useEffect(() => {
+    if (qrHandledRef.current) return;
+
+    const params = new URLSearchParams(location.search || "");
+    if (params.get("source") !== "qrcode") return;
+
+    qrHandledRef.current = true;
+
+    if (!envelopeOpen) {
+      handleEnvelopeOpen();
+    }
+
+    setTimeout(() => {
+      const targetEl = document.getElementById("galleria");
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 150);
+  }, [location.search, envelopeOpen]);
 
   const mapsHrefCeremony = getMapsHref(
     "Basilica di Santa Cecilia in Trastevere, Roma",
