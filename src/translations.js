@@ -149,7 +149,8 @@
     // Photo Gallery
     photoGallery: {
       title: "#amagiKARLstorywithREICHELLE",
-      preWeddingSubtitle: "Il giorno del matrimonio, aiutate a rendere eterno ogni istante: condividete qui i momenti più speciali.",
+      preWeddingSubtitleMobile: "Rendiamo ogni istante eterno.\nIl giorno del nostro matrimonio, aiutaci a rendere ogni momento eterno.\nA partire dal 5 Giugno 2026, questo spazio si trasformerà nella galleria ufficiale dell'evento.\nTornate a trovarci quel giorno per rivivere i momenti più belli insieme a noi!",
+      preWeddingSubtitleDesktop: "Rendiamo ogni istante eterno.\nIl giorno del nostro matrimonio, aiutaci a rendere ogni momento eterno.\nA partire dal 5 Giugno 2026, questo spazio si trasformerà nella galleria ufficiale dell'evento. \nTornate a trovarci quel giorno per rivivere i momenti più belli insieme a noi!",
       postWeddingSubtitle: "I vostri ricordi, la nostra gioia: caricate qui gli scatti più belli.",
       galleryTitle: "Galleria",
       allPhotosTitle: "Tutti gli scatti",
@@ -363,7 +364,8 @@
     // Photo Gallery
     photoGallery: {
       title: "#amagiKARLstorywithREICHELLE",
-      preWeddingSubtitle: "On our wedding day, help us make every moment eternal: share the most special highlights.",
+      preWeddingSubtitleMobile: "Capturing Eternal Moments.\nOn our wedding day, help us make every moment eternal. Starting June 5, 2026, this space will transform into our official event gallery.\nCheck back then to relive the highlights with us!",
+      preWeddingSubtitleDesktop: "Capturing Eternal Moments.\nOn our wedding day, help us make every moment eternal.\nStarting June 5, 2026, this space will transform into our official event gallery.\nCheck back then to relive the highlights with us!",
       postWeddingSubtitle: "Through your lens: we’d love to see the day through your eyes.",
       galleryTitle: "Gallery",
       allPhotosTitle: "All captures",

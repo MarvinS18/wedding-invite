@@ -32,6 +32,9 @@ export default function App() {
   const { lang, audioRef } = useOutletContext();
   // Data evento
   const target = "2026-06-05T16:30:00";
+  const eventDate = new Date(target);
+  const now = new Date();
+  const showCountdown = now < eventDate;
   const { days, hours, mins, secs } = useCountdown(target);
   
   // Inizializza envelopeOpen basandoti su skipIntro o sessionStorage
@@ -306,112 +309,9 @@ export default function App() {
 
       {/* Countdown Section */}
       <div className="site-content">
-        <section
-          id="countdown"
-          className="section-padding bg-background scroll-reveal"
-        >
-          <div className="max-w-4xl mx-auto text-center px-4">
-            <p className="countdown-title text-primary font-body tracking-[0.4em] uppercase mb-4">
-              {t.countdown.title}
-            </p>
-
-            <h2 className="font-script text-5xl text-foreground mb-16">
-              {t.countdown.subtitle}
-            </h2>
-
-            <div
-              className="flex flex-row justify-center max-w-2xl mx-auto"
-              style={{ gap: "clamp(10px, 3.5vw, 48px)" }}
-            >
-              {/* Giorni */}
-              <div className="flex flex-col items-center">
-                <div
-                  className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-                  style={{
-                    width: "clamp(70px, 13vw, 180px)",
-                    height: "clamp(70px, 11vw, 150px)",
-                  }}
-                >
-                  <span
-                    className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
-                  >
-                    {String(days).padStart(2, "0")}
-                  </span>
-                </div>
-                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
-                  {t.countdown.days}
-                </span>
-              </div>
-
-              {/* Ore */}
-              <div className="flex flex-col items-center">
-                <div
-                  className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-                  style={{
-                    width: "clamp(70px, 13vw, 180px)",
-                    height: "clamp(70px, 11vw, 150px)",
-                  }}
-                >
-                  <span
-                    className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
-                  >
-                    {String(hours).padStart(2, "0")}
-                  </span>
-                </div>
-                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
-                  {t.countdown.hours}
-                </span>
-              </div>
-
-              {/* Minuti */}
-              <div className="flex flex-col items-center">
-                <div
-                  className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-                  style={{
-                    width: "clamp(70px, 13vw, 180px)",
-                    height: "clamp(70px, 11vw, 150px)",
-                  }}
-                >
-                  <span
-                    className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
-                  >
-                    {String(mins).padStart(2, "0")}
-                  </span>
-                </div>
-                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
-                  {t.countdown.minutes}
-                </span>
-              </div>
-
-              {/* Secondi */}
-              <div className="flex flex-col items-center">
-                <div
-                  className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
-                  style={{
-                    width: "clamp(70px, 13vw, 180px)",
-                    height: "clamp(70px, 11vw, 150px)",
-                  }}
-                >
-                  <span
-                    className="block font-display font-normal text-foreground tracking-tight tabular-nums"
-                    style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
-                  >
-                    {String(secs).padStart(2, "0")}
-                  </span>
-                </div>
-                <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
-                  {t.countdown.seconds}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Separatore cuore */}
-        <div className="section-separator" style={{ opacity: 1 }}>
+        {/* <div className="section-separator" style={{ opacity: 1 }}>
           <span className="section-separator__line"></span>
           <span className="section-separator__heart">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(138, 110, 93, 0.5)" xmlns="http://www.w3.org/2000/svg">
@@ -419,7 +319,7 @@ export default function App() {
             </svg>
           </span>
           <span className="section-separator__line"></span>
-        </div>
+        </div> */}
 
         {/* Location Section */}
         <section
@@ -1309,6 +1209,107 @@ export default function App() {
 
         {/* SEZIONE FOTO - Photo Gallery */}
         <PhotoGallery lang={lang} />
+        {/* COUNTDOWN */}
+        {showCountdown && (
+          <section
+            id="countdown"
+            className="section-padding bg-background scroll-reveal"
+          >
+            <div className="max-w-4xl mx-auto text-center px-4">
+              <p className="countdown-title text-primary font-body tracking-[0.4em] uppercase mb-4">
+                {t.countdown.title}
+              </p>
+              <h2 className="font-script text-5xl text-foreground mb-6">
+                {t.countdown.subtitle}
+              </h2>
+              <div
+                className="flex flex-row justify-center max-w-2xl mx-auto"
+                style={{ gap: "clamp(10px, 3.5vw, 48px)" }}
+              >
+                {/* Giorni */}
+                <div className="flex flex-col items-center">
+                  <div
+                    className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                    style={{
+                      width: "clamp(70px, 13vw, 180px)",
+                      height: "clamp(70px, 11vw, 150px)",
+                    }}
+                  >
+                    <span
+                      className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                      style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
+                    >
+                      {String(days).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
+                    {t.countdown.days}
+                  </span>
+                </div>
+                {/* Ore */}
+                <div className="flex flex-col items-center">
+                  <div
+                    className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                    style={{
+                      width: "clamp(70px, 13vw, 180px)",
+                      height: "clamp(70px, 11vw, 150px)",
+                    }}
+                  >
+                    <span
+                      className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                      style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
+                    >
+                      {String(hours).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
+                    {t.countdown.hours}
+                  </span>
+                </div>
+                {/* Minuti */}
+                <div className="flex flex-col items-center">
+                  <div
+                    className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                    style={{
+                      width: "clamp(70px, 13vw, 180px)",
+                      height: "clamp(70px, 11vw, 150px)",
+                    }}
+                  >
+                    <span
+                      className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                      style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
+                    >
+                      {String(mins).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
+                    {t.countdown.minutes}
+                  </span>
+                </div>
+                {/* Secondi */}
+                <div className="flex flex-col items-center">
+                  <div
+                    className="bg-card border border-border rounded-lg shadow-soft flex items-center justify-center"
+                    style={{
+                      width: "clamp(70px, 13vw, 180px)",
+                      height: "clamp(70px, 11vw, 150px)",
+                    }}
+                  >
+                    <span
+                      className="block font-display font-normal text-foreground tracking-tight tabular-nums"
+                      style={{ fontSize: "clamp(1.8rem, 3.8vw, 4.6rem)" }}
+                    >
+                      {String(secs).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span className="countdown-label block mt-3 tracking-[0.2em] uppercase text-muted-foreground font-body">
+                    {t.countdown.seconds}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
       {/* Footer */}
       <footer

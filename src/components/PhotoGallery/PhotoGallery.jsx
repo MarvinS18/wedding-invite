@@ -366,9 +366,17 @@ export default function PhotoGallery({ lang = "en" }) {
   const displayedPhotos = photos.slice(0, 9);
   const isBeforeWeddingRef = useRef(Date.now() < weddingDate.getTime());
   const isBeforeWedding = isBeforeWeddingRef.current;
-  const subtitle = isBeforeWedding
-    ? t.preWeddingSubtitle
-    : t.postWeddingSubtitle;
+  // Responsive subtitle logic for gallery
+  let subtitle = '';
+  if (isBeforeWedding) {
+    if (window.innerWidth < 768) {
+      subtitle = t.preWeddingSubtitleMobile || t.preWeddingSubtitleDesktop || t.preWeddingSubtitle || '';
+    } else {
+      subtitle = t.preWeddingSubtitleDesktop || t.preWeddingSubtitleMobile || t.preWeddingSubtitle || '';
+    }
+  } else {
+    subtitle = t.postWeddingSubtitle || '';
+  }
   // Forza sempre il formato dd/mm/yyyy
   const dateFormatOptions = {
     day: "2-digit",
@@ -401,9 +409,10 @@ export default function PhotoGallery({ lang = "en" }) {
           >
             {t.title}
           </h2>
-          <p className="text-base text-muted-foreground font-body leading-relaxed">
-            {subtitle}
-          </p>
+            <p className="text-base text-muted-foreground font-body leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+              {subtitle}
+            </p>
+     
         </div>
 
         {/* Upload Guidelines */}
