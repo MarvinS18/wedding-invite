@@ -1,5 +1,5 @@
 // Data del matrimonio: 5 giugno 2026
-export const weddingDate = new Date('2026-02-24T00:00:00+02:00');
+export const weddingDate = new Date('2026-06-05T00:00:00+02:00');
 
 // // Sottotitolo PRIMA del matrimonio
 // export const preWeddingSubtitle = "Al giorno del matrimonio, condividi gli scatti migliori con tutti gli ospiti";
