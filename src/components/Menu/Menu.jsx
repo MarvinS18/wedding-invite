@@ -108,9 +108,6 @@ export default function Menu({ lang = "en", onLangChange }) {
             {/* <div className="menu-title">Menu</div> */}
 
             <div className="menu-links">
-              <a className="menu-link" href="#countdown" onClick={close}>
-                {t.menu.countdown}
-              </a>
               <a className="menu-link" href="#cerimonia" onClick={close}>
                 {t.menu.ceremony}
               </a>
