@@ -454,6 +454,12 @@ body.full-gallery-page .menu-fab {
   }
 }
 
+@media (min-width: 390px) and (max-width: 430px) and (orientation: portrait) {
+  .menu-link {
+    font-size: 2.65rem;
+  }
+}
+
 @media (max-width: 350px) {
   .menu-panel {
     padding: 1.25rem 0.5rem;
