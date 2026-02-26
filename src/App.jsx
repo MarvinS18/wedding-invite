@@ -1482,12 +1482,12 @@ export default function App() {
               </p>
             </div>
           </div>
-
           <p className="font-script text-5xl text-primary-foreground mt-4 mb-2">
             {t.footer.names}
           </p>
           <p className="text-xs text-primary-foreground/70 font-body tracking-wide mt-6">
             {t.footer.credits}
+            <br />
             <span>Vanessa Palacio </span>
             <a
               href="https://www.instagram.com/vanexjoy/"
