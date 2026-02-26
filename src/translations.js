@@ -137,7 +137,7 @@
       date: "5 giugno 2026",
       message: "Con tutto il nostro amore",
       contactLead: "Per ulteriori informazioni, non esitate a contattarci",
-      credits: "Sito sviluppato da Vanessa Palacio e Marvin Samiano",
+      credits: "Special thanks to our special developer friends: ",
     },
 
     // Music
@@ -352,7 +352,7 @@
       date: "June 5, 2026",
       message: "With all our love",
       contactLead: "For any further information, please feel free to reach out",
-      credits: "Website developed by Vanessa Palacio and Marvin Samiano",
+      credits: "Special thanks to our special developer friends: ",
     },
 
     // Music

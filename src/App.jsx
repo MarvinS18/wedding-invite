@@ -1488,6 +1488,24 @@ export default function App() {
           </p>
           <p className="text-xs text-primary-foreground/70 font-body tracking-wide mt-6">
             {t.footer.credits}
+            <span>Vanessa Palacio </span>
+            <a
+              href="https://www.instagram.com/vanexjoy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline hover:opacity-90 text-primary-foreground"
+            >
+              @vanexjoy
+            </a>
+            <span> - Marvin Samiano </span>
+            <a
+              href="https://www.instagram.com/marvins18/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline hover:opacity-90 text-primary-foreground"
+            >
+              @marvins18
+            </a>
           </p>
     
         </div>
