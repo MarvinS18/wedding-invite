@@ -1375,6 +1375,7 @@ export default function App() {
 
               {/* Karl Anjelo Reyes */}
               <p className="flex items-center justify-center gap-2">
+                <span className="font-medium">Karl Anjelo Reyes:</span>
                 {/* icona telefono */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1391,7 +1392,6 @@ export default function App() {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
                 </svg>
-                <span className="font-medium">Karl Anjelo Reyes:</span>
                 <a
                   href="tel:+393342070009"
                   className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
@@ -1429,6 +1429,7 @@ export default function App() {
 
               {/* Reichelle Mercado */}
               <p className="flex items-center justify-center gap-2">
+                <span className="font-medium">Reichelle Mercado:</span>
                 {/* icona telefono */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1445,7 +1446,6 @@ export default function App() {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.61 2.6a2 2 0 0 1-.45 2.11L8 9a16 16 0 0 0 7 7l.57-1.27a2 2 0 0 1 2.11-.45c.83.28 1.7.49 2.6.61A2 2 0 0 1 22 16.92Z" />
                 </svg>
-                <span className="font-medium">Reichelle Mercado:</span>
                 <a
                   href="tel:+393285969749"
                   className="underline underline-offset-2 hover:opacity-90 text-primary-foreground"
