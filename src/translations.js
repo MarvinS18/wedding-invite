@@ -352,7 +352,7 @@
       date: "June 5, 2026",
       message: "With all our love",
       contactLead: "For any further information, please feel free to reach out",
-      credits: "Special thanks to our amazing developer friends \n",
+      credits: "Special thanks to our amazing developer friends: \n",
     },
 
     // Music
