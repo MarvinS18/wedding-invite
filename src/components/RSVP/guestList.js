@@ -17,7 +17,7 @@ export const GUEST_GROUPS = [
   },
   {
     label: "Mercado-Boco Family",
-    members: ["Ochie Mercado", "Larry Boco", "Deither Boco", "Vera Joy Pablo", "Dale Boco", "Caterina Delios"],
+    members: ["Ochie Mercado", "Larry Boco", "Deither Boco", "Verajoy Pablo", "Dale Boco", "Caterina Delios"],
   },
   {
     label: "Rizaldy Jay Mercado",
