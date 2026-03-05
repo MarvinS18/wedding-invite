@@ -28,6 +28,37 @@ export default function PhotoGallery({ lang = "en" }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showUploadBlockedModal, setShowUploadBlockedModal] = useState(false);
+    // Blocca scroll quando la modale upload bloccato è aperta
+    useEffect(() => {
+      if (!showUploadBlockedModal) return;
+
+      const scrollY = window.scrollY;
+      const scrollBehavior = document.documentElement.style.scrollBehavior;
+      document.body.dataset.uploadBlockedScrollLockBehavior = scrollBehavior || "";
+      document.body.dataset.uploadBlockedScrollLockY = String(scrollY);
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
+      return () => {
+        const lockedY = parseInt(document.body.dataset.uploadBlockedScrollLockY || "0", 10);
+        const lockedBehavior = document.body.dataset.uploadBlockedScrollLockBehavior || "";
+        document.documentElement.style.scrollBehavior = "auto";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        document.body.dataset.uploadBlockedScrollLockY = "";
+        document.body.dataset.uploadBlockedScrollLockBehavior = "";
+        if (!Number.isNaN(lockedY)) {
+          window.scrollTo(0, lockedY);
+        }
+        document.documentElement.style.scrollBehavior = lockedBehavior;
+      };
+    }, [showUploadBlockedModal]);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
