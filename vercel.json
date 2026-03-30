@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/_middleware.js": {
+      "runtime": "edge"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
