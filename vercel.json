@@ -1,13 +1,26 @@
 {
-  "functions": {
-    "api/_middleware.js": {
-      "runtime": "edge"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+
+  "routes": [
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "wedding-site-karlandreichelle.vercel.app"
+        }
+      ],
+      "status": 404,
+      "dest": "/404.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
