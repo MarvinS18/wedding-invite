@@ -183,4 +183,8 @@ export const GUEST_GROUPS = [
     label: "Daryl Renz Lirio, Giulietta Padan",
     members: ["Daryl Renz Lirio", "Giulietta Padan"],
   },
+  {
+    label: "Leyla Campbell",
+    members: ["Leyla Campbell"],
+  },
 ]
