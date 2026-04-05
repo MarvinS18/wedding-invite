@@ -8,8 +8,8 @@ export const GUEST_GROUPS = [
     members: ["Reichelle Carolaine Rodriguez Mercado", "Karl Anjelo Dimaano Reyes"] 
   },
   {
-    label: "Jan Armond Reyes, Leonisa Dimaano",
-    members: ["Jan Armond Reyes", "Leonisa Dimaano"],
+    label: "Jan Armond Reyes, Leonisa Dimaano, Layla Campbell",
+    members: ["Jan Armond Reyes", "Leonisa Dimaano", "Layla Campbell"],
   },
   {
     label: "Mercado Family",
@@ -183,8 +183,4 @@ export const GUEST_GROUPS = [
     label: "Daryl Renz Lirio, Giulietta Padan",
     members: ["Daryl Renz Lirio", "Giulietta Padan"],
   },
-  {
-    label: "Leyla Campbell",
-    members: ["Leyla Campbell"],
-  }
 ]
