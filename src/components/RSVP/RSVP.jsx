@@ -138,7 +138,21 @@ export default function RSVP({ lang = "it" }) {
     }
 
     setMatchedGroup(g);
-    setStep("confirmGroup");
+
+    // Se il gruppo ha solo 1 membro, salta confirmGroup e vai direttamente a rsvpGroup
+    if (g.members.length === 1) {
+      const initial = g.members.map((person) => ({
+        name: person,
+        ceremony: "",
+        reception: "",
+        food: "",
+      }));
+      setResponses(initial);
+      setOpenIdx(0);
+      setStep("rsvpGroup");
+    } else {
+      setStep("confirmGroup");
+    }
   }
 
   function confirmGroupYes() {
@@ -275,7 +289,13 @@ export default function RSVP({ lang = "it" }) {
           <p className="confirm-group__text">{t.rsvpForm.groupQuestion}</p>
 
           <div className="confirm-group__box">
-            {matchedGroup.members.length > 2 ? (
+            {matchedGroup.label.includes(",") ? (
+              matchedGroup.label.split(",").map((member, idx) => (
+                <div key={idx} className="confirm-group__member">
+                  {member.trim()}
+                </div>
+              ))
+            ) : matchedGroup.members.length > 2 ? (
               <>
                 <div
                   className="confirm-group__member"
