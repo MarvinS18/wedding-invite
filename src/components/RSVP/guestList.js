@@ -164,8 +164,8 @@ export const GUEST_GROUPS = [
     members: ["Tita May Oloraza", "Flavio Talone"],
   },
   {
-    label: "Samantha Munoz, Paul Avinguetero",
-    members: ["Samantha Munoz", "Paul Avinguetero"],
+    label: "Samantha Munoz, Paul Aviguetero",
+    members: ["Samantha Munoz", "Paul Aviguetero"],
   },
   {
     label: "Francesca Conidi, Rian Hossain",
