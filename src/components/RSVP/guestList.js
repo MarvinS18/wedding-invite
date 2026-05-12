@@ -76,7 +76,7 @@ export const GUEST_GROUPS = [
     members: ["Rolly Frago", "Ana Frago", "Gioia Frago"],
   },
   {
-    label: "Grita",
+    label: "Lucilla Grita, Boyet Grita",
     members: ["Lucilla Grita", "Boyet Grita"],
   },
   {
