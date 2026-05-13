@@ -140,7 +140,7 @@ export const GUEST_GROUPS = [
     members: ["Chelsea Catigbac"],
   },
   {
-    label: "Maramot Family",
+    label: "Totie Maramot, Chona Maramot",
     members: ["Totie Maramot", "Chona Maramot"],
   },
   {
