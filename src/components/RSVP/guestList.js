@@ -186,5 +186,9 @@ export const GUEST_GROUPS = [
   {
     label: "Kluibert Maramot",
     members: ["Kluibert Maramot"],
+  },
+  {
+    label: "Evan Rae Uri, AJ Canas",
+    members: ["Evan Rae Uri", "AJ Canas"],
   }
 ]
