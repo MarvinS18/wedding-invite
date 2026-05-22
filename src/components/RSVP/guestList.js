@@ -190,5 +190,9 @@ export const GUEST_GROUPS = [
   {
     label: "Evan Rae Uri, AJ Canas",
     members: ["Evan Rae Uri", "AJ Canas"],
+  },
+  {
+    label: "SIGEM Family",
+    members: ["Stefano Leucci", "Mariantonietta Incarbone", "Marco Petrella", "Michela Coletta", "Beatrice Calisi"],
   }
 ]
