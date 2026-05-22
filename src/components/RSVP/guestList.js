@@ -193,6 +193,6 @@ export const GUEST_GROUPS = [
   },
   {
     label: "SIGEM Family",
-    members: ["Stefano Leucci", "Mariantonietta Incarbone", "Marco Petrella", "Michela Coletta", "Beatrice Calisi"],
+    members: ["Stefano Leucci", "Mariantonietta Incarbone", "Marco Petrella", "Michela Coletta", "Beatrice Calisi", "Francesca Rosaria Romeo"],
   }
 ]
