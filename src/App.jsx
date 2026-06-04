@@ -30,8 +30,8 @@ export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const { lang, audioRef } = useOutletContext();
-  // Data evento
-  const target = "2026-06-05T16:30:00";
+  // Data evento (Roma, 5 giugno 2026 ore 16:00 CEST)
+  const target = "2026-06-05T16:00:00+02:00";
   const eventDate = new Date(target);
   const now = new Date();
   const showCountdown = now < eventDate;
